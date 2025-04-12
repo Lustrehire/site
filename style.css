@@ -711,6 +711,21 @@ footer p {
     overflow: hidden;
   }
 
+  #how-it-works{
+    padding: 20px 0;
+
+  }
+
+  #how-it-works p{
+    padding-bottom: 0px;
+  }
+
+  #benefits{
+    gap:20px;
+    padding: 12px 0;
+  }
+  
+
   .scrollable-steps .step {
   display: none;
   flex: 0 0 auto;
