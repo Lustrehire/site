@@ -576,6 +576,10 @@ footer p {
     flex-direction: row;
     gap: 20px;
   }
+
+  nav a {
+    font-size: 16px;
+  }
 }
 
 /* Candle Sizes: Stack vertically and reduce side padding */
