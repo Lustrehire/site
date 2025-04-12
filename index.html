@@ -24,6 +24,7 @@
   <div class="header-container">
     <header>
       <h1>Lustre Hire</h1>
+      <h2 id="SecondTitle">DIY Candle Hire for Events in Perth</h2>
       <nav>
         <a href="#how-it-works">How It Works</a>
         <a href="#benefits">Why Choose Us?</a>
@@ -33,7 +34,6 @@
   </div>
 
   <section id="intro" class="hero">
-    <h2>DIY Candle Hire for Events in Perth</h2>
     <img src="https://i.imgur.com/HXexGPQ.png" alt="Candle arrangement">
   </section>
 <div id="main-content">
@@ -244,13 +244,41 @@
   <section id="contact">
     <h2>Hire Our Candles</h2>
     <p>Fill out the form below to get started with your candle hire.</p>
-    <form>
-      <input type="text" placeholder="First Name" required>
-      <input type="text" placeholder="Last Name" required>
-      <input type="email" placeholder="Email" required>
-      <textarea placeholder="Event details (Date, candles required, etc.)"></textarea>
-      <button type="submit">Submit</button>
-    </form>
+    <form action="https://formspree.io/f/moverenq" method="POST">
+  <div class="form-row">
+    <div class="form-group">
+      <label for="first-name">First Name</label>
+      <input id="first-name" name="first-name" type="text" required />
+    </div>
+    <div class="form-group">
+      <label for="last-name">Last Name</label>
+      <input id="last-name" name="last-name" type="text" required />
+    </div>
+  </div>
+
+  <div class="form-group" id="emailInput">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required />
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="start-date">Hire Start Date</label>
+      <input id="start-date" name="start-date" type="date" required />
+    </div>
+    <div class="form-group">
+      <label for="end-date">Hire End Date</label>
+      <input id="end-date" name="end-date" type="date" required />
+    </div>
+  </div>
+
+  <div class="form-group" id="EventInput">
+    <label for="details">Event Details</label>
+    <textarea id="details" name="details"></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
   </section>
 
   <div class="section-divider">
