@@ -596,6 +596,11 @@ footer p {
     gap: 16px;
   }
 
+  .site-logo{
+    padding-bottom: 16px;
+    width:35px;
+  }
+
   .size {
     height: auto;
     margin: 0;
