@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Candle Hire site</title>
-  <link rel="stylesheet" href="./style.css">
-  <link rel="icon" href="https://i.imgur.com/yDE7kJO.png" type="image/png">
-
-
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lustre Hire - DIY Candle Hire in Perth</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="https://i.imgur.com/yDE7kJO.png" type="image/png" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&family=Syne:wght@800&family=Cutive&display=swap"
+      rel="stylesheet"
+    />
+  </head>  
 <!-- partial:index.partial.html -->
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lustre Hire - DIY Candle Hire in Perth</title>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&family=Syne:wght@800&family=Cutive&display=swap"
-    rel="stylesheet"
-  />
-  
-</head>
 <body>
   
   <div class="header-container">
@@ -80,40 +72,54 @@
         </div>
       </div>
 
-      <!-- Mobile carousel version -->
+     <!-- Mobile carousel version with looping effect -->
+<!-- Mobile swipeable, looping carousel -->
 <div class="mobile-steps">
-  <div class="step-carousel-wrapper">
-    <button class="arrow left" aria-label="Previous Step">&#8592;</button>
-    <div class="scrollable-steps">
-      <div class="step active">
-        <img src="https://i.imgur.com/u3xGfp2.png" alt="Step 1 icon">
-        <strong>1. Choose</strong>
-        Select your candle sizes. All come ready-to-light with no assembly needed.
-      </div>
-      <div class="step">
-        <img src="https://i.imgur.com/5tGpBuN.png" alt="Step 2 icon">
-        <strong>2. Book</strong>
-        Confirm your date and quantities. Deposit equals hire price per candle.
-      </div>
-      <div class="step">
-        <img src="https://i.imgur.com/Gk94kHr.png" alt="Step 3 icon">
-        <strong>3. Pick Up</strong>
-        Collect your candles the day before your event. Save on delivery costs.
-      </div>
-      <div class="step">
-        <img src="https://i.imgur.com/No2fctT.png" alt="Step 4 icon">
-        <strong>4. Enjoy</strong>
-        Create your perfect candlelit atmosphere effortlessly.
-      </div>
-      <div class="step">
-        <img src="https://i.imgur.com/KxP4Mul.png" alt="Step 5 icon">
-        <strong>5. Return</strong>
-        Drop off by 5 PM next day. Flexible arrangements available if needed.
-      </div>
+  <div class="scrollable-steps">
+    <!-- CLONE of last real step -->
+    <div class="step clone">
+      <img src="https://i.imgur.com/KxP4Mul.png" alt="Step 5 icon">
+      <strong>5. Return</strong>
+      Drop off by 5 PM next day. Flexible arrangements available if needed.
     </div>
-    <button class="arrow right" aria-label="Next Step">&#8594;</button>
+
+    <!-- REAL steps -->
+    <div class="step">
+      <img src="https://i.imgur.com/u3xGfp2.png" alt="Step 1 icon">
+      <strong>1. Choose</strong>
+      Select your candle sizes. All come ready-to-light with no assembly needed.
+    </div>
+    <div class="step">
+      <img src="https://i.imgur.com/5tGpBuN.png" alt="Step 2 icon">
+      <strong>2. Book</strong>
+      Confirm your date and quantities. Deposit equals hire price per candle.
+    </div>
+    <div class="step">
+      <img src="https://i.imgur.com/Gk94kHr.png" alt="Step 3 icon">
+      <strong>3. Pick Up</strong>
+      Collect your candles the day before your event. Save on delivery costs.
+    </div>
+    <div class="step">
+      <img src="https://i.imgur.com/No2fctT.png" alt="Step 4 icon">
+      <strong>4. Enjoy</strong>
+      Create your perfect candlelit atmosphere effortlessly.
+    </div>
+    <div class="step">
+      <img src="https://i.imgur.com/KxP4Mul.png" alt="Step 5 icon">
+      <strong>5. Return</strong>
+      Drop off by 5 PM next day. Flexible arrangements available if needed.
+    </div>
+
+    <!-- CLONE of first real step -->
+    <div class="step clone">
+      <img src="https://i.imgur.com/u3xGfp2.png" alt="Step 1 icon">
+      <strong>1. Choose</strong>
+      Select your candle sizes. All come ready-to-light with no assembly needed.
+    </div>
   </div>
 </div>
+
+
 
 <h2>Our sizes</h2>
 <div class="candle-sizes">
@@ -455,11 +461,34 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-    
+document.addEventListener("DOMContentLoaded", () => {
+  const scroller = document.querySelector(".scrollable-steps");
+  const steps = scroller.querySelectorAll(".step");
+  const realSteps = Array.from(steps).filter(step => !step.classList.contains("clone"));
+  const stepWidth = steps[0].offsetWidth + 16;
+
+  // Jump to first real step (skip first clone)
+  scroller.scrollLeft = stepWidth;
+
+  let scrollTimeout;
+  scroller.addEventListener("scroll", () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const index = Math.round(scroller.scrollLeft / stepWidth);
+
+      // If at the clone of last (start of list), jump to last real step
+      if (index === 0) {
+        scroller.scrollLeft = stepWidth * realSteps.length;
+      }
+
+      // If at the clone of first (end of list), jump to first real step
+      if (index === steps.length - 1) {
+        scroller.scrollLeft = stepWidth;
+      }
+    }, 100);
+  });
+});
+
   </script>
-  
-</body>
-<!-- partial -->
-  
 </body>
 </html>
