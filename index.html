@@ -259,40 +259,68 @@
     <h2>Hire Our Candles</h2>
     <p>Fill out the form below to get started with your candle hire.</p>
     <form action="https://formspree.io/f/moverenq" method="POST">
-  <div class="form-row">
-    <div class="form-group">
-      <label for="first-name">First Name</label>
-      <input id="first-name" name="first-name" type="text" required />
-    </div>
-    <div class="form-group">
-      <label for="last-name">Last Name</label>
-      <input id="last-name" name="last-name" type="text" required />
-    </div>
-  </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input id="first-name" name="first-name" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input id="last-name" name="last-name" type="text" required />
+        </div>
+      </div>
+    
+      <div class="form-group" id="emailInput">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+      </div>
+    
+      <div class="form-row">
+        <div class="form-group">
+          <label for="start-date">Hire Start Date</label>
+          <input id="start-date" name="start-date" type="date" required />
+        </div>
+        <div class="form-group">
+          <label for="end-date">Hire End Date</label>
+          <input id="end-date" name="end-date" type="date" required />
+        </div>
+      </div>
 
-  <div class="form-group" id="emailInput">
-    <label for="email">Email</label>
-    <input id="email" name="email" type="email" required />
-  </div>
-
-  <div class="form-row">
-    <div class="form-group">
-      <label for="start-date">Hire Start Date</label>
-      <input id="start-date" name="start-date" type="date" required />
-    </div>
-    <div class="form-group">
-      <label for="end-date">Hire End Date</label>
-      <input id="end-date" name="end-date" type="date" required />
-    </div>
-  </div>
-
-  <div class="form-group" id="EventInput">
-    <label for="details">Event Details</label>
-    <textarea id="details" name="details"></textarea>
-  </div>
-
-  <button type="submit">Submit</button>
-</form>
+      <div class="form-group">
+        <label for="package">How many candles do you want?</label>
+        <select id="package" name="package" required>
+          <option value="">Select an option</option>
+          <option value="15">15 Candles (Intimate Package)</option>
+          <option value="45">45 Candles (Celebration Package)</option>
+          <option value="90">90 Candles (Grand Package)</option>
+          <option value="Custom">Custom Amount</option>
+        </select>
+        <div id="custom-amount" style="display: none;">
+          <label for="custom-candles">Enter your custom candle amount:</label>
+          <input id="custom-candles" name="custom-candles" type="number" min="1" />
+        </div>
+      </div>
+    
+      <div class="form-group" id="EventInput">
+        <label for="details">Event Details</label>
+        <textarea id="details" name="details"></textarea>
+      </div>
+    
+    
+      <div class="form-group">
+        <label for="referral">How did you hear about us?</label>
+        <select id="referral" name="referral" required>
+          <option value="">Select an option</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Facebook">Facebook</option>
+          <option value="Friend Referral">Referred by a Friend</option>
+          <option value="Search Engine">Search Engine (e.g., Google)</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    
+      <button type="submit">Submit</button>
+    </form>
   </section>
 
   <div class="section-divider">
@@ -495,6 +523,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
   });
 });
+document.getElementById('package').addEventListener('change', function() {
+    const customAmountField = document.getElementById('custom-amount');
+    if (this.value === 'Custom') {
+      customAmountField.style.display = 'block';
+    } else {
+      customAmountField.style.display = 'none';
+    }
+  });
 
   </script>
 </body>
