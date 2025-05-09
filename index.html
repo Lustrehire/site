@@ -215,41 +215,54 @@
 </div>
 
 <!-- Mobile carousel -->
-<div class="mobile-benefits-carousel">
-  <button class="arrow left" aria-label="Previous">&#8592;</button>
-  <div class="benefits-track">
-    <div class="benefit">
-      <img src="https://i.imgur.com/oK6L7wY.png" alt="Small candle icon">
-      <strong>Effortless Beauty</strong>
-      Ready-to-light sand wax candles that save you precious time and stress.
-    </div>
-    <div class="benefit">
-      <img src="https://i.imgur.com/I77k7Wq.png" alt="Small candle icon">
-      <strong>Budget-Friendly</strong>
-      Premium pillar-style candles at a fraction of buying cost.
-    </div>
-    <div class="benefit">
-      <img src="https://i.imgur.com/fCRn7IR.png" alt="Small candle icon">
-      <strong>Flexible & Convenient</strong>
-      Easy DIY pick-up and drop-off options.
-    </div>
-    <div class="benefit">
-      <img src="https://i.imgur.com/CLvuNbE.png" alt="Small candle icon">
-      <strong>Safe & Reliable</strong>
-      Our sand wax candles maintain their shape and offer enhanced safety.
-    </div>
-    <div class="benefit">
-      <img src="https://i.imgur.com/c7Z5v1n.png" alt="Small candle icon">
-      <strong>Designed for DIY Brides</strong>
-      Affordable, stylish, and convenient candle hire solutions.
-    </div>
-    <div class="benefit">
-      <img src="https://i.imgur.com/L2mFehp.png" alt="Small candle icon">
-      <strong>5-Star Service</strong>
+<div class="mobile-benefits">
+  <div class="scrollable-benefits">
+    <!-- CLONE of last real benefit (enables seamless looping) -->
+    <div class="benefit clone">
+      <img src="https://i.imgur.com/L2mFehp.png" alt="5‑Star Service icon">
+      <strong>5‑Star Service</strong>
       Join countless satisfied Perth brides with our premium service.
     </div>
+
+    <!-- REAL benefits -->
+    <div class="benefit">
+      <img src="https://i.imgur.com/oK6L7wY.png" alt="Effortless Beauty icon">
+      <strong>Effortless Beauty</strong>
+      Ready‑to‑light sand‑wax candles that save you precious time and stress.
+    </div>
+    <div class="benefit">
+      <img src="https://i.imgur.com/I77k7Wq.png" alt="Budget‑Friendly icon">
+      <strong>Budget‑Friendly</strong>
+      Premium pillar‑style candles at a fraction of buying cost.
+    </div>
+    <div class="benefit">
+      <img src="https://i.imgur.com/fCRn7IR.png" alt="Flexible & Convenient icon">
+      <strong>Flexible & Convenient</strong>
+      Easy DIY pick‑up and drop‑off options.
+    </div>
+    <div class="benefit">
+      <img src="https://i.imgur.com/CLvuNbE.png" alt="Safe & Reliable icon">
+      <strong>Safe & Reliable</strong>
+      Our sand‑wax candles maintain their shape and offer enhanced safety.
+    </div>
+    <div class="benefit">
+      <img src="https://i.imgur.com/c7Z5v1n.png" alt="Designed for DIY Brides icon">
+      <strong>Designed for DIY Brides</strong>
+      Affordable, stylish, and convenient candle‑hire solutions.
+    </div>
+    <div class="benefit">
+      <img src="https://i.imgur.com/L2mFehp.png" alt="5‑Star Service icon">
+      <strong>5‑Star Service</strong>
+      Join countless satisfied Perth brides with our premium service.
+    </div>
+
+    <!-- CLONE of first real benefit (enables seamless looping) -->
+    <div class="benefit clone">
+      <img src="https://i.imgur.com/oK6L7wY.png" alt="Effortless Beauty icon">
+      <strong>Effortless Beauty</strong>
+      Ready‑to‑light sand‑wax candles that save you precious time and stress.
+    </div>
   </div>
-  <button class="arrow right" aria-label="Next">&#8594;</button>
 </div>
   </section>
 
@@ -574,6 +587,28 @@ document.getElementById('package').addEventListener('change', function() {
       });
 
     });
+
+    // benefits
+
+    document.addEventListener("DOMContentLoaded", ()=>{
+    const scroller = document.querySelector('.scrollable-benefits');
+    if(!scroller) return;
+
+    const cards   = scroller.querySelectorAll('.benefit');
+    const realCards = Array.from(cards).filter(c=>!c.classList.contains('clone'));
+    const cardW   = cards[0].offsetWidth + 16; // +gap
+
+    // Jump to first real card (skip leading clone)
+    scroller.scrollLeft = cardW;
+
+    let scrollTimeout;
+    scroller.addEventListener('scroll', ()=>{
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(()=>{
+        const index = Math.round(scroller.scrollLeft / cardW);
+      },100);
+    });
+  });
 
   </script>
 </body>
