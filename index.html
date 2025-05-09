@@ -159,19 +159,15 @@
 </div>
 
 <!-- Mobile Carousel Gallery -->
-<div class="gallery-carousel mobile-gallery">
-  <button class="arrow left" aria-label="Previous image">&#8592;</button>
-  <div class="gallery-track">
-    <img src="https://i.imgur.com/DxZeF3E.jpg" alt="Candle setup 1" class="gallery-image active">
+<div class="gallery mobile-gallery">
+  <div class="scrollable-gallery">
+    <img src="https://i.imgur.com/DxZeF3E.jpg" alt="Candle setup 1" class="gallery-image">
     <img src="https://i.imgur.com/A6Im6gw.jpg" alt="Candle setup 2" class="gallery-image">
     <img src="https://i.imgur.com/aIHg1wQ.jpg" alt="Candle setup 3" class="gallery-image">
     <img src="https://i.imgur.com/72moIaz.png" alt="Candle setup 4" class="gallery-image">
     <img src="https://i.imgur.com/p4TaKaR.png" alt="Candle setup 5" class="gallery-image">
     <img src="https://i.imgur.com/yGbMcz4.png" alt="Candle setup 6" class="gallery-image">
-    <img src="https://i.imgur.com/3cveuf9.png" alt="Candle setup 7" class="gallery-image">
-    <img src="https://i.imgur.com/jHYgHUx.png" alt="Candle setup 8" class="gallery-image">
-  </div>
-  <button class="arrow right" aria-label="Next image">&#8594;</button>
+</div>
 </div>
 
 
@@ -539,6 +535,45 @@ document.getElementById('package').addEventListener('change', function() {
       customAmountField.style.display = 'none';
     }
   });
+
+  //gallery
+  document.addEventListener("DOMContentLoaded", function () {
+      const scroller = document.querySelector(".scrollable-gallery");
+      scroller.style.overflowX = "scroll";
+      scroller.style.display = "flex";
+      scroller.style.scrollSnapType = "x mandatory";
+      scroller.style.gap = "16px";
+      scroller.style.scrollBehavior = "smooth";
+
+      scroller.querySelectorAll(".gallery-image").forEach((img) => {
+        img.style.flex = "0 0 auto";
+        img.style.width = "80%";
+        img.style.maxWidth = "400px";
+        img.style.borderRadius = "8px";
+        img.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+      });
+
+      let isDown = false, startX, scrollLeft;
+
+      scroller.addEventListener("mousedown", (e) => {
+        isDown = true;
+        scroller.classList.add("active");
+        startX = e.pageX - scroller.offsetLeft;
+        scrollLeft = scroller.scrollLeft;
+      });
+
+      scroller.addEventListener("mouseleave", () => { isDown = false; });
+      scroller.addEventListener("mouseup", () => { isDown = false; });
+
+      scroller.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - scroller.offsetLeft;
+        const walk = (x - startX) * 2;
+        scroller.scrollLeft = scrollLeft - walk;
+      });
+
+    });
 
   </script>
 </body>

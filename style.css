@@ -820,7 +820,6 @@ footer p {
 }
 
 .gallery-image {
-  display: none;
   width: 100%;
   border-radius: 8px;
 }
@@ -913,7 +912,6 @@ footer p {
   }
 
   .gallery-image {
-    display: none;
     width: 100%;
     border-radius: 8px;
   }
@@ -943,6 +941,29 @@ footer p {
   .gallery-carousel .arrow.right {
     right: 0;
   }
+  .scrollable-gallery {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 0 16px;
+    scroll-behavior: smooth;
+  }
+
+  .gallery-image {
+    flex: 0 0 100%;
+    max-width: 100%;
+    height: auto;
+    scroll-snap-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .scrollable-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+
 }
 
 @media (min-width: 769px) {
