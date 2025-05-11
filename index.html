@@ -19,7 +19,7 @@
     <header>
       <img src="https://i.imgur.com/yDE7kJO.png" alt="Lustre Hire logo" class="site-logo">
       <h1>Lustre Hire</h1>
-      <h2 id="SecondTitle">DIY Candle Hire for Events in Perth</h2>
+      <h2 id="SecondTitle">Ready to light sand wax candles for events in Perth</h2>
       <button class="menu-toggle" aria-label="Toggle navigation">
         <img src="https://i.imgur.com/40aavGY.png" alt="Open menu" class="icon open-icon" />
         <img src="https://i.imgur.com/eBxZd4V.png" alt="Close menu" class="icon close-icon" />
@@ -43,7 +43,7 @@
   </section>
   
 <div id="main-content">
-  <section id="how-it-works">
+  <section id="how-it-works" class="animate-in">
     <div>
       <h2>How It Works</h2>
     <p>Hiring our beautiful sand wax candles is easy and stress-free. Here's a simple guide to our process.</p>
@@ -155,7 +155,7 @@
   </div>
 
   <!-- Candle Packages Section -->
-  <section id="candle-packages">
+  <section id="candle-packages" class="animate-in">
     <h2>Our Packages</h2>
     <p>Each candle is pre-filled with premium sand wax and equipped with wicks, so they are ready to light right out of the box.</p>
   
@@ -280,7 +280,7 @@
     </svg>
   </div>
 
-  <section id="benefits">
+  <section id="benefits" class="animate-in">
     <h2>Why Choose Us?</h2>
     <p>Our candles create a warm ambiance, perfect for weddings, corporate events, and special occasions. Discover the benefits of candle hire for your next event.</p>
     <!-- Desktop layout -->
@@ -375,7 +375,7 @@
     </svg>
   </div>
 
-  <section id="contact">
+  <section id="contact" class="animate-in">
     <h2>Hire Our Candles</h2>
     <p>Fill out the form below to get started with your candle hire.</p>
     <form action="https://formspree.io/f/moverenq" method="POST">
@@ -713,6 +713,24 @@ document.getElementById('package').addEventListener('change', function() {
     });
   });
 
+  document.addEventListener("DOMContentLoaded", () => {
+    const animatedElements = document.querySelectorAll(".animate-in");
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    animatedElements.forEach(element => {
+      observer.observe(element);
+    });
+  });
   </script>
 </body>
 </html>
