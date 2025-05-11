@@ -1276,6 +1276,7 @@ li, .package-card span{
     font-size: 18px;
     line-height: 28px;
   }
+  .hero-desktop{ display: none; }
 
   #candle-packages{
     padding-top: 0;
@@ -1288,6 +1289,7 @@ li, .package-card span{
 
 @media (min-width: 768px) {
   .mobile-packages { display: none; }
+  .hero-mobile{ display: none; }
 }
 
 .request-quote {
