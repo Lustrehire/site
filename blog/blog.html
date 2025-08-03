@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog | Lustre Hire</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="icon" href="https://i.imgur.com/yDE7kJO.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&family=Syne:wght@800&family=Cutive&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="header-container">
+    <header>
+      <a href="../index.html">
+        <img src="https://i.imgur.com/yDE7kJO.png" alt="Lustre Hire logo" class="site-logo">
+      </a>      
+      <h1>Lustre Hire</h1>
+      <h2 id="SecondTitle">Ready to light sand wax candles for events in Perth</h2>
+
+      <!-- Menu toggle button (same as index.html) -->
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        <img src="https://i.imgur.com/40aavGY.png" alt="Open menu" class="icon open-icon" />
+        <img src="https://i.imgur.com/eBxZd4V.png" alt="Close menu" class="icon close-icon" />
+      </button>
+
+      <!-- Main navigation -->
+      <nav class="main-nav">
+        <a href="../index.html#how-it-works">How It Works</a>
+        <a href="../index.html#benefits">Why Choose Us?</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </header>
+  </div>
+
+  <div id="main-content">
+    <section id="blog">
+      <h2>Our Latest Blog Posts</h2>
+      <div class="blog-posts">
+
+        <!-- Blog Post Preview -->
+        <!-- <article class="blog-preview">
+          <h3><a href="spring-trend-2025.html">Spring 2025 Perth Wedding Trend Forecast</a></h3>
+          <p class="date">August 3, 2025</p>
+          <p>Explore the top colour palettes, textures, and lighting trends for Spring 2025 weddings in Perth. From latte tones to cinematic candlelight, this guide helps you stay on trend with ease.</p>
+          <a href="spring-trend-2025.html" class="booking-button">Read More</a>
+        </article> 
+        
+        <article class="blog-preview">
+          <h3><a href="diy-vs-full-service.html">DIY vs Full-Service: How Much You’ll Save Hiring Sand-Wax Candles in Perth</a></h3>
+          <p class="date">August 3, 2025</p>
+          <p>Wondering how much you could save on candles for your wedding? This breakdown shows the real cost differences between DIY candle hire and full-service styling in Perth—plus why Lustre Hire offers unbeatable value.</p>
+          <a href="diy-vs-full-service.html" class="booking-button">Read More</a>
+        </article>
+
+        <article class="blog-preview">
+          <h3><a href="coastal-boho-colour-playbook.html">Colour-Palette Playbook: Coastal-Boho Reception</a></h3>
+          <p class="date">August 3, 2025</p>
+          <p>Discover the perfect colour palette for your coastal-boho wedding reception. From seafoam green to driftwood neutrals, we show you how to bring this relaxed aesthetic to life with candles, textures, and tone.</p>
+          <a href="coastal-boho-colour-playbook.html" class="booking-button">Read More</a>
+        </article>
+
+        <article class="blog-preview">
+          <h3><a href="tablescape-checklist.html">Planning a 30-Candle Tablescape for under $450: Here’s the Checklist</a></h3>
+          <p class="date">August 3, 2025</p>
+          <p>Create an elegant candlelit table for less than $450. This step-by-step guide covers everything from choosing candles to styling floral accents—perfect for DIY brides looking to maximise style on a budget.</p>
+          <a href="tablescape-checklist.html" class="booking-button">Read More</a>
+        </article>
+        
+        <article class="blog-preview">
+          <h3><a href="venue-safety-approval.html">Venue Safety 101: Getting Candle Approval from Popular Perth Reception Spots</a></h3>
+          <p class="date">August 3, 2025</p>
+          <p>Planning a candlelit wedding? Here’s how to get venue approval for your candles and why Lustre Hire’s enclosed sand wax candles meet safety standards across Perth.</p>
+          <a href="venue-safety-approval.html" class="booking-button">Read More</a>
+        </article>
+        
+        <article class="blog-preview">
+          <h3><a href="burn-time-calculator.html">Ultimate Candle Burn-Time Calculator for Evening Ceremonies</a></h3>
+          <p class="date">August 3, 2025</p>
+          <p>Planning a twilight wedding or candlelit reception? Use this guide to ensure your sand wax candles last all night long. Includes a burn-time chart, expert tips, and a printable planner.</p>
+          <a href="burn-time-calculator.html" class="booking-button">Read More</a>
+        </article>
+        
+        <article class="blog-preview">
+          <h3><a href="Candle-budget-breakdown.html">Breakdown of a $500 Candle Budget: 3 Looks, 3 Price Points</a></h3>
+          <p class="date">August 3, 2025</p>
+          <p>See what kind of candlelit styling you can create with just $500. We break down three looks at three price points—so you can plan with confidence and glow without overspending.</p>
+          <a href="Candle-budget-breakdown.html" class="booking-button">Read More</a>
+        </article> -->
+        
+        
+
+        <!-- Add more blog post previews here -->
+
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>Brighten Your Events with Lustre Hire</p>
+    <p>Contact: lustrehire@gmail.com</p>
+  </footer>
+
+  <!-- Mobile menu toggle script -->
+  <script>
+    //hamburger menu
+
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".main-nav");
+
+  toggle.addEventListener("click", () => {
+    nav.classList.toggle("open");
+    toggle.classList.toggle("menu-open");
+  });
+});
+  </script>
+</body>
+</html>
