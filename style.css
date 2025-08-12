@@ -1439,6 +1439,11 @@ li, .package-card span{
   line-height: 1.6;
 }
 
+.blog-image{
+  max-width: 800px;
+  width: 100%;
+}
+
 @media (max-width: 600px) {
   .blog-post {
     padding: 0 12px;
@@ -1552,13 +1557,6 @@ table tr.total-row {
 }
 
 @media (max-width: 768px) {
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
-
-  table thead {
-    display: none;
-  }
 
   table tr {
     margin-bottom: 1rem;
