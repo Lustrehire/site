@@ -577,71 +577,62 @@
 
   <!-- Candle Packages Section -->
   <section id="candle-packages" class="animate-in">
-    <h2>Our Packages</h2>
-    <p>Each candle is pre-filled with premium sand wax and equipped with wicks, so they are ready to light right out of the box.</p>
-  
-    <!-- Desktop Version (Existing) -->
-    <div class="candle-package-grid desktop-packages">
-      <div class="package-card">
-        <h3>Intimate Glow</h3>
-        <div class="package-total">$150 total</div>
-        <h4 class="price">$10 per candle</h4>
-        <p class="package-summary">A simple option for smaller spaces and soft candlelight styling.</p>
-        <div class="package-includes">Includes 5 of each size</div>
-        <a href="#contact" class="booking-button">Check My Date</a>
+    <div class="pricing-overview">
+      <h2>Simple, transparent pricing</h2>
+      <p class="pricing-lead">$10 per candle</p>
+      <p class="pricing-minimum">Minimum 15 candles</p>
+      <div class="pricing-tier-panel">
+        <article class="pricing-tier">
+          <h3>15 to 44 candles</h3>
+          <p><strong>$10</strong> each</p>
+        </article>
+        <article class="pricing-tier">
+          <h3>45+ candles</h3>
+          <p><strong>$9</strong> each</p>
+          <span>for extra candles</span>
+        </article>
+        <article class="pricing-tier">
+          <h3>90+ candles</h3>
+          <p><strong>$8</strong> each</p>
+          <span>for extra candles</span>
+        </article>
       </div>
-  
-      <div class="package-card popular">
-        <span class="badge">Most Popular</span>
-        <h3>Celebration Glow</h3>
-        <div class="package-total">$405 total</div>
-        <h4 class="price">$9 per candle</h4>
-        <p class="package-summary">Ideal for fuller table styling and a more impactful setup.</p>
-        <div class="package-includes">Includes 15 of each size</div>
-        <a href="#contact" class="booking-button">Check My Date</a>
-      </div>
-  
-      <div class="package-card">
-        <h3>Grand Glow</h3>
-        <div class="package-total">$720 total</div>
-        <h4 class="price">$8 per candle</h4>
-        <p class="package-summary">Best for larger weddings and more dramatic candle styling.</p>
-        <div class="package-includes">Includes 30 of each size</div>
-        <a href="#contact" class="booking-button">Check My Date</a>
-      </div>
-    </div>
-  
-    <!-- Mobile Swipeable Version -->
-    <div class="mobile-packages">
-      <div class="scrollable-packages">
-        <div class="package-card">
-          <h3>Intimate Glow</h3>
-          <div class="package-total">$150 total</div>
-          <h4 class="price">$10 per candle</h4>
-          <p class="package-summary">A simple option for smaller spaces and soft candlelight styling.</p>
-          <div class="package-includes">Includes 5 of each size</div>
-          <a href="#contact" class="booking-button">Check My Date</a>
+
+      <div class="pricing-examples">
+        <div class="pricing-examples-heading">
+          <span></span>
+          <h3>Example pricing</h3>
+          <span></span>
         </div>
-  
-        <div class="package-card popular">
-          <span class="badge">Most Popular</span>
-          <h3>Celebration Glow</h3>
-          <div class="package-total">$405 total</div>
-          <h4 class="price">$9 per candle</h4>
-          <p class="package-summary">Ideal for fuller table styling and a more impactful setup.</p>
-          <div class="package-includes">Includes 15 of each size</div>
-          <a href="#contact" class="booking-button">Check My Date</a>
-        </div>
-  
-        <div class="package-card">
-          <h3>Grand Glow</h3>
-          <div class="package-total">$720 total</div>
-          <h4 class="price">$8 per candle</h4>
-          <p class="package-summary">Best for larger weddings and more dramatic candle styling.</p>
-          <div class="package-includes">Includes 30 of each size</div>
-          <a href="#contact" class="booking-button">Check My Date</a>
+        <div class="pricing-examples-grid">
+          <div class="pricing-example-row">
+            <span>15 candles</span>
+            <strong>$150</strong>
+          </div>
+          <div class="pricing-example-row">
+            <span>30 candles</span>
+            <strong>$300</strong>
+          </div>
+          <div class="pricing-example-row pricing-example-row-highlight">
+            <span>45 candles</span>
+            <strong>$449</strong>
+          </div>
+          <div class="pricing-example-row pricing-example-row-highlight">
+            <span>60 candles</span>
+            <strong>$584</strong>
+          </div>
+          <div class="pricing-example-row">
+            <span>90 candles</span>
+            <strong>$853</strong>
+          </div>
+          <div class="pricing-example-row">
+            <span>100 candles</span>
+            <strong>$933</strong>
+          </div>
         </div>
       </div>
+
+      <a href="#contact" class="booking-button pricing-cta">Check My Date</a>
     </div>
 
     <div class="package-calculator">
@@ -902,26 +893,12 @@
             <div class="calculator-result-summary" id="calculator-result-summary">
               <div class="calculator-summary-chips" id="calculator-summary-chips"></div>
             </div>
-            <div class="calculator-result-list">
-              <div class="calculator-result-item">
-                <span class="calculator-result-label">Estimated candles needed</span>
-                <strong id="calculator-result-range"></strong>
-              </div>
-              <div class="calculator-result-item">
-                <span class="calculator-result-label">Recommended option</span>
-                <strong id="calculator-result-option"></strong>
-              </div>
-              <div class="calculator-result-item">
-                <span class="calculator-result-label">Estimated starting price</span>
-                <strong id="calculator-result-price"></strong>
-              </div>
+            <div class="calculator-result-main">
+              <span class="calculator-result-eyebrow">You’ll need</span>
+              <strong class="calculator-result-range-display" id="calculator-result-range"></strong>
+              <p class="calculator-result-cost-line">Estimated cost <strong id="calculator-result-price"></strong></p>
             </div>
             <p class="calculator-result-disclaimer">This estimate is intended as a helpful starting point. Final recommendations may vary depending on your venue layout, styling preferences, and how full you want the candle setup to feel.</p>
-          </div>
-
-          <div class="calculator-convert-card">
-            <h3>Ready to check your date?</h3>
-            <p>We can help confirm availability and recommend the best option for your wedding setup.</p>
             <div class="calculator-cta-row">
               <button type="button" class="booking-button" id="calculator-check-date">Check My Date</button>
               <button type="button" class="request-quote calculator-quote-button" id="calculator-get-quote">Get My Quote</button>
@@ -943,90 +920,96 @@
   <section id="contact" class="animate-in">
     <h2>Hire Our Candles</h2>
     <p>Fill out the form below to get started with your candle hire.</p>
-    <div id="estimate-summary" class="estimate-summary" hidden>
-      <p class="estimate-summary-label">Your estimate:</p>
-      <p id="estimate-summary-range"></p>
-      <p class="estimate-summary-label">Recommended option:</p>
-      <p id="estimate-summary-option"></p>
-    </div>
-    <form action="https://formspree.io/f/moverenq" method="POST">
-      <div class="form-row">
+    <p class="contact-form-status" id="contact-form-status" hidden aria-live="polite"></p>
+    <form id="contact-form" action="https://formspree.io/f/moverenq" method="POST">
+      <div class="contact-form-progress" aria-hidden="true">
+        <p class="contact-form-step-count" id="contact-form-step-count">Step 1 of 4</p>
+        <div class="contact-form-progress-bar">
+          <span id="contact-form-progress-fill"></span>
+        </div>
+      </div>
+
+      <div class="contact-form-step is-active" data-contact-step="1">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input id="first-name" name="first-name" type="text" required />
+          </div>
+          <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input id="last-name" name="last-name" type="text" required />
+          </div>
+        </div>
+      
+        <div class="form-group" id="emailInput">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+      </div>
+
+      <div class="contact-form-step" data-contact-step="2">
+        <div class="form-group form-group-date">
+          <label for="event-date" class="form-label-with-info">
+            <span>Date needed for your event</span>
+            <button
+              type="button"
+              class="info-tooltip"
+              aria-label="Candles are usually collected the day before your event and returned the day after, so you only need to enter the date you want them for."
+              data-tooltip="Candles are usually collected the day before your event and returned the day after, so you only need to enter the date you want them for."
+            >
+              <i class="bi bi-info-circle" aria-hidden="true"></i>
+            </button>
+          </label>
+          <input id="event-date" name="event-date" type="date" required />
+        </div>
+
+        <div class="form-group form-group-checkbox">
+          <label class="contact-checkbox-row" for="multi-day-hire">
+            <input id="multi-day-hire" name="multi-day-hire" type="checkbox" />
+            <span>Hiring for more than one day?</span>
+          </label>
+        </div>
+
+        <div class="form-group form-group-duration" id="hire-duration-group" hidden>
+          <label for="hire-duration">How many days would you like to hire them for?</label>
+          <input id="hire-duration" name="hire-duration" type="text" inputmode="numeric" placeholder="For example, 2 days" />
+        </div>
+      </div>
+
+      <div class="contact-form-step" data-contact-step="3">
         <div class="form-group">
-          <label for="first-name">First Name</label>
-          <input id="first-name" name="first-name" type="text" required />
+          <label for="candle-count">How many candles do you want?</label>
+          <input id="candle-count" name="candle-count" type="number" min="1" inputmode="numeric" placeholder="For example, 36" required />
         </div>
+      
+        <div class="form-group" id="EventInput">
+          <label for="details">Event Details</label>
+          <textarea id="details" name="details"></textarea>
+          <p class="event-details-note" id="event-details-note" hidden>We have pre-filled your estimate details below based on your calculator results. You can edit them if needed.</p>
+        </div>
+      </div>
+
+      <div class="contact-form-step" data-contact-step="4">
         <div class="form-group">
-          <label for="last-name">Last Name</label>
-          <input id="last-name" name="last-name" type="text" required />
+          <label for="referral">How did you hear about us?</label>
+          <select id="referral" name="referral" required>
+            <option value="">Select an option</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Friend Referral">Referred by a Friend</option>
+            <option value="Search Engine">Search Engine (e.g., Google)</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
       </div>
-    
-      <div class="form-group" id="emailInput">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required />
-      </div>
-    
-      <div class="form-group form-group-date">
-        <label for="event-date" class="form-label-with-info">
-          <span>Date needed for your event</span>
-          <button
-            type="button"
-            class="info-tooltip"
-            aria-label="Candles are usually collected the day before your event and returned the day after, so you only need to enter the date you want them for."
-            data-tooltip="Candles are usually collected the day before your event and returned the day after, so you only need to enter the date you want them for."
-          >
-            <i class="bi bi-info-circle" aria-hidden="true"></i>
-          </button>
-        </label>
-        <input id="event-date" name="event-date" type="date" required />
-      </div>
 
-      <div class="form-group form-group-checkbox">
-        <label class="contact-checkbox-row" for="multi-day-hire">
-          <input id="multi-day-hire" name="multi-day-hire" type="checkbox" />
-          <span>Hiring for more than one day?</span>
-        </label>
-      </div>
+      <p class="contact-form-error" id="contact-form-error" role="alert" aria-live="polite"></p>
 
-      <div class="form-group form-group-duration" id="hire-duration-group" hidden>
-        <label for="hire-duration">How many days would you like to hire them for?</label>
-        <input id="hire-duration" name="hire-duration" type="text" inputmode="numeric" placeholder="For example, 2 days" />
+      <div class="contact-form-nav">
+        <button type="button" class="contact-form-nav-button contact-form-back" id="contact-form-back">Back</button>
+        <button type="button" class="contact-form-nav-button contact-form-next" id="contact-form-next">Next</button>
+        <button type="submit" class="contact-form-submit" hidden>Submit</button>
       </div>
-
-      <div class="form-group">
-        <label for="package">How many candles do you want?</label>
-        <select id="package" name="package" required>
-          <option value="">Select an option</option>
-          <option value="15">15 Candles (Intimate Package)</option>
-          <option value="45">45 Candles (Celebration Package)</option>
-          <option value="90">90 Candles (Grand Package)</option>
-          <option value="Custom">Custom Amount</option>
-        </select>
-        <div id="custom-amount" style="display: none;">
-          <label for="custom-candles">Enter your custom candle amount:</label>
-          <input id="custom-candles" name="custom-candles" type="number" min="1" />
-        </div>
-      </div>
-    
-      <div class="form-group" id="EventInput">
-        <label for="details">Event Details</label>
-        <textarea id="details" name="details"></textarea>
-      </div>
-    
-    
-      <div class="form-group">
-        <label for="referral">How did you hear about us?</label>
-        <select id="referral" name="referral" required>
-          <option value="">Select an option</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Facebook">Facebook</option>
-          <option value="Friend Referral">Referred by a Friend</option>
-          <option value="Search Engine">Search Engine (e.g., Google)</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-    
-      <button type="submit">Submit</button>
     </form>
   </section>
 
@@ -1186,17 +1169,20 @@
         });
       });
 
-      const packageSelect = document.getElementById("package");
-      const customAmountField = document.getElementById("custom-amount");
+      const candleCountField = document.getElementById("candle-count");
       const multiDayHireField = document.getElementById("multi-day-hire");
       const hireDurationGroup = document.getElementById("hire-duration-group");
       const hireDurationField = document.getElementById("hire-duration");
-
-      if (packageSelect && customAmountField) {
-        packageSelect.addEventListener("change", () => {
-          customAmountField.style.display = packageSelect.value === "Custom" ? "block" : "none";
-        });
-      }
+      const eventDetailsNote = document.getElementById("event-details-note");
+      const contactForm = document.getElementById("contact-form");
+      const contactFormSteps = contactForm ? Array.from(contactForm.querySelectorAll(".contact-form-step")) : [];
+      const contactFormBack = document.getElementById("contact-form-back");
+      const contactFormNext = document.getElementById("contact-form-next");
+      const contactFormSubmit = contactForm?.querySelector(".contact-form-submit");
+      const contactFormError = document.getElementById("contact-form-error");
+      const contactFormStatus = document.getElementById("contact-form-status");
+      const contactFormStepCount = document.getElementById("contact-form-step-count");
+      const contactFormProgressFill = document.getElementById("contact-form-progress-fill");
 
       const syncHireDurationFields = () => {
         const showDuration = !!multiDayHireField?.checked;
@@ -1232,14 +1218,9 @@
       const calculatorTablesSummary = document.getElementById("calculator-tables-summary");
       const calculatorResultTables = document.getElementById("calculator-result-tables");
       const calculatorResultRange = document.getElementById("calculator-result-range");
-      const calculatorResultOption = document.getElementById("calculator-result-option");
       const calculatorResultPrice = document.getElementById("calculator-result-price");
       const calculatorSummaryChips = document.getElementById("calculator-summary-chips");
-      const estimateSummary = document.getElementById("estimate-summary");
-      const estimateSummaryRange = document.getElementById("estimate-summary-range");
-      const estimateSummaryOption = document.getElementById("estimate-summary-option");
       const detailsField = document.getElementById("details");
-      const customCandlesField = document.getElementById("custom-candles");
       const contactSection = document.getElementById("contact");
       const firstNameField = document.getElementById("first-name");
       const calculatorSteps = calculatorForm ? Array.from(calculatorForm.querySelectorAll(".calculator-step")) : [];
@@ -1249,6 +1230,233 @@
       const mobileGalleryTrack = document.querySelector(".scrollable-gallery");
       let calculatorStepIndex = 0;
       let calculatorLastResult = null;
+      let contactFormStepIndex = 0;
+      let contactFormSubmitting = false;
+
+      const isMobileContactFlow = () => window.matchMedia("(max-width: 768px)").matches;
+
+      const validateContactFormStep = (stepIndex) => {
+        if (!contactForm) return "";
+
+        if (stepIndex === 0) {
+          if (!document.getElementById("first-name")?.value.trim()) {
+            return "Enter your first name to continue.";
+          }
+
+          if (!document.getElementById("last-name")?.value.trim()) {
+            return "Enter your last name to continue.";
+          }
+
+          const emailValue = document.getElementById("email")?.value.trim() || "";
+          if (!emailValue) {
+            return "Enter your email to continue.";
+          }
+
+          if (!document.getElementById("email")?.checkValidity()) {
+            return "Enter a valid email address to continue.";
+          }
+        }
+
+        if (stepIndex === 1) {
+          if (!document.getElementById("event-date")?.value) {
+            return "Choose the date needed for your event.";
+          }
+
+          if (multiDayHireField?.checked && !hireDurationField?.value.trim()) {
+            return "Enter how many days you would like to hire them for.";
+          }
+        }
+
+        if (stepIndex === 2) {
+          const candleValue = Number(candleCountField?.value || 0);
+          if (!candleValue || candleValue < 1) {
+            return "Enter how many candles you want.";
+          }
+        }
+
+        if (stepIndex === 3) {
+          if (!document.getElementById("referral")?.value) {
+            return "Choose how you heard about us.";
+          }
+        }
+
+        return "";
+      };
+
+      const renderContactFormStep = () => {
+        if (!contactFormSteps.length || !contactFormBack || !contactFormNext || !contactFormSubmit || !contactFormStepCount || !contactFormProgressFill || !contactFormError) {
+          return;
+        }
+
+        const mobileFlow = isMobileContactFlow();
+        contactForm.classList.toggle("contact-form-mobile-flow", mobileFlow);
+
+        if (!mobileFlow) {
+          contactFormSteps.forEach((step) => step.classList.add("is-active"));
+          contactFormBack.hidden = true;
+          contactFormNext.hidden = true;
+          contactFormSubmit.hidden = false;
+          contactFormStepCount.textContent = `Step 1 of ${contactFormSteps.length}`;
+          contactFormProgressFill.style.width = "100%";
+          contactFormError.textContent = "";
+          return;
+        }
+
+        if (contactFormStepIndex > contactFormSteps.length - 1) {
+          contactFormStepIndex = contactFormSteps.length - 1;
+        }
+
+        contactFormSteps.forEach((step, index) => {
+          step.classList.toggle("is-active", index === contactFormStepIndex);
+        });
+
+        contactFormBack.hidden = contactFormStepIndex === 0;
+        contactFormNext.hidden = contactFormStepIndex === contactFormSteps.length - 1;
+        contactFormSubmit.hidden = contactFormStepIndex !== contactFormSteps.length - 1;
+        contactFormStepCount.textContent = `Step ${contactFormStepIndex + 1} of ${contactFormSteps.length}`;
+        contactFormProgressFill.style.width = `${((contactFormStepIndex + 1) / contactFormSteps.length) * 100}%`;
+        contactFormError.textContent = "";
+      };
+
+      const resetContactFormFlow = () => {
+        contactForm?.reset();
+        contactFormStepIndex = 0;
+        if (eventDetailsNote) {
+          eventDetailsNote.hidden = true;
+        }
+        if (contactFormError) {
+          contactFormError.textContent = "";
+        }
+        syncHireDurationFields();
+        renderContactFormStep();
+      };
+
+      contactFormBack?.addEventListener("click", () => {
+        if (!isMobileContactFlow()) return;
+        if (contactFormStepIndex > 0) {
+          contactFormStepIndex -= 1;
+          renderContactFormStep();
+        }
+      });
+
+      contactFormNext?.addEventListener("click", () => {
+        if (!isMobileContactFlow()) return;
+
+        const validationMessage = validateContactFormStep(contactFormStepIndex);
+        if (validationMessage) {
+          if (contactFormError) {
+            contactFormError.textContent = validationMessage;
+          }
+          return;
+        }
+
+        if (contactFormStepIndex < contactFormSteps.length - 1) {
+          contactFormStepIndex += 1;
+          renderContactFormStep();
+        }
+      });
+
+      contactForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!contactForm || contactFormSubmitting) return;
+
+        if (contactFormStatus) {
+          contactFormStatus.hidden = true;
+          contactFormStatus.textContent = "";
+          contactFormStatus.classList.remove("is-error");
+        }
+
+        if (isMobileContactFlow()) {
+          if (contactFormStepIndex !== contactFormSteps.length - 1) {
+            const validationMessage = validateContactFormStep(contactFormStepIndex);
+            if (validationMessage) {
+              if (contactFormError) {
+                contactFormError.textContent = validationMessage;
+              }
+              return;
+            }
+
+            contactFormStepIndex += 1;
+            renderContactFormStep();
+            return;
+          }
+
+          const validationMessage = validateContactFormStep(contactFormStepIndex);
+          if (validationMessage) {
+            if (contactFormError) {
+              contactFormError.textContent = validationMessage;
+            }
+            return;
+          }
+        }
+
+        if (!contactForm.checkValidity()) {
+          contactForm.reportValidity();
+          return;
+        }
+
+        contactFormSubmitting = true;
+        if (contactFormSubmit) {
+          contactFormSubmit.disabled = true;
+          contactFormSubmit.textContent = "Submitting...";
+        }
+
+        fetch(contactForm.action, {
+          method: contactForm.method,
+          body: new FormData(contactForm),
+          headers: {
+            Accept: "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Form submission failed");
+            }
+
+            resetContactFormFlow();
+
+            if (contactFormStatus) {
+              contactFormStatus.hidden = false;
+              contactFormStatus.textContent = "Form submitted. We have received your enquiry and will be in touch soon.";
+            }
+
+            contactSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+          })
+          .catch(() => {
+            if (contactFormStatus) {
+              contactFormStatus.hidden = false;
+              contactFormStatus.textContent = "Something went wrong while submitting the form. Please try again.";
+              contactFormStatus.classList.add("is-error");
+            }
+
+            if (contactFormError) {
+              contactFormError.textContent = "Something went wrong while submitting the form. Please try again.";
+            }
+          })
+          .finally(() => {
+            contactFormSubmitting = false;
+            if (contactFormSubmit) {
+              contactFormSubmit.disabled = false;
+              contactFormSubmit.textContent = "Submit";
+            }
+          });
+      });
+
+      contactForm?.addEventListener("input", () => {
+        if (contactFormStatus && !contactFormStatus.hidden) {
+          contactFormStatus.hidden = true;
+          contactFormStatus.textContent = "";
+          contactFormStatus.classList.remove("is-error");
+        }
+
+        if (contactFormError) {
+          contactFormError.textContent = "";
+        }
+      });
+
+      window.addEventListener("resize", renderContactFormStep);
+      renderContactFormStep();
 
       if (calculatorForm && calculatorIntroPanel && calculatorFlowPanel && calculatorResultPanel) {
         const tableGuestAssumptions = {
@@ -1460,6 +1668,20 @@
           return Math.round(value / increment) * increment;
         };
 
+        const calculateTieredPrice = (candleCount) => {
+          const safeCount = Math.max(15, Math.round(candleCount));
+
+          if (safeCount <= 44) {
+            return safeCount * 10;
+          }
+
+          if (safeCount <= 89) {
+            return (44 * 10) + ((safeCount - 44) * 9);
+          }
+
+          return (44 * 10) + (45 * 9) + ((safeCount - 89) * 8);
+        };
+
         const calculateEstimate = (data) => {
           let expectedFinalGuests = 0;
 
@@ -1527,33 +1749,9 @@
           const lowEnd = Math.max(1, roundEstimateValue(rawTotal, "down"));
           const highEnd = Math.max(lowEnd, roundEstimateValue(finalEstimatedTotal, "up"));
           const estimateCount = Math.max(1, roundEstimateValue(finalEstimatedTotal, "up"));
-          const pricingEstimateCount = lowEnd;
+          const pricingEstimateCount = Math.max(15, lowEnd);
 
-          let recommendedOption = "Custom quantity quote";
-          let estimatedStartingPrice = pricingEstimateCount * 10;
-          let packageFieldValue = "Custom";
-          let customCandleAmount = estimateCount;
-
-          if (estimateCount <= 15) {
-            recommendedOption = "Intimate Glow";
-            estimatedStartingPrice = 150;
-            packageFieldValue = "15";
-            customCandleAmount = "";
-          } else if (estimateCount === 45) {
-            recommendedOption = "Celebration Glow";
-            estimatedStartingPrice = 405;
-            packageFieldValue = "45";
-            customCandleAmount = "";
-          } else if (estimateCount === 90) {
-            recommendedOption = "Grand Glow";
-            estimatedStartingPrice = 720;
-            packageFieldValue = "90";
-            customCandleAmount = "";
-          } else if (pricingEstimateCount >= 45 && pricingEstimateCount <= 89) {
-            estimatedStartingPrice = pricingEstimateCount * 9;
-          } else if (pricingEstimateCount > 90) {
-            estimatedStartingPrice = pricingEstimateCount * 8;
-          }
+          let estimatedStartingPrice = calculateTieredPrice(pricingEstimateCount);
 
           const extraSummary = data.extras.map((extra) => {
             if (extra === "other-area") {
@@ -1592,10 +1790,7 @@
             planningBuffer,
             lowEnd,
             highEnd,
-            recommendedOption,
             estimatedStartingPrice,
-            packageFieldValue,
-            customCandleAmount,
             tableStyleLabel,
             fullness: data.fullness,
             extraSummary,
@@ -1628,12 +1823,16 @@
           calculatorNext.textContent = calculatorStepIndex === activeSteps.length - 1 ? "See My Estimate" : "Next";
         };
 
+        const scrollCalculatorToTop = () => {
+          const calculatorShell = document.querySelector(".calculator-shell-packages") || document.querySelector(".calculator-shell");
+          calculatorShell?.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+
         const buildEstimateSummary = (result, data, actionLabel) => {
           const detailLines = [
             "[Calculator estimate]",
             `Requested action: ${actionLabel}`,
             `Estimated candles needed: ${result.lowEnd} to ${result.highEnd}`,
-            `Recommended option: ${result.recommendedOption}`,
             `Estimated starting price: ${formatCurrency(result.estimatedStartingPrice)}`,
           ];
 
@@ -1668,23 +1867,18 @@
         };
 
         const applyEstimateToEnquiry = (actionLabel) => {
-          if (!calculatorLastResult || !detailsField || !packageSelect || !contactSection) return;
+          if (!calculatorLastResult || !detailsField || !contactSection) return;
 
           const summaryText = buildEstimateSummary(calculatorLastResult, getCalculatorData(), actionLabel);
           const existingText = detailsField.value.replace(/\[Calculator estimate\][\s\S]*?\[End calculator estimate\]\n*/g, "").trim();
           detailsField.value = existingText ? `${summaryText}\n\n${existingText}` : summaryText;
 
-          packageSelect.value = calculatorLastResult.packageFieldValue;
-          packageSelect.dispatchEvent(new Event("change"));
-
-          if (customCandlesField) {
-            customCandlesField.value = calculatorLastResult.packageFieldValue === "Custom" ? calculatorLastResult.customCandleAmount : "";
+          if (candleCountField) {
+            candleCountField.value = String(calculatorLastResult.estimateCount);
           }
 
-          if (estimateSummary && estimateSummaryRange && estimateSummaryOption) {
-            estimateSummary.hidden = false;
-            estimateSummaryRange.textContent = `${calculatorLastResult.lowEnd} to ${calculatorLastResult.highEnd} candles`;
-            estimateSummaryOption.textContent = calculatorLastResult.recommendedOption;
+          if (eventDetailsNote) {
+            eventDetailsNote.hidden = false;
           }
 
           contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1705,7 +1899,6 @@
           }
 
           calculatorResultRange.textContent = `Around ${result.lowEnd} to ${result.highEnd} candles`;
-          calculatorResultOption.textContent = result.recommendedOption;
           calculatorResultPrice.textContent = `From ${formatCurrency(result.estimatedStartingPrice)}`;
           if (calculatorSummaryChips) {
             const summaryItems = result.setupSummary.length ? result.setupSummary : ["Estimate based on your selections"];
@@ -1725,6 +1918,7 @@
           calculatorResultPanel.classList.add("calculator-hidden");
           calculatorFlowPanel.classList.remove("calculator-hidden");
           renderCalculatorStep();
+          scrollCalculatorToTop();
         });
 
         calculatorCancel?.addEventListener("click", () => {
@@ -1742,6 +1936,7 @@
           if (calculatorStepIndex > 0) {
             calculatorStepIndex -= 1;
             renderCalculatorStep();
+            scrollCalculatorToTop();
           }
         });
 
@@ -1758,11 +1953,13 @@
 
           if (calculatorStepIndex === activeSteps.length - 1) {
             showCalculatorResult();
+            scrollCalculatorToTop();
             return;
           }
 
           calculatorStepIndex += 1;
           renderCalculatorStep();
+          scrollCalculatorToTop();
         });
 
         calculatorReset?.addEventListener("click", () => {
