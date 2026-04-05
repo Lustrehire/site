@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Payment Received | Lustre Hire</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&family=Syne:wght@800&family=Cutive&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="header-container internal-page-header">
+    <header>
+      <div class="logoName">
+        <div class="logoNameContainer">
+          <a href="./index.html">
+            <img src="https://i.imgur.com/yDE7kJO.png" alt="Lustre Hire logo" class="site-logo">
+          </a>
+          <div class="site-title">Lustre Hire</div>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-success">
+          <img src="https://i.imgur.com/40aavGY.png" alt="Open menu" class="icon open-icon" />
+          <img src="https://i.imgur.com/eBxZd4V.png" alt="Close menu" class="icon close-icon" />
+        </button>
+
+        <nav class="main-nav desktop-nav" aria-label="Primary">
+          <a href="./index.html#candle-packages">Pricing</a>
+          <a href="./index.html#how-it-works">How It Works</a>
+          <a href="./index.html#faq">FAQ</a>
+          <a href="./blog/blog.html">Blog</a>
+          <a href="mailto:lustrehire@gmail.com">Contact</a>
+          <a href="./index.html#availability-checker" class="nav-booking-link">Check Availability</a>
+        </nav>
+      </div>
+
+      <nav class="main-nav mobile-nav" id="mobile-nav-success" aria-label="Mobile">
+        <a href="./index.html#candle-packages">Pricing</a>
+        <a href="./index.html#how-it-works">How It Works</a>
+        <a href="./index.html#faq">FAQ</a>
+        <a href="./blog/blog.html">Blog</a>
+        <a href="mailto:lustrehire@gmail.com">Contact</a>
+        <a href="./index.html#availability-checker" class="nav-booking-link">Check Availability</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="page-breadcrumb-wrap">
+    <nav class="page-breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">Home</a>
+      <span class="page-breadcrumb-separator" aria-hidden="true">/</span>
+      <a href="./book.html">Booking</a>
+      <span class="page-breadcrumb-separator" aria-hidden="true">/</span>
+      <span aria-current="page">Confirmation</span>
+    </nav>
+  </div>
+
+  <main class="return-page">
+    <section class="return-card confirmation-card">
+      <div class="confirmation-hero">
+        <span class="confirmation-icon" aria-hidden="true">
+          <i class="bi bi-check2-circle"></i>
+        </span>
+        <p class="confirmation-kicker">Booking confirmed</p>
+        <h1>Payment received</h1>
+        <p class="return-status" id="payment-success-status" aria-live="polite">Saving your confirmed booking...</p>
+      </div>
+
+      <div class="confirmation-layout">
+        <div class="return-summary confirmation-summary" id="payment-success-summary" hidden></div>
+
+        <section class="confirmation-next-steps" id="payment-success-next-steps" hidden>
+          <h2>What happens next</h2>
+          <div class="confirmation-steps">
+            <div class="confirmation-step">
+              <span class="confirmation-step-number">1</span>
+              <div>
+                <h3>Watch for your confirmation email</h3>
+                <p>Your confirmation email will include your booking details, pickup address, and any final collection notes.</p>
+              </div>
+            </div>
+            <div class="confirmation-step">
+              <span class="confirmation-step-number">2</span>
+              <div>
+                <h3>Keep your booking details handy</h3>
+                <p>Your event date, candle quantity, and recorded time windows are all linked to this booking and will be confirmed by email.</p>
+              </div>
+            </div>
+            <div class="confirmation-step">
+              <span class="confirmation-step-number">3</span>
+              <div>
+                <h3>Need to update anything?</h3>
+                <p>If you need to adjust a detail, reply to your confirmation email and we can help from there.</p>
+              </div>
+            </div>
+          </div>
+          <div class="confirmation-email-note">
+            <i class="bi bi-envelope-check" aria-hidden="true"></i>
+            <p>Pickup address details are shared in your confirmation email. If you do not see it, please check your spam or promotions folder.</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="confirmation-actions" id="payment-success-actions" hidden>
+        <a href="./index.html" class="booking-button">Back to Homepage</a>
+      </div>
+    </section>
+  </main>
+  <script src="./shared-date.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const mobileNav = document.getElementById("mobile-nav-success");
+      const mobileNavLinks = mobileNav ? Array.from(mobileNav.querySelectorAll("a")) : [];
+
+      menuToggle?.addEventListener("click", () => {
+        if (!mobileNav) return;
+        const isOpen = mobileNav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (!mobileNav || !menuToggle) return;
+          mobileNav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      const bookingStorageKey = "lustreHirePendingBooking";
+      const bookingSavedKey = "lustreHireConfirmedBookingSaved";
+      const quoteStorageKey = "lustreHirePendingQuote";
+      const appsScriptUrl = "https://script.google.com/macros/s/AKfycbxajjPE4vCpTJZSIHRXWy_IZk5Sw3Rkpe4eKthR_0dw6eSoCKjMNqZjKiLZcjTwDy5ZgA/exec";
+  
+      const messageElement = document.getElementById("payment-success-message");
+      const statusElement = document.getElementById("payment-success-status");
+      const summaryElement = document.getElementById("payment-success-summary");
+      const nextStepsElement = document.getElementById("payment-success-next-steps");
+      const actionsElement = document.getElementById("payment-success-actions");
+      if (statusElement) {
+        statusElement.classList.add("status-loading");
+      }
+  
+      const urlParams = new URLSearchParams(window.location.search);
+      const stripeSessionId = urlParams.get("session_id") || "";
+      const savedBookingRaw = sessionStorage.getItem(bookingSavedKey);
+      const fetchWithTimeout = async (url, options = {}, timeoutMs = 12000) => {
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+
+        try {
+          return await fetch(url, {
+            ...options,
+            signal: controller.signal,
+          });
+        } finally {
+          window.clearTimeout(timeoutId);
+        }
+      };
+      const readJsonResponse = async (response) => {
+        const responseText = await response.text();
+        try {
+          return responseText ? JSON.parse(responseText) : null;
+        } catch (error) {
+          console.error("Malformed JSON response:", error, responseText);
+          return null;
+        }
+      };
+      const revealResolvedState = () => {
+        if (nextStepsElement) {
+          nextStepsElement.hidden = false;
+        }
+        if (actionsElement) {
+          actionsElement.hidden = false;
+        }
+      };
+      const formatDisplayDate = (value) => window.LustreHireDate.formatDisplayDate(value, "-");
+      const renderSummary = (booking, isQuote) => {
+        if (!summaryElement) return;
+        summaryElement.hidden = false;
+        summaryElement.innerHTML = `
+          <h2>${isQuote ? "Confirmed booking summary" : "Booking summary"}</h2>
+          <div class="confirmation-summary-grid">
+            <section class="confirmation-summary-section">
+              <h3>Booking details</h3>
+              <div class="confirmation-summary-list">
+                <div class="confirmation-summary-item"><span>Event date</span><strong>${formatDisplayDate(booking.eventDate)}</strong></div>
+                <div class="confirmation-summary-item"><span>Candle quantity</span><strong>${booking.quantity || "-"}</strong></div>
+                <div class="confirmation-summary-item"><span>Pickup date</span><strong>${formatDisplayDate(booking.pickupDate)}</strong></div>
+                <div class="confirmation-summary-item"><span>Return date</span><strong>${formatDisplayDate(booking.returnDate)}</strong></div>
+                <div class="confirmation-summary-item"><span>Pickup time window</span><strong>${booking.pickupTimeWindow || "-"}</strong></div>
+                <div class="confirmation-summary-item"><span>Drop-off time window</span><strong>${booking.dropoffTimeWindow || "-"}</strong></div>
+              </div>
+            </section>
+            <section class="confirmation-summary-section">
+              <h3>Customer details</h3>
+              <div class="confirmation-summary-list">
+                <div class="confirmation-summary-item"><span>Name</span><strong>${booking.fullName || "-"}</strong></div>
+                <div class="confirmation-summary-item"><span>Email</span><strong>${booking.email || "-"}</strong></div>
+                <div class="confirmation-summary-item"><span>Phone</span><strong>${booking.phone || "-"}</strong></div>
+              </div>
+            </section>
+          </div>
+          <div class="confirmation-payment-summary">
+            <div class="confirmation-payment-row">
+              <span>Candle hire</span>
+              <strong>$${Number(booking.hireFee || 0).toLocaleString()}</strong>
+            </div>
+            <div class="confirmation-payment-row">
+              <span>Refundable bond</span>
+              <strong>$${Number(booking.refundableBond || booking.hireFee || 0).toLocaleString()}</strong>
+            </div>
+            <div class="confirmation-payment-row confirmation-payment-row-total">
+              <span>Total paid today</span>
+              <strong>$${Number((booking.hireFee || 0) + (booking.refundableBond || booking.hireFee || 0)).toLocaleString()}</strong>
+            </div>
+          </div>
+        `;
+      };
+
+      console.log("[QUOTE DEBUG] payment-success stripeSessionId:", stripeSessionId);
+      console.log("[QUOTE DEBUG] payment-success savedBookingRaw:", savedBookingRaw);
+
+      if (savedBookingRaw) {
+        try {
+          const savedBooking = JSON.parse(savedBookingRaw);
+          console.log("[QUOTE DEBUG] payment-success savedBooking:", savedBooking);
+          if (!stripeSessionId || !savedBooking.stripeSessionId || savedBooking.stripeSessionId === stripeSessionId) {
+            const isQuote = savedBooking.mode === "quote";
+            console.log("[QUOTE DEBUG] payment-success using saved booking mode:", savedBooking.mode);
+            if (statusElement) {
+              statusElement.textContent = "Payment received and booking confirmed.";
+              statusElement.classList.remove("is-error");
+              statusElement.classList.remove("status-loading");
+            }
+            renderSummary(savedBooking, isQuote);
+            revealResolvedState();
+            return;
+          }
+        } catch (error) {
+          sessionStorage.removeItem(bookingSavedKey);
+        }
+      }
+  
+      const pendingBookingRaw = sessionStorage.getItem(bookingStorageKey);
+      console.log("[QUOTE DEBUG] payment-success pendingBookingRaw:", pendingBookingRaw);
+  
+      if (!pendingBookingRaw) {
+        if (messageElement) {
+          messageElement.textContent =
+            "Your payment was successful, but we could not find your booking details in this browser session.";
+        }
+        if (statusElement) {
+          statusElement.textContent =
+            "Please contact us and include your payment confirmation so we can help confirm your booking manually.";
+          statusElement.classList.add("is-error");
+          statusElement.classList.remove("status-loading");
+        }
+        if (actionsElement) {
+          actionsElement.hidden = false;
+        }
+        return;
+      }
+  
+      let pendingBooking = null;
+  
+      try {
+        pendingBooking = JSON.parse(pendingBookingRaw);
+        console.log("[QUOTE DEBUG] payment-success booking data:", pendingBooking);
+      } catch (error) {
+        if (messageElement) {
+          messageElement.textContent =
+            "Your payment was successful, but we could not read your saved booking details.";
+        }
+        if (statusElement) {
+          statusElement.textContent =
+            "Please contact us so we can confirm your booking manually.";
+          statusElement.classList.add("is-error");
+          statusElement.classList.remove("status-loading");
+        }
+        if (actionsElement) {
+          actionsElement.hidden = false;
+        }
+        return;
+      }
+  
+      const confirmedBooking = {
+        ...pendingBooking,
+        stripeSessionId,
+      };
+      const bookingMode = pendingBooking.mode === "quote" ? "quote" : "direct";
+      const successPayload = {
+        action: bookingMode === "quote" ? "markQuoteAsConfirmed" : "saveConfirmedBooking",
+        bookingData: bookingMode === "quote" ? confirmedBooking : bookingMode === "direct" ? confirmedBooking : undefined,
+        quoteToken: bookingMode === "quote" ? pendingBooking.quoteToken || "" : undefined,
+        stripeSessionId: bookingMode === "quote" ? stripeSessionId : undefined,
+      };
+      console.log("[QUOTE DEBUG] payment-success mode:", bookingMode);
+      console.log("[QUOTE DEBUG] payment-success payload:", successPayload);
+  
+      try {
+        const response = await fetchWithTimeout(appsScriptUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify(successPayload),
+        }, 12000);
+
+        const result = await readJsonResponse(response);
+
+        console.log("[QUOTE DEBUG] payment-success response:", result);
+  
+        if (!response.ok || !result) {
+          throw new Error("booking_save_request_failed");
+        }
+  
+        if (!result?.success) {
+          throw new Error("booking_save_request_failed");
+        }
+  
+        // Clear old storage first so stale bookings are not reused
+        sessionStorage.removeItem(bookingSavedKey);
+        sessionStorage.removeItem(bookingStorageKey);
+        sessionStorage.removeItem(quoteStorageKey);
+  
+        sessionStorage.setItem(bookingSavedKey, JSON.stringify({
+          ...confirmedBooking,
+          bookingId: result.bookingId || ""
+        }));
+  
+        if (statusElement) {
+          statusElement.textContent = "Payment received and booking confirmed.";
+          statusElement.classList.remove("is-error");
+          statusElement.classList.remove("status-loading");
+        }
+  
+        if (summaryElement) {
+          renderSummary(confirmedBooking, bookingMode === "quote");
+        }
+        revealResolvedState();
+      } catch (error) {
+        console.error("Confirmed booking save error:", error);
+  
+        if (messageElement) {
+          messageElement.textContent =
+            "Your payment was successful, but we could not finish saving your booking yet.";
+        }
+  
+        if (statusElement) {
+          statusElement.textContent =
+            "We could not finish confirming your booking online just yet. Please contact us and include your payment confirmation so we can help right away.";
+          statusElement.classList.add("is-error");
+          statusElement.classList.remove("status-loading");
+        }
+        if (actionsElement) {
+          actionsElement.hidden = false;
+        }
+      }
+    });
+  </script>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Lustre Hire</p>
+      <div class="site-footer-links">
+        <a href="mailto:lustrehire@gmail.com">lustrehire@gmail.com</a>
+        <a href="./terms-and-conditions.html">Terms &amp; Conditions</a>
+        <a href="./how-to-return.html">How to Return</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

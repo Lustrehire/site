@@ -11,13 +11,13 @@
   <meta property="og:image" content="https://lustrehire.com/img/spring-hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>Blog | Lustre Hire</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../style.css" />
   <link rel="icon" href="https://i.imgur.com/yDE7kJO.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&family=Syne:wght@800&family=Cutive&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div class="header-container">
+  <div class="header-container internal-page-header">
     <header>
       <div class="logoName">
         <div class="logoNameContainer">
@@ -26,139 +26,208 @@
           </a>
           <div class="site-title">Lustre Hire</div>
         </div>
-
-        <!-- Menu toggle button (same as index.html) -->
-        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="blog-nav">
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="blog-nav-mobile">
           <img src="https://i.imgur.com/40aavGY.png" alt="Open menu" class="icon open-icon" />
           <img src="https://i.imgur.com/eBxZd4V.png" alt="Close menu" class="icon close-icon" />
         </button>
+
+        <nav class="main-nav desktop-nav" aria-label="Primary">
+          <a href="../index.html#candle-packages">Pricing</a>
+          <a href="../index.html#how-it-works">How It Works</a>
+          <a href="../index.html#faq">FAQ</a>
+          <a href="blog.html" class="active">Blog</a>
+          <a href="mailto:lustrehire@gmail.com">Contact</a>
+          <a href="../index.html#availability-checker" class="nav-booking-link">Check Availability</a>
+        </nav>
       </div>
 
-      <!-- Main navigation -->
-      <nav class="main-nav" id="blog-nav" aria-label="Primary">
+      <nav class="main-nav mobile-nav" id="blog-nav-mobile" aria-label="Mobile">
+        <a href="../index.html#candle-packages">Pricing</a>
         <a href="../index.html#how-it-works">How It Works</a>
-        <a href="../index.html#benefits">Why Choose Us?</a>
+        <a href="../index.html#faq">FAQ</a>
         <a href="blog.html" class="active">Blog</a>
-        <a href="../index.html#contact">Contact</a>
+        <a href="mailto:lustrehire@gmail.com">Contact</a>
+        <a href="../index.html#availability-checker" class="nav-booking-link">Check Availability</a>
       </nav>
     </header>
   </div>
 
-  <div id="main-content">
-    <section id="blog">
-      <div class="blog-intro">
-        <p class="eyebrow">Perth Wedding Candle Guides</p>
-        <h1 class="blog-h1">Planning ideas, budget tips, and venue-friendly styling advice</h1>
-        <p>Use these guides to work out candle quantities, compare hire vs DIY costs, and design a warmer reception without overcomplicating your setup.</p>
+  <div class="page-breadcrumb-wrap page-breadcrumb-wrap-blog">
+    <nav class="page-breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="page-breadcrumb-separator" aria-hidden="true">/</span>
+      <span aria-current="page">Blog</span>
+    </nav>
+  </div>
+
+  <main id="main-content" class="blog-landing-page">
+    <section class="blog-landing-hero">
+      <div class="blog-landing-hero-copy">
+        <p class="eyebrow">Lustre Hire Journal</p>
+        <h1 class="blog-h1">Guides to help you plan a warmer, easier candlelit event</h1>
+        <p class="blog-landing-intro">Browse practical planning advice, venue-friendly candle tips, and budget-conscious styling ideas for Perth weddings and events.</p>
         <div class="blog-actions">
-          <a href="../index.html#candle-packages" class="booking-button">View Candle Packages</a>
-          <a href="../index.html#contact" class="text-link">Ask About Your Date</a>
+          <a href="../index.html#availability-checker" class="booking-button">Check My Date</a>
+          <a href="../index.html#candle-packages" class="text-link">View Candle Packages</a>
         </div>
       </div>
+      <div class="blog-landing-hero-visual">
+        <img src="../img/spring-hero.jpg" alt="Candlelit reception styling by Lustre Hire">
+      </div>
+    </section>
 
-      <article class="featured-blog-preview">
-        <p class="featured-label">Start here</p>
+    <section class="blog-topic-strip" aria-label="Popular topics">
+      <article class="blog-topic-pill">
+        <i class="bi bi-wallet2" aria-hidden="true"></i>
+        <div>
+          <strong>Budget planning</strong>
+          <span>Simple cost breakdowns</span>
+        </div>
+      </article>
+      <article class="blog-topic-pill">
+        <i class="bi bi-stars" aria-hidden="true"></i>
+        <div>
+          <strong>Styling ideas</strong>
+          <span>Looks that feel elevated</span>
+        </div>
+      </article>
+      <article class="blog-topic-pill">
+        <i class="bi bi-building-check" aria-hidden="true"></i>
+        <div>
+          <strong>Venue readiness</strong>
+          <span>Approval and safety tips</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="blog-featured-split">
+      <article class="blog-featured-card">
+        <p class="featured-label">Featured guide</p>
         <h2><a href="diy-vs-full-service.html">DIY vs Full-Service: How Much You’ll Save Hiring Sand-Wax Candles in Perth</a></h2>
         <p class="date">August 12, 2025</p>
         <p>Start with the clearest buying guide on the site: what DIY really costs, where the hidden effort sits, and when hiring becomes the simpler option.</p>
         <a href="diy-vs-full-service.html" class="booking-button">Read the Guide</a>
       </article>
+      <article class="blog-featured-image-card">
+        <img src="../img/spring-setup.jpg" alt="Styled candle arrangement for a Perth event">
+      </article>
+    </section>
 
-      <h2 class="blog-section-title">Latest Posts</h2>
-      <div class="blog-posts">
-
-        <!-- Blog Post Preview -->
-        <article class="blog-preview">
-          <h3><a href="diy-vs-full-service.html">DIY vs Full-Service: How Much You’ll Save Hiring Sand-Wax Candles in Perth</a></h3>
-          <p class="date">August 12, 2025</p>
-          <p>Wondering how much you could save on candles for your wedding? This breakdown shows the real cost differences between DIY candle hire and full-service styling in Perth, plus why Lustre Hire offers unbeatable value.</p>
-          <a href="diy-vs-full-service.html" class="booking-button">Read More</a>
-        </article>
-
-        <article class="blog-preview">
-          <h3><a href="spring-trend-2025.html">Spring 2025 Perth Wedding Trend Forecast</a></h3>
-          <p class="date">August 7, 2025</p>
-          <p>Explore the top colour palettes, textures, and lighting trends for Spring 2025 weddings in Perth. From latte tones to cinematic candlelight, this guide helps you stay on trend with ease.</p>
-          <a href="spring-trend-2025.html" class="booking-button">Read More</a>
-        </article>
+    <section class="blog-collection">
+      <div class="blog-section-heading">
+        <div>
+          <p class="eyebrow">Latest reading</p>
+          <h2 class="blog-section-title">Fresh planning articles</h2>
+        </div>
+        <p>Short, useful guides for couples and event planners working out quantities, styling, and venue-friendly candle setups.</p>
       </div>
 
-      <h2 class="blog-section-title">Popular Planning Guides</h2>
-      <div class="blog-posts">
-        <article class="blog-preview">
-          <h3><a href="tablescape-checklist.html">Planning a 30-Candle Tablescape for under $450: Here’s the Checklist</a></h3>
-          <p class="date">August 3, 2025</p>
-          <p>Create an elegant candlelit table for less than $450. This step-by-step guide covers quantities, styling notes, and the details couples usually forget until late in planning.</p>
-          <a href="tablescape-checklist.html" class="booking-button">Read More</a>
+      <div class="blog-card-grid">
+        <article class="blog-card blog-card-featured">
+          <a class="blog-card-image" href="diy-vs-full-service.html">
+            <img src="../img/Pin 15.jpg" alt="DIY candle hire inspiration">
+          </a>
+          <div class="blog-card-body">
+            <p class="date">August 12, 2025</p>
+            <h3><a href="diy-vs-full-service.html">DIY vs Full-Service: How Much You’ll Save Hiring Sand-Wax Candles in Perth</a></h3>
+            <p>See the real cost difference between DIY candle hire and full-service styling in Perth, and where the value actually sits.</p>
+            <a href="diy-vs-full-service.html" class="text-link">Read article</a>
+          </div>
         </article>
 
-        <article class="blog-preview">
-          <h3><a href="venue-safety-approval.html">Venue Safety 101: Getting Candle Approval from Popular Perth Reception Spots</a></h3>
-          <p class="date">August 3, 2025</p>
-          <p>Planning a candlelit reception? This guide helps you understand venue questions, approval concerns, and why enclosed sand wax candles are often easier to approve.</p>
-          <a href="venue-safety-approval.html" class="booking-button">Read More</a>
+        <article class="blog-card">
+          <a class="blog-card-image" href="spring-trend-2025.html">
+            <img src="../img/Pin 14.jpg" alt="Spring 2025 wedding styling inspiration">
+          </a>
+          <div class="blog-card-body">
+            <p class="date">August 7, 2025</p>
+            <h3><a href="spring-trend-2025.html">Spring 2025 Perth Wedding Trend Forecast</a></h3>
+            <p>Explore the palettes, textures, and candlelit styling trends shaping Spring 2025 weddings in Perth.</p>
+            <a href="spring-trend-2025.html" class="text-link">Read article</a>
+          </div>
         </article>
 
-        <article class="blog-preview">
-          <h3><a href="burn-time-calculator.html">Ultimate Candle Burn-Time Calculator for Evening Ceremonies</a></h3>
-          <p class="date">August 3, 2025</p>
-          <p>Work out how long your candles need to last for ceremonies, cocktail hour, and reception styling so you can order with more confidence.</p>
-          <a href="burn-time-calculator.html" class="booking-button">Read More</a>
+        <article class="blog-card">
+          <a class="blog-card-image" href="tablescape-checklist.html">
+            <img src="../img/Pin 16.jpg" alt="Candlelit tablescape planning">
+          </a>
+          <div class="blog-card-body">
+            <p class="date">August 3, 2025</p>
+            <h3><a href="tablescape-checklist.html">Planning a 30-Candle Tablescape for under $450: Here’s the Checklist</a></h3>
+            <p>Create an elegant candlelit table for less than $450 with a practical checklist for quantities and styling.</p>
+            <a href="tablescape-checklist.html" class="text-link">Read article</a>
+          </div>
         </article>
 
-        <!-- <article class="blog-preview">
-          <h3><a href="coastal-boho-colour-playbook.html">Colour-Palette Playbook: Coastal-Boho Reception</a></h3>
-          <p class="date">August 3, 2025</p>
-          <p>Discover the perfect colour palette for your coastal-boho wedding reception. From seafoam green to driftwood neutrals, we show you how to bring this relaxed aesthetic to life with candles, textures, and tone.</p>
-          <a href="coastal-boho-colour-playbook.html" class="booking-button">Read More</a>
+        <article class="blog-card">
+          <a class="blog-card-image" href="venue-safety-approval.html">
+            <img src="../img/Pin 17.jpg" alt="Venue-safe candle styling">
+          </a>
+          <div class="blog-card-body">
+            <p class="date">August 3, 2025</p>
+            <h3><a href="venue-safety-approval.html">Venue Safety 101: Getting Candle Approval from Popular Perth Reception Spots</a></h3>
+            <p>Understand common venue questions and how enclosed sand wax candles can make approvals simpler.</p>
+            <a href="venue-safety-approval.html" class="text-link">Read article</a>
+          </div>
         </article>
-        
-        <article class="blog-preview">
-          <h3><a href="Candle-budget-breakdown.html">Breakdown of a $500 Candle Budget: 3 Looks, 3 Price Points</a></h3>
-          <p class="date">August 3, 2025</p>
-          <p>See what kind of candlelit styling you can create with just $500. We break down three looks at three price points—so you can plan with confidence and glow without overspending.</p>
-          <a href="Candle-budget-breakdown.html" class="booking-button">Read More</a>
-        </article> -->
-      </div>
 
-      <div class="blog-cta">
-        <h2>Need help choosing a package?</h2>
-        <p>Tell us your date, venue, and rough candle count. We can point you to the right package or quote a custom quantity.</p>
-        <a href="../index.html#contact" class="booking-button">Check Availability</a>
+        <article class="blog-card">
+          <a class="blog-card-image" href="burn-time-calculator.html">
+            <img src="../img/Pin 5.jpg" alt="Evening ceremony candle burn time">
+          </a>
+          <div class="blog-card-body">
+            <p class="date">August 3, 2025</p>
+            <h3><a href="burn-time-calculator.html">Ultimate Candle Burn-Time Calculator for Evening Ceremonies</a></h3>
+            <p>Work out how long your candles need to last so you can order with more confidence and less guesswork.</p>
+            <a href="burn-time-calculator.html" class="text-link">Read article</a>
+          </div>
+        </article>
       </div>
     </section>
-  </div>
 
-  <footer>
-    <p>Brighten Your Events with Lustre Hire</p>
-    <p>Contact: lustrehire@gmail.com</p>
+    <section class="blog-cta blog-landing-cta">
+      <div>
+        <p class="eyebrow">Need help choosing a package?</p>
+        <h2>Tell us your date and rough candle count</h2>
+        <p>We can point you to the right package or help you work out a quote that fits your event setup.</p>
+      </div>
+      <a href="../index.html#availability-checker" class="booking-button">Check Availability</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Lustre Hire</p>
+      <div class="site-footer-links">
+        <a href="mailto:lustrehire@gmail.com">lustrehire@gmail.com</a>
+        <a href="../terms-and-conditions.html">Terms &amp; Conditions</a>
+        <a href="../how-to-return.html">How to Return</a>
+      </div>
+    </div>
   </footer>
 
-  <!-- Mobile menu toggle script -->
   <script>
-    //hamburger menu
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.getElementById("blog-nav-mobile");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".main-nav");
+      if (!toggle || !nav) return;
 
-  if (!toggle || !nav) return;
+      const setMenuState = (isOpen) => {
+        nav.classList.toggle("open", isOpen);
+        toggle.classList.toggle("menu-open", isOpen);
+        toggle.setAttribute("aria-expanded", String(isOpen));
+      };
 
-  const setMenuState = (isOpen) => {
-    nav.classList.toggle("open", isOpen);
-    toggle.classList.toggle("menu-open", isOpen);
-    toggle.setAttribute("aria-expanded", String(isOpen));
-  };
+      toggle.addEventListener("click", () => {
+        const isOpen = toggle.getAttribute("aria-expanded") === "true";
+        setMenuState(!isOpen);
+      });
 
-  toggle.addEventListener("click", () => {
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    setMenuState(!isOpen);
-  });
-
-  nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setMenuState(false));
-  });
-});
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMenuState(false));
+      });
+    });
   </script>
 </body>
 </html>

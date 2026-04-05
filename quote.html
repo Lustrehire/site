@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review Your Quote | Lustre Hire</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&family=Syne:wght@800&family=Cutive&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="header-container internal-page-header">
+    <header>
+      <div class="logoName">
+        <div class="logoNameContainer">
+          <a href="./index.html">
+            <img src="https://i.imgur.com/yDE7kJO.png" alt="Lustre Hire logo" class="site-logo">
+          </a>
+          <div class="site-title">Lustre Hire</div>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-quote">
+          <img src="https://i.imgur.com/40aavGY.png" alt="Open menu" class="icon open-icon" />
+          <img src="https://i.imgur.com/eBxZd4V.png" alt="Close menu" class="icon close-icon" />
+        </button>
+
+        <nav class="main-nav desktop-nav" aria-label="Primary">
+          <a href="./index.html#candle-packages">Pricing</a>
+          <a href="./index.html#how-it-works">How It Works</a>
+          <a href="./index.html#faq">FAQ</a>
+          <a href="./blog/blog.html">Blog</a>
+          <a href="mailto:lustrehire@gmail.com">Contact</a>
+          <a href="./index.html#availability-checker" class="nav-booking-link">Check Availability</a>
+        </nav>
+      </div>
+
+      <nav class="main-nav mobile-nav" id="mobile-nav-quote" aria-label="Mobile">
+        <a href="./index.html#candle-packages">Pricing</a>
+        <a href="./index.html#how-it-works">How It Works</a>
+        <a href="./index.html#faq">FAQ</a>
+        <a href="./blog/blog.html">Blog</a>
+        <a href="mailto:lustrehire@gmail.com">Contact</a>
+        <a href="./index.html#availability-checker" class="nav-booking-link">Check Availability</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="page-breadcrumb-wrap">
+    <nav class="page-breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">Home</a>
+      <span class="page-breadcrumb-separator" aria-hidden="true">/</span>
+      <span aria-current="page">Review Quote</span>
+    </nav>
+  </div>
+
+  <main class="return-page">
+    <section class="return-card quote-review-page">
+      <div class="quote-review-hero">
+        <p class="terms-kicker">Quote review</p>
+        <h1>Review your quote</h1>
+        <p class="return-status status-loading" id="quote-page-status" aria-live="polite">Loading your quote...</p>
+      </div>
+
+      <div class="booking-system-actions quote-page-actions" id="quote-page-error-actions" hidden>
+        <a href="./index.html?scrollTo=availability-checker" class="calculator-nav-button">Check availability again</a>
+        <a href="mailto:lustrehire@gmail.com" class="booking-button">Contact us</a>
+      </div>
+
+      <div id="quote-review-result" hidden></div>
+      <div class="return-summary quote-review-summary" id="quote-review-summary" hidden></div>
+      <div class="quote-review-bottom-action" id="quote-review-bottom-action" hidden></div>
+    </section>
+  </main>
+
+  <script src="./shared-date.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const mobileNav = document.getElementById("mobile-nav-quote");
+      const mobileNavLinks = mobileNav ? Array.from(mobileNav.querySelectorAll("a")) : [];
+
+      menuToggle?.addEventListener("click", () => {
+        if (!mobileNav) return;
+        const isOpen = mobileNav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (!mobileNav || !menuToggle) return;
+          mobileNav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      const quoteStorageKey = "lustreHirePendingQuote";
+      const appsScriptUrl = "https://script.google.com/macros/s/AKfycbxajjPE4vCpTJZSIHRXWy_IZk5Sw3Rkpe4eKthR_0dw6eSoCKjMNqZjKiLZcjTwDy5ZgA/exec";
+
+      const statusElement = document.getElementById("quote-page-status");
+      const summaryElement = document.getElementById("quote-review-summary");
+      const resultElement = document.getElementById("quote-review-result");
+      const bottomActionElement = document.getElementById("quote-review-bottom-action");
+      const errorActions = document.getElementById("quote-page-error-actions");
+
+      const params = new URLSearchParams(window.location.search);
+      const quoteToken = params.get("quoteToken") || params.get("token") || "";
+
+      let quoteData = null;
+      let resolvedQuantity = 0;
+      let latestAvailability = null;
+
+      const getSingleValue = (value) => Array.isArray(value) ? value[0] : value;
+      const getStringValue = (value) => {
+        const singleValue = getSingleValue(value);
+        return singleValue == null ? "" : String(singleValue);
+      };
+      const getNumberFromValue = (value) => {
+        const singleValue = getSingleValue(value);
+        const parsed = Number(singleValue);
+        return Number.isFinite(parsed) ? parsed : 0;
+      };
+
+      const calculateHireFee = (quantity) => {
+        const safeCount = Math.max(15, Math.round(Number(quantity) || 0));
+        if (safeCount <= 44) return safeCount * 10;
+        if (safeCount <= 89) return (44 * 10) + ((safeCount - 44) * 9);
+        return (44 * 10) + (45 * 9) + ((safeCount - 89) * 8);
+      };
+
+      const isPopularEventDate = (value) => {
+        const safeValue = getStringValue(value);
+        if (!safeValue || !/^\d{4}-\d{2}-\d{2}$/.test(safeValue)) return false;
+        const [year, month, day] = safeValue.split("-").map(Number);
+        const date = new Date(year, month - 1, day);
+        const dayOfWeek = date.getDay();
+        return dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0;
+      };
+
+      const formatCurrency = (value) => `$${Number(value || 0).toLocaleString()}`;
+      const formatDisplayDate = (value) => window.LustreHireDate.formatDisplayDate(getStringValue(value), "-");
+
+      const fetchWithTimeout = async (url, options = {}, timeoutMs = 12000) => {
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+
+        try {
+          return await fetch(url, {
+            ...options,
+            signal: controller.signal,
+          });
+        } finally {
+          window.clearTimeout(timeoutId);
+        }
+      };
+
+      const readJsonResponse = async (response) => {
+        const responseText = await response.text();
+        try {
+          return responseText ? JSON.parse(responseText) : null;
+        } catch (error) {
+          console.error("Malformed JSON response:", error, responseText);
+          return null;
+        }
+      };
+
+      const updateStatus = (message, isError = false, isLoading = false) => {
+        if (!statusElement) return;
+        statusElement.textContent = message;
+        statusElement.classList.toggle("is-error", isError);
+        statusElement.classList.toggle("status-loading", isLoading);
+      };
+
+      const showErrorShell = (statusCopy) => {
+        updateStatus(statusCopy, true, false);
+        if (summaryElement) {
+          summaryElement.hidden = true;
+        }
+        if (resultElement) {
+          resultElement.hidden = true;
+          resultElement.innerHTML = "";
+        }
+        if (bottomActionElement) {
+          bottomActionElement.hidden = true;
+          bottomActionElement.innerHTML = "";
+        }
+        if (errorActions) {
+          errorActions.hidden = false;
+        }
+      };
+
+      const normaliseQuoteData = (rawQuote) => {
+        const quantity = getNumberFromValue(rawQuote.quantity);
+        const hireFee = getNumberFromValue(rawQuote.hireFee) || calculateHireFee(quantity);
+        const refundableBond = getNumberFromValue(rawQuote.refundableBond ?? rawQuote.bondAmount ?? rawQuote.hireFee) || hireFee;
+
+        return {
+          ...rawQuote,
+          bookingId: getStringValue(rawQuote.bookingId),
+          eventDate: getStringValue(rawQuote.eventDate),
+          pickupDate: getStringValue(rawQuote.pickupDate),
+          returnDate: getStringValue(rawQuote.returnDate),
+          fullName: getStringValue(rawQuote.fullName),
+          email: getStringValue(rawQuote.email),
+          phone: getStringValue(rawQuote.phone),
+          address: getStringValue(rawQuote.address || rawQuote.customerAddress),
+          pickupTimeWindow: getStringValue(rawQuote.pickupTimeWindow),
+          dropoffTimeWindow: getStringValue(rawQuote.dropoffTimeWindow),
+          notes: getStringValue(rawQuote.notes),
+          quantity,
+          hireFee,
+          refundableBond,
+          bondAmount: refundableBond,
+        };
+      };
+
+      const renderQuoteSummary = () => {
+        if (!summaryElement || !quoteData) return;
+        const totalDueToday = Number(quoteData.hireFee || 0) + Number(quoteData.refundableBond || 0);
+        const isUnavailableState = latestAvailability && latestAvailability.available !== true && latestAvailability.partialAvailable !== true;
+        const isNoticeState = latestAvailability?.status === "notice_period";
+        const quoteBadgeText = isNoticeState
+          ? "Manual confirmation"
+          : isUnavailableState
+            ? "Date unavailable"
+            : "Not yet confirmed";
+        const quoteSubline = (isUnavailableState || isNoticeState)
+          ? ""
+          : `<p class="quote-sheet-subline">This quote remains subject to live availability until payment is completed.</p>`;
+        summaryElement.hidden = false;
+        summaryElement.innerHTML = `
+          <div class="quote-sheet">
+            <div class="quote-sheet-header">
+              <div class="quote-sheet-heading">
+                <h3>Quote reference ${quoteData.bookingId || "-"}</h3>
+                ${quoteSubline}
+              </div>
+              <div class="quote-sheet-badge">${quoteBadgeText}</div>
+            </div>
+
+            <div class="quote-sheet-grid">
+              <div class="quote-sheet-main">
+                <section class="quote-sheet-section">
+                  <h4>Hire period</h4>
+                  <div class="quote-sheet-list">
+                    <div class="quote-sheet-item"><span>Pickup date</span><strong>${formatDisplayDate(quoteData.pickupDate)}</strong></div>
+                    <div class="quote-sheet-item"><span>Return date</span><strong>${formatDisplayDate(quoteData.returnDate)}</strong></div>
+                    ${quoteData.pickupTimeWindow ? `<div class="quote-sheet-item"><span>Pickup time window</span><strong>${quoteData.pickupTimeWindow}</strong></div>` : ""}
+                    ${quoteData.dropoffTimeWindow ? `<div class="quote-sheet-item"><span>Drop-off time window</span><strong>${quoteData.dropoffTimeWindow}</strong></div>` : ""}
+                  </div>
+                </section>
+
+                <section class="quote-sheet-section">
+                  <h4>Prepared for</h4>
+                  <div class="quote-sheet-list">
+                    <div class="quote-sheet-item"><span>Customer name</span><strong>${quoteData.fullName || "-"}</strong></div>
+                    <div class="quote-sheet-item"><span>Email address</span><strong>${quoteData.email || "-"}</strong></div>
+                    ${quoteData.phone ? `<div class="quote-sheet-item"><span>Phone number</span><strong>${quoteData.phone}</strong></div>` : ""}
+                    ${quoteData.address ? `<div class="quote-sheet-item"><span>Address</span><strong>${quoteData.address}</strong></div>` : ""}
+                  </div>
+                </section>
+              </div>
+
+              <aside class="quote-sheet-total">
+                <h4>Payment summary</h4>
+                <div class="quote-sheet-total-box">
+                  <div class="quote-sheet-total-row">
+                    <span>Candle hire</span>
+                    <strong>${formatCurrency(quoteData.hireFee)}</strong>
+                  </div>
+                  <div class="quote-sheet-total-row">
+                    <span>Refundable bond</span>
+                    <strong>${formatCurrency(quoteData.refundableBond)}</strong>
+                  </div>
+                  <div class="quote-sheet-total-row quote-sheet-total-row-grand">
+                    <span>Total</span>
+                    <strong>${formatCurrency(totalDueToday)}</strong>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        `;
+      };
+
+      const getQuoteContinueUrl = () => {
+        const targetUrl = new URL("book.html", window.location.href);
+        targetUrl.searchParams.set("quoteToken", quoteToken);
+        if (resolvedQuantity && resolvedQuantity !== quoteData.quantity) {
+          targetUrl.searchParams.set("adjustedQuantity", String(resolvedQuantity));
+        }
+        return targetUrl.href;
+      };
+
+      const storeQuoteSession = () => {
+        if (!quoteData) return;
+        const payload = {
+          ...quoteData,
+          quantity: resolvedQuantity || quoteData.quantity,
+          hireFee: quoteData.hireFee,
+          refundableBond: quoteData.refundableBond,
+          bondAmount: quoteData.refundableBond,
+          quoteToken,
+          mode: "quote",
+        };
+        sessionStorage.setItem(quoteStorageKey, JSON.stringify(payload));
+      };
+
+      const renderResultCard = (variant, heading, message, summaryMarkup, actionsMarkup) => {
+        if (!resultElement) return;
+        const iconClass = variant === "limited"
+          ? "availability-success-icon availability-success-icon-limited"
+          : variant === "unavailable"
+            ? "availability-success-icon availability-success-icon-unavailable"
+            : "availability-success-icon";
+        const iconName = variant === "limited"
+          ? "exclamation-circle"
+          : variant === "unavailable"
+            ? "x-circle"
+            : "check2-circle";
+        const cardClass = variant === "limited"
+          ? "quote-review-status-card-limited"
+          : variant === "unavailable"
+            ? "quote-review-status-card-unavailable"
+            : "quote-review-status-card-success";
+
+        const headingMarkup = heading
+          ? `
+              <div class="availability-success-heading">
+                <span class="${iconClass}" aria-hidden="true">
+                  <i class="bi bi-${iconName}"></i>
+                </span>
+                <div class="availability-success-copy">
+                  <h4>${heading}</h4>
+                </div>
+              </div>
+            `
+          : "";
+        const noteMarkup = message ? `<p class="availability-success-note">${message}</p>` : "";
+
+        resultElement.hidden = false;
+        resultElement.innerHTML = `
+          <div class="quote-review-status-card ${cardClass}">
+            ${headingMarkup}
+            ${summaryMarkup || ""}
+            ${noteMarkup}
+            ${actionsMarkup || ""}
+          </div>
+        `;
+      };
+
+      const renderSummaryItems = (items, single = false) => {
+        const containerClass = single
+          ? "availability-success-summary availability-success-summary-single"
+          : "availability-success-summary";
+        return `
+          <div class="${containerClass}" aria-label="Quote status summary">
+            ${items.join("")}
+          </div>
+        `;
+      };
+
+      const summaryItemMarkup = (icon, label, value) => `
+        <div class="availability-success-summary-item">
+          <span class="availability-success-summary-icon" aria-hidden="true">
+            <i class="bi bi-${icon}"></i>
+          </span>
+          <div class="availability-success-summary-content">
+            <span class="availability-success-summary-label">${label}</span>
+            <div class="availability-success-summary-value-row">
+              <strong>${value}</strong>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const renderValidState = () => {
+        const remainingStock = getNumberFromValue(latestAvailability?.remainingStock);
+        const showPopularBadge = isPopularEventDate(quoteData.eventDate) || (remainingStock > 0 && remainingStock < 300);
+        updateStatus("Your quote is still valid and your date is currently available.");
+        storeQuoteSession();
+        renderResultCard(
+          "success",
+          "",
+          showPopularBadge ? "Popular date" : "",
+          "",
+          ""
+        );
+        renderQuoteSummary();
+        if (bottomActionElement) {
+          bottomActionElement.hidden = false;
+          bottomActionElement.innerHTML = `
+            <div class="quote-review-bottom-inner">
+              <a href="${getQuoteContinueUrl()}" class="booking-button quote-review-bottom-button">I’m ready to secure booking</a>
+            </div>
+          `;
+        }
+      };
+
+      const renderLimitedState = (maxAvailable) => {
+        updateStatus("Your booking is not confirmed until payment is completed.");
+        if (bottomActionElement) {
+          bottomActionElement.hidden = true;
+          bottomActionElement.innerHTML = "";
+        }
+        renderResultCard(
+          "limited",
+          "",
+          `Your original quote was for ${quoteData.quantity} candles, but we currently have up to ${maxAvailable} candles available for this date.`,
+          renderSummaryItems([
+            summaryItemMarkup("calendar3", "Event date", formatDisplayDate(quoteData.eventDate)),
+            summaryItemMarkup("fire", "Available now", `Up to ${maxAvailable} candles`),
+          ]),
+          `
+            <div class="availability-result-actions availability-result-actions-triple quote-result-actions">
+              <button type="button" class="booking-button" id="quote-update-quantity-button">Update my quote to ${maxAvailable} candles</button>
+              <a href="./index.html?scrollTo=availability-checker" class="calculator-nav-button">Check another date</a>
+              <a href="mailto:lustrehire@gmail.com" class="calculator-nav-button">Contact us</a>
+            </div>
+          `
+        );
+
+        document.getElementById("quote-update-quantity-button")?.addEventListener("click", () => {
+          resolvedQuantity = maxAvailable;
+          quoteData = {
+            ...quoteData,
+            quantity: maxAvailable,
+            hireFee: calculateHireFee(maxAvailable),
+            refundableBond: calculateHireFee(maxAvailable),
+            bondAmount: calculateHireFee(maxAvailable),
+          };
+          renderValidState();
+        });
+        renderQuoteSummary();
+      };
+
+      const renderUnavailableState = () => {
+        updateStatus("Unfortunately, we no longer have enough candles available for this date to fulfil this order.");
+        if (resultElement) {
+          resultElement.hidden = true;
+          resultElement.innerHTML = "";
+        }
+        renderQuoteSummary();
+        if (bottomActionElement) {
+          bottomActionElement.hidden = false;
+          bottomActionElement.innerHTML = `
+            <div class="quote-review-bottom-inner quote-review-bottom-inner-double">
+              <a href="./index.html?scrollTo=availability-checker" class="calculator-nav-button quote-review-bottom-button">Check another date</a>
+              <a href="mailto:lustrehire@gmail.com" class="booking-button quote-review-bottom-button">Contact us</a>
+            </div>
+          `;
+        }
+      };
+
+      const renderNoticePeriodState = () => {
+        const minimumNoticeDays = getNumberFromValue(latestAvailability?.minimumNoticeDays) || 3;
+        const earliestAllowedEventDate = getStringValue(latestAvailability?.earliestAllowedEventDate);
+        const earliestDateLine = earliestAllowedEventDate
+          ? `<p class="availability-success-note">The earliest date currently available for online booking is ${formatDisplayDate(earliestAllowedEventDate)}.</p>`
+          : "";
+
+        updateStatus(`Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.`);
+        if (resultElement) {
+          resultElement.hidden = false;
+          resultElement.innerHTML = `
+            <div class="quote-review-status-card quote-review-status-card-notice">
+              <div class="availability-success-heading">
+                <span class="availability-success-icon availability-success-icon-notice" aria-hidden="true">
+                  <i class="bi bi-clock-history"></i>
+                </span>
+                <div class="availability-success-copy">
+                  <h4>This quote needs manual confirmation</h4>
+                </div>
+              </div>
+              <p class="availability-success-note">Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.</p>
+              ${earliestDateLine}
+            </div>
+          `;
+        }
+        renderQuoteSummary();
+        if (bottomActionElement) {
+          bottomActionElement.hidden = false;
+          bottomActionElement.innerHTML = `
+            <div class="quote-review-bottom-inner quote-review-bottom-inner-double">
+              <a href="mailto:lustrehire@gmail.com" class="booking-button quote-review-bottom-button">Contact us</a>
+              <a href="./index.html?scrollTo=availability-checker" class="calculator-nav-button quote-review-bottom-button">Check another date</a>
+            </div>
+          `;
+        }
+      };
+
+      const runLiveAvailabilityCheck = async () => {
+        const response = await fetchWithTimeout(appsScriptUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify({
+            action: "checkAvailability",
+            eventDate: quoteData.eventDate,
+            quantity: quoteData.quantity,
+          }),
+        }, 12000);
+
+        const result = await readJsonResponse(response);
+        if (!response.ok || !result || typeof result !== "object") {
+          throw new Error("availability_check_failed");
+        }
+        latestAvailability = result;
+
+        const maxAvailable = getNumberFromValue(result.maxAvailable);
+        resolvedQuantity = quoteData.quantity;
+
+        if (result.status === "notice_period") {
+          renderNoticePeriodState();
+          return;
+        }
+
+        if (result.available === true) {
+          renderValidState();
+          return;
+        }
+
+        if (result.partialAvailable === true && maxAvailable >= 15) {
+          renderLimitedState(maxAvailable);
+          return;
+        }
+
+        renderUnavailableState();
+      };
+
+      if (!quoteToken) {
+        showErrorShell("Please use the link from your email or head back to the homepage to check availability again.");
+        return;
+      }
+
+      try {
+        updateStatus("Loading your quote...", false, true);
+        const response = await fetchWithTimeout(appsScriptUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify({
+            action: "getQuoteByToken",
+            quoteToken,
+          }),
+        }, 12000);
+
+        const result = await readJsonResponse(response);
+        console.log("[QUOTE DEBUG] quote review response:", result);
+
+        const rawQuote = result?.booking || result?.quote || result?.data || null;
+        if (!response.ok || !result) {
+          throw new Error("quote_lookup_failed");
+        }
+        if (!result?.success || result?.status === "missing" || !rawQuote) {
+          showErrorShell(result?.message || "Please check the link in your email or check availability again.");
+          return;
+        }
+        if (result.status === "paid" || rawQuote.quoteStatus === "paid" || rawQuote.bookingStatus === "confirmed") {
+          updateStatus("Your booking is already confirmed.");
+          summaryElement.hidden = true;
+          if (bottomActionElement) {
+            bottomActionElement.hidden = true;
+            bottomActionElement.innerHTML = "";
+          }
+          renderResultCard(
+            "success",
+            "This quote has already been paid",
+            "Your booking is already confirmed. If you need anything else, you can reply to your confirmation email.",
+            "",
+            `
+              <div class="availability-result-actions">
+                <a href="./index.html" class="calculator-nav-button">Back to homepage</a>
+              </div>
+            `
+          );
+          return;
+        }
+        if (result.status === "expired" || rawQuote.quoteStatus === "expired") {
+          showErrorShell(result?.message || "Please check availability again to create a new quote.");
+          return;
+        }
+        if (result.status === "notice_period") {
+          quoteData = normaliseQuoteData(rawQuote);
+          latestAvailability = result;
+          resolvedQuantity = quoteData.quantity;
+          renderNoticePeriodState();
+          return;
+        }
+        if (result.status !== "valid") {
+          showErrorShell(result?.message || "Please contact us if you need help with this quote.");
+          return;
+        }
+
+        quoteData = normaliseQuoteData(rawQuote);
+        resolvedQuantity = quoteData.quantity;
+        await runLiveAvailabilityCheck();
+      } catch (error) {
+        console.error("Quote review load error:", error);
+        showErrorShell("Your booking has not been placed yet. Please try again in a moment.");
+      }
+    });
+  </script>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Lustre Hire</p>
+      <div class="site-footer-links">
+        <a href="mailto:lustrehire@gmail.com">lustrehire@gmail.com</a>
+        <a href="./terms-and-conditions.html">Terms &amp; Conditions</a>
+        <a href="./how-to-return.html">How to Return</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

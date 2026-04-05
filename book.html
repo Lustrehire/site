@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete Your Booking | Lustre Hire</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" href="https://i.imgur.com/yDE7kJO.png" type="image/png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&family=Syne:wght@800&family=Cutive&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <div class="header-container internal-page-header">
+    <header>
+      <div class="logoName">
+        <div class="logoNameContainer">
+          <a href="./index.html">
+            <img src="https://i.imgur.com/yDE7kJO.png" alt="Lustre Hire logo" class="site-logo">
+          </a>
+          <div class="site-title">Lustre Hire</div>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav">
+          <img src="https://i.imgur.com/40aavGY.png" alt="Open menu" class="icon open-icon" />
+          <img src="https://i.imgur.com/eBxZd4V.png" alt="Close menu" class="icon close-icon" />
+        </button>
+
+        <nav class="main-nav desktop-nav" aria-label="Primary">
+          <a href="./index.html#candle-packages">Pricing</a>
+          <a href="./index.html#how-it-works">How It Works</a>
+          <a href="./index.html#faq">FAQ</a>
+          <a href="./blog/blog.html">Blog</a>
+          <a href="mailto:lustrehire@gmail.com">Contact</a>
+          <a href="./index.html#availability-checker" class="nav-booking-link">Check Availability</a>
+        </nav>
+      </div>
+
+      <nav class="main-nav mobile-nav" id="mobile-nav" aria-label="Mobile">
+        <a href="./index.html#candle-packages">Pricing</a>
+        <a href="./index.html#how-it-works">How It Works</a>
+        <a href="./index.html#faq">FAQ</a>
+        <a href="./blog/blog.html">Blog</a>
+        <a href="mailto:lustrehire@gmail.com">Contact</a>
+        <a href="./index.html#availability-checker" class="nav-booking-link">Check Availability</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="page-breadcrumb-wrap">
+    <nav class="page-breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">Home</a>
+      <span class="page-breadcrumb-separator" aria-hidden="true">/</span>
+      <span aria-current="page">Booking</span>
+    </nav>
+  </div>
+
+  <main class="return-page book-page">
+    <section class="return-card book-page-card">
+      <div class="book-page-backdrop" aria-hidden="true"></div>
+
+      <div class="book-flow-layout">
+        <aside class="book-flow-aside">
+          <div class="book-flow-aside-wave" aria-hidden="true"></div>
+          <div class="book-flow-aside-copy">
+            <span class="book-flow-aside-star" aria-hidden="true">
+              <i class="bi bi-stars"></i>
+            </span>
+            <h2>Let&apos;s get your booking set</h2>
+            <p>Just a few details and we&apos;ll handle the rest.</p>
+          </div>
+          <div class="book-flow-aside-points">
+            <div class="book-flow-aside-point">
+              <span aria-hidden="true"><i class="bi bi-shield-check"></i></span>
+              <strong>Secure booking</strong>
+            </div>
+            <div class="book-flow-aside-point">
+              <span aria-hidden="true"><i class="bi bi-calendar3"></i></span>
+              <strong>Flexible scheduling</strong>
+            </div>
+            <div class="book-flow-aside-point">
+              <span aria-hidden="true"><i class="bi bi-headset"></i></span>
+              <strong>Friendly support</strong>
+            </div>
+          </div>
+        </aside>
+
+        <div class="book-flow-main">
+          <div class="book-flow-surface">
+            <div class="book-page-header">
+              <div class="booking-flow-progress book-page-progress" id="book-flow-progress" hidden>
+                <div class="booking-flow-progress-row">
+                  <p class="booking-flow-progress-count" id="book-flow-progress-count">Step 1 of 2</p>
+                </div>
+                <div class="booking-flow-progress-bar" aria-hidden="true">
+                  <span class="booking-flow-progress-fill" id="book-flow-progress-fill"></span>
+                </div>
+              </div>
+              <h1 id="book-page-title">Enter your details</h1>
+              <p id="book-page-message">Loading your booking details...</p>
+              <p class="return-status" id="book-page-status" aria-live="polite">Preparing your booking page...</p>
+              <div class="booking-system-actions" id="book-page-error-actions" hidden>
+                <a href="./index.html?scrollTo=availability-checker" class="calculator-nav-button">Back to availability</a>
+                <button type="button" class="booking-button" id="book-page-contact-button">Contact us</button>
+              </div>
+            </div>
+
+            <div class="return-summary book-context-summary" id="book-context-summary" hidden></div>
+
+            <section class="availability-panel" id="book-form-panel" hidden>
+              <form id="book-form" novalidate>
+                <div class="availability-form-grid">
+                  <div class="form-group">
+                    <label for="book-full-name">Full Name</label>
+                    <input id="book-full-name" name="book-full-name" type="text" placeholder="e.g. Jane Smith" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="book-email">Email Address</label>
+                    <input id="book-email" name="book-email" type="email" placeholder="e.g. jane@email.com" required />
+                  </div>
+                </div>
+                <div class="availability-form-grid">
+                  <div class="form-group">
+                    <label for="book-address">Address</label>
+                    <input id="book-address" name="book-address" type="text" placeholder="Enter your address" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="book-phone">Phone Number</label>
+                    <input id="book-phone" name="book-phone" type="tel" inputmode="tel" placeholder="e.g. 0412 345 678" required />
+                  </div>
+                </div>
+                <div class="availability-form-grid">
+                  <div class="form-group">
+                    <label for="book-pickup-time-window">Pickup time window</label>
+                    <select id="book-pickup-time-window" name="book-pickup-time-window" required>
+                      <option value="">Select a pickup time</option>
+                      <option value="7:00 AM to 9:00 AM">7:00 AM to 9:00 AM</option>
+                      <option value="9:00 AM to 11:00 AM">9:00 AM to 11:00 AM</option>
+                      <option value="11:00 AM to 1:00 PM">11:00 AM to 1:00 PM</option>
+                      <option value="1:00 PM to 3:00 PM">1:00 PM to 3:00 PM</option>
+                      <option value="3:00 PM to 5:00 PM">3:00 PM to 5:00 PM</option>
+                      <option value="5:00 PM to 7:00 PM">5:00 PM to 7:00 PM</option>
+                      <option value="7:00 PM to 9:00 PM">7:00 PM to 9:00 PM</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="book-dropoff-time-window">Drop-off time window</label>
+                    <select id="book-dropoff-time-window" name="book-dropoff-time-window" required>
+                      <option value="">Select a drop-off time</option>
+                      <option value="7:00 AM to 9:00 AM">7:00 AM to 9:00 AM</option>
+                      <option value="9:00 AM to 11:00 AM">9:00 AM to 11:00 AM</option>
+                      <option value="11:00 AM to 1:00 PM">11:00 AM to 1:00 PM</option>
+                      <option value="1:00 PM to 3:00 PM">1:00 PM to 3:00 PM</option>
+                      <option value="3:00 PM to 5:00 PM">3:00 PM to 5:00 PM</option>
+                      <option value="5:00 PM to 7:00 PM">5:00 PM to 7:00 PM</option>
+                      <option value="7:00 PM to 9:00 PM">7:00 PM to 9:00 PM</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="book-notes">Notes / Event Details</label>
+                  <textarea id="book-notes" name="book-notes" placeholder="Any special requests or additional information..."></textarea>
+                </div>
+                <div class="availability-panel-actions">
+                  <a href="./index.html?scrollTo=availability-checker" class="calculator-nav-button availability-back-button">Back</a>
+                  <button type="submit" class="booking-button availability-submit" id="book-review-button">Review Booking</button>
+                </div>
+                <p class="availability-booking-feedback" id="book-form-feedback" role="status" aria-live="polite"></p>
+              </form>
+            </section>
+
+            <section class="availability-panel availability-review-booking-mode" id="book-review-panel" hidden>
+              <div class="availability-booking-summary" id="book-review-summary"></div>
+              <div class="availability-payment-note">
+                <h4><i class="bi bi-shield-lock" aria-hidden="true"></i><span>Payment reassurance</span></h4>
+                <p>A refundable bond is charged upfront today and refunded after return if everything comes back in good condition.</p>
+              </div>
+              <div class="booking-terms-check">
+                <input type="checkbox" id="book-terms-checkbox" name="book-terms-checkbox" required />
+                <div class="booking-terms-copy">
+                  <label for="book-terms-checkbox">
+                    I agree to the
+                    <a href="./terms-and-conditions.html" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>
+                  </label>
+                </div>
+              </div>
+              <div class="availability-panel-actions availability-panel-actions-split">
+                <button type="button" class="calculator-nav-button availability-back-button" id="book-back-to-form">Back</button>
+                <div class="availability-review-actions">
+                  <button type="button" class="booking-button availability-submit" id="book-payment-button" disabled aria-disabled="true">Proceed to Secure Payment</button>
+                </div>
+              </div>
+              <p class="availability-secure-note"><i class="bi bi-lock-fill" aria-hidden="true"></i> Secure checkout powered by Stripe</p>
+              <p class="availability-booking-feedback" id="book-review-feedback" role="status" aria-live="polite"></p>
+              <div class="booking-inline-actions" id="book-review-error-actions" hidden>
+                <button type="button" class="calculator-nav-button" id="book-retry-payment-button">Try again</button>
+                <button type="button" class="calculator-nav-button" id="book-review-back-button">Return to previous step</button>
+                <button type="button" class="booking-button" id="book-review-contact-button">Contact us</button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./shared-date.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const mobileNav = document.getElementById("mobile-nav");
+      const mobileNavLinks = mobileNav ? Array.from(mobileNav.querySelectorAll("a")) : [];
+
+      menuToggle?.addEventListener("click", () => {
+        if (!mobileNav) return;
+        const isOpen = mobileNav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (!mobileNav || !menuToggle) return;
+          mobileNav.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      const bookingStorageKey = "lustreHirePendingBooking";
+      const quoteStorageKey = "lustreHirePendingQuote";
+      const appsScriptUrl = "https://script.google.com/macros/s/AKfycbxajjPE4vCpTJZSIHRXWy_IZk5Sw3Rkpe4eKthR_0dw6eSoCKjMNqZjKiLZcjTwDy5ZgA/exec";
+
+      const pageTitle = document.getElementById("book-page-title");
+      const pageMessage = document.getElementById("book-page-message");
+      const pageStatus = document.getElementById("book-page-status");
+      const pageErrorActions = document.getElementById("book-page-error-actions");
+      const pageContactButton = document.getElementById("book-page-contact-button");
+      const flowProgress = document.getElementById("book-flow-progress");
+      const flowProgressCount = document.getElementById("book-flow-progress-count");
+      const flowProgressFill = document.getElementById("book-flow-progress-fill");
+      const contextSummary = document.getElementById("book-context-summary");
+      const formPanel = document.getElementById("book-form-panel");
+      const bookingForm = document.getElementById("book-form");
+      const formFeedback = document.getElementById("book-form-feedback");
+      const reviewPanel = document.getElementById("book-review-panel");
+      const reviewSummary = document.getElementById("book-review-summary");
+      const reviewFeedback = document.getElementById("book-review-feedback");
+      const reviewErrorActions = document.getElementById("book-review-error-actions");
+      const reviewButton = document.getElementById("book-review-button");
+      const paymentButton = document.getElementById("book-payment-button");
+      const retryPaymentButton = document.getElementById("book-retry-payment-button");
+      const reviewBackButton = document.getElementById("book-review-back-button");
+      const reviewContactButton = document.getElementById("book-review-contact-button");
+      const backToFormButton = document.getElementById("book-back-to-form");
+      const termsCheckbox = document.getElementById("book-terms-checkbox");
+
+      const fullNameField = document.getElementById("book-full-name");
+      const emailField = document.getElementById("book-email");
+      const addressField = document.getElementById("book-address");
+      const phoneField = document.getElementById("book-phone");
+      const pickupField = document.getElementById("book-pickup-time-window");
+      const dropoffField = document.getElementById("book-dropoff-time-window");
+      const notesField = document.getElementById("book-notes");
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const quoteToken = urlParams.get("quoteToken") || urlParams.get("token") || "";
+      const adjustedQuantityParam = Number(urlParams.get("adjustedQuantity") || 0);
+
+      let bookingMode = quoteToken ? "quote" : "direct";
+      let baseBookingContext = null;
+
+      const getSingleValue = (value) => Array.isArray(value) ? value[0] : value;
+      const getStringValue = (value) => {
+        const singleValue = getSingleValue(value);
+        return singleValue == null ? "" : String(singleValue);
+      };
+      const getNumberFromValue = (value) => {
+        const singleValue = getSingleValue(value);
+        const parsed = Number(singleValue);
+        return Number.isFinite(parsed) ? parsed : 0;
+      };
+
+      const formatCurrencyValue = (value) => `$${Number(value || 0).toLocaleString()}`;
+      const formatDisplayDate = (value) => window.LustreHireDate.formatDisplayDate(value, "-");
+
+      const calculateHireFee = (quantity) => {
+        const safeCount = Math.max(15, Math.round(Number(quantity) || 0));
+        if (safeCount <= 44) return safeCount * 10;
+        if (safeCount <= 89) return (44 * 10) + ((safeCount - 44) * 9);
+        return (44 * 10) + (45 * 9) + ((safeCount - 89) * 8);
+      };
+
+      const setButtonLoadingState = (button, isLoading, loadingText) => {
+        if (!(button instanceof HTMLElement)) return;
+        if (!button.dataset.defaultLabel) {
+          button.dataset.defaultLabel = button.textContent || "";
+        }
+        button.classList.toggle("button-loading", isLoading);
+        if ("disabled" in button) {
+          button.disabled = isLoading;
+        }
+        button.setAttribute("aria-busy", String(isLoading));
+        button.textContent = isLoading ? loadingText : button.dataset.defaultLabel;
+      };
+
+      const setStatusLoadingState = (element, message, isLoading) => {
+        if (!(element instanceof HTMLElement)) return;
+        element.textContent = message;
+        element.classList.toggle("status-loading", isLoading);
+        element.classList.remove("is-error");
+      };
+
+      const fetchWithTimeout = async (url, options = {}, timeoutMs = 12000) => {
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+
+        try {
+          return await fetch(url, {
+            ...options,
+            signal: controller.signal,
+          });
+        } finally {
+          window.clearTimeout(timeoutId);
+        }
+      };
+
+      const readJsonResponse = async (response) => {
+        const responseText = await response.text();
+        try {
+          return responseText ? JSON.parse(responseText) : null;
+        } catch (error) {
+          console.error("Malformed JSON response:", error, responseText);
+          return null;
+        }
+      };
+
+      const hideReviewErrorActions = () => {
+        if (reviewErrorActions) {
+          reviewErrorActions.hidden = true;
+        }
+      };
+
+      const showReviewErrorActions = () => {
+        if (reviewErrorActions) {
+          reviewErrorActions.hidden = false;
+        }
+      };
+
+      const setErrorState = (message, statusText = "") => {
+        if (pageMessage) pageMessage.textContent = message;
+        if (pageStatus) {
+          pageStatus.textContent = statusText;
+          pageStatus.classList.add("is-error");
+          pageStatus.classList.remove("status-loading");
+        }
+        if (pageErrorActions) {
+          pageErrorActions.hidden = false;
+        }
+        contextSummary.hidden = true;
+        formPanel.hidden = true;
+        reviewPanel.hidden = true;
+      };
+
+      pageContactButton?.addEventListener("click", () => {
+        window.location.href = "mailto:lustrehire@gmail.com";
+      });
+
+      const syncContextSummaryVisibility = () => {
+        if (!contextSummary) return;
+        contextSummary.hidden = true;
+      };
+
+      const renderFlowProgress = (stepNumber) => {
+        if (flowProgressCount) {
+          flowProgressCount.textContent = `Step ${stepNumber} of 2`;
+        }
+        if (flowProgressFill) {
+          flowProgressFill.style.width = `${(stepNumber / 2) * 100}%`;
+        }
+      };
+
+      const updateStepPresentation = (stepNumber) => {
+        if (flowProgress) {
+          flowProgress.hidden = false;
+        }
+        renderFlowProgress(stepNumber);
+
+        if (stepNumber === 1) {
+          if (pageTitle) pageTitle.textContent = "Enter your details";
+          if (pageMessage) {
+            pageMessage.textContent = bookingMode === "quote"
+              ? "We have prefilled your quote details where possible. Add anything missing below."
+              : "";
+          }
+          if (pageStatus) pageStatus.textContent = "";
+          if (pageErrorActions) pageErrorActions.hidden = true;
+          return;
+        }
+
+        if (pageTitle) pageTitle.textContent = "Review your booking";
+        if (pageMessage) {
+          pageMessage.textContent = "";
+        }
+        if (pageStatus) pageStatus.textContent = "";
+        if (pageErrorActions) pageErrorActions.hidden = true;
+      };
+
+      const showFormPanel = () => {
+        formPanel.hidden = false;
+        reviewPanel.hidden = true;
+        syncContextSummaryVisibility();
+        updateStepPresentation(1);
+      };
+
+      const showReviewPanel = () => {
+        formPanel.hidden = true;
+        reviewPanel.hidden = false;
+        syncContextSummaryVisibility();
+        updateStepPresentation(2);
+        syncTermsAcceptanceState();
+      };
+
+      const syncTermsAcceptanceState = () => {
+        if (!(paymentButton instanceof HTMLButtonElement) || !(termsCheckbox instanceof HTMLInputElement)) {
+          return;
+        }
+        paymentButton.disabled = !termsCheckbox.checked;
+        paymentButton.setAttribute("aria-disabled", String(!termsCheckbox.checked));
+      };
+
+      const getFormValues = () => ({
+        fullName: fullNameField?.value.trim() || "",
+        email: emailField?.value.trim() || "",
+        address: addressField?.value.trim() || "",
+        phone: phoneField?.value.trim() || "",
+        pickupTimeWindow: pickupField?.value || "",
+        dropoffTimeWindow: dropoffField?.value || "",
+        notes: notesField?.value.trim() || "",
+      });
+
+      const validateFormValues = () => {
+        const values = getFormValues();
+        if (!values.fullName || !values.email || !values.address || !values.phone || !values.pickupTimeWindow || !values.dropoffTimeWindow) {
+          return {
+            values,
+            error: "Enter your name, email, address, phone number, and both time windows to continue.",
+          };
+        }
+        return { values, error: "" };
+      };
+
+      const buildBookingData = () => {
+        const values = getFormValues();
+        const quantity = Number(baseBookingContext?.quantity || 0);
+        const hireFee = Number(baseBookingContext?.hireFee || calculateHireFee(quantity));
+        const refundableBond = Number(
+          baseBookingContext?.refundableBond ??
+          baseBookingContext?.bondAmount ??
+          hireFee
+        );
+        const successUrl = new URL("payment-success.html", window.location.href).href;
+        const cancelUrl = new URL("payment-cancelled.html", window.location.href).href;
+
+        return {
+          ...baseBookingContext,
+          mode: bookingMode,
+          quoteToken: bookingMode === "quote" ? quoteToken : "",
+          fullName: values.fullName,
+          email: values.email,
+          address: values.address,
+          customerAddress: values.address,
+          phone: values.phone,
+          pickupTimeWindow: values.pickupTimeWindow,
+          dropoffTimeWindow: values.dropoffTimeWindow,
+          notes: values.notes,
+          hireFee,
+          refundableBond,
+          bondAmount: refundableBond,
+          quantity,
+          successUrl,
+          cancelUrl,
+        };
+      };
+
+      const renderContextSummary = () => {
+        if (!contextSummary || !baseBookingContext) return;
+        const refundableBondAmount = Number(
+          (baseBookingContext.refundableBond ?? baseBookingContext.bondAmount ?? baseBookingContext.hireFee) || 0
+        );
+        const totalDueToday = Number(baseBookingContext.hireFee || 0) + refundableBondAmount;
+        contextSummary.innerHTML = `
+          <h2>${bookingMode === "quote" ? "Quote summary" : "Booking summary"}</h2>
+          <p><strong>Event date:</strong> ${formatDisplayDate(baseBookingContext.eventDate)}</p>
+          <p><strong>Quantity:</strong> ${baseBookingContext.quantity || "-"}</p>
+          <p><strong>Pickup date:</strong> ${formatDisplayDate(baseBookingContext.pickupDate)}</p>
+          <p><strong>Return date:</strong> ${formatDisplayDate(baseBookingContext.returnDate)}</p>
+          <p><strong>Hire fee:</strong> ${formatCurrencyValue(baseBookingContext.hireFee)}</p>
+          <p><strong>Refundable bond:</strong> ${formatCurrencyValue(refundableBondAmount)}</p>
+          <p><strong>Total due today:</strong> ${formatCurrencyValue(totalDueToday)}</p>
+        `;
+      };
+
+      const renderReviewSummary = () => {
+        if (!reviewSummary) return;
+        const booking = buildBookingData();
+        const totalDueToday = Number(booking.hireFee || 0) + Number(booking.refundableBond || 0);
+
+        reviewSummary.innerHTML = `
+          <div class="availability-review-layout">
+            <div class="availability-review-top">
+              <section class="availability-review-card availability-review-card-details">
+                <h4>Booking details</h4>
+                <div class="availability-review-list">
+                  <div class="availability-review-item"><span>Event date</span><strong>${formatDisplayDate(booking.eventDate)}</strong></div>
+                  <div class="availability-review-item"><span>Candle quantity</span><strong>${booking.quantity || "-"}</strong></div>
+                  <div class="availability-review-item"><span>Pickup date</span><strong>${formatDisplayDate(booking.pickupDate)}</strong></div>
+                  <div class="availability-review-item"><span>Return date</span><strong>${formatDisplayDate(booking.returnDate)}</strong></div>
+                  <div class="availability-review-item"><span>Pickup time window</span><strong>${booking.pickupTimeWindow || "-"}</strong></div>
+                  <div class="availability-review-item"><span>Drop-off time window</span><strong>${booking.dropoffTimeWindow || "-"}</strong></div>
+                </div>
+              </section>
+              <section class="availability-review-card availability-review-card-details">
+                <h4>Customer details</h4>
+                <div class="availability-review-list">
+                  <div class="availability-review-item"><span>Full name</span><strong>${booking.fullName || "-"}</strong></div>
+                  <div class="availability-review-item"><span>Email address</span><strong>${booking.email || "-"}</strong></div>
+                  <div class="availability-review-item"><span>Address</span><strong>${booking.address || "-"}</strong></div>
+                  <div class="availability-review-item"><span>Phone number</span><strong>${booking.phone || "-"}</strong></div>
+                  <div class="availability-review-item availability-review-item-notes"><span>Notes</span><strong>${booking.notes || "No notes added"}</strong></div>
+                </div>
+              </section>
+            </div>
+            <aside class="availability-review-card availability-review-card-summary">
+              <h4>Payment summary</h4>
+              <div class="availability-payment-summary">
+                <div class="availability-payment-row">
+                  <span>Candle hire</span>
+                  <strong>${formatCurrencyValue(booking.hireFee)}</strong>
+                </div>
+                <div class="availability-payment-row">
+                  <span>Refundable bond</span>
+                  <strong>${formatCurrencyValue(booking.refundableBond)}</strong>
+                </div>
+                <div class="availability-payment-row availability-payment-row-total">
+                  <span>Total due today</span>
+                  <strong>${formatCurrencyValue(totalDueToday)}</strong>
+                </div>
+              </div>
+            </aside>
+          </div>
+        `;
+      };
+
+      const populateForm = () => {
+        if (!baseBookingContext) return;
+        if (fullNameField) fullNameField.value = baseBookingContext.fullName || "";
+        if (emailField) emailField.value = baseBookingContext.email || "";
+        if (addressField) addressField.value = baseBookingContext.address || baseBookingContext.customerAddress || "";
+        if (phoneField) phoneField.value = baseBookingContext.phone || "";
+        if (pickupField) pickupField.value = baseBookingContext.pickupTimeWindow || "";
+        if (dropoffField) dropoffField.value = baseBookingContext.dropoffTimeWindow || "";
+        if (notesField) notesField.value = baseBookingContext.notes || "";
+      };
+
+      const loadDirectContext = () => {
+        const pendingRaw = sessionStorage.getItem(bookingStorageKey);
+        if (!pendingRaw) {
+          return null;
+        }
+
+        try {
+          const parsed = JSON.parse(pendingRaw);
+          if (!parsed || parsed.mode === "quote") {
+            return null;
+          }
+
+          return {
+            ...parsed,
+            mode: "direct",
+            hireFee: Number(parsed.hireFee || calculateHireFee(parsed.quantity)),
+            refundableBond: Number(parsed.refundableBond || parsed.hireFee || calculateHireFee(parsed.quantity)),
+          };
+        } catch (error) {
+          return null;
+        }
+      };
+
+      if (pageStatus) {
+        setStatusLoadingState(pageStatus, "Preparing your booking page...", true);
+      }
+
+      if (bookingMode === "quote") {
+        console.log("[QUOTE DEBUG] book page quoteToken:", quoteToken);
+        try {
+          const response = await fetchWithTimeout(appsScriptUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8",
+            },
+            body: JSON.stringify({
+              action: "getQuoteByToken",
+              quoteToken,
+            }),
+          }, 12000);
+
+          const result = await readJsonResponse(response);
+
+          console.log("[QUOTE DEBUG] getQuoteByToken response:", result);
+
+          const quoteBooking = result?.booking || result?.quote || result?.data || null;
+          if (!response.ok || !result) {
+            throw new Error("quote_lookup_failed");
+          }
+          if (!result?.success || result?.status === "missing" || !quoteBooking) {
+            setErrorState("We couldn't find that quote.", result?.message || "Please check the link in your email or request a new quote.");
+            return;
+          }
+          if (result.status === "paid" || quoteBooking.quoteStatus === "paid" || quoteBooking.bookingStatus === "confirmed") {
+            setErrorState("This quote has already been paid.", result?.message || "Your booking is already confirmed.");
+            return;
+          }
+          if (result.status === "expired" || quoteBooking.quoteStatus === "expired") {
+            setErrorState("This quote has expired.", result?.message || "Please request a new quote or check availability again.");
+            return;
+          }
+          if (result.status === "notice_period") {
+            const minimumNoticeDays = getNumberFromValue(result.minimumNoticeDays) || 3;
+            const earliestAllowedEventDate = getStringValue(result.earliestAllowedEventDate);
+            const earliestDateCopy = earliestAllowedEventDate
+              ? ` The earliest date currently available for online booking is ${formatDisplayDate(earliestAllowedEventDate)}.`
+              : "";
+            setErrorState(
+              "This booking needs manual confirmation.",
+              `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.${earliestDateCopy}`
+            );
+            return;
+          }
+          if (result.status !== "valid") {
+            setErrorState("This quote is not ready for payment.", result?.message || "Please contact us if you need help with this quote.");
+            return;
+          }
+
+          baseBookingContext = {
+            ...quoteBooking,
+            mode: "quote",
+            quoteToken,
+            bookingId: getStringValue(quoteBooking.bookingId),
+            eventDate: getStringValue(quoteBooking.eventDate),
+            pickupDate: getStringValue(quoteBooking.pickupDate),
+            returnDate: getStringValue(quoteBooking.returnDate),
+            fullName: getStringValue(quoteBooking.fullName),
+            email: getStringValue(quoteBooking.email),
+            address: getStringValue(quoteBooking.address || quoteBooking.customerAddress),
+            customerAddress: getStringValue(quoteBooking.customerAddress || quoteBooking.address),
+            phone: getStringValue(quoteBooking.phone),
+            pickupTimeWindow: getStringValue(quoteBooking.pickupTimeWindow),
+            dropoffTimeWindow: getStringValue(quoteBooking.dropoffTimeWindow),
+            notes: getStringValue(quoteBooking.notes),
+            quantity: getNumberFromValue(quoteBooking.quantity),
+            hireFee: getNumberFromValue(quoteBooking.hireFee) || calculateHireFee(getNumberFromValue(quoteBooking.quantity)),
+            refundableBond: getNumberFromValue(quoteBooking.refundableBond ?? quoteBooking.bondAmount ?? quoteBooking.hireFee) || calculateHireFee(getNumberFromValue(quoteBooking.quantity)),
+            bondAmount: getNumberFromValue(quoteBooking.bondAmount ?? quoteBooking.refundableBond ?? quoteBooking.hireFee) || calculateHireFee(getNumberFromValue(quoteBooking.quantity)),
+          };
+
+          if (Number.isFinite(adjustedQuantityParam) && adjustedQuantityParam >= 15 && adjustedQuantityParam < baseBookingContext.quantity) {
+            const adjustedHireFee = calculateHireFee(adjustedQuantityParam);
+            baseBookingContext = {
+              ...baseBookingContext,
+              quantity: adjustedQuantityParam,
+              hireFee: adjustedHireFee,
+              refundableBond: adjustedHireFee,
+              bondAmount: adjustedHireFee,
+            };
+          }
+
+          const availabilityResponse = await fetchWithTimeout(appsScriptUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8",
+            },
+            body: JSON.stringify({
+              action: "checkAvailability",
+              eventDate: baseBookingContext.eventDate,
+              quantity: baseBookingContext.quantity,
+            }),
+          }, 12000);
+
+          const availabilityResult = await readJsonResponse(availabilityResponse);
+          if (!availabilityResponse.ok || !availabilityResult || typeof availabilityResult !== "object") {
+            throw new Error("availability_check_failed");
+          }
+
+          if (availabilityResult.status === "notice_period") {
+            const minimumNoticeDays = getNumberFromValue(availabilityResult.minimumNoticeDays) || 3;
+            const earliestAllowedEventDate = getStringValue(availabilityResult.earliestAllowedEventDate);
+            const earliestDateCopy = earliestAllowedEventDate
+              ? ` The earliest date currently available for online booking is ${formatDisplayDate(earliestAllowedEventDate)}.`
+              : "";
+            setErrorState(
+              "This booking needs manual confirmation.",
+              `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.${earliestDateCopy}`
+            );
+            return;
+          }
+
+          if (pageTitle) pageTitle.textContent = "Enter your details";
+          if (pageMessage) pageMessage.textContent = "Add the final details below to continue to secure payment.";
+          if (pageStatus) {
+            pageStatus.textContent = "";
+            pageStatus.classList.remove("is-error");
+            pageStatus.classList.remove("status-loading");
+          }
+        } catch (error) {
+          console.error("[QUOTE DEBUG] book page load error:", error);
+          setErrorState(
+            "We couldn’t complete that step right now.",
+            "Your booking has not been placed yet. Please try again or contact us if you need help."
+          );
+          return;
+        }
+      } else {
+        baseBookingContext = loadDirectContext();
+        if (!baseBookingContext) {
+          setErrorState("Start with checking your date first.", "We couldn't find your booking details in this browser session. Please head back to the availability checker and start again.");
+          return;
+        }
+
+        if (pageTitle) pageTitle.textContent = "Enter your details";
+        if (pageMessage) pageMessage.textContent = "";
+        if (pageStatus) {
+          pageStatus.textContent = "";
+          pageStatus.classList.remove("is-error");
+          pageStatus.classList.remove("status-loading");
+        }
+      }
+
+      renderContextSummary();
+      populateForm();
+      showFormPanel();
+
+      bookingForm?.addEventListener("input", () => {
+        if (formFeedback) {
+          formFeedback.textContent = "";
+          formFeedback.classList.remove("is-error");
+          formFeedback.classList.remove("status-loading");
+        }
+      });
+
+      bookingForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const validation = validateFormValues();
+        if (validation.error) {
+          formFeedback.textContent = validation.error;
+          formFeedback.classList.add("is-error");
+          return;
+        }
+
+        if (reviewButton instanceof HTMLButtonElement) {
+          setButtonLoadingState(reviewButton, true, "Preparing Review...");
+        }
+        setStatusLoadingState(formFeedback, "Preparing your booking review...", true);
+        renderReviewSummary();
+
+        window.setTimeout(() => {
+          if (reviewButton instanceof HTMLButtonElement) {
+            setButtonLoadingState(reviewButton, false);
+          }
+          formFeedback.textContent = "";
+          formFeedback.classList.remove("status-loading");
+          showReviewPanel();
+        }, 240);
+      });
+
+      backToFormButton?.addEventListener("click", () => {
+        if (reviewFeedback) {
+          reviewFeedback.textContent = "";
+          reviewFeedback.classList.remove("is-error");
+          reviewFeedback.classList.remove("status-loading");
+        }
+        hideReviewErrorActions();
+        showFormPanel();
+      });
+
+      termsCheckbox?.addEventListener("change", () => {
+        syncTermsAcceptanceState();
+        if (reviewFeedback) {
+          reviewFeedback.textContent = "";
+          reviewFeedback.classList.remove("is-error");
+          reviewFeedback.classList.remove("status-loading");
+        }
+        hideReviewErrorActions();
+      });
+
+      paymentButton?.addEventListener("click", async () => {
+        const validation = validateFormValues();
+        if (validation.error) {
+          showFormPanel();
+          formFeedback.textContent = validation.error;
+          formFeedback.classList.add("is-error");
+          return;
+        }
+
+        if (termsCheckbox instanceof HTMLInputElement && !termsCheckbox.checked) {
+          if (reviewFeedback) {
+            reviewFeedback.textContent = "Please confirm that you agree to the Terms & Conditions before continuing to payment.";
+            reviewFeedback.classList.add("is-error");
+            reviewFeedback.classList.remove("status-loading");
+          }
+          termsCheckbox.focus();
+          syncTermsAcceptanceState();
+          return;
+        }
+
+        const bookingData = buildBookingData();
+        sessionStorage.setItem(bookingStorageKey, JSON.stringify(bookingData));
+        if (bookingMode === "quote") {
+          sessionStorage.setItem(quoteStorageKey, JSON.stringify(bookingData));
+        } else {
+          sessionStorage.removeItem(quoteStorageKey);
+        }
+
+        if (paymentButton instanceof HTMLButtonElement) {
+          setButtonLoadingState(paymentButton, true, "Preparing Payment...");
+        }
+        if (reviewFeedback) {
+          setStatusLoadingState(reviewFeedback, "Preparing secure payment...", true);
+        }
+
+        try {
+          const payload = bookingMode === "quote"
+            ? {
+                action: "createQuoteCheckoutSession",
+                quoteToken,
+                successUrl: bookingData.successUrl,
+                cancelUrl: bookingData.cancelUrl,
+                bookingData,
+              }
+            : {
+                action: "createCheckoutSession",
+                bookingData,
+              };
+
+          if (bookingMode === "quote") {
+            console.log("[QUOTE DEBUG] createQuoteCheckoutSession payload:", payload);
+          }
+
+          const response = await fetchWithTimeout(appsScriptUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8",
+            },
+            body: JSON.stringify(payload),
+          }, 12000);
+
+          const result = await readJsonResponse(response);
+
+          if (bookingMode === "quote") {
+            console.log("[QUOTE DEBUG] createQuoteCheckoutSession response:", result);
+          }
+
+          if (!response.ok || !result) {
+            throw new Error("checkout_preparation_failed");
+          }
+
+          if (!result?.success || !result?.checkoutUrl) {
+            throw new Error("checkout_preparation_failed");
+          }
+
+          const storedBooking = {
+            ...(result.bookingData || bookingData),
+            mode: bookingMode,
+            quoteToken: bookingMode === "quote" ? quoteToken : "",
+          };
+
+          sessionStorage.setItem(bookingStorageKey, JSON.stringify(storedBooking));
+          if (bookingMode === "quote") {
+            sessionStorage.setItem(quoteStorageKey, JSON.stringify(storedBooking));
+            console.log("[QUOTE DEBUG] sessionStorage booking data:", storedBooking);
+          }
+
+          window.location.href = result.checkoutUrl;
+        } catch (error) {
+          console.error("Checkout session preparation error:", error);
+          if (reviewFeedback) {
+            reviewFeedback.textContent = "We couldn’t start secure payment right now. Your booking has not been submitted. Please try again.";
+            reviewFeedback.classList.add("is-error");
+            reviewFeedback.classList.remove("status-loading");
+          }
+          showReviewErrorActions();
+          if (paymentButton instanceof HTMLButtonElement) {
+            setButtonLoadingState(paymentButton, false);
+            syncTermsAcceptanceState();
+          }
+        }
+      });
+
+      retryPaymentButton?.addEventListener("click", () => {
+        paymentButton?.click();
+      });
+
+      reviewBackButton?.addEventListener("click", () => {
+        if (reviewFeedback) {
+          reviewFeedback.textContent = "";
+          reviewFeedback.classList.remove("is-error");
+          reviewFeedback.classList.remove("status-loading");
+        }
+        hideReviewErrorActions();
+        showFormPanel();
+      });
+
+      reviewContactButton?.addEventListener("click", () => {
+        window.location.href = "mailto:lustrehire@gmail.com";
+      });
+
+      syncTermsAcceptanceState();
+    });
+  </script>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Lustre Hire</p>
+      <div class="site-footer-links">
+        <a href="mailto:lustrehire@gmail.com">lustrehire@gmail.com</a>
+        <a href="./terms-and-conditions.html">Terms &amp; Conditions</a>
+        <a href="./how-to-return.html">How to Return</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

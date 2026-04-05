@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Not Completed | Lustre Hire</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&family=Syne:wght@800&family=Cutive&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="header-container internal-page-header">
+    <header>
+      <div class="logoName">
+        <div class="logoNameContainer">
+          <a href="./index.html">
+            <img src="https://i.imgur.com/yDE7kJO.png" alt="Lustre Hire logo" class="site-logo">
+          </a>
+          <div class="site-title">Lustre Hire</div>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-cancelled">
+          <img src="https://i.imgur.com/40aavGY.png" alt="Open menu" class="icon open-icon" />
+          <img src="https://i.imgur.com/eBxZd4V.png" alt="Close menu" class="icon close-icon" />
+        </button>
+
+        <nav class="main-nav desktop-nav" aria-label="Primary">
+          <a href="./index.html#candle-packages">Pricing</a>
+          <a href="./index.html#how-it-works">How It Works</a>
+          <a href="./index.html#faq">FAQ</a>
+          <a href="./blog/blog.html">Blog</a>
+          <a href="mailto:lustrehire@gmail.com">Contact</a>
+          <a href="./index.html#availability-checker" class="nav-booking-link">Check Availability</a>
+        </nav>
+      </div>
+
+      <nav class="main-nav mobile-nav" id="mobile-nav-cancelled" aria-label="Mobile">
+        <a href="./index.html#candle-packages">Pricing</a>
+        <a href="./index.html#how-it-works">How It Works</a>
+        <a href="./index.html#faq">FAQ</a>
+        <a href="./blog/blog.html">Blog</a>
+        <a href="mailto:lustrehire@gmail.com">Contact</a>
+        <a href="./index.html#availability-checker" class="nav-booking-link">Check Availability</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="page-breadcrumb-wrap">
+    <nav class="page-breadcrumb" aria-label="Breadcrumb">
+      <a href="./index.html">Home</a>
+      <span class="page-breadcrumb-separator" aria-hidden="true">/</span>
+      <a href="./book.html">Booking</a>
+      <span class="page-breadcrumb-separator" aria-hidden="true">/</span>
+      <span aria-current="page">Payment Not Completed</span>
+    </nav>
+  </div>
+
+  <main class="return-page">
+    <section class="return-card confirmation-card payment-cancelled-card">
+      <div class="confirmation-hero payment-cancelled-hero">
+        <span class="confirmation-icon payment-cancelled-icon" aria-hidden="true">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </span>
+        <p class="confirmation-kicker">Checkout paused</p>
+        <h1>Payment not completed</h1>
+        <p class="payment-cancelled-intro">Your booking has not been confirmed yet. If you closed payment or had trouble checking out, you can continue where you left off below.</p>
+        <p class="return-status payment-cancelled-status">No payment has been taken unless Stripe showed your payment as successful.</p>
+      </div>
+
+      <div class="confirmation-layout payment-cancelled-layout">
+        <div class="return-summary confirmation-summary payment-cancelled-summary" id="payment-cancelled-summary" hidden></div>
+
+        <section class="confirmation-next-steps payment-cancelled-next-steps">
+          <h2>What you can do next</h2>
+          <div class="confirmation-steps">
+            <div class="confirmation-step">
+              <span class="confirmation-step-number">1</span>
+              <div>
+                <h3>Return to secure booking</h3>
+                <p>If your details are still saved, you can jump straight back into your booking or quote flow without starting from scratch.</p>
+              </div>
+            </div>
+            <div class="confirmation-step">
+              <span class="confirmation-step-number">2</span>
+              <div>
+                <h3>Take another moment if needed</h3>
+                <p>If anything has changed, you can head back to the homepage and check your date again before continuing.</p>
+              </div>
+            </div>
+            <div class="confirmation-step">
+              <span class="confirmation-step-number">3</span>
+              <div>
+                <h3>Need help?</h3>
+                <p>If you had trouble in checkout or you are unsure what to do next, get in touch and we’ll be happy to help.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="payment-cancelled-actions">
+        <a href="./index.html?scrollTo=availability-checker" class="booking-button" id="payment-cancelled-resume-link">Return to secure booking</a>
+        <a href="./index.html?scrollTo=availability-checker" class="calculator-nav-button">Back to homepage</a>
+        <a href="mailto:lustrehire@gmail.com" class="calculator-nav-button">Contact us</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <p>Lustre Hire</p>
+      <div class="site-footer-links">
+        <a href="mailto:lustrehire@gmail.com">lustrehire@gmail.com</a>
+        <a href="./terms-and-conditions.html">Terms &amp; Conditions</a>
+        <a href="./how-to-return.html">How To Return</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./shared-date.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const mobileNav = document.getElementById("mobile-nav-cancelled");
+      const summaryElement = document.getElementById("payment-cancelled-summary");
+      const resumeLink = document.getElementById("payment-cancelled-resume-link");
+      const bookingStorageKey = "lustreHirePendingBooking";
+      const quoteStorageKey = "lustreHirePendingQuote";
+
+      const setMenuState = (isOpen) => {
+        if (!menuToggle || !mobileNav) return;
+        mobileNav.classList.toggle("open", isOpen);
+        menuToggle.classList.toggle("menu-open", isOpen);
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      };
+
+      menuToggle?.addEventListener("click", () => {
+        const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+        setMenuState(!isOpen);
+      });
+
+      mobileNav?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMenuState(false));
+      });
+
+      const readStoredJson = (key) => {
+        try {
+          const raw = sessionStorage.getItem(key);
+          return raw ? JSON.parse(raw) : null;
+        } catch (error) {
+          return null;
+        }
+      };
+
+      const formatCurrency = (value) => `$${Number(value || 0).toLocaleString()}`;
+      const getResumeTarget = (bookingData, quoteData) => {
+        const source = quoteData || bookingData;
+        if (!source) {
+          return "./index.html?scrollTo=availability-checker";
+        }
+
+        if (source.mode === "quote" || source.quoteToken || quoteData?.quoteToken) {
+          const quoteToken = source.quoteToken || quoteData?.quoteToken || "";
+          if (quoteToken) {
+            const url = new URL("./book.html", window.location.href);
+            url.searchParams.set("quoteToken", quoteToken);
+            return url.pathname + url.search;
+          }
+        }
+
+        return "./book.html";
+      };
+
+      const bookingData = readStoredJson(bookingStorageKey);
+      const quoteData = readStoredJson(quoteStorageKey);
+      const summarySource = quoteData || bookingData;
+
+      if (resumeLink) {
+        resumeLink.href = getResumeTarget(bookingData, quoteData);
+      }
+
+      if (summaryElement && summarySource) {
+        const totalDueToday = Number(summarySource.hireFee || 0) + Number(summarySource.refundableBond || summarySource.bondAmount || 0);
+        summaryElement.hidden = false;
+        summaryElement.innerHTML = `
+          <h2>Your saved details</h2>
+          <div class="confirmation-summary-grid">
+            <section class="confirmation-summary-section">
+              <h3>Booking details</h3>
+              <div class="confirmation-summary-list">
+                <div class="confirmation-summary-item"><span>Event date</span><strong>${window.LustreHireDate.formatDisplayDate(summarySource.eventDate, "-")}</strong></div>
+                <div class="confirmation-summary-item"><span>Candle quantity</span><strong>${summarySource.quantity || "-"}</strong></div>
+                <div class="confirmation-summary-item"><span>Pickup date</span><strong>${window.LustreHireDate.formatDisplayDate(summarySource.pickupDate, "-")}</strong></div>
+                <div class="confirmation-summary-item"><span>Return date</span><strong>${window.LustreHireDate.formatDisplayDate(summarySource.returnDate, "-")}</strong></div>
+              </div>
+            </section>
+            <section class="confirmation-summary-section">
+              <h3>Payment summary</h3>
+              <div class="confirmation-summary-list">
+                <div class="confirmation-summary-item"><span>Candle hire</span><strong>${formatCurrency(summarySource.hireFee || 0)}</strong></div>
+                <div class="confirmation-summary-item"><span>Refundable bond</span><strong>${formatCurrency(summarySource.refundableBond || summarySource.bondAmount || 0)}</strong></div>
+                <div class="confirmation-summary-item"><span>Total due today</span><strong>${formatCurrency(totalDueToday)}</strong></div>
+              </div>
+            </section>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>
