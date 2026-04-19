@@ -5,4 +5,4 @@ Disallow: /quote.html
 Disallow: /payment-success.html
 Disallow: /payment-cancelled.html
 
-Sitemap: https://lustrehire.com/sitemap.xml
+Sitemap: https://www.lustrehire.com/sitemap.xml
