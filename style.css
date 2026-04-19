@@ -4181,6 +4181,14 @@ form textarea {
   font-weight: 700;
 }
 
+.quote-sheet-total-note {
+  margin: var(--space-4) 0 0;
+  color: #4B5563;
+  font-family: 'Kumbh Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 .quote-review-bottom-action {
   margin-top: var(--space-6);
 }

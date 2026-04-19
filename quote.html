@@ -267,25 +267,26 @@
                 </section>
               </div>
 
-              <aside class="quote-sheet-total">
-                <h4>Payment summary</h4>
-                <div class="quote-sheet-total-box">
-                  <div class="quote-sheet-total-row">
-                    <span>Candle hire</span>
-                    <strong>${formatCurrency(quoteData.hireFee)}</strong>
+                <aside class="quote-sheet-total">
+                  <h4>Payment summary</h4>
+                  <div class="quote-sheet-total-box">
+                    <div class="quote-sheet-total-row">
+                      <span>Candle hire</span>
+                      <strong>${formatCurrency(quoteData.hireFee)}</strong>
+                    </div>
+                    <div class="quote-sheet-total-row">
+                      <span>Refundable bond</span>
+                      <strong>${formatCurrency(quoteData.refundableBond)}</strong>
+                    </div>
+                    <div class="quote-sheet-total-row quote-sheet-total-row-grand">
+                      <span>Total</span>
+                      <strong>${formatCurrency(totalDueToday)}</strong>
+                    </div>
                   </div>
-                  <div class="quote-sheet-total-row">
-                    <span>Refundable bond</span>
-                    <strong>${formatCurrency(quoteData.refundableBond)}</strong>
-                  </div>
-                  <div class="quote-sheet-total-row quote-sheet-total-row-grand">
-                    <span>Total</span>
-                    <strong>${formatCurrency(totalDueToday)}</strong>
-                  </div>
-                </div>
-              </aside>
+                  <p class="quote-sheet-total-note">A refundable bond is required with all bookings and is returned in full after your candles are returned and checked in normal hire situations.</p>
+                </aside>
+              </div>
             </div>
-          </div>
         `;
       };
 
