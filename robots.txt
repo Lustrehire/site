@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /book.html
+Disallow: /quote.html
+Disallow: /payment-success.html
+Disallow: /payment-cancelled.html
+
+Sitemap: https://lustrehire.com/sitemap.xml
