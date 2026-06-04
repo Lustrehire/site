@@ -80,6 +80,7 @@
   </main>
 
   <script src="./shared-date.js"></script>
+  <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const menuToggle = document.querySelector(".menu-toggle");
@@ -401,6 +402,11 @@
               <a href="${getQuoteContinueUrl()}" class="booking-button quote-review-bottom-button">I’m ready to secure booking</a>
             </div>
           `;
+          bottomActionElement.querySelector(".quote-review-bottom-button")?.addEventListener("click", () => {
+            window.trackLustreEvent?.("booking_started", window.buildLustreBookingTrackingParams?.(quoteData, {
+              booking_mode: "quote",
+            }) || {});
+          });
         }
       };
 

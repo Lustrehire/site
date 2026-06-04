@@ -114,6 +114,7 @@
     </section>
   </main>
   <script src="./shared-date.js"></script>
+  <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const menuToggle = document.querySelector(".menu-toggle");
@@ -335,6 +336,17 @@
           ...confirmedBooking,
           bookingId: result.bookingId || ""
         }));
+
+        const trackedConfirmedBooking = {
+          ...confirmedBooking,
+          bookingId: result.bookingId || confirmedBooking.bookingId || "",
+          stripeSessionId,
+        };
+        const confirmationParams = window.buildLustreBookingTrackingParams?.(trackedConfirmedBooking, {
+          booking_mode: bookingMode,
+        }) || {};
+        window.trackLustreEvent?.("booking_confirmed", confirmationParams);
+        window.trackLustreStandardMetaEvent?.("Purchase", confirmationParams.total_due);
   
         if (statusElement) {
           statusElement.textContent = "Payment received and booking confirmed.";

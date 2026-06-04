@@ -1408,6 +1408,7 @@
   </div>
 
   <script src="./shared-date.js"></script>
+  <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const menuToggle = document.querySelector(".menu-toggle");
@@ -2371,6 +2372,12 @@
             return;
           }
 
+          window.trackLustreEvent?.("availability_check", {
+            event_date: eventDate,
+            quantity,
+            ...window.getLustreAttribution?.(),
+          });
+
           if (availabilitySubmitButton instanceof HTMLButtonElement) {
             setButtonLoadingState(availabilitySubmitButton, true, "Checking...");
           }
@@ -2405,6 +2412,18 @@
             const isAvailable = result.available === true;
             const isPartialAvailable = result.partialAvailable === true;
             const status = getStringValue(result.status);
+            const availabilityStatus = status || (isAvailable ? "available" : isPartialAvailable ? "partial_available" : "unavailable");
+            const quoteHireFee = calculateHireFee(quantity);
+
+            window.trackLustreEvent?.("quote_generated", {
+              event_date: getStringValue(result.eventDate) || eventDate,
+              quantity,
+              hire_fee: quoteHireFee,
+              bond_amount: quoteHireFee,
+              total_due: quoteHireFee + quoteHireFee,
+              availability_status: availabilityStatus,
+              ...window.getLustreAttribution?.(),
+            });
 
             if (status === "notice_period") {
               renderAvailabilityNoticeState(result);
@@ -2499,6 +2518,10 @@
           sessionStorage.setItem(bookingStorageKey, JSON.stringify(directBookingContext));
           sessionStorage.removeItem(quoteStorageKey);
 
+          window.trackLustreEvent?.("booking_started", window.buildLustreBookingTrackingParams?.(directBookingContext, {
+            booking_mode: "direct",
+          }) || {});
+
           if (availabilityReadyButton instanceof HTMLButtonElement) {
             setButtonLoadingState(availabilityReadyButton, true, "Opening Booking...");
           }
@@ -2534,6 +2557,16 @@
             const eventDate = getStringValue(latestAvailabilityResult.eventDate) || availabilityDateField?.value || "";
             const quantity = getNumberFromValue(latestAvailabilityResult.requestedQuantity) || Number(availabilityQuantityField?.value || 0);
             renderAvailabilityBookingSummary(latestAvailabilityResult, eventDate, quantity);
+            const hireFee = calculateHireFee(quantity);
+            window.trackLustreEvent?.("booking_started", {
+              event_date: eventDate,
+              quantity,
+              hire_fee: hireFee,
+              bond_amount: hireFee,
+              total_due: hireFee + hireFee,
+              booking_mode: "direct",
+              ...window.getLustreAttribution?.(),
+            });
           }
           showAvailabilityStep(3);
         });
@@ -2695,6 +2728,12 @@
 
           sessionStorage.setItem(bookingStorageKey, JSON.stringify(booking));
           sessionStorage.removeItem(quoteStorageKey);
+
+          const checkoutParams = window.buildLustreBookingTrackingParams?.(booking, {
+            booking_mode: "direct",
+          }) || {};
+          window.trackLustreEvent?.("checkout_started", checkoutParams);
+          window.trackLustreStandardMetaEvent?.("InitiateCheckout", checkoutParams.total_due);
 
           if (availabilityReviewSubmit instanceof HTMLButtonElement) {
             setButtonLoadingState(availabilityReviewSubmit, true, "Preparing Payment...");

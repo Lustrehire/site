@@ -211,6 +211,7 @@
   </main>
 
   <script src="./shared-date.js"></script>
+  <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const menuToggle = document.querySelector(".menu-toggle");
@@ -742,6 +743,9 @@
       renderContextSummary();
       populateForm();
       showFormPanel();
+      window.trackLustreEvent?.("booking_started", window.buildLustreBookingTrackingParams?.(baseBookingContext, {
+        booking_mode: bookingMode,
+      }) || {});
 
       bookingForm?.addEventListener("input", () => {
         if (formFeedback) {
@@ -823,6 +827,12 @@
         } else {
           sessionStorage.removeItem(quoteStorageKey);
         }
+
+        const checkoutParams = window.buildLustreBookingTrackingParams?.(bookingData, {
+          booking_mode: bookingMode,
+        }) || {};
+        window.trackLustreEvent?.("checkout_started", checkoutParams);
+        window.trackLustreStandardMetaEvent?.("InitiateCheckout", checkoutParams.total_due);
 
         if (paymentButton instanceof HTMLButtonElement) {
           setButtonLoadingState(paymentButton, true, "Preparing Payment...");
