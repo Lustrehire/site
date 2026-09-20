@@ -1921,27 +1921,16 @@
           const parsed = Number(singleValue);
           return Number.isFinite(parsed) ? parsed : 0;
         };
-        const defaultMinimumNoticeDays = 3;
-        const formatInputDate = (date) => {
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, "0");
-          const day = String(date.getDate()).padStart(2, "0");
-          return `${year}-${month}-${day}`;
-        };
-        const applyAvailabilityMinimumDate = (minimumNoticeDays = defaultMinimumNoticeDays, earliestAllowedEventDate = "") => {
+        const defaultMinimumNoticeDays = window.LustreHireDate.minimumNoticeDays;
+        let backendNoticeDays = defaultMinimumNoticeDays;
+        let backendEarliestDate = "";
+        const applyAvailabilityMinimumDate = (minimumNoticeDays = backendNoticeDays, earliestAllowedEventDate = backendEarliestDate) => {
           if (!(availabilityDateField instanceof HTMLInputElement)) return;
-          if (earliestAllowedEventDate && /^\d{4}-\d{2}-\d{2}$/.test(earliestAllowedEventDate)) {
-            availabilityDateField.min = earliestAllowedEventDate;
-            return;
-          }
-
-          const safeNoticeDays = Number.isFinite(Number(minimumNoticeDays))
-            ? Math.max(0, Number(minimumNoticeDays))
-            : defaultMinimumNoticeDays;
-          const minDate = new Date();
-          minDate.setHours(0, 0, 0, 0);
-          minDate.setDate(minDate.getDate() + safeNoticeDays);
-          availabilityDateField.min = formatInputDate(minDate);
+          backendNoticeDays = minimumNoticeDays;
+          backendEarliestDate = earliestAllowedEventDate;
+          availabilityDateField.min = window.LustreHireDate.earliestEventDate(minimumNoticeDays, earliestAllowedEventDate);
+          const tooSoon = availabilityDateField.value && availabilityDateField.value < availabilityDateField.min;
+          availabilityDateField.setCustomValidity(tooSoon ? window.LustreHireDate.noticeMessage(availabilityDateField.min) : "");
         };
         const isPopularEventDate = (value) => {
           if (!value) return false;
@@ -2139,10 +2128,10 @@
                   <i class="bi bi-clock-history"></i>
                 </span>
                 <div class="availability-success-copy">
-                  <h4>Online bookings require at least ${minimumNoticeDays} days’ notice</h4>
+                  <h4>Please choose a later event date</h4>
                 </div>
               </div>
-              <p class="availability-success-note">If your event is sooner than that, please contact us and we’ll let you know if we can help.</p>
+              <p class="availability-success-note" data-notice-message></p>
               ${earliestDateLine}
               <div class="availability-result-actions">
                 <button type="button" class="booking-button" data-availability-action="contact-us">Contact us</button>
@@ -2150,6 +2139,7 @@
               </div>
             </div>
           `;
+          availabilityResult.querySelector("[data-notice-message]").textContent = getStringValue(resultData.message) || window.LustreHireDate.noticeMessage(availabilityDateField.min);
           setAvailabilityResultState(true);
           setAvailabilityConfirmedState(false);
           showAvailabilityStep(1);
@@ -2395,6 +2385,13 @@
             return;
           }
 
+          applyAvailabilityMinimumDate();
+          if (eventDate < availabilityDateField.min) {
+            availabilityFeedback.textContent = window.LustreHireDate.noticeMessage(availabilityDateField.min);
+            availabilityFeedback.classList.add("is-error");
+            return;
+          }
+
           window.trackLustreEvent?.("availability_check", {
             event_date: eventDate,
             quantity,
@@ -2474,6 +2471,26 @@
         });
 
         applyAvailabilityMinimumDate();
+        availabilityDateField.addEventListener("input", () => applyAvailabilityMinimumDate());
+        availabilityDateField.addEventListener("focus", () => applyAvailabilityMinimumDate());
+        availabilityDateField.addEventListener("invalid", () => {
+          applyAvailabilityMinimumDate();
+          if (availabilityDateField.value && availabilityDateField.value < availabilityDateField.min) {
+            availabilityFeedback.textContent = window.LustreHireDate.noticeMessage(availabilityDateField.min);
+            availabilityFeedback.classList.add("is-error");
+          }
+        });
+        window.addEventListener("pageshow", () => applyAvailabilityMinimumDate());
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) applyAvailabilityMinimumDate();
+        });
+        const refreshAtLocalMidnight = () => {
+          applyAvailabilityMinimumDate();
+          const now = new Date();
+          const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+          window.setTimeout(refreshAtLocalMidnight, midnight.getTime() - now.getTime());
+        };
+        refreshAtLocalMidnight();
 
         // Keep step 2 tied to the latest check only.
         availabilityForm.addEventListener("input", resetAvailabilityFlow);

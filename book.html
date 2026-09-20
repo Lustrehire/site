@@ -606,14 +606,10 @@
             return;
           }
           if (result.status === "notice_period") {
-            const minimumNoticeDays = getNumberFromValue(result.minimumNoticeDays) || 3;
-            const earliestAllowedEventDate = getStringValue(result.earliestAllowedEventDate);
-            const earliestDateCopy = earliestAllowedEventDate
-              ? ` The earliest date currently available for online booking is ${formatDisplayDate(earliestAllowedEventDate)}.`
-              : "";
+            const earliestAllowedEventDate = window.LustreHireDate.earliestEventDate(result.minimumNoticeDays, getStringValue(result.earliestAllowedEventDate));
             setErrorState(
               "This booking needs manual confirmation.",
-              result.message || `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.${earliestDateCopy}`
+              result.message || window.LustreHireDate.noticeMessage(earliestAllowedEventDate)
             );
             return;
           }
@@ -673,14 +669,10 @@
           }
 
           if (availabilityResult.status === "notice_period") {
-            const minimumNoticeDays = getNumberFromValue(availabilityResult.minimumNoticeDays) || 3;
-            const earliestAllowedEventDate = getStringValue(availabilityResult.earliestAllowedEventDate);
-            const earliestDateCopy = earliestAllowedEventDate
-              ? ` The earliest date currently available for online booking is ${formatDisplayDate(earliestAllowedEventDate)}.`
-              : "";
+            const earliestAllowedEventDate = window.LustreHireDate.earliestEventDate(availabilityResult.minimumNoticeDays, getStringValue(availabilityResult.earliestAllowedEventDate));
             setErrorState(
               "This booking needs manual confirmation.",
-              availabilityResult.message || `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.${earliestDateCopy}`
+              availabilityResult.message || window.LustreHireDate.noticeMessage(earliestAllowedEventDate)
             );
             return;
           }

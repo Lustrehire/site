@@ -459,13 +459,13 @@
       };
 
       const renderNoticePeriodState = () => {
-        const minimumNoticeDays = getNumberFromValue(latestAvailability?.minimumNoticeDays) || 3;
-        const earliestAllowedEventDate = getStringValue(latestAvailability?.earliestAllowedEventDate);
+        const earliestAllowedEventDate = window.LustreHireDate.earliestEventDate(latestAvailability?.minimumNoticeDays, getStringValue(latestAvailability?.earliestAllowedEventDate));
+        const noticeMessage = latestAvailability?.message || window.LustreHireDate.noticeMessage(earliestAllowedEventDate);
         const earliestDateLine = earliestAllowedEventDate
           ? `<p class="availability-success-note">The earliest date currently available for online booking is ${formatDisplayDate(earliestAllowedEventDate)}.</p>`
           : "";
 
-        updateStatus(latestAvailability?.message || `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.`);
+        updateStatus(noticeMessage);
         if (resultElement) {
           resultElement.hidden = false;
           resultElement.innerHTML = `
@@ -478,11 +478,12 @@
                   <h4>This quote needs manual confirmation</h4>
                 </div>
               </div>
-              <p class="availability-success-note">Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.</p>
+              <p class="availability-success-note" data-notice-message></p>
               ${earliestDateLine}
             </div>
           `;
         }
+        if (resultElement) resultElement.querySelector("[data-notice-message]").textContent = noticeMessage;
         renderQuoteSummary();
         if (bottomActionElement) {
           bottomActionElement.hidden = false;

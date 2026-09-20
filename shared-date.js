@@ -38,6 +38,17 @@
     });
   };
 
+  const minimumNoticeDays = 8;
+  const earliestEventDate = (backendDays = minimumNoticeDays, backendDate = "", now = new Date()) => {
+    const offset = Math.max(minimumNoticeDays, Math.ceil(Number(backendDays) || minimumNoticeDays));
+    // Advance local calendar days, including across DST, month and year boundaries.
+    const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + offset);
+    const localMinimum = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    return /^\d{4}-\d{2}-\d{2}$/.test(backendDate) && backendDate > localMinimum ? backendDate : localMinimum;
+  };
+  const noticeMessage = (earliestDate = earliestEventDate()) =>
+    `We require at least 7 days' notice for bookings. Please select an event date from ${formatDisplayDate(earliestDate)} onwards.`;
+
   window.LustreHireDate = window.LustreHireDate || {};
-  window.LustreHireDate.formatDisplayDate = formatDisplayDate;
+  Object.assign(window.LustreHireDate, { formatDisplayDate, minimumNoticeDays, earliestEventDate, noticeMessage });
 })();

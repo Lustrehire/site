@@ -11,12 +11,13 @@ const booking = {
 const available = {
   success: true, status: 'available', available: true, partialAvailable: false,
   eventDate: booking.eventDate, pickupDate: booking.pickupDate, returnDate: booking.returnDate,
-  requestedQuantity: 50, remainingStock: 500, maxAvailable: 500, minimumNoticeDays: 3,
+  requestedQuantity: 50, remainingStock: 500, maxAvailable: 500, minimumNoticeDays: 8,
 };
 const checkoutUrl = 'https://checkout.example.test/fake-session';
 
 const test = base.extend({
-  backend: [async ({ context }, use) => {
+  browserNow: ['2030-06-01T04:00:00Z', { option: true }],
+  backend: [async ({ context, browserNow }, use) => {
     const backend = {
       calls: [], unexpected: [], errors: [], expectedErrors: [],
       replies: {
@@ -34,13 +35,13 @@ const test = base.extend({
       });
     });
     // Fixed browser time keeps notice periods and fixture dates deterministic.
-    await context.addInitScript(() => {
+    await context.addInitScript(browserNow => {
       const NativeDate = Date;
       window.Date = class extends NativeDate {
-        constructor(...args) { super(...(args.length ? args : ['2030-06-01T04:00:00Z'])); }
-        static now() { return new NativeDate('2030-06-01T04:00:00Z').getTime(); }
+        constructor(...args) { super(...(args.length ? args : [browserNow])); }
+        static now() { return new NativeDate(browserNow).getTime(); }
       };
-    });
+    }, browserNow);
     // Fail closed: only the local read-only site may touch the network.
     // Every external request is fulfilled here, never forwarded or fetched.
     await context.route('**/*', async route => {
