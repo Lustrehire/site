@@ -176,11 +176,7 @@
 
             <section class="availability-panel availability-review-booking-mode" id="book-review-panel" hidden>
               <div class="availability-booking-summary" id="book-review-summary"></div>
-              <div class="availability-payment-note">
-                <h4><i class="bi bi-shield-lock" aria-hidden="true"></i><span>Payment reassurance</span></h4>
-                <p>A refundable bond is required with all bookings as a standard safeguard for non-returned or seriously damaged items.</p>
-                <p>In normal hire situations, it is returned in full after your candles are returned and checked.</p>
-              </div>
+              <p class="booking-payment-reassurance">Secure checkout powered by Stripe<br>We'll email your final payment link 7 days before pickup.</p>
               <div class="booking-terms-check">
                 <input type="checkbox" id="book-terms-checkbox" name="book-terms-checkbox" required />
                 <div class="booking-terms-copy">
@@ -193,10 +189,9 @@
               <div class="availability-panel-actions availability-panel-actions-split">
                 <button type="button" class="calculator-nav-button availability-back-button" id="book-back-to-form">Back</button>
                 <div class="availability-review-actions">
-                  <button type="button" class="booking-button availability-submit" id="book-payment-button" disabled aria-disabled="true">Proceed to Secure Payment</button>
+                  <button type="button" class="booking-button availability-submit" id="book-payment-button" disabled aria-disabled="true">Pay Deposit</button>
                 </div>
               </div>
-              <p class="availability-secure-note"><i class="bi bi-lock-fill" aria-hidden="true"></i> Secure checkout powered by Stripe</p>
               <p class="availability-booking-feedback" id="book-review-feedback" role="status" aria-live="polite"></p>
               <div class="booking-inline-actions" id="book-review-error-actions" hidden>
                 <button type="button" class="calculator-nav-button" id="book-retry-payment-button">Try again</button>
@@ -211,6 +206,7 @@
   </main>
 
   <script src="./shared-date.js"></script>
+  <script src="./shared-payment.js"></script>
   <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
@@ -490,26 +486,20 @@
 
       const renderContextSummary = () => {
         if (!contextSummary || !baseBookingContext) return;
-        const refundableBondAmount = Number(
-          (baseBookingContext.refundableBond ?? baseBookingContext.bondAmount ?? baseBookingContext.hireFee) || 0
-        );
-        const totalDueToday = Number(baseBookingContext.hireFee || 0) + refundableBondAmount;
         contextSummary.innerHTML = `
           <h2>${bookingMode === "quote" ? "Quote summary" : "Booking summary"}</h2>
           <p><strong>Event date:</strong> ${formatDisplayDate(baseBookingContext.eventDate)}</p>
           <p><strong>Quantity:</strong> ${baseBookingContext.quantity || "-"}</p>
           <p><strong>Pickup date:</strong> ${formatDisplayDate(baseBookingContext.pickupDate)}</p>
           <p><strong>Return date:</strong> ${formatDisplayDate(baseBookingContext.returnDate)}</p>
-          <p><strong>Hire fee:</strong> ${formatCurrencyValue(baseBookingContext.hireFee)}</p>
-          <p><strong>Refundable bond:</strong> ${formatCurrencyValue(refundableBondAmount)}</p>
-          <p><strong>Total due today:</strong> ${formatCurrencyValue(totalDueToday)}</p>
+          ${window.LustreHirePayment.summary(baseBookingContext.hireFee, baseBookingContext.pickupDate, false, true)}
         `;
       };
 
       const renderReviewSummary = () => {
         if (!reviewSummary) return;
         const booking = buildBookingData();
-        const totalDueToday = Number(booking.hireFee || 0) + Number(booking.refundableBond || 0);
+        paymentButton.textContent = `Pay ${window.LustreHirePayment.currency(window.LustreHirePayment.calculate(booking.hireFee).depositAmount)} Deposit`;
 
         reviewSummary.innerHTML = `
           <div class="availability-review-layout">
@@ -537,21 +527,7 @@
               </section>
             </div>
             <aside class="availability-review-card availability-review-card-summary">
-              <h4>Payment summary</h4>
-              <div class="availability-payment-summary">
-                <div class="availability-payment-row">
-                  <span>Candle hire</span>
-                  <strong>${formatCurrencyValue(booking.hireFee)}</strong>
-                </div>
-                <div class="availability-payment-row">
-                  <span>Refundable bond</span>
-                  <strong>${formatCurrencyValue(booking.refundableBond)}</strong>
-                </div>
-                <div class="availability-payment-row availability-payment-row-total">
-                  <span>Total due today</span>
-                  <strong>${formatCurrencyValue(totalDueToday)}</strong>
-                </div>
-              </div>
+              ${window.LustreHirePayment.summary(booking.hireFee, booking.pickupDate, false, true)}
             </aside>
           </div>
         `;
@@ -622,7 +598,7 @@
             return;
           }
           if (result.status === "paid" || quoteBooking.quoteStatus === "paid" || quoteBooking.bookingStatus === "confirmed") {
-            setErrorState("This quote has already been paid.", result?.message || "Your booking is already confirmed.");
+            setErrorState("Booking confirmed.", "Your booking is already confirmed. Please refer to your confirmation email for payment details.");
             return;
           }
           if (result.status === "unavailable") {

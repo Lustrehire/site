@@ -80,6 +80,7 @@
   </main>
 
   <script src="./shared-date.js"></script>
+  <script src="./shared-payment.js"></script>
   <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
@@ -224,7 +225,7 @@
 
       const renderQuoteSummary = () => {
         if (!summaryElement || !quoteData) return;
-        const totalDueToday = Number(quoteData.hireFee || 0) + Number(quoteData.refundableBond || 0);
+
         const isUnavailableState = latestAvailability && latestAvailability.available !== true && latestAvailability.partialAvailable !== true;
         const isNoticeState = latestAvailability?.status === "notice_period";
         const quoteBadgeText = isNoticeState
@@ -234,7 +235,7 @@
             : "Not yet confirmed";
         const quoteSubline = (isUnavailableState || isNoticeState)
           ? ""
-          : `<p class="quote-sheet-subline">This quote remains subject to live availability until payment is completed.</p>`;
+          : `<p class="quote-sheet-subline">Your date is not reserved until the booking deposit is paid.</p>${quoteRevalidated ? "" : `<p class="quote-sheet-subline">Your quote is valid for 7 days and remains subject to live availability.</p>`}`;
         summaryElement.hidden = false;
         summaryElement.innerHTML = `
           <div class="quote-sheet">
@@ -272,18 +273,7 @@
                 <aside class="quote-sheet-total">
                   <h4>Payment summary</h4>
                   <div class="quote-sheet-total-box">
-                    <div class="quote-sheet-total-row">
-                      <span>Candle hire</span>
-                      <strong>${formatCurrency(quoteData.hireFee)}</strong>
-                    </div>
-                    <div class="quote-sheet-total-row">
-                      <span>Refundable bond</span>
-                      <strong>${formatCurrency(quoteData.refundableBond)}</strong>
-                    </div>
-                    <div class="quote-sheet-total-row quote-sheet-total-row-grand">
-                      <span>Total</span>
-                      <strong>${formatCurrency(totalDueToday)}</strong>
-                    </div>
+                    ${window.LustreHirePayment.summary(quoteData.hireFee, quoteData.pickupDate)}
                   </div>
                   <p class="quote-sheet-total-note">A refundable bond is required with all bookings and is returned in full after your candles are returned and checked in normal hire situations.</p>
                 </aside>
@@ -402,7 +392,7 @@
           bottomActionElement.hidden = false;
           bottomActionElement.innerHTML = `
             <div class="quote-review-bottom-inner">
-              <a href="${getQuoteContinueUrl()}" class="booking-button quote-review-bottom-button">I’m ready to secure booking</a>
+              <a href="${getQuoteContinueUrl()}" class="booking-button quote-review-bottom-button">Pay Deposit &amp; Secure My Date</a>
             </div>
           `;
           bottomActionElement.querySelector(".quote-review-bottom-button")?.addEventListener("click", () => {
@@ -414,7 +404,7 @@
       };
 
       const renderLimitedState = (maxAvailable) => {
-        updateStatus("Your booking is not confirmed until payment is completed.");
+        updateStatus("Your booking is not confirmed until the booking deposit is paid.");
         if (bottomActionElement) {
           bottomActionElement.hidden = true;
           bottomActionElement.innerHTML = "";
@@ -583,7 +573,7 @@
           }
           renderResultCard(
             "success",
-            "This quote has already been paid",
+            "Booking confirmed",
             "Your booking is already confirmed. If you need anything else, you can reply to your confirmation email.",
             "",
             `

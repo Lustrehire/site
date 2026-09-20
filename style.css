@@ -8404,3 +8404,105 @@ table tr.total-row {
     min-height: 0;
   }
 }
+
+/* Staged payments reuse the existing summary cards on every booking page. */
+.staged-payment-summary { width: 100%; min-width: 0; }
+.staged-payment-row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; }
+.staged-payment-row strong { white-space: nowrap; }
+.staged-payment-total { font-size: 1.15em; font-weight: 700; }
+.staged-payment-later { border-top: 1px solid #ddd; margin-top: 1rem; padding-top: 1rem; }
+.staged-payment-later h4 { margin: 0 0 0.5rem; }
+.staged-payment-note { font-size: 0.9em; line-height: 1.5; }
+
+/* A quieter payment decision on the booking review. */
+.booking-payment-simple > p { line-height: 1.6; }
+.booking-payment-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.booking-payment-card { min-width: 0; padding: 1.25rem; border-radius: 12px; background: rgba(23, 52, 9, 0.035); }
+.booking-payment-card-today { background: rgba(32, 79, 10, 0.09); border: 1px solid rgba(32, 79, 10, 0.18); }
+.booking-payment-card h5 { margin: 0 0 0.75rem; font-size: 1rem; }
+.booking-payment-amount { display: block; font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 1.2; }
+.booking-payment-card-today .booking-payment-amount { color: #204f0a; }
+.booking-payment-card p { margin: 0.75rem 0 0; font-size: 0.9rem; line-height: 1.6; }
+.booking-payment-footnote { color: #62695e; font-size: 0.85rem; }
+
+/* Keep payment UI in the site's existing sans-serif type system. */
+.booking-payment-simple, .staged-payment-summary, .booking-payment-reassurance,
+.booking-payment-simple h4, .booking-payment-simple h5, .staged-payment-summary h4,
+.booking-payment-simple p, .booking-payment-simple strong, .staged-payment-summary strong {
+  font-family: 'Kumbh Sans', sans-serif;
+}
+.booking-payment-intro strong, .booking-payment-intro span { display: block; }
+.booking-payment-intro strong { font-size: 1rem; font-weight: 600; }
+.booking-payment-intro span { margin-top: 0.4rem; font-size: 0.9rem; color: #62695e; }
+.booking-payment-card:not(.booking-payment-card-today) .booking-payment-amount { font-size: clamp(1.5rem, 3vw, 1.75rem); font-weight: 600; color: #515b4c; }
+.booking-payment-simple .booking-payment-footnote { font-size: 0.85rem; font-weight: 400; }
+.booking-payment-reassurance { font-size: 0.85rem; font-weight: 400; color: #62695e; line-height: 1.6; margin: 1.25rem 0; }
+.availability-price { font-family: 'Kumbh Sans', sans-serif; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(23, 52, 9, 0.1); }
+.availability-price > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 1rem; row-gap: 0.25rem; margin-bottom: 1rem; }
+.availability-price strong { white-space: nowrap; }
+.availability-price p { font-size: 0.85rem; font-weight: 400; line-height: 1.5; color: #62695e; }
+
+/* Homepage availability result: hire, bond, total and deposit callout. */
+#availability-result .availability-result-card { gap: 20px; }
+#availability-result .availability-success-summary-item { border: 0; background: transparent; padding: 4px 0; align-items: flex-start; }
+#availability-result .availability-price { margin-top: 0; padding-top: 12px; }
+#availability-result .availability-success-note { margin: 0; font-size: 0.85rem; line-height: 1.5; }
+#availability-result { padding: 24px; border-radius: 16px; }
+#availability-result .availability-price-total { border-top: 1px solid rgba(23, 52, 9, 0.13); padding-top: 16px; font-size: 1.2rem; font-weight: 700; }
+.availability-price-total strong { color: #204f0a; font-size: 1.15em; }
+#availability-result .availability-bond-note { color: #62695e; font-size: 0.85rem; line-height: 1.6; }
+.availability-deposit-callout { display: flex; align-items: center; gap: 14px; padding: 18px; margin-top: 18px; border-radius: 14px; background: rgba(32, 79, 10, 0.065); color: #204f0a; }
+.availability-deposit-callout .bi { flex: 0 0 auto; font-size: 24px; }
+.availability-price .availability-deposit-callout strong { font-size: 1.05rem; line-height: 1.5; white-space: normal; }
+.availability-success-actions .availability-continue-button { height: 46px; min-height: 46px; border: 1px solid #c9d2c3; background: transparent; box-shadow: none; font-weight: 500; align-self: center; }
+.availability-success-actions .availability-success-reassurance { font-size: 12px; font-weight: 400; }
+@media (max-width: 768px) {
+  #availability-result { padding: 18px; }
+  #availability-result .availability-success-card { padding: 0; gap: 16px; }
+  .availability-deposit-callout { padding: 14px; gap: 10px; }
+  #availability-result .availability-success-heading { flex-direction: row; align-items: center; gap: 10px; }
+  #availability-result .availability-success-copy h4 { font-size: 20px; line-height: 1.2; }
+  #availability-result .availability-success-icon { width: 34px; height: 34px; }
+  #availability-result .availability-success-icon .bi { font-size: 20px; }
+  #availability-result .availability-success-summary { gap: 8px; }
+  #availability-result .availability-success-summary-icon { width: 30px; height: 30px; }
+  #availability-result .availability-price > div { font-size: 0.9rem; column-gap: 12px; }
+  .availability-success-actions { gap: 8px; margin-top: 12px; }
+}
+
+/* Alignment polish for the successful homepage result only. */
+#availability-result .availability-result-card-success .availability-success-heading {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-4);
+}
+#availability-result .availability-result-card-success .availability-success-copy { min-width: 0; }
+#availability-result .availability-result-card-success .availability-success-copy h4 {
+  margin: 0;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+#availability-result .availability-result-card-success .availability-success-summary { align-items: start; }
+#availability-result .availability-result-card-success .availability-success-summary-item {
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 0;
+}
+#availability-result .availability-result-card-success .availability-success-summary-label { line-height: 1.3; }
+#availability-result .availability-result-card-success .availability-success-summary-value-row { align-items: flex-start; }
+#availability-result .availability-result-card-success .availability-deposit-callout { margin-top: var(--space-4); }
+@media (min-width: 769px) and (max-width: 1024px) {
+  #availability-result .availability-result-card-success .availability-success-copy h4 { font-size: 24px; }
+}
+@media (max-width: 768px) {
+  #availability-result:has(.availability-result-card-success) { padding: var(--space-4) 18px; }
+  #availability-result .availability-result-card-success .availability-success-heading { gap: var(--space-3); }
+  #availability-result .availability-result-card-success .availability-success-summary { gap: var(--space-3); }
+  #availability-result .availability-result-card-success .availability-success-copy h4 { font-size: 22px; }
+  #availability-result .availability-result-card-success .availability-success-icon { width: 34px; height: 34px; }
+}
+@media (max-width: 600px) {
+  #availability-result .availability-result-card-success .availability-success-copy h4 { font-size: 18px; line-height: 1.15; }
+  #availability-result .availability-result-card-success .availability-success-icon { width: 32px; height: 32px; }
+  #availability-result .availability-result-card-success .availability-success-icon .bi { font-size: 19px; }
+}

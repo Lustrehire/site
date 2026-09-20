@@ -182,7 +182,7 @@
           "name": "How do I make a booking?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can check your date on the website, get a quote, and complete your booking online when you are ready."
+            "text": "Check live availability and pay a 50% booking deposit to secure your candles and date, or email yourself a quote. The remaining hire balance plus a refundable bond equal to the full hire fee are due 7 days before pickup. We will email a secure Stripe payment link. Pickup is the day before your event."
           }
         },
         {
@@ -290,7 +290,7 @@
         <p class="hero-eyebrow">Perth wedding candle hire</p>
         <h1>Beautiful wedding candles without the DIY stress</h1>
         <p>Ready-to-light candle hire for Perth brides. Pre-filled, easy to pick up, and designed to give your wedding that warm candlelit look without the extra effort.</p>
-        <p class="hero-subline">Check your date, get a quote, and book when you are ready.</p>
+        <p class="hero-subline">Check your date and secure your candles online.</p>
         <div class="hero-buttons">
           <a href="#availability-checker" class="btn primary">Check Date &amp; Get Quote</a>
           <a href="#how-it-works" class="btn secondary">See How It Works</a>
@@ -323,7 +323,7 @@
       <div class="step">
         <i class="bi bi-credit-card step-icon" aria-hidden="true"></i>
         <strong>2. Book Online</strong>
-        Complete your details, review your booking, and pay securely online to lock in your date.
+        Pay a 50% deposit securely online to lock in your date. The remaining hire balance and refundable bond are due 7 days before pickup.
       </div>
       <div class="step">
         <i class="bi bi-geo-alt step-icon" aria-hidden="true"></i>
@@ -352,7 +352,7 @@
         <div class="step">
           <i class="bi bi-credit-card step-icon" aria-hidden="true"></i>
           <strong>2. Book Online</strong>
-          Complete your details, review your booking, and pay securely online to lock in your date.
+          Pay a 50% deposit securely online to lock in your date. The remaining hire balance and refundable bond are due 7 days before pickup.
         </div>
         <div class="step">
           <i class="bi bi-geo-alt step-icon" aria-hidden="true"></i>
@@ -1107,8 +1107,8 @@
         </form>
         <div class="availability-result" id="availability-result" hidden></div>
         <div class="availability-success-actions" id="availability-success-actions" hidden>
+          <button type="button" class="booking-button availability-ready-button" id="availability-ready-button" hidden>Secure My Date</button>
           <button type="button" class="calculator-nav-button availability-continue-button" id="availability-continue-button" hidden>Email My Quote</button>
-          <button type="button" class="booking-button availability-ready-button" id="availability-ready-button" hidden>Secure My Date and Pay now</button>
           <p class="availability-success-reassurance">Secure checkout via Stripe</p>
           <button type="button" class="text-link availability-edit-button" id="availability-edit-button" hidden>Edit Details</button>
         </div>
@@ -1182,20 +1182,20 @@
         <div class="availability-booking-summary" id="availability-booking-summary"></div>
         <div class="availability-payment-note" id="availability-payment-note">
           <h4><i class="bi bi-shield-lock" aria-hidden="true"></i> Payment reassurance</h4>
-          <p>A refundable bond is required with all bookings as a standard safeguard for non-returned or seriously damaged items.</p>
-          <p>In normal hire situations, it is returned in full after your candles are returned and checked.</p>
+          <p>Pay 50% of your candle hire today to secure your date.</p>
+          <p>The remaining 50% plus your refundable bond is due 7 days before pickup. We'll email you a secure Stripe payment link. The bond is refunded after return and inspection, subject to the hire terms.</p>
         </div>
         <div class="availability-panel-actions availability-panel-actions-split">
           <button type="button" class="calculator-nav-button availability-back-button" id="availability-back-to-step-2">Back</button>
           <div class="availability-review-actions">
-            <button type="button" class="booking-button availability-submit" id="availability-review-submit">I&rsquo;m Ready to Book</button>
-            <button type="button" class="calculator-nav-button availability-quote-button" id="availability-quote-submit">Email Me My Quote</button>
+            <button type="button" class="booking-button availability-submit" id="availability-review-submit">Pay Deposit &amp; Secure My Date</button>
+            <button type="button" class="calculator-nav-button availability-quote-button" id="availability-quote-submit">Email My Quote</button>
           </div>
         </div>
         <p class="availability-secure-note" id="availability-secure-note"><i class="bi bi-lock-fill" aria-hidden="true"></i> Secure checkout powered by Stripe</p>
         <div class="availability-quote-convert" id="availability-quote-convert" hidden>
           <p>If you are ready to secure your date now, you can switch to booking and continue to payment.</p>
-          <button type="button" class="text-link availability-switch-link" id="availability-switch-to-booking">I&rsquo;m Ready to Book Instead</button>
+          <button type="button" class="text-link availability-switch-link" id="availability-switch-to-booking">Pay Deposit &amp; Secure My Date Instead</button>
         </div>
         <p class="availability-booking-feedback" id="availability-review-feedback" role="status" aria-live="polite"></p>
       </div>
@@ -1353,7 +1353,7 @@
           <strong>How do I make a booking?</strong>
           <i class='fas fa-chevron-down'></i>
         </button>
-        <p class="answer">You can check your date on the website, get a quote, and complete your booking online when you are ready.</p>
+        <p class="answer">Check live availability and pay a 50% booking deposit to secure your candles and date, or email yourself a quote. The remaining hire balance plus a refundable bond equal to the full hire fee are due 7 days before pickup. We will email a secure Stripe payment link. Pickup is the day before your event.</p>
       </div>
       <div class="faq-item" data-faq-category="booking pricing" data-faq-search="why do i need to pay a refundable bond safeguard standard returned in full non returned seriously damaged transport">
         <button class="faq-question" type="button" aria-expanded="false">
@@ -1408,6 +1408,7 @@
   </div>
 
   <script src="./shared-date.js"></script>
+  <script src="./shared-payment.js"></script>
   <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -1819,7 +1820,7 @@
 
           if (availabilityReviewSubmit) {
             availabilityReviewSubmit.hidden = mode === "quote";
-            availabilityReviewSubmit.textContent = "Proceed to Secure Payment";
+            availabilityReviewSubmit.textContent = "Pay Deposit & Secure My Date";
           }
 
           if (availabilityQuoteSubmit) {
@@ -1951,6 +1952,24 @@
           return dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0;
         };
 
+        const renderAvailabilityPrice = (quantity) => {
+          if (quantity < 15) return "";
+          const hireFee = calculateHireFee(quantity);
+          const { depositAmount, bondAmount, finalPaymentAmount } = window.LustreHirePayment.calculate(hireFee);
+          const totalPaid = (Math.round(depositAmount * 100) + Math.round(finalPaymentAmount * 100)) / 100;
+          const currency = window.LustreHirePayment.currency;
+          return `<div class="availability-price" aria-label="Price for ${quantity} candles">
+            <div class="availability-price-hire"><span>Candle hire</span> <strong>${currency(hireFee)}</strong></div>
+            <div><span>Refundable bond</span> <strong>${currency(bondAmount)}</strong></div>
+            <div class="availability-price-total" aria-label="Total across the booking, including refundable bond"><span>Total</span> <strong>${currency(totalPaid)}</strong></div>
+            <p class="availability-bond-note">The refundable bond is returned after the candles are returned and checked, subject to the hire terms.</p>
+            <section class="availability-deposit-callout" aria-label="Booking deposit">
+              <i class="bi bi-tag-fill" aria-hidden="true"></i>
+              <strong>Secure today with a ${currency(depositAmount)} deposit.</strong>
+            </section>
+          </div>`;
+        };
+
         const renderAvailabilityAvailableState = (resultData, requestedQuantity) => {
           if (requestedQuantity < 15 || Number(availabilityQuantityField?.value || 0) < 15 || resultData.status === "below_minimum") {
             renderAvailabilityBelowMinimumState(resultData.status === "below_minimum" ? resultData.message : "");
@@ -1960,9 +1979,7 @@
           const eventDateDisplay = formatAvailabilityDisplayDate(eventDateRaw);
           const quantityLabel = `${requestedQuantity} candle${requestedQuantity === 1 ? "" : "s"}`;
           const isPopularDate = isPopularEventDate(eventDateRaw);
-          const successMessage = isPopularDate
-            ? "Great news, your date is currently available. Weekend dates are our most in-demand and can book out quickly, so if everything looks right, you can secure it now."
-            : "Great news, your date is currently available. You can email yourself this quote to review later, or continue to book now.";
+          const successMessage = "Your candles are available now, but aren't reserved until your deposit is paid.";
           const popularDateBadge = isPopularDate
             ? `<span class="availability-popular-badge">Popular date</span>`
             : "";
@@ -1975,7 +1992,7 @@
                   <i class="bi bi-check2-circle"></i>
                 </span>
                 <div class="availability-success-copy">
-                  <h4>Your date is available ✨</h4>
+                  <h4>Your date is available</h4>
                 </div>
               </div>
               <div class="availability-success-summary" aria-label="Availability summary">
@@ -2003,11 +2020,13 @@
                   </div>
                 </div>
               </div>
+              ${renderAvailabilityPrice(requestedQuantity)}
               <p class="availability-success-note">${successMessage}</p>
             </div>
           `;
           setAvailabilityResultState(true);
           setAvailabilityConfirmedState(true);
+          availabilityReadyButton.textContent = `Secure My Date for ${window.LustreHirePayment.currency(window.LustreHirePayment.calculate(calculateHireFee(requestedQuantity)).depositAmount)}`;
           showAvailabilityStep(1);
         };
 
@@ -2050,6 +2069,7 @@
                   </div>
                 </div>
               </div>
+              ${renderAvailabilityPrice(maxAvailable)}
               <p class="availability-success-note">We can’t do ${requestedQuantity} candles for this date, but we currently have up to ${maxAvailable} candles available.</p>
               <div class="availability-result-actions availability-result-actions-triple">
                 <button type="button" class="booking-button" data-availability-action="continue-limited">Continue with ${maxAvailable} candles</button>
@@ -2175,8 +2195,6 @@
           const dropoffTimeValue = availabilityDropoffTimeWindow?.value || "Not selected yet";
           const notesValue = document.getElementById("availability-notes")?.value.trim() || "No notes added";
           const hireFee = calculateHireFee(quantityValue);
-          const refundableBondAmount = hireFee;
-          const totalDueToday = hireFee + refundableBondAmount;
 
           if (availabilityJourneyMode === "quote") {
             availabilityBookingSummary.innerHTML = `
@@ -2226,18 +2244,7 @@
               <aside class="availability-review-card availability-review-card-summary">
                 <h4>Payment summary</h4>
                 <div class="availability-payment-summary">
-                  <div class="availability-payment-row">
-                    <span>Candle hire</span>
-                    <strong>${formatCurrencyValue(hireFee)}</strong>
-                  </div>
-                  <div class="availability-payment-row">
-                    <span>Refundable bond</span>
-                    <strong>${formatCurrencyValue(refundableBondAmount)}</strong>
-                  </div>
-                  <div class="availability-payment-row availability-payment-row-total">
-                    <span>Total due today</span>
-                    <strong>${formatCurrencyValue(totalDueToday)}</strong>
-                  </div>
+                  ${window.LustreHirePayment.summary(hireFee)}
                 </div>
               </aside>
             </div>
@@ -2440,7 +2447,7 @@
               quantity,
               hire_fee: quoteHireFee,
               bond_amount: quoteHireFee,
-              total_due: quoteHireFee + quoteHireFee,
+              total_due: window.LustreHirePayment.calculate(quoteHireFee).depositAmount,
               availability_status: availabilityStatus,
               ...window.getLustreAttribution?.(),
             });
@@ -2583,7 +2590,7 @@
               quantity,
               hire_fee: hireFee,
               bond_amount: hireFee,
-              total_due: hireFee + hireFee,
+              total_due: window.LustreHirePayment.calculate(hireFee).depositAmount,
               booking_mode: "direct",
               ...window.getLustreAttribution?.(),
             });

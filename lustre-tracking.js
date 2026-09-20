@@ -69,7 +69,7 @@
   function buildLustreBookingTrackingParams(source = {}, extraParams = {}) {
     const hireFee = getNumber(source.hireFee);
     const bondAmount = getNumber(source.bondAmount ?? source.refundableBond);
-    const totalDue = getNumber(source.totalDue ?? source.total_due) || (hireFee || bondAmount ? hireFee + bondAmount : 0);
+    const totalDue = window.LustreHirePayment.calculate(hireFee).depositAmount;
     const params = {
       event_date: source.eventDate || source.event_date || "",
       quantity: getNumber(source.quantity || source.requestedQuantity),

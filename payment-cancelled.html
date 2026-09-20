@@ -69,8 +69,8 @@
           <i class="bi bi-arrow-counterclockwise"></i>
         </span>
         <p class="confirmation-kicker">Checkout paused</p>
-        <h1>Payment not completed</h1>
-        <p class="payment-cancelled-intro">Your booking has not been confirmed yet. If you closed payment or had trouble checking out, you can continue where you left off below.</p>
+        <h1>Booking deposit not completed</h1>
+        <p class="payment-cancelled-intro">Your booking deposit was not completed, so your date has not been reserved. If you closed payment or had trouble checking out, you can continue where you left off below.</p>
         <p class="return-status payment-cancelled-status">No payment has been taken unless Stripe showed your payment as successful.</p>
       </div>
 
@@ -125,6 +125,7 @@
   </footer>
 
   <script src="./shared-date.js"></script>
+  <script src="./shared-payment.js"></script>
   <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -188,7 +189,7 @@
       }
 
       if (summaryElement && summarySource) {
-        const totalDueToday = Number(summarySource.hireFee || 0) + Number(summarySource.refundableBond || summarySource.bondAmount || 0);
+
         summaryElement.hidden = false;
         summaryElement.innerHTML = `
           <h2>Your saved details</h2>
@@ -205,9 +206,7 @@
             <section class="confirmation-summary-section">
               <h3>Payment summary</h3>
               <div class="confirmation-summary-list">
-                <div class="confirmation-summary-item"><span>Candle hire</span><strong>${formatCurrency(summarySource.hireFee || 0)}</strong></div>
-                <div class="confirmation-summary-item"><span>Refundable bond</span><strong>${formatCurrency(summarySource.refundableBond || summarySource.bondAmount || 0)}</strong></div>
-                <div class="confirmation-summary-item"><span>Total due today</span><strong>${formatCurrency(totalDueToday)}</strong></div>
+                ${window.LustreHirePayment.summary(summarySource.hireFee, summarySource.pickupDate)}
               </div>
             </section>
           </div>
