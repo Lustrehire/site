@@ -65,7 +65,7 @@
       <div class="quote-review-hero">
         <p class="terms-kicker">Quote review</p>
         <h1>Review your quote</h1>
-        <p class="return-status status-loading" id="quote-page-status" aria-live="polite">Loading your quote...</p>
+        <p class="return-status status-loading" id="quote-page-status" aria-live="polite">Checking your quote...</p>
       </div>
 
       <div class="booking-system-actions quote-page-actions" id="quote-page-error-actions" hidden>
@@ -116,6 +116,7 @@
       let quoteData = null;
       let resolvedQuantity = 0;
       let latestAvailability = null;
+      let quoteRevalidated = false;
 
       const getSingleValue = (value) => Array.isArray(value) ? value[0] : value;
       const getStringValue = (value) => {
@@ -389,8 +390,10 @@
         storeQuoteSession();
         renderResultCard(
           "success",
-          "",
-          showPopularBadge ? "Popular date" : "",
+          quoteRevalidated ? "Your quote is still available" : "",
+          quoteRevalidated
+            ? "We’ve rechecked your date and candle availability, and you can continue with your booking."
+            : showPopularBadge ? "Popular date" : "",
           "",
           ""
         );
@@ -448,7 +451,7 @@
       };
 
       const renderUnavailableState = () => {
-        updateStatus("Unfortunately, we no longer have enough candles available for this date to fulfil this order.");
+        updateStatus(latestAvailability?.message || "Unfortunately, we no longer have enough candles available for this date to fulfil this order.");
         if (resultElement) {
           resultElement.hidden = true;
           resultElement.innerHTML = "";
@@ -472,7 +475,7 @@
           ? `<p class="availability-success-note">The earliest date currently available for online booking is ${formatDisplayDate(earliestAllowedEventDate)}.</p>`
           : "";
 
-        updateStatus(`Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.`);
+        updateStatus(latestAvailability?.message || `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.`);
         if (resultElement) {
           resultElement.hidden = false;
           resultElement.innerHTML = `
@@ -548,7 +551,7 @@
       }
 
       try {
-        updateStatus("Loading your quote...", false, true);
+        updateStatus("Checking your quote...", false, true);
         const response = await fetchWithTimeout(appsScriptUrl, {
           method: "POST",
           headers: {
@@ -591,8 +594,10 @@
           );
           return;
         }
-        if (result.status === "expired" || rawQuote.quoteStatus === "expired") {
-          showErrorShell(result?.message || "Please check availability again to create a new quote.");
+        if (result.status === "unavailable") {
+          quoteData = normaliseQuoteData(rawQuote);
+          latestAvailability = { ...result, available: false, partialAvailable: false };
+          renderUnavailableState();
           return;
         }
         if (result.status === "notice_period") {
@@ -607,6 +612,7 @@
           return;
         }
 
+        quoteRevalidated = result.quoteRevalidated === true;
         quoteData = normaliseQuoteData(rawQuote);
         resolvedQuantity = quoteData.quantity;
         await runLiveAvailabilityCheck();

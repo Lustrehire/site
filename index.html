@@ -1095,7 +1095,7 @@
             </div>
             <div class="form-group">
               <label for="availability-quantity">Candle Quantity (Min 15 candles)</label>
-              <input id="availability-quantity" name="availability-quantity" type="number" min="1" inputmode="numeric" placeholder="For example, 50" required />
+              <input id="availability-quantity" name="availability-quantity" type="number" min="15" inputmode="numeric" placeholder="For example, 50" required />
               <p class="availability-helper-copy">
                 Not sure how many candles you need?
                 <a href="#candle-packages" class="text-link availability-helper-link">Use our candle estimate</a>
@@ -1952,6 +1952,10 @@
         };
 
         const renderAvailabilityAvailableState = (resultData, requestedQuantity) => {
+          if (requestedQuantity < 15 || Number(availabilityQuantityField?.value || 0) < 15 || resultData.status === "below_minimum") {
+            renderAvailabilityBelowMinimumState(resultData.status === "below_minimum" ? resultData.message : "");
+            return;
+          }
           const eventDateRaw = getStringValue(resultData.eventDate) || availabilityDateField?.value || "";
           const eventDateDisplay = formatAvailabilityDisplayDate(eventDateRaw);
           const quantityLabel = `${requestedQuantity} candle${requestedQuantity === 1 ? "" : "s"}`;
@@ -2263,6 +2267,13 @@
           showAvailabilityStep(1);
         };
 
+        const renderAvailabilityBelowMinimumState = (message = "") => {
+          resetAvailabilityFlow();
+          availabilityFeedback.textContent = message || "Minimum order is 15 candles.";
+          availabilityFeedback.classList.remove("status-loading");
+          availabilityFeedback.classList.add("is-error");
+        };
+
         const getBookingFormValues = () => {
           const fullName = document.getElementById("availability-full-name")?.value.trim() || "";
           const email = document.getElementById("availability-email")?.value.trim() || "";
@@ -2372,6 +2383,11 @@
             return;
           }
 
+          if (quantity < 15) {
+            renderAvailabilityBelowMinimumState();
+            return;
+          }
+
           window.trackLustreEvent?.("availability_check", {
             event_date: eventDate,
             quantity,
@@ -2401,6 +2417,10 @@
             const result = await readJsonResponse(response);
             if (!response.ok || !result || typeof result !== "object") {
               throw new Error("availability_request_failed");
+            }
+            if (result.status === "below_minimum") {
+              renderAvailabilityBelowMinimumState(result.message);
+              return;
             }
             latestAvailabilityResult = result;
             applyAvailabilityMinimumDate(getNumberFromValue(result.minimumNoticeDays) || defaultMinimumNoticeDays, getStringValue(result.earliestAllowedEventDate));

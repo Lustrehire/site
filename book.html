@@ -625,8 +625,8 @@
             setErrorState("This quote has already been paid.", result?.message || "Your booking is already confirmed.");
             return;
           }
-          if (result.status === "expired" || quoteBooking.quoteStatus === "expired") {
-            setErrorState("This quote has expired.", result?.message || "Please request a new quote or check availability again.");
+          if (result.status === "unavailable") {
+            setErrorState("This date is no longer available.", result.message || "Please check availability again or contact us.");
             return;
           }
           if (result.status === "notice_period") {
@@ -637,7 +637,7 @@
               : "";
             setErrorState(
               "This booking needs manual confirmation.",
-              `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.${earliestDateCopy}`
+              result.message || `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.${earliestDateCopy}`
             );
             return;
           }
@@ -704,15 +704,22 @@
               : "";
             setErrorState(
               "This booking needs manual confirmation.",
-              `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.${earliestDateCopy}`
+              availabilityResult.message || `Online bookings require at least ${minimumNoticeDays} days’ notice. If your event is sooner than that, please contact us and we’ll let you know if we can help.${earliestDateCopy}`
             );
+            return;
+          }
+
+          if (availabilityResult.available !== true) {
+            setErrorState("This date is no longer available.", availabilityResult.message || "Please check availability again or contact us.");
             return;
           }
 
           if (pageTitle) pageTitle.textContent = "Enter your details";
           if (pageMessage) pageMessage.textContent = "Add the final details below to continue to secure payment.";
           if (pageStatus) {
-            pageStatus.textContent = "";
+            pageStatus.textContent = result.quoteRevalidated === true
+              ? "Your quote and availability were rechecked before continuing."
+              : "";
             pageStatus.classList.remove("is-error");
             pageStatus.classList.remove("status-loading");
           }
