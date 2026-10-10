@@ -1127,6 +1127,18 @@
               <input id="availability-email" name="availability-email" type="email" required />
             </div>
           </div>
+          <div class="form-group">
+            <label for="availability-customer-source">How did you first hear about Lustre Hire?</label>
+            <select id="availability-customer-source" name="customerSource">
+              <option value="">Select an option</option>
+              <option value="Facebook Marketplace">Facebook Marketplace</option>
+              <option value="Google Search">Google Search</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Pinterest">Pinterest</option>
+              <option value="Friend / Referral">Friend / Referral</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
           <div class="availability-form-grid availability-booking-only-fields" id="availability-booking-extra-grid">
             <div class="form-group">
               <label for="availability-address">Address</label>
@@ -2274,6 +2286,7 @@
         const getBookingFormValues = () => {
           const fullName = document.getElementById("availability-full-name")?.value.trim() || "";
           const email = document.getElementById("availability-email")?.value.trim() || "";
+          const customerSource = document.getElementById("availability-customer-source")?.value || "";
           const address = availabilityAddressField?.value.trim() || "";
           const phone = document.getElementById("availability-phone")?.value.trim() || "";
           const pickupTimeWindow = availabilityPickupTimeWindow?.value || "";
@@ -2283,6 +2296,7 @@
           return {
             fullName,
             email,
+            customerSource,
             address,
             phone,
             pickupTimeWindow,
@@ -2299,6 +2313,7 @@
           const {
             fullName,
             email,
+            customerSource,
             address,
             phone,
             pickupTimeWindow,
@@ -2336,6 +2351,7 @@
               refundableBond: refundableBondAmount,
               fullName,
               email,
+              customerSource,
               address: mode === "quote" ? "" : address,
               phone: mode === "quote" ? "" : phone,
               pickupTimeWindow: mode === "quote" ? "" : pickupTimeWindow,
@@ -2551,6 +2567,7 @@
           const hireFee = calculateHireFee(quantity);
           const directBookingContext = {
             mode: "direct",
+            customerSource: getBookingFormValues().customerSource,
             eventDate,
             quantity,
             pickupDate: getStringValue(latestAvailabilityResult.pickupDate),

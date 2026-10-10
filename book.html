@@ -124,6 +124,18 @@
                     <input id="book-email" name="book-email" type="email" placeholder="e.g. jane@email.com" required />
                   </div>
                 </div>
+                <div class="form-group">
+                  <label for="book-customer-source">How did you first hear about Lustre Hire?</label>
+                  <select id="book-customer-source" name="customerSource">
+                    <option value="">Select an option</option>
+                    <option value="Facebook Marketplace">Facebook Marketplace</option>
+                    <option value="Google Search">Google Search</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Pinterest">Pinterest</option>
+                    <option value="Friend / Referral">Friend / Referral</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
                 <div class="availability-form-grid">
                   <div class="form-group">
                     <label for="book-address">Address</label>
@@ -257,6 +269,7 @@
       const termsCheckbox = document.getElementById("book-terms-checkbox");
 
       const fullNameField = document.getElementById("book-full-name");
+      const customerSourceField = document.getElementById("book-customer-source");
       const emailField = document.getElementById("book-email");
       const addressField = document.getElementById("book-address");
       const phoneField = document.getElementById("book-phone");
@@ -433,6 +446,7 @@
       const getFormValues = () => ({
         fullName: fullNameField?.value.trim() || "",
         email: emailField?.value.trim() || "",
+        customerSource: customerSourceField?.value || "",
         address: addressField?.value.trim() || "",
         phone: phoneField?.value.trim() || "",
         pickupTimeWindow: pickupField?.value || "",
@@ -469,6 +483,7 @@
           quoteToken: bookingMode === "quote" ? quoteToken : "",
           fullName: values.fullName,
           email: values.email,
+          customerSource: values.customerSource,
           address: values.address,
           customerAddress: values.address,
           phone: values.phone,
@@ -536,6 +551,7 @@
       const populateForm = () => {
         if (!baseBookingContext) return;
         if (fullNameField) fullNameField.value = baseBookingContext.fullName || "";
+        if (customerSourceField) customerSourceField.value = baseBookingContext.customerSource || "";
         if (emailField) emailField.value = baseBookingContext.email || "";
         if (addressField) addressField.value = baseBookingContext.address || baseBookingContext.customerAddress || "";
         if (phoneField) phoneField.value = baseBookingContext.phone || "";
@@ -639,6 +655,16 @@
             refundableBond: getNumberFromValue(quoteBooking.refundableBond ?? quoteBooking.bondAmount ?? quoteBooking.hireFee) || calculateHireFee(getNumberFromValue(quoteBooking.quantity)),
             bondAmount: getNumberFromValue(quoteBooking.bondAmount ?? quoteBooking.refundableBond ?? quoteBooking.hireFee) || calculateHireFee(getNumberFromValue(quoteBooking.quantity)),
           };
+
+          // Keep the customer's latest answer when retrying this quote after checkout.
+          try {
+            const pending = JSON.parse(sessionStorage.getItem(bookingStorageKey) || "null");
+            if (pending?.quoteToken === quoteToken && typeof pending.customerSource === "string") {
+              baseBookingContext.customerSource = pending.customerSource;
+            }
+          } catch (error) {
+            // A missing or unreadable saved booking must not block a valid quote.
+          }
 
           if (Number.isFinite(adjustedQuantityParam) && adjustedQuantityParam >= 15 && adjustedQuantityParam < baseBookingContext.quantity) {
             const adjustedHireFee = calculateHireFee(adjustedQuantityParam);
@@ -858,6 +884,7 @@
 
           const storedBooking = {
             ...(result.bookingData || bookingData),
+            customerSource: bookingData.customerSource,
             mode: bookingMode,
             quoteToken: bookingMode === "quote" ? quoteToken : "",
           };
