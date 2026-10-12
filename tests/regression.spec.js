@@ -218,7 +218,7 @@ for (const mode of ['direct', 'quote']) {
     await expect(summary).toContainText('Final payment $481.50');
     await expect(summary).toContainText(/7 June? 2030/);
     expect(backend.calls.map(call => call.action)).toEqual([mode === 'direct' ? 'saveConfirmedBooking' : 'markQuoteAsConfirmed']);
-    expect(await page.evaluate(() => window.dataLayer.find(event => event.event === 'booking_confirmed').total_due)).toBe(160.50);
+    expect(await page.evaluate(() => window.dataLayer.filter(event => ['booking_confirmed', 'purchase'].includes(event[1])))).toEqual([]);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.reload();
     await expect(summary).toContainText('Deposit paid today $160.50');

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="referrer" content="no-referrer">
   <meta charset="UTF-8" />
+  <script src="./lustre-tracking.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Checkout recovery page for incomplete Lustre Hire payments." />
   <meta name="robots" content="noindex,nofollow" />
@@ -126,7 +128,6 @@
 
   <script src="./shared-date.js"></script>
   <script src="./shared-payment.js"></script>
-  <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const menuToggle = document.querySelector(".menu-toggle");
@@ -183,6 +184,7 @@
       const bookingData = readStoredJson(bookingStorageKey);
       const quoteData = readStoredJson(quoteStorageKey);
       const summarySource = quoteData || bookingData;
+      window.trackLustreCancellation?.();
 
       if (resumeLink) {
         resumeLink.href = getResumeTarget(bookingData, quoteData);

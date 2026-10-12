@@ -1,25 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" >
   <head>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-MTQH9ZRG');</script>
-  <!-- End Google Tag Manager -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18047450478">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-18047450478');
-</script>
-
+    <meta name="referrer" content="no-referrer">
     <meta charset="UTF-8" />
+    <script src="./lustre-tracking.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Wedding candle hire in Perth for DIY brides and events. Ready-to-light sand wax candles, easy pickup from Bull Creek, simple online booking, and affordable pricing from $8 per candle." />
     <link rel="canonical" href="https://www.lustrehire.com/" />
@@ -205,41 +189,11 @@
     }
     </script>
 
-    <!-- Meta Pixel Code -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1271538364415253');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1271538364415253&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
-   
   </head>  
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1RPLQ8LZ48"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1RPLQ8LZ48');
-</script>
 <!-- partial:index.partial.html -->
 <body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MTQH9ZRG"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+
   <div class="header-container">
     <header>
       <div class="logoName">
@@ -1421,7 +1375,6 @@
 
   <script src="./shared-date.js"></script>
   <script src="./shared-payment.js"></script>
-  <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const menuToggle = document.querySelector(".menu-toggle");
@@ -2438,6 +2391,9 @@
             if (!response.ok || !result || typeof result !== "object") {
               throw new Error("availability_request_failed");
             }
+            if (result.success === true) window.trackLustreEvent?.("availability_result", {
+              quantity, availability_status: result.status || (result.available ? "available" : result.partialAvailable ? "partial_available" : "unavailable"),
+            });
             if (result.status === "below_minimum") {
               renderAvailabilityBelowMinimumState(result.message);
               return;
@@ -2452,18 +2408,6 @@
             const isAvailable = result.available === true;
             const isPartialAvailable = result.partialAvailable === true;
             const status = getStringValue(result.status);
-            const availabilityStatus = status || (isAvailable ? "available" : isPartialAvailable ? "partial_available" : "unavailable");
-            const quoteHireFee = calculateHireFee(quantity);
-
-            window.trackLustreEvent?.("quote_generated", {
-              event_date: getStringValue(result.eventDate) || eventDate,
-              quantity,
-              hire_fee: quoteHireFee,
-              bond_amount: quoteHireFee,
-              total_due: window.LustreHirePayment.calculate(quoteHireFee).depositAmount,
-              availability_status: availabilityStatus,
-              ...window.getLustreAttribution?.(),
-            });
 
             if (status === "notice_period") {
               renderAvailabilityNoticeState(result);
@@ -2734,6 +2678,7 @@
                 quoteStatus: result.quoteStatus || "sent",
               };
 
+              window.trackLustreQuoteGenerated?.(quoteBooking);
               sessionStorage.setItem(bookingStorageKey, JSON.stringify(quoteBooking));
               sessionStorage.setItem(quoteStorageKey, JSON.stringify(quoteBooking));
               availabilityBookingFeedback.textContent = "";
@@ -2772,6 +2717,7 @@
             availabilityBookingFeedback.textContent = "";
             availabilityBookingFeedback.classList.remove("status-loading");
             showAvailabilityStep(3);
+            window.trackLustreEvent?.("booking_details_completed", window.buildLustreBookingTrackingParams?.({ eventDate, quantity, mode: "direct" }) || {});
           }, 260);
         });
 
@@ -2793,8 +2739,6 @@
           const checkoutParams = window.buildLustreBookingTrackingParams?.(booking, {
             booking_mode: "direct",
           }) || {};
-          window.trackLustreEvent?.("checkout_started", checkoutParams);
-          window.trackLustreStandardMetaEvent?.("InitiateCheckout", checkoutParams.total_due);
 
           if (availabilityReviewSubmit instanceof HTMLButtonElement) {
             setButtonLoadingState(availabilityReviewSubmit, true, "Preparing Payment...");
@@ -2822,12 +2766,14 @@
             }
 
             if (result.success && result.checkoutUrl) {
+              window.trackLustreCheckoutReady?.(result.checkoutUrl, checkoutParams);
               window.location.href = result.checkoutUrl;
               return;
             }
 
             throw new Error("checkout_session_failed");
           } catch (error) {
+            window.trackLustreEvent?.("checkout_error", { booking_mode: checkoutParams.booking_mode, error_code: "checkout_preparation_failed" });
             console.error("Checkout session preparation error:", error);
             if (availabilityReviewFeedback) {
               availabilityReviewFeedback.textContent = "We couldn’t start secure payment right now. Your booking has not been submitted. Please try again.";

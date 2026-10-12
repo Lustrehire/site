@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="referrer" content="no-referrer">
   <meta charset="UTF-8" />
+  <script src="./lustre-tracking.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Secure booking page for completing a Lustre Hire candle reservation." />
   <meta name="robots" content="noindex,nofollow" />
@@ -219,7 +221,6 @@
 
   <script src="./shared-date.js"></script>
   <script src="./shared-payment.js"></script>
-  <script src="./lustre-tracking.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const menuToggle = document.querySelector(".menu-toggle");
@@ -778,6 +779,7 @@
           formFeedback.textContent = "";
           formFeedback.classList.remove("status-loading");
           showReviewPanel();
+          window.trackLustreEvent?.("booking_details_completed", window.buildLustreBookingTrackingParams?.(baseBookingContext, { booking_mode: bookingMode }) || {});
         }, 240);
       });
 
@@ -832,8 +834,6 @@
         const checkoutParams = window.buildLustreBookingTrackingParams?.(bookingData, {
           booking_mode: bookingMode,
         }) || {};
-        window.trackLustreEvent?.("checkout_started", checkoutParams);
-        window.trackLustreStandardMetaEvent?.("InitiateCheckout", checkoutParams.total_due);
 
         if (paymentButton instanceof HTMLButtonElement) {
           setButtonLoadingState(paymentButton, true, "Preparing Payment...");
@@ -895,8 +895,10 @@
             console.log("[QUOTE DEBUG] sessionStorage booking data:", storedBooking);
           }
 
+          window.trackLustreCheckoutReady?.(result.checkoutUrl, checkoutParams);
           window.location.href = result.checkoutUrl;
         } catch (error) {
+          window.trackLustreEvent?.("checkout_error", { booking_mode: checkoutParams.booking_mode, error_code: "checkout_preparation_failed" });
           console.error("Checkout session preparation error:", error);
           if (reviewFeedback) {
             reviewFeedback.textContent = "We couldn’t start secure payment right now. Your booking has not been submitted. Please try again.";
