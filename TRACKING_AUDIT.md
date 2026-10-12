@@ -34,7 +34,7 @@ Validated attribution persists in sessionStorage across the booking journey, wit
 | Event | Trigger and protection |
 | --- | --- |
 | availability_check | Valid availability submission after date/quantity validation |
-| availability_result | Successful backend response, including allowlisted availability status |
+| availability_result | HTTP-successful, parsed availability response with valid boolean flags or recognised notice/minimum outcome; success may be absent. Unknown statuses, explicit failures and error payloads are excluded. |
 | quote_generated | Successful quote save with booking ID; once per ID per browser session |
 | booking_started | Booking journey entry; deduplicated across steps/reloads |
 | booking_details_completed | Validated required details and review reached; once per journey |
@@ -91,4 +91,13 @@ Earlier root HTML/shared tracking changes belong to the preceding tracking work.
 
 ## Test result
 
-Full `npm test`: **194 passed** across desktop Chromium and mobile Chromium (1.8 minutes). `git diff --check` passed. All Apps Script, checkout and provider traffic is mocked or blocked; no real Stripe payments or analytics hits are made. Tests check initialisation, attribution, sanitisation, private-page exclusion, duplicate prevention and existing booking regressions. Live reporting/provider settings still need manual verification.
+Full `npm test`: **230 passed** across desktop Chromium and mobile Chromium (2.2 minutes). `git diff --check` passed. All Apps Script, checkout and provider traffic is mocked or blocked; no real Stripe payments or analytics hits are made. Tests check initialisation, attribution, sanitisation, private-page exclusion, duplicate prevention and existing booking regressions. Live reporting/provider settings still need manual verification.
+
+
+## Availability-result production response fix
+
+Cause: the event hook required `result.success === true`, but the real Apps Script checkAvailability response does not necessarily include that field. The UI correctly used available, partialAvailable and status, while analytics silently skipped the result. Earlier generic fixtures included success:true and did not expose this mismatch.
+
+The event hook now validates the availability response separately from the unchanged booking/UI handler. It runs only after successful HTTP handling and JSON parsing, rejects arrays, explicit success:false, error fields, unknown statuses and invalid flag types for stock outcomes, and accepts the real response without a success field. Valid available/partialAvailable boolean flags determine available, partial or unavailable; notice_period and below_minimum take precedence. Legacy partial_available/limited responses are normalised to partial. If status is absent, valid boolean flags are sufficient. Only quantity and the allowlisted availability status are supplied to the existing sanitising helper; backend messages, private URLs and identifiers are not forwarded.
+
+This fix changes index.html, the status allowlist in lustre-tracking.js, new tests/availability-tracking.spec.js and this audit. No Apps Script, Stripe, pricing, booking requests or UI behaviour changes. The new tests mirror Apps Script responses without success:true and cover all availability outcomes, payload privacy, single-event delivery, malformed responses and transport failures. Full suite: **230 passed** on desktop and mobile Chromium, including 36 new availability-tracking regression cases. `git diff --check` passed. No deployment was performed.

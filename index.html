@@ -2391,9 +2391,20 @@
             if (!response.ok || !result || typeof result !== "object") {
               throw new Error("availability_request_failed");
             }
-            if (result.success === true) window.trackLustreEvent?.("availability_result", {
-              quantity, availability_status: result.status || (result.available ? "available" : result.partialAvailable ? "partial_available" : "unavailable"),
-            });
+            // Availability responses do not require a `success` field. Validate
+            // the availability shape independently of the existing UI handling.
+            const recognisedStatus = ["available", "partial", "partial_available", "limited", "unavailable", "notice_period", "below_minimum"].includes(result.status);
+            const hasAvailabilityFlags = typeof result.available === "boolean" && typeof result.partialAvailable === "boolean";
+            const isAvailabilityOutcome = (recognisedStatus || result.status == null || result.status === "") &&
+              (hasAvailabilityFlags || result.status === "notice_period" || result.status === "below_minimum");
+            if (!Array.isArray(result) && result.success !== false && !result.error && isAvailabilityOutcome) {
+              const trackingStatus = ["notice_period", "below_minimum"].includes(result.status)
+                ? result.status
+                : result.available ? "available" : result.partialAvailable ? "partial" : "unavailable";
+              window.trackLustreEvent?.("availability_result", {
+                quantity, availability_status: trackingStatus,
+              });
+            }
             if (result.status === "below_minimum") {
               renderAvailabilityBelowMinimumState(result.message);
               return;

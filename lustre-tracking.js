@@ -194,7 +194,7 @@
       if (source[key] !== undefined && Number.isFinite(Number(source[key])) && Number(source[key]) >= 0) params[key] = Number(source[key]);
     }
     if (['direct', 'quote'].includes(source.booking_mode)) params.booking_mode = source.booking_mode;
-    if (['available', 'partial_available', 'limited', 'unavailable', 'below_minimum', 'notice_period'].includes(source.availability_status)) params.availability_status = source.availability_status;
+    if (['available', 'partial', 'partial_available', 'limited', 'unavailable', 'below_minimum', 'notice_period'].includes(source.availability_status)) params.availability_status = source.availability_status;
     if (source.error_code === 'checkout_preparation_failed') params.error_code = source.error_code;
     if (source.currency === 'AUD') params.currency = 'AUD';
     return params;
