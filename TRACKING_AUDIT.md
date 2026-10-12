@@ -11,13 +11,13 @@ Preserved IDs:
 - Meta Pixel: `1271538364415253`
 - GTM: `GTM-MTQH9ZRG`
 
-GA4 runs across index, book, quote, payment-success and payment-cancelled. The helper loads gtag.js once, configures GA with send_page_view:false and sends one explicit page_view. It sends one GA command per business event, explicitly targeted at this GA property; it does not also push a duplicate GTM business-event object. Re-running the helper cannot duplicate initialisation. GTM must not install a second GA implementation.
+GA4 runs across all 21 explicitly declared public pages and the existing book, quote, payment-success and payment-cancelled funnel pages. The helper loads gtag.js once, configures GA with send_page_view:false and sends one explicit page_view. It sends one GA command per business event, explicitly targeted at this GA property; it does not also push a duplicate GTM business-event object. Re-running the helper cannot duplicate initialisation. GTM must not install a second GA implementation.
 
-Google Ads, Meta and GTM run on eligible public homepage visits, including Facebook, Instagram, Google advertising and referred traffic. Private booking, quote and payment pages do not load Meta/GTM or Clarity. Their real URLs and backend request inputs remain intact; GA receives sanitised page_location/page_referrer and allowlisted event fields.
+Google Ads, Meta and GTM run on explicitly eligible public page visits, including Facebook, Instagram, Google advertising and referred traffic. Private booking, quote and payment pages do not load Meta/GTM or Clarity. Their real URLs and backend request inputs remain intact; GA receives sanitised page_location/page_referrer and allowlisted event fields.
 
 ## URLs, attribution and privacy controls
 
-The public homepage URL is cleaned synchronously before vendors load. Only known UTM/click parameter keys with validated values survive. Unknown keys, repeated query parameters, unsafe fragments, private tokens and malformed advertising IDs are dropped. Existing availability scroll navigation and section links still work.
+Each explicitly public page URL is cleaned synchronously before vendors load. Only known UTM/click parameter keys with validated values survive. Unknown keys, repeated query parameters, unsafe fragments, private tokens and malformed advertising IDs are dropped. Existing availability scroll navigation and section links still work.
 
 Recognised click parameters: gclid, dclid, gbraid, wbraid, fbclid and msclkid. Source and medium use recognised advertising-channel values. Campaign name/id/content/term use a maximum of 100 characters, starting with an alphanumeric character and allowing letters, digits, spaces, underscores and hyphens. No manually approved vocabulary is required. Email/URL syntax, long phone-like digit sequences, address-like strings and private identifier prefixes are rejected.
 
@@ -114,3 +114,72 @@ Cause: the explicit body mask overrode the Balanced dashboard policy and masked 
 Changed in this correction: index.html, lustre-tracking.js, tests/campaign-tracking.spec.js (replaced its old body-mask expectation), new tests/clarity-masking.spec.js, and this audit. Tests inspect masks at mocked GTM execution, verify public content has no masked ancestor, exercise actual repeated summary rendering and check all private routes remain excluded from GTM/Clarity while retaining GA.
 
 Masking changes affect new recordings, not existing recordings. Balanced can still automatically mask things such as numbers or email addresses; removing the blanket attribute does not force all text to be public. See [Microsoft's masking documentation](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-masking). No deployment or GTM publication was performed. Full suite: **242 passed** across desktop/mobile Chromium, including 12 new masking checks. `git diff --check` passed. Provider scripts and payment requests were mocked, so live recording appearance still needs verification after deployment.
+
+## FAQ search analytics
+
+Homepage FAQ filtering remains immediate and unchanged. After 700 ms without input, `faq_search` sends only a locally classified `faq_topic` (`pricing`, `pickup`, `returns`, `bond`, `burn_time`, `safety`, `availability`, or `other`) plus the helper's existing sanitised page/campaign context to GA4. No raw search text is passed to the helper, stored, added to URLs or sent to Meta. The helper independently allowlists topic values. Unknown searches, including personal text without topic keywords, become `other`.
+
+Consecutive searches in the same topic are deduplicated until the input is cleared or another topic is searched. Empty searches and filter-button clicks emit nothing; input composition waits until completion. This measures topic interest rather than every distinct phrase. The FAQ input retains `data-clarity-mask="true"`; no Clarity unmasking or vendor configuration changes were added.
+
+For reporting by topic, register `faq_topic` as an event-scoped GA4 custom dimension if it is not already registered. No additional GTM tag or GA installation is needed. Existing dashboard privacy requirements above still apply, including avoiding automatic raw search-term collection. Tests cover all eight categories, debounce timing, deduplication, clear/composition behaviour, unchanged filtering, masking and rejection of unsafe parameters. No deployment performed.
+
+FAQ validation: full `npm test` **264 passed** across desktop and mobile Chromium, including 22 new FAQ checks. `git diff --check` passed. Backend/payment/provider traffic was mocked; no real payments or analytics hits were generated.
+
+
+## Public-page expansion
+
+### Audit and coverage
+
+Previously only the homepage and four private funnel pages loaded the helper. The other 20 public HTML pages had no analytics implementation to duplicate. All existing public pages now declare their exact static path and load the same helper. These are the full public inventory (also listed in the sitemap):
+
+- `/index.html` (also `/`)
+- `/terms-and-conditions.html`
+- `/how-to-return.html`
+- `/blog/Candle-budget-breakdown.html`
+- `/blog/blog.html`
+- `/blog/burn-time-calculator.html`
+- `/blog/coastal-boho-colour-playbook.html`
+- `/blog/diy-vs-full-service.html`
+- `/blog/diy-wedding-candles-whats-actually-worth-doing-yourself.html`
+- `/blog/diy-wedding-decor-regrets-what-to-outsource-vs-do-yourself.html`
+- `/blog/do-wedding-candles-fit-in-a-normal-car.html`
+- `/blog/how-many-candles-do-i-need-for-a-wedding.html`
+- `/blog/how-to-get-candle-approval-from-your-wedding-venue-in-perth.html`
+- `/blog/how-to-pack-transport-and-return-wedding-candles-without-mess.html`
+- `/blog/sand-wax-candles-vs-pillar-candles-for-weddings.html`
+- `/blog/spring-trend-2025.html`
+- `/blog/tablescape-checklist.html`
+- `/blog/venue-safety-approval.html`
+- `/blog/wedding-candle-hire-perth-prices.html`
+- `/blog/wedding-candle-styling-ideas-for-long-tables.html`
+- `/blog/what-to-ask-your-venue-before-using-candles.html`
+
+The burn-time calculator is an editorial guide/table, not a personal-data calculator. The blog, return guide and terms pages have no inputs, storage-driven customer content, backend requests or personal-data renderers. Homepage inputs and customer summaries retain their existing selective masks. Public text remains visible under Balanced masking; nothing broadly unmasks forms or dynamic output.
+
+`book.html`, `quote.html`, `payment-success.html` and `payment-cancelled.html` retain sanitised GA only, even if a public marker is accidentally added. Unmarked URLs and other explicitly private pages initialise no providers. Separately maintained DEV/Apps Script files are not public content and were not changed.
+
+Audit limitation: `blog/tablescape-checklist.html` already referenced missing `/script.js` (404). This unrelated reference was left unchanged. The tracking test explicitly checks for that one known missing resource rather than hiding all browser errors. Its shared analytics helper still initialises correctly.
+
+### Reusable implementation and new pages
+
+Copy `templates/public-page.html.template`, replace `{{PUBLIC_PAGE_PATH}}` with the exact static root-relative path (e.g. `/blog/new-article.html`), and replace `{{TITLE}}`. Keep the no-referrer meta policy and the public-page declaration before the single synchronous `/lustre-tracking.js` include. Populate the public content and add the page to the sitemap where appropriate. No per-page GA/GTM/Clarity dashboard work is required. `AGENTS.md` instructs future Codex work to follow this convention.
+
+Eligibility requires an authored `meta[name="lustre-public-page"]` whose value exactly matches the current pathname (`/index.html` also accepts `/`). It is not inferred from `/blog/`, the mere presence of the helper, or any query parameter. A copy served under the wrong URL or with unfilled placeholders stays excluded. Slugs must be static public names; never put a customer name/token/ID into the marker, title or URL. Any page rendering customer, account, quote, booking or payment information must omit the public marker and may use `<meta name="lustre-private-page" content="true">` as an overriding exclusion. New private pages need separate review before enabling any GA tracking.
+
+For any future inputs, retain automatic masking and explicitly mark inputs/textarea/select/contenteditable elements with `data-clarity-mask="true"`. Render personal output only inside an already-masked container. Do not use page-wide masking or `data-clarity-unmask`. The tests discover root and blog HTML; extend discovery for a new content directory. The template is exercised at a hypothetical `/guides/` URL without creating a published page.
+
+### Navigation, attribution and reporting
+
+Each document sends one GA page view using its real static path; public articles no longer fall back to `/`. Re-including the helper does not duplicate provider startup, readiness events or page views. The same GTM container and `lustre_tracking_ready` / `lustre_clarity_eligible` contract reuse the existing Clarity tag. There is no new Clarity installation or GA/Ads/Meta tag in GTM. Existing provider IDs and funnel event triggers remain unchanged; purchase remains disabled.
+
+The optional `previous_page_path` parameter describes the previous tracked document in the same tab within 30 minutes. It contains only a stored static page path, never a raw referrer/query/fragment. It accompanies page views and existing funnel events, so an availability check on the homepage can retain the preceding article path. Browser session storage is optional: without it, this context and cross-page campaign persistence may be unavailable, while page views still work. Reloads can have the same previous/current path. Untracked pages, new tabs and external entries limit reconstruction; this is not a precise click log or guaranteed attribution model. Existing validated campaign attribution persists across public and private funnel steps.
+
+Use GA's page paths and event sequences to analyse journeys and the last observed pages of sessions. No unreliable unload/exit event is introduced; closed tabs, blockers and consent restrictions can create gaps. Optionally register `previous_page_path` as an event-scoped custom dimension for event-level reporting. Keep the existing Clarity tag firing once on `lustre_tracking_ready` with `lustre_clarity_eligible === true`; if it has an additional homepage-only URL condition, broaden that condition to the eligibility contract. Retain all consent checks. Do not add unrestricted All Pages recording or duplicate vendor tags.
+
+### Consent and verification limits
+
+This expansion does not fabricate grants, reset Google/Clarity consent queues, or replace an existing Meta queue (including a queued revoke). Existing GTM/provider consent restrictions remain in charge. Eligibility is a content/privacy classification, never evidence of consent. There is still no repository consent manager or regional enforcement layer; the separate privacy and international-consent considerations above remain applicable. Mocked tests verify signal preservation, not the behaviour of real provider scripts under regional rules. No remote GA, GTM or Clarity settings have been changed or verified; check actual payloads/recordings and consent behaviour after an authorised deployment.
+
+Changed for this expansion: the 21 public HTML files above (head metadata/helper only), `lustre-tracking.js`, `templates/public-page.html.template`, `AGENTS.md`, `tests/public-page-tracking.spec.js` and this audit. The preceding FAQ changes remain intact. No booking/payment page source, CSS, Apps Script, Stripe request or pricing code was modified. Not deployed.
+
+Public-page validation: full `npm test` **328 passed** across desktop and mobile Chromium, including 64 new public-page checks and the preceding FAQ tests. `git diff --check` passed. Provider and backend/payment traffic was mocked or blocked; no real payments or analytics hits were generated. The single known pre-existing tablescape `/script.js` 404 is explicitly accounted for as described above.

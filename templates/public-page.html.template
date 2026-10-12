@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <!-- Replace with this public page's exact pathname, e.g. /blog/new-article.html. -->
+  <meta name="lustre-public-page" content="{{PUBLIC_PAGE_PATH}}">
+  <script src="/lustre-tracking.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}} | Lustre Hire</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main id="main-content">
+    <article>
+      <h1>{{TITLE}}</h1>
+      <!-- PUBLIC_CONTENT -->
+    </article>
+  </main>
+  <!-- Keep every input masked with data-clarity-mask="true". Wrap any personal
+       output in an already-masked container BEFORE rendering it. Never put
+       customer details in titles, URLs or public content. Do not use this
+       template for customer-specific, booking, quote or payment pages. -->
+</body>
+</html>

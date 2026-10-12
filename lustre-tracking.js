@@ -2,9 +2,18 @@
   if (window.lustreTrackingLoaded) return;
   window.lustreTrackingLoaded = true;
   const measurementId = 'G-1RPLQ8LZ48';
-  const paths = ['/', '/index.html', '/book.html', '/quote.html', '/payment-success.html', '/payment-cancelled.html'];
-  const pagePath = paths.includes(location.pathname) ? location.pathname : '/';
-  const publicPage = ['/', '/index.html'].includes(location.pathname);
+  const privatePaths = ['/book.html', '/quote.html', '/payment-success.html', '/payment-cancelled.html'];
+  // Eligibility is authored in the HTML, never inferred from a URL prefix or query.
+  // An exact static path also prevents a fallback/rewrite from opting in unknown URLs.
+  const declaredPath = document.querySelector('meta[name="lustre-public-page"]')?.content;
+  const validPagePath = path => typeof path === 'string' && path.length <= 200 &&
+    (path === '/' || /^\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9_-]+\.html$/.test(path));
+  const privatePage = privatePaths.includes(location.pathname) ||
+    document.querySelector('meta[name="lustre-private-page"]') !== null;
+  const publicPage = !privatePage && validPagePath(declaredPath) &&
+    (declaredPath === location.pathname || (declaredPath === '/index.html' && location.pathname === '/'));
+  if (!publicPage && !privatePaths.includes(location.pathname)) return;
+  const pagePath = location.pathname;
   const originalParams = new URLSearchParams(location.search);
   const sources = new Set(['facebook', 'instagram', 'google', 'bing', 'microsoft', 'meta', 'fb', 'ig', 'linkedin', 'pinterest', 'tiktok', 'youtube']);
   const media = new Set(['cpc', 'ppc', 'paid_social', 'paid-social', 'paid_search', 'paid-search', 'social', 'organic', 'referral', 'email', 'display', 'affiliate', 'video']);
@@ -66,7 +75,7 @@
   }
   const safeReferrer = referrerOrigin(document.referrer);
   // Existing booking/quote/payment URL parameters remain untouched. On the
-  // public homepage, remove everything except validated campaign parameters
+  // explicitly public pages, remove everything except validated campaign parameters
   // and the existing, fixed navigation target before any vendor is loaded.
   let publicUrlSafe = publicPage;
   if (publicPage) {
@@ -83,12 +92,22 @@
   // referral is safe; a path/query-bearing referral needs a clean landing hop.
   // Do not discard its attribution or reject the referring site itself.
   const needsCleanReferrer = Boolean(document.referrer && document.referrer !== safeReferrer);
-  const events = new Set(['availability_check', 'availability_result', 'quote_generated', 'booking_started', 'booking_details_completed', 'begin_checkout', 'checkout_started', 'checkout_error', 'payment_cancelled']);
+  const events = new Set(['faq_search', 'availability_check', 'availability_result', 'quote_generated', 'booking_started', 'booking_details_completed', 'begin_checkout', 'checkout_started', 'checkout_error', 'payment_cancelled']);
   const memory = {};
   const read = key => { try { return JSON.parse(sessionStorage.getItem('lustreTracking:' + key)) || memory[key]; } catch { return memory[key]; } };
   const write = (key, value) => { memory[key] = value; try { if (value === null) sessionStorage.removeItem('lustreTracking:' + key); else sessionStorage.setItem('lustreTracking:' + key, JSON.stringify(value)); } catch { /* Tracking must not block booking. */ } };
   const once = key => { if (read(key)) return false; write(key, true); return true; };
   const number = value => Number.isFinite(Number(value)) && Number(value) >= 0 ? Number(value) : 0;
+  let previousPagePath = '';
+  function captureNavigation() {
+    const previous = read('previousPage');
+    // Only previously tracked static paths, never arbitrary referrer URLs.
+    // This is the previous observed page in this tab, not a click/exit event.
+    if ((!safeReferrer || safeReferrer === location.origin + '/') && previous &&
+        Date.now() - previous.savedAt >= 0 && Date.now() - previous.savedAt < 30 * 60 * 1000 &&
+        validPagePath(previous.path) && !containsPrivate(previous.path)) previousPagePath = previous.path;
+    write('previousPage', { path: pagePath, savedAt: Date.now() });
+  }
   let attribution = {};
   let googleLoaded = false, gaLoaded = false, adsLoaded = false, metaLoaded = false, gtmLoaded = false;
   const campaignFields = { utm_source: 'campaign_source', utm_medium: 'campaign_medium', utm_campaign: 'campaign_name', utm_id: 'campaign_id', utm_content: 'campaign_content', utm_term: 'campaign_term' };
@@ -99,6 +118,7 @@
       url.searchParams.set(key, value);
     }
     const params = { page_path: pagePath, page_location: url.href, page_referrer: attribution.referrer || safeReferrer };
+    if (previousPagePath) params.previous_page_path = previousPagePath;
     for (const [key, field] of Object.entries(campaignFields)) if (attribution[key]) params[field] = attribution[key];
     return params;
   }
@@ -146,6 +166,7 @@
       }
       return;
     }
+    captureNavigation();
     const page = pageParams();
     window.gtag('set', page);
     if (!googleLoaded) { window.gtag('js', new Date()); googleLoaded = true; }
@@ -164,11 +185,15 @@
     }
     if (publicUrlSafe && !needsCleanReferrer && !metaLoaded) {
       metaLoaded = true;
-      const fbq = window.fbq = function () {
-        if (fbq.callMethod) fbq.callMethod.apply(fbq, arguments);
-        else fbq.queue.push(arguments);
-      };
-      window._fbq = fbq; fbq.queue = []; fbq.push = fbq; fbq.loaded = true; fbq.version = '2.0';
+      // Preserve an existing provider queue, including visitor opt-out signals.
+      let fbq = window.fbq;
+      if (!fbq) {
+        fbq = window.fbq = function () {
+          if (fbq.callMethod) fbq.callMethod.apply(fbq, arguments);
+          else fbq.queue.push(arguments);
+        };
+        window._fbq = fbq; fbq.queue = []; fbq.push = fbq; fbq.loaded = true; fbq.version = '2.0';
+      }
       fbq('set', 'autoConfig', false, '1271538364415253');
       fbq('init', '1271538364415253');
       fbq('track', 'PageView');
@@ -177,7 +202,7 @@
     const startGtm = () => {
       if (!publicUrlSafe || needsCleanReferrer) return;
       // Sensitive fields and dynamic summary containers are masked in the
-      // homepage markup before GTM runs; public content uses dashboard masking.
+      // public markup before GTM runs; public content uses dashboard masking.
       window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
       window.dataLayer.push({ event: 'lustre_tracking_ready', lustre_clarity_eligible: true });
       if (gtmLoaded) return;
@@ -190,6 +215,7 @@
   }
   function clean(source = {}) {
     const params = pageParams();
+    if (['pricing', 'pickup', 'returns', 'bond', 'burn_time', 'safety', 'availability', 'other'].includes(source.faq_topic)) params.faq_topic = source.faq_topic;
     for (const key of ['quantity', 'hire_fee', 'bond_amount', 'total_due', 'value']) {
       if (source[key] !== undefined && Number.isFinite(Number(source[key])) && Number(source[key]) >= 0) params[key] = Number(source[key]);
     }
@@ -210,7 +236,7 @@
       if (['booking_started', 'booking_details_completed'].includes(eventName) && !once(eventName + ':' + journey(source))) return false;
       const params = clean(source);
       window.gtag('event', eventName, { ...params, send_to: measurementId });
-      deliver(['meta', 'trackCustom', eventName, params]);
+      if (eventName !== 'faq_search') deliver(['meta', 'trackCustom', eventName, params]);
       return true;
     } catch { return false; }
   }
