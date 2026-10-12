@@ -176,8 +176,8 @@
     }
     const startGtm = () => {
       if (!publicUrlSafe || needsCleanReferrer) return;
-      // Mask all DOM text for any future Clarity tag before GTM can run.
-      document.body.setAttribute('data-clarity-mask', 'true');
+      // Sensitive fields and dynamic summary containers are masked in the
+      // homepage markup before GTM runs; public content uses dashboard masking.
       window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
       window.dataLayer.push({ event: 'lustre_tracking_ready', lustre_clarity_eligible: true });
       if (gtmLoaded) return;

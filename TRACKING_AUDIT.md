@@ -50,11 +50,15 @@ Checkout is not a charge: checkout/cancellation events omit monetary value. Quot
 
 ## Clarity installation through GTM
 
-Clarity is ready for a single GTM installation; no project ID was invented and no Clarity script or GTM tag was published.
+The site owner has installed Clarity through GTM and confirmed recordings. This masking correction does not add a second installation or change/publish the GTM container.
 
-Before GTM loads, the body receives `data-clarity-mask="true"`. This strictly masks body content, including contact forms, customer inputs and dynamically rendered booking summaries, without a visible UI change. Do not add unmask overrides or transmit customer values through custom identify calls.
+The body-wide mask has been removed. Public headings, navigation, descriptions and buttons now use the dashboard's Balanced masking policy. No data-clarity-unmask attributes are introduced, so Clarity's automatic input masking remains intact.
 
-Configure one Clarity tag for the real project, firing once per page on `lustre_tracking_ready` when `lustre_clarity_eligible === true`. This flag means the page is eligible for recording under the site's technical privacy rules; **it is not a consent signal**. Keep private book/quote/payment pages excluded. Do not add a second direct installation or an unrestricted All Pages trigger. Use strict masking and inspect actual recordings/network data before publishing. See [Microsoft's masking documentation](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-masking).
+Explicit `data-clarity-mask="true"` attributes are present in the initial homepage HTML on input, textarea and select controls, plus these sensitive dynamic containers: availability-feedback, availability-result, availability-booking-summary, availability-booking-feedback, availability-review-feedback, availability-step-4-panel and contact-modal-status. This protects names, emails, phone numbers, addresses, notes, other free text, customer-specific review/confirmation details and backend feedback. Labels and submit buttons outside these containers remain public.
+
+Masks exist before GTM loads. Replacing a summary's innerHTML preserves the mask on its enclosing container, so its newly rendered personal content is protected without a delayed MutationObserver. Future personal-data renderers must likewise insert content into a pre-masked container. Do not add unmask overrides or transmit customer values through custom identify calls.
+
+Configure one Clarity tag for the real project, firing once per page on `lustre_tracking_ready` when `lustre_clarity_eligible === true`. This flag means the page is eligible for recording under the site's technical privacy rules; **it is not a consent signal**. Keep private book/quote/payment pages excluded. Do not add a second direct installation or an unrestricted All Pages trigger. Keep Balanced masking for ordinary public content, retain the explicit sensitive-element masks, and inspect new recordings/network data after deploying the correction. See [Microsoft's masking documentation](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-masking).
 
 ## Separate privacy and international-consent considerations
 
@@ -91,7 +95,7 @@ Earlier root HTML/shared tracking changes belong to the preceding tracking work.
 
 ## Test result
 
-Full `npm test`: **230 passed** across desktop Chromium and mobile Chromium (2.2 minutes). `git diff --check` passed. All Apps Script, checkout and provider traffic is mocked or blocked; no real Stripe payments or analytics hits are made. Tests check initialisation, attribution, sanitisation, private-page exclusion, duplicate prevention and existing booking regressions. Live reporting/provider settings still need manual verification.
+Full `npm test`: **242 passed** across desktop Chromium and mobile Chromium (2.3 minutes). `git diff --check` passed. All Apps Script, checkout and provider traffic is mocked or blocked; no real Stripe payments or analytics hits are made. Tests check initialisation, attribution, sanitisation, private-page exclusion, duplicate prevention and existing booking regressions. Live reporting/provider settings still need manual verification.
 
 
 ## Availability-result production response fix
@@ -101,3 +105,12 @@ Cause: the event hook required `result.success === true`, but the real Apps Scri
 The event hook now validates the availability response separately from the unchanged booking/UI handler. It runs only after successful HTTP handling and JSON parsing, rejects arrays, explicit success:false, error fields, unknown statuses and invalid flag types for stock outcomes, and accepts the real response without a success field. Valid available/partialAvailable boolean flags determine available, partial or unavailable; notice_period and below_minimum take precedence. Legacy partial_available/limited responses are normalised to partial. If status is absent, valid boolean flags are sufficient. Only quantity and the allowlisted availability status are supplied to the existing sanitising helper; backend messages, private URLs and identifiers are not forwarded.
 
 This fix changes index.html, the status allowlist in lustre-tracking.js, new tests/availability-tracking.spec.js and this audit. No Apps Script, Stripe, pricing, booking requests or UI behaviour changes. The new tests mirror Apps Script responses without success:true and cover all availability outcomes, payload privacy, single-event delivery, malformed responses and transport failures. Full suite: **230 passed** on desktop and mobile Chromium, including 36 new availability-tracking regression cases. `git diff --check` passed. No deployment was performed.
+
+
+## Selective Clarity masking correction
+
+Cause: the explicit body mask overrode the Balanced dashboard policy and masked every descendant's text. The helper no longer applies that blanket attribute; index.html instead marks only form controls and sensitive dynamic containers. No provider IDs, event hooks, consent behaviour, private-page exclusions, booking logic, layout, pricing or backend integrations changed.
+
+Changed in this correction: index.html, lustre-tracking.js, tests/campaign-tracking.spec.js (replaced its old body-mask expectation), new tests/clarity-masking.spec.js, and this audit. Tests inspect masks at mocked GTM execution, verify public content has no masked ancestor, exercise actual repeated summary rendering and check all private routes remain excluded from GTM/Clarity while retaining GA.
+
+Masking changes affect new recordings, not existing recordings. Balanced can still automatically mask things such as numbers or email addresses; removing the blanket attribute does not force all text to be public. See [Microsoft's masking documentation](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-masking). No deployment or GTM publication was performed. Full suite: **242 passed** across desktop/mobile Chromium, including 12 new masking checks. `git diff --check` passed. Provider scripts and payment requests were mocked, so live recording appearance still needs verification after deployment.

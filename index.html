@@ -777,25 +777,25 @@
               <legend>What information do you already know?</legend>
               <div class="calculator-choice-grid">
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_knowledge" value="tables">
+                  <input data-clarity-mask="true" type="radio" name="calculator_knowledge" value="tables">
                   <span>I know how many tables I’ll have</span>
                 </label>
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_knowledge" value="final-guests">
+                  <input data-clarity-mask="true" type="radio" name="calculator_knowledge" value="final-guests">
                   <span>I only know my final guest count</span>
                 </label>
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_knowledge" value="invited-guests">
+                  <input data-clarity-mask="true" type="radio" name="calculator_knowledge" value="invited-guests">
                   <span>I only know how many guests I’m inviting</span>
                 </label>
               </div>
               <div class="calculator-input-panel calculator-hidden" data-knowledge-panel="final-guests">
                 <label for="calculator-final-guests">Estimated final guest count</label>
-                <input id="calculator-final-guests" name="calculator_final_guests" type="number" min="1" inputmode="numeric">
+                <input data-clarity-mask="true" id="calculator-final-guests" name="calculator_final_guests" type="number" min="1" inputmode="numeric">
               </div>
               <div class="calculator-input-panel calculator-hidden" data-knowledge-panel="invited-guests">
                 <label for="calculator-invited-guests">How many guests are you inviting?</label>
-                <input id="calculator-invited-guests" name="calculator_invited_guests" type="number" min="1" inputmode="numeric">
+                <input data-clarity-mask="true" id="calculator-invited-guests" name="calculator_invited_guests" type="number" min="1" inputmode="numeric">
               </div>
             </fieldset>
 
@@ -803,19 +803,19 @@
               <legend>What table style are you expecting?</legend>
               <div class="calculator-choice-grid">
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_table_style_guess" value="round">
+                  <input data-clarity-mask="true" type="radio" name="calculator_table_style_guess" value="round">
                   <span>Round tables</span>
                 </label>
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_table_style_guess" value="long">
+                  <input data-clarity-mask="true" type="radio" name="calculator_table_style_guess" value="long">
                   <span>Long tables</span>
                 </label>
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_table_style_guess" value="mix">
+                  <input data-clarity-mask="true" type="radio" name="calculator_table_style_guess" value="mix">
                   <span>A mix of both</span>
                 </label>
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_table_style_guess" value="not-sure">
+                  <input data-clarity-mask="true" type="radio" name="calculator_table_style_guess" value="not-sure">
                   <span>Not sure</span>
                 </label>
               </div>
@@ -825,38 +825,38 @@
               <legend>Tell us about your guest tables</legend>
               <div class="calculator-input-panel">
                 <label for="calculator-table-count">How many guest tables will you have?</label>
-                <input id="calculator-table-count" name="calculator_table_count" type="number" min="1" inputmode="numeric">
+                <input data-clarity-mask="true" id="calculator-table-count" name="calculator_table_count" type="number" min="1" inputmode="numeric">
               </div>
               <div class="calculator-input-panel calculator-option-group">
                 <p class="calculator-group-label">What type of guest tables are they mostly?</p>
                 <div class="calculator-choice-grid calculator-choice-grid-compact">
                   <label class="calculator-choice">
-                    <input type="radio" name="calculator_known_table_type" value="round">
+                    <input data-clarity-mask="true" type="radio" name="calculator_known_table_type" value="round">
                     <span>Round</span>
                   </label>
                   <label class="calculator-choice">
-                    <input type="radio" name="calculator_known_table_type" value="long">
+                    <input data-clarity-mask="true" type="radio" name="calculator_known_table_type" value="long">
                     <span>Long</span>
                   </label>
                   <label class="calculator-choice">
-                    <input type="radio" name="calculator_known_table_type" value="mix">
+                    <input data-clarity-mask="true" type="radio" name="calculator_known_table_type" value="mix">
                     <span>A mix of both</span>
                   </label>
                 </div>
               </div>
               <div class="calculator-input-panel calculator-hidden" id="calculator-mix-split-panel">
                 <label class="calculator-checkbox-row">
-                  <input type="checkbox" id="calculator-know-mix-split" name="calculator_know_mix_split">
+                  <input data-clarity-mask="true" type="checkbox" id="calculator-know-mix-split" name="calculator_know_mix_split">
                   <span>I know my round and long table split</span>
                 </label>
                 <div class="calculator-field-grid calculator-hidden" id="calculator-mix-split-fields">
                   <div class="calculator-input-panel">
                     <label for="calculator-round-table-count">Round tables</label>
-                    <input id="calculator-round-table-count" name="calculator_round_table_count" type="number" min="0" inputmode="numeric">
+                    <input data-clarity-mask="true" id="calculator-round-table-count" name="calculator_round_table_count" type="number" min="0" inputmode="numeric">
                   </div>
                   <div class="calculator-input-panel">
                     <label for="calculator-long-table-count">Long tables</label>
-                    <input id="calculator-long-table-count" name="calculator_long_table_count" type="number" min="0" inputmode="numeric">
+                    <input data-clarity-mask="true" id="calculator-long-table-count" name="calculator_long_table_count" type="number" min="0" inputmode="numeric">
                   </div>
                 </div>
               </div>
@@ -866,19 +866,19 @@
               <legend>How full do you want the candle styling to feel?</legend>
               <div class="calculator-choice-grid calculator-visual-grid">
                 <label class="calculator-choice calculator-visual-choice">
-                  <input type="radio" name="calculator_fullness" value="light">
+                  <input data-clarity-mask="true" type="radio" name="calculator_fullness" value="light">
                   <img src="img/smaller-wedding-candle-styling-option.jpg" alt="Lighter candle styling option for a smaller wedding setup" width="480" height="640" loading="lazy" decoding="async">
                   <span class="calculator-visual-title">Light</span>
                   <span class="calculator-visual-copy">A subtle candlelit look with fewer candles and more breathing room.</span>
                 </label>
                 <label class="calculator-choice calculator-visual-choice">
-                  <input type="radio" name="calculator_fullness" value="balanced">
+                  <input data-clarity-mask="true" type="radio" name="calculator_fullness" value="balanced">
                   <img src="img/balanced-wedding-reception-candle-styling.jpg" alt="Balanced candle styling option for a wedding reception" width="896" height="1280" loading="lazy" decoding="async">
                   <span class="calculator-visual-title">Balanced</span>
                   <span class="calculator-visual-copy">A fuller, more styled look that works well for most weddings.</span>
                 </label>
                 <label class="calculator-choice calculator-visual-choice">
-                  <input type="radio" name="calculator_fullness" value="full">
+                  <input data-clarity-mask="true" type="radio" name="calculator_fullness" value="full">
                   <img src="img/full-wedding-candle-styling-option.jpg" alt="Full candle styling option with a denser candle layout" width="480" height="640" loading="lazy" decoding="async">
                   <span class="calculator-visual-title">Full</span>
                   <span class="calculator-visual-copy">A more dramatic candlelit look with denser styling and more visual impact.</span>
@@ -890,39 +890,39 @@
               <legend>Are you styling any extra areas?</legend>
               <div class="calculator-checkbox-grid">
                 <label class="calculator-checkbox-row">
-                  <input type="checkbox" name="calculator_extra" value="bridal-table">
+                  <input data-clarity-mask="true" type="checkbox" name="calculator_extra" value="bridal-table">
                   <span>Bridal table</span>
                 </label>
                 <label class="calculator-checkbox-row">
-                  <input type="checkbox" name="calculator_extra" value="welcome-table">
+                  <input data-clarity-mask="true" type="checkbox" name="calculator_extra" value="welcome-table">
                   <span>Welcome table</span>
                 </label>
                 <label class="calculator-checkbox-row">
-                  <input type="checkbox" name="calculator_extra" value="cake-table">
+                  <input data-clarity-mask="true" type="checkbox" name="calculator_extra" value="cake-table">
                   <span>Cake table</span>
                 </label>
                 <label class="calculator-checkbox-row">
-                  <input type="checkbox" name="calculator_extra" value="signing-table">
+                  <input data-clarity-mask="true" type="checkbox" name="calculator_extra" value="signing-table">
                   <span>Signing table</span>
                 </label>
                 <label class="calculator-checkbox-row">
-                  <input type="checkbox" name="calculator_extra" value="ceremony-aisle" id="calculator-extra-aisle">
+                  <input data-clarity-mask="true" type="checkbox" name="calculator_extra" value="ceremony-aisle" id="calculator-extra-aisle">
                   <span>Ceremony aisle</span>
                 </label>
                 <label class="calculator-checkbox-row">
-                  <input type="checkbox" name="calculator_extra" value="bar-table">
+                  <input data-clarity-mask="true" type="checkbox" name="calculator_extra" value="bar-table">
                   <span>Bar or drinks table</span>
                 </label>
               </div>
 
               <div class="calculator-input-panel">
                 <label class="calculator-checkbox-row">
-                  <input type="checkbox" name="calculator_extra" value="other-area" id="calculator-extra-other">
+                  <input data-clarity-mask="true" type="checkbox" name="calculator_extra" value="other-area" id="calculator-extra-other">
                   <span>Lounge, gift, memorial, or other styling area</span>
                 </label>
                 <div class="calculator-inline-input calculator-hidden" id="calculator-other-area-panel">
                   <label for="calculator-other-area-count">How many extra styling areas?</label>
-                  <input id="calculator-other-area-count" name="calculator_other_area_count" type="number" min="1" inputmode="numeric" value="1">
+                  <input data-clarity-mask="true" id="calculator-other-area-count" name="calculator_other_area_count" type="number" min="1" inputmode="numeric" value="1">
                 </div>
               </div>
             </fieldset>
@@ -931,43 +931,43 @@
               <legend>How would you like to estimate your aisle styling?</legend>
               <div class="calculator-choice-grid calculator-choice-grid-compact">
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_aisle_method" value="length">
+                  <input data-clarity-mask="true" type="radio" name="calculator_aisle_method" value="length">
                   <span>By aisle length</span>
                 </label>
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_aisle_method" value="rows">
+                  <input data-clarity-mask="true" type="radio" name="calculator_aisle_method" value="rows">
                   <span>By rows of chairs</span>
                 </label>
                 <label class="calculator-choice">
-                  <input type="radio" name="calculator_aisle_method" value="not-sure">
+                  <input data-clarity-mask="true" type="radio" name="calculator_aisle_method" value="not-sure">
                   <span>I’m not sure</span>
                 </label>
               </div>
               <div class="calculator-input-panel calculator-hidden" data-aisle-panel="length">
                 <label for="calculator-aisle-length">Approximate aisle length in metres</label>
-                <input id="calculator-aisle-length" name="calculator_aisle_length" type="number" min="1" step="0.5" inputmode="decimal">
+                <input data-clarity-mask="true" id="calculator-aisle-length" name="calculator_aisle_length" type="number" min="1" step="0.5" inputmode="decimal">
               </div>
               <div class="calculator-input-panel calculator-hidden" data-aisle-panel="rows">
                 <label for="calculator-chair-rows">Number of chair rows along the aisle</label>
-                <input id="calculator-chair-rows" name="calculator_chair_rows" type="number" min="1" inputmode="numeric">
+                <input data-clarity-mask="true" id="calculator-chair-rows" name="calculator_chair_rows" type="number" min="1" inputmode="numeric">
               </div>
               <div class="calculator-input-panel calculator-hidden" data-aisle-panel="not-sure">
                 <label>How many guests are you expecting at the ceremony?</label>
                 <div class="calculator-choice-grid calculator-choice-grid-compact">
                   <label class="calculator-choice">
-                    <input type="radio" name="calculator_aisle_guess" value="up-to-40">
+                    <input data-clarity-mask="true" type="radio" name="calculator_aisle_guess" value="up-to-40">
                     <span>Up to 40 guests</span>
                   </label>
                   <label class="calculator-choice">
-                    <input type="radio" name="calculator_aisle_guess" value="40-to-80">
+                    <input data-clarity-mask="true" type="radio" name="calculator_aisle_guess" value="40-to-80">
                     <span>40 to 80 guests</span>
                   </label>
                   <label class="calculator-choice">
-                    <input type="radio" name="calculator_aisle_guess" value="80-to-120">
+                    <input data-clarity-mask="true" type="radio" name="calculator_aisle_guess" value="80-to-120">
                     <span>80 to 120 guests</span>
                   </label>
                   <label class="calculator-choice">
-                    <input type="radio" name="calculator_aisle_guess" value="120-plus">
+                    <input data-clarity-mask="true" type="radio" name="calculator_aisle_guess" value="120-plus">
                     <span>120+ guests</span>
                   </label>
                 </div>
@@ -976,11 +976,11 @@
                 <label>Candles on one side or both sides?</label>
                 <div class="calculator-choice-grid calculator-choice-grid-compact">
                   <label class="calculator-choice">
-                    <input type="radio" name="calculator_aisle_sides" value="one-side">
+                    <input data-clarity-mask="true" type="radio" name="calculator_aisle_sides" value="one-side">
                     <span>One side</span>
                   </label>
                   <label class="calculator-choice">
-                    <input type="radio" name="calculator_aisle_sides" value="both-sides">
+                    <input data-clarity-mask="true" type="radio" name="calculator_aisle_sides" value="both-sides">
                     <span>Both sides</span>
                   </label>
                 </div>
@@ -1045,11 +1045,11 @@
           <div class="availability-form-grid">
             <div class="form-group">
               <label for="availability-date">Event Date</label>
-              <input id="availability-date" name="availability-date" type="date" required />
+              <input data-clarity-mask="true" id="availability-date" name="availability-date" type="date" required />
             </div>
             <div class="form-group">
               <label for="availability-quantity">Candle Quantity (Min 15 candles)</label>
-              <input id="availability-quantity" name="availability-quantity" type="number" min="15" inputmode="numeric" placeholder="For example, 50" required />
+              <input data-clarity-mask="true" id="availability-quantity" name="availability-quantity" type="number" min="15" inputmode="numeric" placeholder="For example, 50" required />
               <p class="availability-helper-copy">
                 Not sure how many candles you need?
                 <a href="#candle-packages" class="text-link availability-helper-link">Use our candle estimate</a>
@@ -1057,9 +1057,9 @@
             </div>
           </div>
           <button type="submit" class="booking-button availability-submit">Check Availability</button>
-          <p class="availability-feedback" id="availability-feedback" role="status" aria-live="polite"></p>
+          <p class="availability-feedback" id="availability-feedback" data-clarity-mask="true" role="status" aria-live="polite"></p>
         </form>
-        <div class="availability-result" id="availability-result" hidden></div>
+        <div class="availability-result" id="availability-result" data-clarity-mask="true" hidden></div>
         <div class="availability-success-actions" id="availability-success-actions" hidden>
           <button type="button" class="booking-button availability-ready-button" id="availability-ready-button" hidden>Secure My Date</button>
           <button type="button" class="calculator-nav-button availability-continue-button" id="availability-continue-button" hidden>Email My Quote</button>
@@ -1074,16 +1074,16 @@
           <div class="availability-form-grid availability-quote-lite-fields">
             <div class="form-group">
               <label for="availability-full-name">Full Name</label>
-              <input id="availability-full-name" name="availability-full-name" type="text" required />
+              <input data-clarity-mask="true" id="availability-full-name" name="availability-full-name" type="text" required />
             </div>
             <div class="form-group">
               <label for="availability-email">Email Address</label>
-              <input id="availability-email" name="availability-email" type="email" required />
+              <input data-clarity-mask="true" id="availability-email" name="availability-email" type="email" required />
             </div>
           </div>
           <div class="form-group">
             <label for="availability-customer-source">How did you first hear about Lustre Hire?</label>
-            <select id="availability-customer-source" name="customerSource">
+            <select data-clarity-mask="true" id="availability-customer-source" name="customerSource">
               <option value="">Select an option</option>
               <option value="Facebook Marketplace">Facebook Marketplace</option>
               <option value="Google Search">Google Search</option>
@@ -1096,17 +1096,17 @@
           <div class="availability-form-grid availability-booking-only-fields" id="availability-booking-extra-grid">
             <div class="form-group">
               <label for="availability-address">Address</label>
-              <input id="availability-address" name="availability-address" type="text" required />
+              <input data-clarity-mask="true" id="availability-address" name="availability-address" type="text" required />
             </div>
             <div class="form-group">
               <label for="availability-phone">Phone Number</label>
-              <input id="availability-phone" name="availability-phone" type="tel" inputmode="tel" required />
+              <input data-clarity-mask="true" id="availability-phone" name="availability-phone" type="tel" inputmode="tel" required />
             </div>
           </div>
           <div class="availability-form-grid availability-booking-only-fields">
             <div class="form-group">
               <label for="availability-pickup-time-window">Pickup time window</label>
-              <select id="availability-pickup-time-window" name="availability-pickup-time-window" required>
+              <select data-clarity-mask="true" id="availability-pickup-time-window" name="availability-pickup-time-window" required>
                 <option value="">Select a pickup time</option>
                 <option value="7:00 AM to 9:00 AM">7:00 AM to 9:00 AM</option>
                 <option value="9:00 AM to 11:00 AM">9:00 AM to 11:00 AM</option>
@@ -1119,7 +1119,7 @@
             </div>
             <div class="form-group">
               <label for="availability-dropoff-time-window">Drop-off time window</label>
-              <select id="availability-dropoff-time-window" name="availability-dropoff-time-window" required>
+              <select data-clarity-mask="true" id="availability-dropoff-time-window" name="availability-dropoff-time-window" required>
                 <option value="">Select a drop-off time</option>
                 <option value="7:00 AM to 9:00 AM">7:00 AM to 9:00 AM</option>
                 <option value="9:00 AM to 11:00 AM">9:00 AM to 11:00 AM</option>
@@ -1133,19 +1133,19 @@
           </div>
           <div class="form-group availability-booking-only-fields" id="availability-notes-group">
             <label for="availability-notes">Notes / Event Details</label>
-            <textarea id="availability-notes" name="availability-notes"></textarea>
+            <textarea data-clarity-mask="true" id="availability-notes" name="availability-notes"></textarea>
           </div>
           <div class="availability-panel-actions">
             <button type="button" class="calculator-nav-button availability-back-button" id="availability-back-to-step-1">Back</button>
             <button type="submit" class="booking-button availability-submit" id="availability-step-2-submit">Continue</button>
           </div>
-          <p class="availability-booking-feedback" id="availability-booking-feedback" role="status" aria-live="polite"></p>
+          <p class="availability-booking-feedback" id="availability-booking-feedback" data-clarity-mask="true" role="status" aria-live="polite"></p>
         </form>
       </div>
 
       <div class="availability-panel" id="availability-step-3-panel" hidden>
         <h3 id="availability-step-3-title">Review before payment</h3>
-        <div class="availability-booking-summary" id="availability-booking-summary"></div>
+        <div class="availability-booking-summary" id="availability-booking-summary" data-clarity-mask="true"></div>
         <div class="availability-payment-note" id="availability-payment-note">
           <h4><i class="bi bi-shield-lock" aria-hidden="true"></i> Payment reassurance</h4>
           <p>Pay 50% of your candle hire today to secure your date.</p>
@@ -1163,10 +1163,10 @@
           <p>If you are ready to secure your date now, you can switch to booking and continue to payment.</p>
           <button type="button" class="text-link availability-switch-link" id="availability-switch-to-booking">Pay Deposit &amp; Secure My Date Instead</button>
         </div>
-        <p class="availability-booking-feedback" id="availability-review-feedback" role="status" aria-live="polite"></p>
+        <p class="availability-booking-feedback" id="availability-review-feedback" data-clarity-mask="true" role="status" aria-live="polite"></p>
       </div>
 
-      <div class="availability-panel" id="availability-step-4-panel" hidden>
+      <div class="availability-panel" id="availability-step-4-panel" data-clarity-mask="true" hidden>
         <div class="availability-complete-card">
           <span class="availability-complete-icon" aria-hidden="true">
             <i class="bi bi-envelope-check"></i>
@@ -1212,7 +1212,7 @@
       <div class="faq-toolbar">
         <label class="faq-search" for="faq-search">
           <i class="bi bi-search" aria-hidden="true"></i>
-          <input id="faq-search" type="search" placeholder="Search questions" aria-label="Search frequently asked questions">
+          <input data-clarity-mask="true" id="faq-search" type="search" placeholder="Search questions" aria-label="Search frequently asked questions">
         </label>
         <div class="faq-filters" role="group" aria-label="FAQ categories">
           <button type="button" class="faq-filter is-active" data-faq-filter="all">All</button>
@@ -1354,19 +1354,19 @@
       </button>
       <h2 id="contact-modal-title">Contact Lustre Hire</h2>
       <p>If you have a general question, send us a message and we’ll get back to you soon.</p>
-      <div class="contact-modal-status" id="contact-modal-status" hidden aria-live="polite"></div>
+      <div class="contact-modal-status" id="contact-modal-status" data-clarity-mask="true" hidden aria-live="polite"></div>
       <form id="contact-modal-form" action="https://formspree.io/f/moverenq" method="POST">
         <div class="form-group">
           <label for="contact-modal-name">Full Name</label>
-          <input id="contact-modal-name" name="full-name" type="text" required />
+          <input data-clarity-mask="true" id="contact-modal-name" name="full-name" type="text" required />
         </div>
         <div class="form-group">
           <label for="contact-modal-email">Email Address</label>
-          <input id="contact-modal-email" name="email" type="email" required />
+          <input data-clarity-mask="true" id="contact-modal-email" name="email" type="email" required />
         </div>
         <div class="form-group">
           <label for="contact-modal-message">Message</label>
-          <textarea id="contact-modal-message" name="message" required></textarea>
+          <textarea data-clarity-mask="true" id="contact-modal-message" name="message" required></textarea>
         </div>
         <button type="submit" class="booking-button contact-modal-submit">Send Message</button>
       </form>

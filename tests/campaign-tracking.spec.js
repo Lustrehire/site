@@ -9,7 +9,7 @@ async function marketingLoaded(page) {
   await expect(page.locator('script[src*="gtm.js"]')).toHaveCount(1);
   await expect(page.locator('script[src*="fbevents.js"]')).toHaveCount(1);
   expect(await page.evaluate(() => window.dataLayer.filter(e => e.event === 'lustre_tracking_ready').at(-1).lustre_clarity_eligible)).toBe(true);
-  await expect(page.locator('body')).toHaveAttribute('data-clarity-mask', 'true');
+  await expect(page.locator('body')).not.toHaveAttribute('data-clarity-mask');
   expect(await events(page, 'page_view')).toHaveLength(1);
 }
 for (const [label, query] of [
