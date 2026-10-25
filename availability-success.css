@@ -1,0 +1,70 @@
+/* Shared availability result presentation. Existing states, IDs and actions are retained. */
+.cro-home #availability-checker:has(.availability-step-confirmed) > .cro-section-heading { display: none; }
+.cro-home #availability-checker:has(.availability-step-confirmed) { display: block; background: #f7f9f3; }
+.cro-home #availability-checker:has(.availability-step-confirmed) .cro-estimator { display: none; }
+.cro-home #availability-step-1-panel.availability-step-confirmed { margin: 0; padding: 0; }
+.cro-home #availability-step-1-panel.availability-step-confirmed #availability-result { padding: 0; margin: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; font-family: inherit; }
+.cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) { display: grid; gap: 16px; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-heading { display: flex; align-items: center; gap: 16px; margin: 0; }
+.cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-icon { flex: 0 0 56px; width: 56px; height: 56px; margin: 0; background: #deeddc; color: #26783f; border: 0; border-radius: 50%; display: grid; place-items: center; }
+.cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-icon svg { width: 24px; height: 24px; }
+.cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-copy h4 { margin: 0; color: #1d442a; font: 700 clamp(21px,2.4vw,28px)/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; letter-spacing: -.02em; }
+.cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-copy p { margin: 8px 0 0; color: #607661; font: 400 16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+.cro-home #availability-result .availability-price-compact { display: block; margin: 0; padding: 20px; border: 1px solid #e0e3df; border-radius: 16px; background: #fff; box-shadow: none; }
+.cro-home #availability-result .available-price-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 24px; }
+.cro-home #availability-result .availability-price-compact :is(.availability-price-hire,.available-deposit) { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 0; padding: 0; border: 0; background: transparent; }
+.cro-home #availability-result .availability-price-compact .available-deposit { align-items: flex-end; text-align: right; }
+.cro-home #availability-result .available-price-top span { font-size: 13px; text-transform: uppercase; letter-spacing: .02em; font-weight: 400; color: #6a786d; }
+.cro-home #availability-result .available-price-top strong { font: 700 30px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color: #225c3c; }
+.cro-home #availability-result .available-price-top .available-deposit strong { font-size: 27px; }
+.cro-home #availability-result .available-deposit small { font-size: 15px; color: #606660; }
+.cro-home #availability-result .available-payment-details { border-top: 1px solid #e1e7df; padding-top: 16px; }
+.cro-home #availability-result .available-payment-details summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 44px; color: #346542; font-size: 15px; line-height: 1.4; font-weight: 500; list-style: none; cursor: pointer; }
+.cro-home #availability-result .available-payment-details summary::-webkit-details-marker { display: none; }
+.cro-home #availability-result .available-chevron { flex: 0 0 8px; width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin: 0 4px 4px; }
+.cro-home #availability-result .available-payment-details[open] .available-chevron { transform: rotate(225deg); margin-top: 8px; }
+.cro-home #availability-result .available-payment-body { background: #f4f6ef; border-radius: 16px; padding: 16px; margin-top: 12px; }
+.cro-home #availability-result .available-payment-body dl { display: grid; gap: 16px; margin: 0; font-size: 15px; color: #526350; }
+.cro-home #availability-result .available-payment-body dl > div { display: flex; justify-content: space-between; gap: 16px; margin: 0; padding: 0; background: transparent; border: 0; }
+.cro-home #availability-result .available-payment-body :is(dt,dd) { margin: 0; }
+.cro-home #availability-result .available-payment-body dd { color: #2a5032; white-space: nowrap; }
+.cro-home #availability-result .available-payment-body .availability-price-total { font-weight: 600; }
+.cro-home #availability-result .available-payment-body p { margin: 20px 0 0; font: 400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color: #6a7c68; }
+.cro-home #availability-result .available-reservation-note { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: #ebf1e4; border-radius: 16px; color: #315937; }
+.cro-home #availability-result .available-reservation-note svg { width: 24px; height: 24px; flex: 0 0 24px; margin-top: 1px; }
+.cro-home #availability-result .available-reservation-note strong { font-size: 16px; line-height: 1.4; font-weight: 500; }
+.cro-home #availability-result .available-reservation-note p { margin: 8px 0 0; font: 400 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color: #60765b; }
+.cro-home #availability-step-1-panel.availability-step-confirmed .availability-success-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+.cro-home #availability-step-1-panel.availability-step-confirmed .availability-success-actions > button:not(.availability-edit-button) { width: 100%; max-width: none; min-height: 52px; padding: 12px 16px; margin: 0; display: flex; justify-content: center; align-items: center; gap: 12px; border-radius: 999px; box-shadow: none; font: 500 16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+.cro-home #availability-step-1-panel.availability-step-confirmed .availability-success-actions svg { width: 20px; height: 20px; flex: 0 0 20px; }
+.cro-home #availability-step-1-panel.availability-step-confirmed .availability-success-reassurance { margin: 0; color: #748570; font-size: 13px; line-height: 1.5; text-align: center; }
+.cro-home #availability-step-1-panel.availability-step-confirmed .availability-edit-button { align-self: center; margin: 0; min-height: 44px; }
+@layer mobile-v3 {
+  .cro-home #availability-step-1-panel.availability-step-confirmed #availability-ready-button { background: #194e33 !important; color: #fff !important; border: 1px solid #194e33 !important; }
+  .cro-home #availability-step-1-panel.availability-step-confirmed #availability-continue-button { background: #fff !important; color: #285d3c !important; border: 1px solid #c9dbc5 !important; }
+}
+@media(max-width:359px) {
+  .cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-heading { gap: 12px; }
+  .cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-icon { flex-basis: 40px; width: 40px; height: 40px; }
+  .cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-copy h4 { font-size: 20px; }
+  .cro-home #availability-result .availability-price-compact { padding: 16px; }
+  .cro-home #availability-result .available-payment-details summary { font-size: 14px; }
+  .cro-home #availability-step-1-panel.availability-step-confirmed .availability-success-actions > button:not(.availability-edit-button) { font-size: 14px; gap: 8px; padding-inline: 12px; }
+}
+.cro-home #availability-result .available-price-top { margin: 0; }
+.cro-home #availability-result .available-payment-details { margin: 0; }
+.cro-home #availability-result .available-payment-details summary { padding: 0; font-size: 14px; }
+.cro-home #availability-result .available-payment-body .availability-price-total { font-size: 15px; line-height: 1.5; }
+.cro-home #availability-result .available-reservation-note strong { font-size: 15px; }
+
+/* Limited stock and unavailable dates share the successful modal's compact layout. */
+.cro-home #availability-dialog #availability-result { padding: 0; margin: 0; border: 0; background: transparent; box-shadow: none; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+.cro-home #availability-result .availability-result-card-limited .availability-success-icon { background: #f1ecdc; color: #8a6428; }
+.cro-home #availability-result .availability-result-card-unavailable .availability-success-icon { background: #e8ede3; color: #526b50; }
+.cro-home #availability-result .availability-result-card-notice .availability-success-icon { background: #f1ecdc; color: #8a6428; }
+.cro-home #availability-result .availability-result-card-limited h4 { color: #72541f; }
+.cro-home #availability-result .availability-success-note { padding: 16px; margin: 0; border-radius: 12px; background: #ebf1e4; color: #526650; font: 400 14px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+.cro-home #availability-result .availability-result-actions { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; margin: 0; }
+.cro-home #availability-result .availability-result-actions > button { display: flex; align-items: center; justify-content: center; width: 100%; min-width: 0; max-width: none; height: auto; min-height: 48px; margin: 0; padding: 12px 16px; border: 1px solid #cbd9c5; border-radius: 999px; background: #fff; color: #285d3c; box-shadow: none; white-space: normal; overflow: visible; text-overflow: clip; font: 600 15px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; text-align: center; }
+.cro-home #availability-result .availability-result-actions > .booking-button { background: #194e33; border-color: #194e33; color: #fff; }
+.cro-home #availability-result .availability-success-icon > i { font-size: 24px; line-height: 1; }

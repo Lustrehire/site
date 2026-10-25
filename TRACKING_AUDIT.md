@@ -11,7 +11,7 @@ Preserved IDs:
 - Meta Pixel: `1271538364415253`
 - GTM: `GTM-MTQH9ZRG`
 
-GA4 runs across all 21 explicitly declared public pages and the existing book, quote, payment-success and payment-cancelled funnel pages. The helper loads gtag.js once, configures GA with send_page_view:false and sends one explicit page_view. It sends one GA command per business event, explicitly targeted at this GA property; it does not also push a duplicate GTM business-event object. Re-running the helper cannot duplicate initialisation. GTM must not install a second GA implementation.
+GA4 runs across all 23 explicitly declared public pages (including the new Gallery and FAQ documents on the CRO development branch) and the existing book, quote, payment-success and payment-cancelled funnel pages. The helper loads gtag.js once, configures GA with send_page_view:false and sends one explicit page_view. It sends one GA command per business event, explicitly targeted at this GA property; it does not also push a duplicate GTM business-event object. Re-running the helper cannot duplicate initialisation. GTM must not install a second GA implementation.
 
 Google Ads, Meta and GTM run on explicitly eligible public page visits, including Facebook, Instagram, Google advertising and referred traffic. Private booking, quote and payment pages do not load Meta/GTM or Clarity. Their real URLs and backend request inputs remain intact; GA receives sanitised page_location/page_referrer and allowlisted event fields.
 
@@ -183,3 +183,19 @@ This expansion does not fabricate grants, reset Google/Clarity consent queues, o
 Changed for this expansion: the 21 public HTML files above (head metadata/helper only), `lustre-tracking.js`, `templates/public-page.html.template`, `AGENTS.md`, `tests/public-page-tracking.spec.js` and this audit. The preceding FAQ changes remain intact. No booking/payment page source, CSS, Apps Script, Stripe request or pricing code was modified. Not deployed.
 
 Public-page validation: full `npm test` **328 passed** across desktop and mobile Chromium, including 64 new public-page checks and the preceding FAQ tests. `git diff --check` passed. Provider and backend/payment traffic was mocked or blocked; no real payments or analytics hits were generated. The single known pre-existing tablescape `/script.js` 404 is explicitly accounted for as described above.
+
+## CRO development branch — Checkpoint 2 (17 October 2026)
+
+`codex/lustre-cro-redesign` adds exact public paths `/gallery` and `/faq` and preserves existing tracking IDs, event definitions, sanitisation, attribution and private-funnel exclusions. New known section aliases are explicitly allowlisted; unknown paths/fragments remain excluded. FAQ search behavior moves intact to shared `faq.js` on `/faq`, with only its page context changing. Public-page discovery includes the two new root documents and verifies their clean canonical paths. No CTA, estimator, contact or purchase conversion event was invented.
+
+Full preview verification: **358 tests passed** across desktop/mobile Chromium. Tests cover single page views for the new routes, alias redirects, unknown-route exclusion, masking, FAQ topic-only events, attribution continuity and existing quote/booking/checkout regressions. This is mocked browser evidence, not proof of live provider receipt or remote settings. Historical homepage vs FAQ/gallery page-level reports will need a release-date annotation when the content split eventually ships.
+
+The manual design preview on localhost port 4174 separately simulates forms and uses a response-only CSP to block provider scripts, API connections, frames and external form submissions. Production HTML does not include those mocks/CSP changes. Its safety check observed zero real backend requests and zero successful tracking-provider responses. Production provider configuration was not changed. Hosting route behavior and automatic deployment rules still need verification before any push/release. See `audit/cro/CHECKPOINT-2.md` for implementation and visual-review evidence. Nothing has been deployed.
+
+The mockup-led Checkpoint 2 refinement moves the existing contact form inline with its masks and submission contract intact, retains all four authentic reviews in a mobile swipe/keyboard presentation, and adds only the fixed `#candle-sizes` safe navigation destination. Provider initialization, attribution and event definitions remain unchanged. See `audit/cro/REFINEMENT-1.md` for current review evidence.
+
+The subsequent typography/spacing audit introduces shared CSS tokens, a native responsive grid and a lower-priority legacy style layer on the three redesigned public documents. It makes no tracking/provider/event changes. The full isolated suite passes 358 tests, including consistent section alignment and 320px user text-spacing checks. See `audit/cro/DESIGN-AUDIT.md`. Nothing has been deployed.
+
+### Portable gallery and FAQ file links (24 October 2026)
+
+Internal navigation now opens `/gallery.html` and `/faq.html` directly, so ordinary static previews do not require extensionless rewrites. Each document declares its exact `.html` public pathname before the existing synchronous tracking include. The shared tracker recognises only these two reviewed file/clean-route pairs and keeps their existing `/gallery` and `/faq` analytics page paths and canonical SEO URLs. This does not allow arbitrary fallback paths, change event names, add vendors, or opt private funnel pages into public tracking. The local test server serves the actual `.html` files directly and retains clean-route aliases, rather than redirecting file links back to potentially unsupported clean routes.

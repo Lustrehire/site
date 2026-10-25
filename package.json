@@ -5,7 +5,8 @@
     "test": "playwright test",
     "test:headed": "playwright test --headed",
     "test:report": "playwright show-report",
-    "test:critical": "playwright test --grep @critical"
+    "test:critical": "playwright test --grep @critical",
+    "gallery:update": "python3 scripts/update-gallery.py"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.0"

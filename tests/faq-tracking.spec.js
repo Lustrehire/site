@@ -4,7 +4,7 @@ const events = page => page.evaluate(() => (window.dataLayer || [])
   .filter(e => e[0] === 'event' && e[1] === 'faq_search').map(e => e[2]));
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/faq');
   await page.clock.install({ time: new Date('2030-06-01T04:00:00Z') });
   await page.clock.pauseAt(new Date('2030-06-01T04:00:01Z'));
 });

@@ -1,0 +1,14 @@
+<div class="header-container site-header">
+  <header>
+    <div class="logoName">
+      <div class="logoNameContainer"><a href="/" aria-label="Lustre Hire home"><img src="https://i.imgur.com/yDE7kJO.png" alt="Lustre Hire logo" class="site-logo" width="48" height="48"></a><div class="site-title">Lustre Hire</div></div>
+      <button type="button" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="{{NAV_ID}}"><span class="menu-lines" aria-hidden="true"></span></button>
+      <nav class="main-nav desktop-nav" aria-label="Primary">
+{{LINKS}}
+      </nav>
+    </div>
+    <nav class="main-nav mobile-nav" id="{{NAV_ID}}" aria-label="Mobile" inert aria-hidden="true">
+{{LINKS}}
+    </nav>
+  </header>
+</div>

@@ -1,0 +1,35 @@
+/* One header component; page content and private funnel styles remain independent. */
+body:has(> .site-header) { overflow-x: clip; }
+.site-header.site-header {
+  --header-gutter: var(--cro-gutter,48px);
+  position: sticky; top: 0; z-index: 100;
+  display: flex; flex-direction: column; align-items: center; flex-shrink: 0;
+  width: 100vw; max-width: none;
+  margin: 0 calc((100% - 100vw) / 2); padding: 0; gap: 0;
+  box-sizing: border-box; background: #fff; border-bottom: 1px solid #e5e6dc; box-shadow: none;
+  color: #25392c; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+}
+.site-header.site-header * { box-sizing: border-box; }
+.site-header.site-header > header { display: flex; flex-direction: column; align-items: center; width: 100%; margin: 0; padding: 0; }
+.site-header.site-header .logoName { display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%; max-width: none; min-height: 88px; margin: 0; padding: 16px 32px; gap: 24px; background: #fff; border: 0; box-shadow: none; }
+.site-header.site-header .logoNameContainer { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; margin: 0; padding: 0; }
+.site-header.site-header .logoNameContainer > a { display: flex; align-items: center; min-width: 0; }
+.site-header.site-header .site-logo { display: block; width: 48px; height: 48px; object-fit: contain; padding: 0; margin: 0; }
+.site-header.site-header .site-title { margin: 0; font: 400 28px/1.1 Georgia,'Times New Roman',serif; letter-spacing: -.05em; white-space: nowrap; color: #1c291f; }
+.site-header.site-header .desktop-nav { display: flex; align-items: center; gap: 8px; margin: 0; padding: 0; }
+.site-header.site-header .desktop-nav > a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin: 0; padding: 8px 12px; border: 0; border-radius: 8px; background: transparent; font: 500 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color: #28392c; text-decoration: none; white-space: nowrap; box-shadow: none; }
+.site-header.site-header .desktop-nav > a:not(.nav-booking-link):hover { background: #f3f4ef; }
+.site-header.site-header .main-nav > a[aria-current=page] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.site-header.site-header .desktop-nav > .nav-booking-link { margin-left: 8px; padding: 12px 20px; border-radius: 999px; background: #184d30; color: #fff; font-weight: 600; }
+.site-header.site-header .desktop-nav > .nav-booking-link:hover { background: #123d26; }
+.site-header.site-header .menu-toggle, .site-header.site-header .mobile-nav { display: none; }
+.site-header.site-header :is(a,button):focus-visible { outline: 2px solid #315f40; outline-offset: 3px; }
+@media(max-width:1100px) {
+  .site-header.site-header .desktop-nav { display: none; }
+}
+@media(max-width:767px) {
+  .site-header.site-header { --header-gutter: var(--cro-gutter,24px); }
+  .site-header.site-header .site-logo { width: 36px; height: 36px; }
+  .site-header.site-header .site-title { font-size: 27px; }
+  .site-header.site-header .logoNameContainer { gap: 8px; }
+}

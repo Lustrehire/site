@@ -1,0 +1,146 @@
+[
+  {
+    "question": "How many candles do I need for my wedding?",
+    "answerHTML": "It depends on your table count, layout, and how full you want the styling to feel. You can use our candle estimate calculator for a general guide, or get in touch for a more tailored recommendation.",
+    "categories": [
+      "pricing",
+      "booking"
+    ],
+    "search": "how many candles do i need for my wedding candle estimate calculator quantity tables styling full recommendation"
+  },
+  {
+    "question": "Do the candles come ready to light?",
+    "answerHTML": "Yes. All candles come pre-filled and ready to use, so there is no filling or assembly needed on your end.",
+    "categories": [
+      "booking",
+      "care"
+    ],
+    "search": "do the candles come ready to light pre filled ready to use assembly"
+  },
+  {
+    "question": "What is the minimum order?",
+    "answerHTML": "Our minimum order is 15 candles.",
+    "categories": [
+      "pricing",
+      "booking"
+    ],
+    "search": "what is the minimum order 15 candles"
+  },
+  {
+    "question": "Can I hire a custom quantity?",
+    "answerHTML": "Yes. If our package options do not quite fit your setup, we can provide a custom quote.",
+    "categories": [
+      "pricing",
+      "booking"
+    ],
+    "search": "can i hire a custom quantity custom quote package options"
+  },
+  {
+    "question": "Where are you located?",
+    "answerHTML": "Pickup is from Bull Creek, Western Australia.",
+    "categories": [
+      "pickup",
+      "booking"
+    ],
+    "search": "where are you located pickup bull creek western australia"
+  },
+  {
+    "question": "How does the hire period work?",
+    "answerHTML": "Standard hire includes pickup the day before your event and return the day after by 5 PM.",
+    "categories": [
+      "pickup",
+      "booking"
+    ],
+    "search": "how does the hire period work pickup day before event return day after 5 pm"
+  },
+  {
+    "question": "Do I need to clean the candles after use?",
+    "answerHTML": "No. Blow them out, repack them, and return them. We handle the cleaning.",
+    "categories": [
+      "care",
+      "pickup"
+    ],
+    "search": "do i need to clean the candles after use cleaning return"
+  },
+  {
+    "question": "Will the candles fit in a normal car?",
+    "answerHTML": "In many cases, yes. Orders are packed for practical pickup and transport, and many fit in a standard car depending on quantity.",
+    "categories": [
+      "pickup",
+      "booking"
+    ],
+    "search": "will the candles fit in a normal car transport pickup quantity"
+  },
+  {
+    "question": "How much does each candle box weigh?",
+    "answerHTML": "Each candle box is usually around 25 to 30 kilos. We recommend bringing one extra person with you to help carry and load the boxes comfortably.",
+    "categories": [
+      "pickup",
+      "care"
+    ],
+    "search": "how much do the candle boxes weigh weight heavy lifting carrying helper extra person 25 30 kilos"
+  },
+  {
+    "question": "Does the hire include a lighter?",
+    "answerHTML": "No, we do not include a lighter with the hire. We recommend bringing a standard barbecue lighter so it is easier to reach down into the vessels when lighting the candles.",
+    "categories": [
+      "care",
+      "booking"
+    ],
+    "search": "does it include a lighter lighter barbecue lighter lighting candles vessels"
+  },
+  {
+    "question": "Can I hire the candles for more than one day?",
+    "answerHTML": "Yes. If you need them for longer than standard hire, let us know and we can discuss extended hire options.",
+    "categories": [
+      "booking",
+      "pickup"
+    ],
+    "search": "can i hire the candles for more than one day extended hire"
+  },
+  {
+    "question": "Do you offer delivery?",
+    "answerHTML": "At the moment, pickup from Bull Creek is the standard option.",
+    "categories": [
+      "pickup",
+      "booking"
+    ],
+    "search": "do you offer delivery pickup bull creek standard option"
+  },
+  {
+    "question": "What if I accidentally damage a candle?",
+    "answerHTML": "If any items are damaged during hire, just let us know. We can talk you through the next steps based on the item and the extent of the damage.",
+    "categories": [
+      "care",
+      "booking"
+    ],
+    "search": "what if i accidentally damage a candle damaged during hire next steps"
+  },
+  {
+    "question": "How do I make a booking?",
+    "answerHTML": "Check live availability and pay a 50% booking deposit to secure your candles and date, or email yourself a quote. The remaining hire balance plus a refundable bond equal to the full hire fee are due 7 days before pickup. We will email a secure Stripe payment link. Pickup is the day before your event.",
+    "categories": [
+      "booking",
+      "pricing"
+    ],
+    "search": "how do i make a booking enquire event details confirm availability next steps"
+  },
+  {
+    "question": "Why do I need to pay a refundable bond?",
+    "answerHTML": "A refundable bond is required with all bookings as a standard safeguard for non-returned or seriously damaged items. In normal hire situations, it is returned in full after your candles are returned and checked. Our candles are packed carefully for transport, so this is simply a standard precaution rather than something most customers need to worry about.",
+    "categories": [
+      "booking",
+      "pricing"
+    ],
+    "search": "why do i need to pay a refundable bond safeguard standard returned in full non returned seriously damaged transport"
+  },
+  {
+    "question": "Can I cancel my booking?",
+    "answerHTML": "Because your booking reserves stock and your event date in advance, 50% of the candle hire fee is non-refundable once a booking is confirmed. If you cancel within 14 days of your event date, the full candle hire fee is non-refundable. Any refundable bond paid will be returned in full if the booking is cancelled before collection or pickup.",
+    "categories": [
+      "booking",
+      "pricing"
+    ],
+    "search": "can i cancel my booking cancellations refundable bond non refundable"
+  }
+]

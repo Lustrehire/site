@@ -7,13 +7,16 @@
   // An exact static path also prevents a fallback/rewrite from opting in unknown URLs.
   const declaredPath = document.querySelector('meta[name="lustre-public-page"]')?.content;
   const validPagePath = path => typeof path === 'string' && path.length <= 200 &&
-    (path === '/' || /^\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9_-]+\.html$/.test(path));
+    (path === '/' || ['/gallery', '/faq'].includes(path) || /^\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9_-]+\.html$/.test(path));
   const privatePage = privatePaths.includes(location.pathname) ||
     document.querySelector('meta[name="lustre-private-page"]') !== null;
+  // Only these two reviewed static documents share their existing clean SEO/GA paths.
+  const publicDocumentAliases = { '/gallery.html': '/gallery', '/faq.html': '/faq' };
+  const cleanDocumentPath = publicDocumentAliases[declaredPath];
   const publicPage = !privatePage && validPagePath(declaredPath) &&
-    (declaredPath === location.pathname || (declaredPath === '/index.html' && location.pathname === '/'));
+    (declaredPath === location.pathname || cleanDocumentPath === location.pathname || (declaredPath === '/index.html' && location.pathname === '/'));
   if (!publicPage && !privatePaths.includes(location.pathname)) return;
-  const pagePath = location.pathname;
+  const pagePath = publicPage && cleanDocumentPath ? cleanDocumentPath : location.pathname;
   const originalParams = new URLSearchParams(location.search);
   const sources = new Set(['facebook', 'instagram', 'google', 'bing', 'microsoft', 'meta', 'fb', 'ig', 'linkedin', 'pinterest', 'tiktok', 'youtube']);
   const media = new Set(['cpc', 'ppc', 'paid_social', 'paid-social', 'paid_search', 'paid-search', 'social', 'organic', 'referral', 'email', 'display', 'affiliate', 'video']);
@@ -79,11 +82,11 @@
   // and the existing, fixed navigation target before any vendor is loaded.
   let publicUrlSafe = publicPage;
   if (publicPage) {
-    const url = new URL(location.origin + pagePath);
+    const url = new URL(location.origin + location.pathname);
     for (const [key, value] of Object.entries(landingCampaign)) url.searchParams.set(key, value);
     if (originalParams.get('scrollTo') === 'availability-checker') url.searchParams.set('scrollTo', 'availability-checker');
     // Existing anchor navigation is functional; only known section IDs survive.
-    const anchors = ['#availability-checker', '#candle-packages', '#how-it-works', '#faq', '#contact', '#testimonials'];
+    const anchors = ['#availability-checker', '#availability', '#candle-packages', '#pricing', '#how-it-works', '#faq', '#contact', '#testimonials', '#benefits', '#diy-practical', '#candle-calculator', '#gallery-preview', '#candle-sizes'];
     if (anchors.includes(location.hash)) url.hash = location.hash;
     try { if (url.href !== location.href) history.replaceState(history.state, '', url.href); }
     catch { publicUrlSafe = false; }

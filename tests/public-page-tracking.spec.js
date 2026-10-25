@@ -28,25 +28,24 @@ for (const file of publicPages) {
   test(`${file}: explicitly public, sanitised and initialised once`, async ({ page, backend }) => {
     const missingResources = [];
     page.on('response', response => { if (response.status() === 404) missingResources.push(new URL(response.url()).pathname); });
-    // Existing tablescape page references a missing script.js; leave page behaviour untouched.
-    if (file === 'blog/tablescape-checklist.html') backend.expectedErrors.push(/^Failed to load resource: the server responded with a status of 404 \(Not Found\)$/);
     const html = fs.readFileSync(path.join(root, file), 'utf8');
-    expect(html).toContain(`<meta name="lustre-public-page" content="/${file}">`);
+    const pathname = ['gallery.html', 'faq.html'].includes(file) ? '/' + file.replace('.html', '') : '/' + file;
+    expect(html).toContain(`<meta name="lustre-public-page" content="${['gallery.html', 'faq.html'].includes(file) ? '/' + file : pathname}">`);
     expect(html.indexOf('name="referrer"')).toBeLessThan(html.indexOf('lustre-tracking.js'));
     expect(html.indexOf('name="lustre-public-page"')).toBeLessThan(html.indexOf('lustre-tracking.js'));
     await page.route(/gtag\/js|gtm\.js|fbevents\.js/, route => route.fulfill({
       contentType: 'application/javascript', body: 'window.observedUrls = (window.observedUrls || []).concat(location.href);',
     }));
     await page.goto(`/${file}?utm_source=google&utm_medium=cpc&utm_campaign=public_pages&email=private%40example.test&quoteToken=secret-token&session_id=cs_secret#private`);
-    await assertPublic(page, '/' + file);
+    await assertPublic(page, pathname);
     await expect.poll(() => page.evaluate(() => window.observedUrls?.length)).toBe(3);
     expect((await views(page))[0].campaign_name).toBe('public_pages');
     const sent = await page.evaluate(() => JSON.stringify([window.dataLayer, window.fbq.queue, window.observedUrls]));
     for (const secret of ['private', 'secret-token', 'cs_secret']) expect(sent).not.toContain(secret);
     await page.addScriptTag({ url: '/lustre-tracking.js' });
-    await assertPublic(page, '/' + file);
+    await assertPublic(page, pathname);
     expect(await page.evaluate(() => window.fbq.queue.filter(e => e[1] === 'PageView').length)).toBe(1);
-    expect(missingResources).toEqual(file === 'blog/tablescape-checklist.html' ? ['/script.js'] : []);
+    expect(missingResources).toEqual([]);
   });
 }
 

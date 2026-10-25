@@ -1,0 +1,141 @@
+/* Desktop placement only: the original form and estimator are moved, not copied. */
+.cro-home .hero .hero-content { display: grid; grid-template-columns: minmax(0,1fr) minmax(360px,480px); align-items: center; gap: clamp(24px,3vw,48px); padding: 32px; min-height: 620px; }
+.cro-home .hero .hero-text { max-width: 620px; min-width: 0; padding: 16px; }
+.cro-home .hero h1 { font-size: clamp(40px,3.8vw,56px); }
+.cro-home .hero .hero-buttons { display: none; }
+.cro-home .hero .hero-text > .hero-price { text-align: left; }
+.cro-home .hero .cro-trust-link { justify-content: flex-start; }
+.cro-home #desktop-hero-form-slot { min-width: 0; position: relative; z-index: 1; align-self: center; }
+.cro-home .hero #availability-checker { display: block; width: 100%; max-width: none; margin: 0; padding: 28px; background: #faf9f5; border: 1px solid #e5e6dc; border-radius: 20px; box-shadow: none; text-align: left; color: #1c291f; font: 400 15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+.cro-home .hero #availability-checker .cro-section-heading { display: flex; flex-direction: column; gap: 12px; margin: 0 0 24px; }
+.cro-home .hero #availability-checker .mobile-v3-only { display: block; }
+.cro-home .hero #availability-checker .mobile-v3-desktop { display: none; }
+.cro-home .hero #availability-checker .mobile-v3-kicker { color: #526d56; font-size: 11px; font-weight: 700; letter-spacing: .105em; text-transform: uppercase; }
+.cro-home .hero #availability-checker h2 { font: 400 clamp(28px,2.6vw,36px)/1.12 Georgia,'Times New Roman',serif; color: #1c291f; letter-spacing: -.035em; margin: 0; }
+.cro-home .hero #availability-checker .cro-section-heading > p { font-size: 14px; line-height: 1.5; color: #606b60; margin: 0; }
+.cro-home .hero #availability-checker .cro-availability-body { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.cro-home .hero #availability-form { display: grid; gap: 16px; padding: 0; margin: 0; }
+.cro-home .hero #availability-form .availability-form-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 20px; padding: 0; margin: 0; }
+.cro-home .hero #availability-form .form-group { padding: 0; margin: 0; gap: 8px; }
+.cro-home .hero #availability-form label { font-size: 14px; font-weight: 600; color: #25332a; }
+.cro-home .hero #availability-form input { width: 100%; min-height: 52px; padding: 12px 16px; border: 1px solid #dce1d8; border-radius: 12px; background: #fff; color: #25332a; font: 400 16px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+.cro-home .hero #availability-form .availability-submit { width: 100%; min-height: 52px; margin: 0; padding: 12px 16px; background: #184d30; border: 0; border-radius: 999px; box-shadow: none; font: 600 15px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+.cro-home .hero #availability-form .availability-helper-copy { display: none; }
+.cro-home .hero #availability-form .availability-feedback:empty { display: none; }
+.cro-home #main-content #wedding-estimator-panel { display: block; margin-block: 48px; padding: 32px; border: 1px solid #e5e6dc; border-radius: 16px; background: #fff; align-self: start; }
+.cro-home #wedding-estimator-panel .cro-estimator { margin: 0; }
+.cro-home #wedding-estimator-panel .calculator-intro-panel { margin: 0; padding: 0; background: transparent; border: 0; box-shadow: none; }
+.cro-home #wedding-estimator-panel #calculator-start { width: 100%; min-height: 48px; margin: 0; padding: 12px 16px; color: #fff; background: #184d30; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 600; }
+.cro-home #wedding-estimator-panel .calculator-event-note { margin-top: 16px; }
+.cro-home #wedding-estimator-panel :is(.calculator-flow-panel,.calculator-result-panel) { margin: 0; padding: 16px; box-shadow: none; }
+.cro-home #wedding-estimator-panel :is(.calculator-choice-grid,.calculator-field-grid,.calculator-checkbox-grid) { grid-template-columns: minmax(0,1fr); }
+.cro-home #wedding-estimator-panel .calculator-visual-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.cro-home #wedding-estimator-panel .calculator-visual-grid img { max-width: 100%; }
+@media(min-width:1100px) {
+  .cro-home #main-content > #wedding-estimator-panel { grid-column: 2; grid-row: 1; }
+}
+@media(max-width:1199px) {
+  .cro-home .hero .hero-content { grid-template-columns: minmax(0,1fr) minmax(340px,400px); gap: 24px; padding: 24px; }
+  .cro-home .hero .hero-text { padding: 8px; }
+  .cro-home .hero #availability-checker { padding: 24px; }
+}
+.cro-home .hero #availability-checker .cro-section-heading { align-items: flex-start; text-align: left; }
+.cro-home .hero #availability-checker .cro-section-heading :is(h2,p) { text-align: left; }
+.cro-home #main-content #wedding-estimator-panel h2 { font-size: 32px; }
+/* Photo-led pricing examples and a compact estimator entry, desktop only. */
+.cro-home #candle-packages .desktop-pricing-only { display: block; }
+.cro-home #candle-packages .cro-price-examples { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; border: 0; border-radius: 0; background: transparent; }
+.cro-home #candle-packages .cro-price-examples article { display: grid; grid-template-columns: 1fr 1fr; align-content: start; align-items: center; gap: 0 4px; padding: 0; border: 1px solid #e4e4db; border-radius: 12px; background: #fff; overflow: hidden; text-align: center; }
+.cro-home #candle-packages .cro-price-examples article > span { grid-column: 1; grid-row: 1; justify-self: end; margin-top: 20px; font-size: 15px; }
+.cro-home #candle-packages .cro-price-examples article > small { grid-column: 2; grid-row: 1; justify-self: start; margin-top: 20px; font-size: 15px; }
+.cro-home #candle-packages .cro-price-examples article > strong { grid-column: 1 / -1; grid-row: 2; margin-top: 8px; font-size: 28px; }
+.cro-home #candle-packages .pricing-tier-caption { grid-column: 1 / -1; grid-row: 3; min-height: 36px; margin: 4px 8px 16px; font-size: 11px; line-height: 1.5; color: #606b60; text-align: center; }
+.cro-home #candle-packages .pricing-example-photo { grid-column: 1 / -1; grid-row: 4; width: 100%; height: 144px; object-fit: cover; }
+.cro-home #candle-packages .pricing-photo-note { margin-top: 4px; font-size: 11px; color: #737e70; }
+.cro-home #main-content #wedding-estimator-panel { background: #f0f2eb; padding: 32px; }
+.cro-home #wedding-estimator-panel .mobile-v3-kicker::before { content: ''; display: inline-block; width: 12px; height: 16px; border: 1.5px solid currentColor; border-radius: 2px; margin-right: 12px; vertical-align: -3px; background: repeating-linear-gradient(to bottom, transparent 0 4px, currentColor 4px 5px, transparent 5px 7px); }
+.cro-home #wedding-estimator-panel #calculator-start { min-height: 52px; }
+.cro-home #wedding-estimator-panel .calculator-event-note { display: none; }
+/* Align the compact panel with the pricing heading without stretching its height. */
+@media(min-width:1100px) {
+  .cro-home #main-content > #wedding-estimator-panel {
+    align-self: start;
+    margin-top: calc(48px + 18px + 28px);
+    margin-bottom: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+
+@media(min-width:1100px) {
+  .cro-home #main-content #candle-packages h2 {
+    font-size: clamp(44px, 3.6vw, 52px);
+    max-width: 430px;
+    line-height: 1.06;
+  }
+  .cro-home #main-content #wedding-estimator-panel h2 {
+    font-size: clamp(30px, 2.3vw, 36px);
+    line-height: 1.12;
+  }
+  .cro-home #main-content #wedding-estimator-panel .cro-section-heading {
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+}
+
+/* Desktop reference: imagery above prices, with the tier arithmetic kept explicit. */
+.cro-home #candle-packages .cro-price-examples article { grid-template-rows: 104px auto auto 68px auto; }
+.cro-home #candle-packages .pricing-example-photo { grid-row: 1; height: 104px; }
+.cro-home #candle-packages .cro-price-examples article > span:not(.pricing-saving),
+.cro-home #candle-packages .cro-price-examples article > small { grid-row: 2; margin-top: 16px; }
+.cro-home #candle-packages .cro-price-examples article > strong { grid-row: 3; margin-top: 4px; }
+.cro-home #candle-packages .pricing-tier-caption { grid-row: 4; align-self: start; margin: 4px 8px 0; min-height: 0; }
+.cro-home #candle-packages .cro-price-examples .pricing-saving { grid-column: 1 / -1; grid-row: 5; justify-self: center; margin: 8px 8px 16px; padding: 4px 12px; border-radius: 999px; background: #eeeadf; color: #606b60; font-size: 11px; line-height: 1.3; }
+.cro-home #wedding-estimator-panel .estimator-highlights { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 0; padding-top: 28px; margin-top: 28px; border-top: 1px solid #d8dfce; }
+.cro-home #wedding-estimator-panel .estimator-highlights > div { text-align: center; padding-inline: 12px; }
+.cro-home #wedding-estimator-panel .estimator-highlights > div + div { border-left: 1px solid #d8dfce; }
+.cro-home #wedding-estimator-panel .estimator-highlights svg { display: block; box-sizing: content-box; width: 24px; height: 24px; padding: 12px; margin: 0 auto 12px; border: 1px solid #d8dfce; border-radius: 50%; color: #526d56; }
+.cro-home #wedding-estimator-panel .estimator-highlights strong { display: block; font-size: 13px; color: #25392d; }
+.cro-home #wedding-estimator-panel .estimator-highlights p { margin: 8px 0 0; color: #606b60; font-size: 12px; line-height: 1.5; }
+.cro-home #wedding-estimator-panel:has(#calculator-intro-panel.calculator-hidden) .estimator-highlights { display: none; }
+
+/* Shared row sizes keep every pricing example aligned, regardless of copy length. */
+.cro-home #candle-packages .cro-price-examples { align-items: stretch; }
+.cro-home #candle-packages .cro-price-examples article {
+  grid-template-columns: minmax(0,1fr);
+  grid-template-rows: 112px 44px 40px 40px 64px;
+  align-content: start;
+  align-items: start;
+}
+.cro-home #candle-packages .pricing-example-photo { grid-column: 1; height: 112px; margin: 0; display: block; }
+.cro-home #candle-packages .pricing-quantity { display: flex; grid-column: 1; grid-row: 2; align-self: end; align-items: baseline; justify-content: center; gap: 4px; padding: 0 8px 4px; }
+.cro-home #candle-packages .pricing-quantity :is(span,small) { margin: 0; font-size: 14px; line-height: 20px; font-weight: 600; }
+.cro-home #candle-packages .cro-price-examples article > strong { grid-column: 1; margin: 0; font-size: 28px; line-height: 40px; }
+.cro-home #candle-packages .pricing-tier-caption { grid-column: 1; margin: 0; padding: 4px 8px 0; font-size: 12px; line-height: 18px; }
+.cro-home #candle-packages .cro-price-examples .pricing-saving { grid-column: 1; align-self: start; justify-self: center; box-sizing: border-box; width: calc(100% - 24px); max-width: 152px; margin: 4px 12px 16px; padding: 8px; font-size: 11px; line-height: 14px; font-weight: 500; }
+/* Keep the estimator reassurance items centred on the same shared rows. */
+.cro-home #wedding-estimator-panel .estimator-highlights > div {
+  display: grid;
+  grid-template-rows: 50px 20px auto;
+  justify-items: center;
+  align-content: start;
+  row-gap: 12px;
+  min-width: 0;
+  text-align: center;
+}
+.cro-home #wedding-estimator-panel .estimator-highlights svg {
+  margin: 0;
+}
+.cro-home #wedding-estimator-panel .estimator-highlights strong {
+  margin: 0;
+  line-height: 20px;
+  text-align: center;
+}
+.cro-home #wedding-estimator-panel .estimator-highlights p {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  line-height: 18px;
+}
+.cro-home #main-content > #wedding-estimator-panel { margin-bottom: 24px; }

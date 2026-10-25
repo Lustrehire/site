@@ -1,0 +1,2 @@
+/* Legacy components stay available; the public design system owns layout and type. */
+@import url("/style.css") layer(legacy);

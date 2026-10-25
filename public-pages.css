@@ -1,0 +1,46 @@
+/* Gallery and FAQ share the homepage's cream, forest green and type scale. */
+.cro-page { --cro-paper: #faf9f5; --cro-ink: #1c291f; --cro-green: #184d30; --cro-muted: #606b60; --cro-line: #e5e6dc; background: var(--cro-paper); color: var(--cro-ink); font: 400 16px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; -webkit-font-smoothing: antialiased; }
+.cro-page .header-container { background: #fff; }
+.cro-page .site-title { font-family: Georgia,'Times New Roman',serif; letter-spacing: -.05em; }
+.cro-page .cro-page-intro { max-width: 800px; padding-block: 32px 40px; }
+.cro-page .cro-back-link { margin-bottom: 24px; font-size: 13px; }
+.cro-page .cro-eyebrow { color: #55715b; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 12px; }
+.cro-page #main-content h1 { font: 400 clamp(32px,4vw,48px)/1.1 Georgia,'Times New Roman',serif; letter-spacing: -.035em; margin: 0; }
+.cro-page #main-content h2 { font-family: Georgia,'Times New Roman',serif; letter-spacing: -.025em; }
+.cro-page .cro-page-intro > p:not(.cro-eyebrow) { margin: 16px 0 24px; max-width: 640px; color: #606b60; }
+.cro-page .booking-button { background: #184d30; border: 0; min-height: 48px; padding: 12px 24px; border-radius: 999px; box-shadow: none; font: 600 14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+.cro-page .cro-gallery-grid { gap: 16px; }
+.cro-page .cro-gallery-item { border-radius: 12px; }
+.cro-page .cro-gallery-item img { transition: transform 180ms ease; }
+@media(hover:hover) { .cro-page .cro-gallery-item:hover img { transform: scale(1.025); } }
+.cro-page .faq-toolbar { display: grid; gap: 20px; margin-bottom: 24px; }
+.cro-page .faq-search { max-width: 600px; font-size: 14px; }
+.cro-page .faq-search input { background: #fff; font: inherit; font-size: 16px; border-color: #dce1d8; }
+.cro-page .faq-filter { background: transparent; color: #315b3d; border-radius: 999px; font: 600 13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+.cro-page .faq-filter.is-active { background: #184d30; border-color: #184d30; color: #fff; }
+.cro-page #faq .faq-list { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; }
+.cro-page .faq-item { background: #fff; border: 1px solid #e5e6dc; border-radius: 12px; box-shadow: none; }
+.cro-page .faq-question { min-height: 64px; padding: 20px; font-family: inherit; color: #25332a; }
+.cro-page .faq-question strong { font-size: 15px; line-height: 1.5; }
+.cro-page .faq-item .answer { padding: 0 20px 20px; font-size: 15px; color: #606b60; }
+.cro-page .cro-page-end { gap: 12px; padding-block: 40px; border-top: 1px solid #e5e6dc; margin-top: 32px; }
+.cro-page .cro-page-end h2 { font-size: 30px; line-height: 1.15; }
+.cro-page .cro-page-end p { color: #606b60; }
+.cro-page .site-footer-links a { min-height: 44px; display: flex; align-items: center; font-size: 14px; }
+.cro-page .main-nav a[aria-current=page] { color: #184d30; text-decoration: underline; text-underline-offset: 6px; }
+.cro-page :is(a,button,input):focus-visible { outline: 2px solid #315f40; outline-offset: 4px; }
+@media(max-width:767px) {
+  .cro-page { --cro-gutter: 24px; font-size: 15px; }
+  .cro-page .logoName { min-height: 66px; padding: 8px 24px; }
+  .cro-page .site-logo { width: 36px; height: 36px; }
+  .cro-page .site-title { font-size: 27px; }
+  .cro-page .logoNameContainer { gap: 8px; }
+  .cro-page .cro-page-intro { padding-block: 24px 32px; }
+  .cro-page .cro-page-intro > p:not(.cro-eyebrow) { font-size: 15px; }
+  .cro-page .cro-gallery-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+  .cro-page .faq-question { padding: 16px; min-height: 56px; }
+  .cro-page .faq-item .answer { padding: 0 16px 16px; font-size: 14px; }
+  .cro-page .cro-page-end { padding-block: 32px; }
+}
+@media(prefers-reduced-motion:reduce) { .cro-page .cro-gallery-item img { transition: none; } }
+.cro-page .nav-booking-link { background: #184d30; box-shadow: none; }

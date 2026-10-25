@@ -1,0 +1,204 @@
+/* Homepage below the hero, 768px and above. Hero retains cro.css; navigation is refined below. */
+.cro-home { background: #faf9f5; }
+.cro-home #main-content, .cro-home .site-footer {
+  --d-1: 4px; --d-2: 8px; --d-3: 12px; --d-4: 16px; --d-5: 20px; --d-6: 24px; --d-8: 32px; --d-10: 40px; --d-12: 48px; --d-16: 64px;
+  --cro-ink: #1c291f; --cro-muted: #606b60; --cro-green: #184d30;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  color: var(--cro-ink); line-height: 1.6;
+}
+.cro-home #main-content { overflow: visible; }
+.cro-home #main-content .mobile-v3-only { display: block; }
+.cro-home #main-content .mobile-v3-desktop { display: none; }
+.cro-home #main-content .cro-section { padding: var(--d-16) 0; border-color: #e5e6dc; }
+.cro-home #main-content h2 { font: 400 clamp(30px,3vw,40px)/1.1 Georgia,'Times New Roman',serif; letter-spacing: -.035em; color: #1c291f; }
+.cro-home #main-content .cro-section-heading { display: flex; flex-direction: column; align-items: flex-start; gap: var(--d-3); max-width: 640px; margin-bottom: var(--d-8); }
+.cro-home #main-content .cro-section-heading > :is(h2,p) { margin: 0; }
+.cro-home #main-content .cro-section-heading p { font-size: 16px; color: #606b60; line-height: 1.6; }
+.cro-home #main-content :is(.cro-section-kicker,.mobile-v3-kicker) { font: 700 11px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; letter-spacing: .105em; text-transform: uppercase; color: #526d56; }
+.cro-home #main-content .cro-section-kicker { display: flex; align-items: center; gap: var(--d-2); }
+.cro-home #main-content .cro-section-kicker svg { display: block; width: 18px; height: 18px; flex: 0 0 18px; color: #526d56; }
+.cro-home #main-content :is(h3,button,input,select,textarea,.booking-button,.cro-outline-link) { font-family: inherit; }
+.cro-home #main-content .booking-button { min-height: 48px; background: #184d30; font-size: 15px; font-weight: 650; }
+.cro-home #main-content .cro-outline-link { min-height: 48px; background: #fff; border: 1px solid #daddd1; font-size: 14px; font-weight: 600; color: #235336; padding: var(--d-3) var(--d-6); margin-top: var(--d-6); box-shadow: none; }
+.cro-home #candle-packages { padding-top: var(--d-12); }
+.cro-home .cro-price-examples { display: grid; grid-template-columns: 1fr; border: 1px solid #e4e4db; border-radius: 16px; overflow: hidden; background: #fff; gap: 0; }
+.cro-home .cro-price-examples article { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--d-2); padding: var(--d-5) var(--d-6); background: #fff; border: 0; border-radius: 0; box-shadow: none; text-align: left; }
+.cro-home .cro-price-examples article + article { border-top: 1px solid #e8e9e1; }
+.cro-home .cro-price-examples article::before { display: none; }
+.cro-home .cro-price-examples article:nth-child(2) { background: #fff; }
+.cro-home .cro-price-examples :is(span,small) { font-size: 17px; font-weight: 600; margin: 0; }
+.cro-home .cro-price-examples strong { font-size: 25px; color: #1b5130; }
+.cro-home #candle-packages .cro-price-caption { font-size: 13px; margin-top: var(--d-4); text-align: left; }
+.cro-home .cro-pricing-details { margin-top: var(--d-3); }
+.cro-home .cro-pricing-details > summary { justify-content: flex-start; }
+.cro-home #main-content #availability-checker { display: block; padding: var(--d-8); margin-block: var(--d-12); background: #fff; border: 1px solid #e5e6dc; border-radius: 16px; align-self: start; }
+.cro-home #availability-checker .cro-availability-body { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.cro-home #availability-checker .availability-step-card { padding: 0; }
+.cro-home #availability-form { padding: 0; margin: 0; display: grid; gap: var(--d-4); }
+.cro-home #availability-form .availability-form-grid { display: grid; grid-template-columns: 1fr; gap: var(--d-5); padding: 0; }
+.cro-home #availability-form .form-group { margin: 0; }
+.cro-home #availability-form label { font-size: 14px; color: #25332a; font-weight: 600; }
+.cro-home #availability-form input { min-height: 52px; background: #fff; border: 1px solid #dce1d8; border-radius: 12px; font-size: 16px; }
+.cro-home #availability-form .availability-submit { margin: 0; }
+.cro-home #availability-feedback:empty { display: none; }
+.cro-home .cro-estimator { margin-top: var(--d-3); }
+.cro-home .cro-estimator :is(#candle-calculator,.package-calculator,.calculator-shell,.calculator-intro-panel) { margin: 0; padding: 0; }
+.cro-home .cro-estimator #calculator-start { width: 100%; min-height: 44px; padding: var(--d-2) 0; margin: 0; justify-content: center; text-align: center; color: #2f5d3c; font-size: 14px; }
+.cro-home #main-content #testimonials { padding: var(--d-10); background: #fff; border: 1px solid #e5e6dc; border-radius: 20px; }
+.cro-home #testimonials .testimonials-header h2 { font: 700 11px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; letter-spacing: .07em; color: #355a3d; }
+.cro-home #testimonials .testimonials-header { display: flex; justify-content: space-between; align-items: center; gap: var(--d-6); margin-bottom: var(--d-6); }
+.cro-home .testimonials-grid { display: grid; overflow: visible; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--d-6); }
+.cro-home .testimonial-card { padding: var(--d-6); background: #fff; border: 1px solid #e5e6dc; border-radius: 16px; box-shadow: none; }
+.cro-home .testimonial-quote { font-size: 16px; color: #283128; }
+.cro-home .cro-quote-mark { color: #bc995f; width: 24px; height: 24px; margin-bottom: var(--d-3); }
+.cro-home .testimonial-meta :is(strong,span) { font-size: 13px; }
+.cro-home .testimonials-support { font-size: 13px; }
+.cro-home .cro-gallery-preview { grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--d-4); }
+.cro-home .cro-gallery-preview img { aspect-ratio: 4 / 3; border-radius: 12px; }
+.cro-home .cro-gallery-preview a::after { display: none; }
+.cro-home .cro-size-layout { grid-template-columns: 1fr 1fr; gap: var(--d-12); }
+.cro-home .cro-size-visual img { height: 360px; object-fit: cover; object-position: center 55%; }
+.cro-home .cro-size-labels > div { padding: var(--d-3) var(--d-2); background: #f0f1e9; border-radius: 12px; }
+.cro-home .cro-size-labels strong { font-size: 14px; }
+.cro-home #main-content #how-it-works { padding: var(--d-10); background: transparent; border: 1px solid #e5e6dc; border-radius: 16px; }
+.cro-home .cro-steps { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: var(--d-6); }
+.cro-home .cro-steps li::before { background: #d6e3d2; color: #2c603d; font-weight: 700; }
+.cro-home .cro-steps h3 { font-size: 16px; }
+.cro-home #how-it-works .cro-steps p { font-size: 14px; }
+.cro-home .cro-steps h3 svg { display: block; width: 20px; height: 20px; flex: 0 0 20px; color: #526d56; }
+.cro-home #benefits .cro-benefits { grid-template-columns: repeat(4,minmax(0,1fr)); gap: var(--d-4); }
+.cro-home #benefits .benefit { padding: var(--d-6); background: #fff; box-shadow: none; border: 1px solid #e1e5d8; }
+.cro-home #benefits .benefit svg { padding: 0; background: transparent; border: 0; border-radius: 0; }
+.cro-home #benefits .benefit p { font-size: 15px; }
+.cro-home #faq .faq-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; gap: var(--d-3); }
+.cro-home #faq .faq-item { background: #fff; border: 1px solid #e6e6df; border-radius: 12px; }
+.cro-home #faq .faq-question { min-height: 72px; padding: var(--d-5); }
+.cro-home #faq .faq-question strong { font-size: 15px; font-weight: 600; }
+.cro-home #main-content .cro-ready { padding: var(--d-12); background: #224532; border: 0; border-radius: 20px; box-shadow: none; }
+.cro-home #main-content .cro-ready h2 { color: #fff; }
+.cro-home .cro-ready::before, .cro-home .cro-ready::after, .cro-home .cro-ready svg { display: none; }
+.cro-home .cro-ready .mobile-v3-kicker { color: #d7e4d1 !important; margin-bottom: var(--d-4); }
+.cro-home #main-content .cro-ready .mobile-v3-cta-copy { color: #e4ece2; font-size: 16px; margin-bottom: var(--d-6); text-align: center; }
+.cro-home #main-content .cro-ready .booking-button { background: #fff; min-width: 320px; }
+@layer mobile-v3 { .cro-home #main-content .cro-ready .booking-button { color: #214b31 !important; } }
+.cro-home #main-content #contact { grid-template-columns: 1fr 1fr; gap: var(--d-12); padding-block: var(--d-16); }
+.cro-home #contact :is(input,textarea) { background: #fff; border: 1px solid #dce1d8; }
+.cro-home #contact .contact-modal-submit { background: #184d30; min-height: 48px; }
+.cro-home .site-footer-links a { font-size: 14px; min-height: 44px; display: flex; align-items: center; }
+.cro-home #main-content :is(a,button,input,select,textarea):focus-visible { outline: 2px solid #315f40; outline-offset: 4px; }
+@media (min-width: 1100px) {
+  .cro-home #main-content { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: var(--d-12); align-items: start; }
+  .cro-home #main-content > * { grid-column: 1 / -1; min-width: 0; }
+  .cro-home #main-content > #candle-packages { grid-column: 1; grid-row: 1; border: 0; }
+  .cro-home #main-content > #availability-checker { grid-column: 2; grid-row: 1; }
+}
+@media (max-width: 1099px) {
+  .cro-home #main-content #availability-checker { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); gap: var(--d-8); }
+  .cro-home #main-content #how-it-works { padding: var(--d-8); }
+  .cro-home .cro-steps { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .cro-home #benefits .cro-benefits { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .cro-home #faq .faq-list { grid-template-columns: 1fr; }
+  .cro-home #main-content #testimonials { padding: var(--d-8); }
+}
+
+.cro-home .cro-review-dots { display: none; }
+.cro-home .cro-steps li { display: block; padding: 0; }
+.cro-home .cro-steps li::after { display: none; }
+.cro-home #faq .cro-faq-icon { position: relative; width: 14px; height: 14px; flex-basis: 14px; border: 0; transform: none; margin: 0; color: #366043; }
+.cro-home #faq .cro-faq-icon::before, .cro-home #faq .cro-faq-icon::after { content: ''; position: absolute; top: 6px; left: 1px; width: 12px; height: 1.5px; background: currentColor; }
+.cro-home #faq .cro-faq-icon::after { transform: rotate(90deg); }
+.cro-home #faq .faq-item.open .cro-faq-icon { transform: none; margin: 0; }
+.cro-home #faq .faq-item.open .cro-faq-icon::after { display: none; }
+
+/* Flat surfaces and a quiet, familiar desktop navigation. */
+.cro-home #main-content :is(.booking-button,.cro-outline-link,.testimonial-card,.benefit,.cro-ready,.availability-step-card) { box-shadow: none; }
+.cro-home .header-container { background: #fff; border-bottom: 1px solid #e5e6dc; box-shadow: none; }
+.cro-home .logoName { padding: 16px 32px; min-height: 88px; box-shadow: none; }
+.cro-home .desktop-nav { display: flex; align-items: center; gap: 8px; }
+.cro-home .desktop-nav > a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 12px; border-radius: 8px; font: 500 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color: #28392c; text-decoration: none; box-shadow: none; }
+.cro-home .desktop-nav > a:not(.nav-booking-link):hover { background: #f3f4ef; }
+.cro-home .desktop-nav > a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.cro-home .desktop-nav > .nav-booking-link { padding: 12px 20px; margin-left: 8px; background: #184d30; color: #fff; border-radius: 999px; font-weight: 600; }
+.cro-home .desktop-nav > .nav-booking-link:hover { background: #123d26; }
+.cro-home .desktop-nav > a:focus-visible { outline: 2px solid #315f40; outline-offset: 4px; }
+.cro-home #main-content .booking-button:hover { background: #123d26; }
+.cro-home #main-content .cro-ready .booking-button:hover { background: #f3f4ef; }
+.cro-home #main-content .cro-ready svg { display: block; width: 32px; height: 32px; margin: 0 auto var(--d-4); color: #d7e4d1; }
+.cro-home .cro-size-labels { position: relative; width: calc(100% - 32px); margin: -24px auto 0; padding: 12px; border: 1px solid #e5e6dc; border-radius: 12px; background: #fff; gap: 8px; }
+.cro-home .cro-size-labels > div { background: #fff; padding: 8px; }
+.cro-home .cro-size-labels > div + div { border-left: 1px solid #e5e6dc; border-radius: 0; }
+@media (min-width: 1101px) {
+  .cro-home .cro-gallery-preview { grid-template-columns: repeat(3,minmax(0,1fr)); grid-auto-rows: 192px; gap: 16px; }
+  .cro-home .cro-gallery-preview a { margin: 0; }
+  .cro-home .cro-gallery-preview a:first-child { grid-column: span 2; grid-row: span 2; }
+  .cro-home .cro-gallery-preview img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+}
+@media (max-width: 1100px) {
+  .cro-home .desktop-nav { display: none; }
+  .cro-home .logoName { padding: 12px 24px; min-height: 80px; }
+}
+
+/* Desktop customer reviews: three equal cards in a manually controlled carousel. */
+.cro-home #main-content #testimonials { background: #fff; }
+.cro-home #testimonials .testimonials-header { display: flex; max-width: none; }
+.cro-home #testimonials .testimonials-header::after { content: ''; height: 1px; background: #e5e6dc; flex: 1; order: 1; }
+.cro-home #testimonials .testimonials-header h2 { flex: 0 0 auto; text-transform: uppercase; letter-spacing: .16em; }
+.cro-home #testimonials .cro-review-rating { order: 2; flex: 0 0 auto; }
+.cro-home .reviews-carousel { position: relative; min-width: 0; }
+.cro-home #testimonials .testimonials-grid { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.cro-home #testimonials .testimonials-grid::-webkit-scrollbar { display: none; }
+.cro-home #testimonials .testimonial-card { flex: 0 0 calc((100% - 40px) / 3); min-width: 0; scroll-snap-align: start; padding: 24px; border: 1px solid #e2e1d7; border-radius: 16px; background: transparent; }
+.cro-home #testimonials .testimonial-quote { font-size: 15px; line-height: 1.55; margin-bottom: 20px; }
+.cro-home #testimonials .testimonial-meta { width: 100%; border-top: 1px solid #e2e1d7; padding-top: 16px; }
+.cro-home #testimonials .testimonial-meta strong { display: block; margin-bottom: 4px; }
+.cro-home #testimonials .review-arrow { position: absolute; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #e2e1d7; border-radius: 50%; background: #fff; color: #214b31; font-size: 28px; line-height: 1; cursor: pointer; }
+.cro-home #testimonials .review-previous { left: -22px; }
+.cro-home #testimonials .review-next { right: -22px; }
+.cro-home #testimonials .review-arrow:disabled { visibility: hidden; }
+.cro-home #testimonials .cro-review-dots { display: flex; justify-content: center; gap: 0; margin: 8px 0; }
+.cro-home #testimonials .cro-review-dots button { position: relative; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.cro-home #testimonials .cro-review-dots button::after { content: ''; position: absolute; width: 8px; height: 8px; top: 18px; left: 18px; border-radius: 50%; background: #d1d7cb; }
+.cro-home #testimonials .cro-review-dots button[aria-pressed=true]::after { background: #184d30; }
+.cro-home #testimonials .cro-review-dots button[hidden] { display: none; }
+.cro-home #testimonials .testimonials-footer { border-top: 1px solid #e5e6dc; margin-top: 8px; padding-top: 24px; }
+@media(max-width:1099px) {
+  .cro-home #testimonials .testimonial-card { flex-basis: calc((100% - 20px) / 2); }
+  .cro-home #testimonials .testimonials-header { flex-wrap: wrap; }
+  .cro-home #testimonials .testimonials-header::after { display: none; }
+}
+/* A shared gap separates sections, including the bordered review and process panels. */
+.cro-home #main-content { display: grid; row-gap: 32px; }
+.cro-home #main-content > :is(#benefits,#gallery-preview,#candle-sizes,#faq,#contact) { padding-block: 24px; }
+.cro-home #main-content > #candle-packages { padding-bottom: 24px; }
+.cro-home #main-content > .cro-ready { margin-block: 0; }
+@media(max-width:1099px) {
+  .cro-home #main-content { grid-template-columns: minmax(0,1fr); }
+}
+.cro-home #testimonials .testimonials-footer { flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; }
+.cro-home #testimonials .journey-booking-cta { margin-top: 0; flex-shrink: 0; align-self: center; }
+@media(max-width:1099px) {
+  .cro-home #testimonials .testimonials-footer { flex-wrap: wrap; gap: 16px; }
+}
+
+/* Occasion inspiration: restrained photo cards using the existing gallery assets. */
+.cro-home .cro-occasions { margin-top: 40px; padding-top: 32px; }
+.cro-home .cro-occasions > div { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+.cro-home .cro-occasions .occasion-desktop-only { display: block; }
+.cro-home .cro-occasions .occasions-kicker { display: flex; align-items: center; gap: 16px; color: #55715b; font-size: 11px; line-height: 1.5; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.cro-home .cro-occasions .occasions-kicker::before, .cro-home .cro-occasions .occasions-kicker::after { content: ''; width: 64px; height: 1px; background: #ccd4c5; }
+.cro-home #gallery-preview .cro-occasions h3 { font-size: clamp(28px,3vw,40px); text-align: center; }
+.cro-home #gallery-preview .cro-occasions > div > p { max-width: 720px; font-size: 16px; text-align: center; }
+.cro-home .cro-occasions ul { gap: 16px; margin-top: 28px; }
+.cro-home .cro-occasions li { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 0; border: 1px solid #e5e6dc; border-radius: 12px; background: #fffdf8; overflow: hidden; box-shadow: none; text-align: left; }
+.cro-home .cro-occasions li + li { border-left: 1px solid #e5e6dc; }
+.cro-home .cro-occasions .occasion-photo { width: 100%; height: 144px; object-fit: cover; }
+.cro-home .cro-occasions .occasion-icon { position: relative; display: grid; place-items: center; align-self: center; width: 64px; height: 64px; max-width: none; margin-top: -32px; border-radius: 50%; background: #f0f1e8; color: #55715b; }
+.cro-home .cro-occasions li .occasion-icon svg { width: 36px; height: 36px; }
+.cro-home .cro-occasions .occasion-copy { display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(48px,auto) 1fr; gap: 12px 8px; flex: 1; padding: 16px 20px 20px; }
+.cro-home .cro-occasions li .occasion-title { grid-column: 1 / -1; max-width: none; font: 400 21px/1.15 Georgia,'Times New Roman',serif; color: #21412b; letter-spacing: -.025em; }
+.cro-home #gallery-preview .cro-occasions .occasion-description { font-size: 14px; line-height: 1.5; }
+@media(max-width:1099px) {
+  .cro-home .cro-occasions ul { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+.cro-home .cro-occasions li:nth-child(2) .occasion-photo { object-position: center 65%; }

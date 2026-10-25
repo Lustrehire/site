@@ -1,0 +1,230 @@
+.cro-home { --m-space-1: 4px; --m-space-2: 8px; --m-space-3: 12px; --m-space-4: 16px; --m-space-5: 20px; --m-space-6: 24px; --m-space-7: 28px; --m-space-8: 32px; --m-space-10: 40px; --m-space-12: 48px; --m-space-14: 56px; }
+/* Homepage only. Loaded exclusively at 320–767px; tablet/desktop keep cro.css. */
+.cro-home { --cro-paper: #faf9f5; --cro-ink: #1c291f; --cro-muted: #606b60; --cro-green: #184d30; --cro-gutter: 24px; --cro-type-heading: clamp(28px, 7.2vw, 31px); --cro-type-display: clamp(30px, 8.37vw, 36px); --cro-leading-body: 1.55; background: var(--cro-paper); color: var(--cro-ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; font-size: 15px; line-height: 1.47; -webkit-font-smoothing: antialiased; }
+.cro-home .mobile-v3-only { display: block; }
+.cro-home .mobile-v3-desktop { display: none; }
+.cro-home .logoName { min-height: 66px; padding: var(--m-space-2) var(--m-space-6); }
+.cro-home .site-logo { width: 36px; height: 36px; }
+.cro-home .site-title { font-size: 27px; letter-spacing: -.06em; }
+.cro-home .logoNameContainer { gap: var(--m-space-2); }
+.cro-home .header-container { background: #fff; }
+.cro-home .menu-toggle { transform: scale(.8); transform-origin: center right; }
+.cro-home .hero { border: 0; background: var(--cro-paper); }
+.cro-home .hero-content { display: block; }
+.cro-home .hero-image { position: relative; inset: auto; height: clamp(180px, 56.5vw, 320px); }
+.cro-home .hero-image img { object-position: center 49%; }
+.cro-home .hero-image::after { display: none; }
+.cro-home .hero-text { padding: var(--m-space-6) var(--cro-gutter) var(--m-space-7); color: var(--cro-ink); max-width: none; }
+.cro-home .hero .hero-eyebrow { color: #55715b; font-size: 10px; font-weight: 700; margin-bottom: var(--m-space-2); }
+.cro-home .hero h1 { color: var(--cro-ink); max-width: 100%; font-weight: 400; line-height: 1.09; }
+.cro-home .hero-text > .hero-intro { display: block; color: var(--cro-muted); margin-top: var(--m-space-3); max-width: none; font-size: 15px; line-height: 1.55; }
+.cro-home .hero-features { display: none; }
+.cro-home .hero-buttons { margin-top: var(--m-space-5); }
+.cro-home .booking-button, .cro-home .hero .btn.primary { min-height: 49px; font-size: 15px; background: #184d30; font-weight: 650; }
+.cro-home .hero-text > .hero-price { margin: var(--m-space-4) 0 0; text-align: right; color: var(--cro-muted); font-size: 12px; }
+.cro-home .cro-trust-link { justify-content: flex-start; width: fit-content; max-width: 100%; margin-top: var(--m-space-2); color: #315c40; font-size: 12px; font-weight: 500; flex-wrap: wrap; }
+.cro-home .cro-section { padding-block: var(--m-space-6); }
+.cro-home #main-content .cro-section-heading, .cro-home .testimonials-header { gap: var(--m-space-2); margin-bottom: var(--m-space-5); }
+.cro-home #main-content h2 { letter-spacing: -.035em; line-height: 1.09; color: var(--cro-ink); }
+.cro-home #main-content .cro-section-heading > p { color: var(--cro-muted); font-size: 14px; line-height: 1.55; }
+.cro-home .cro-section-kicker, .cro-home .mobile-v3-kicker { font-size: 10px; letter-spacing: .105em; font-weight: 700; text-transform: uppercase; color: #55715b; line-height: 1.5; }
+.cro-home .cro-section-kicker svg { display: block; width: 16px; height: 16px; flex: 0 0 16px; }
+.cro-home .cro-price-examples { display: block; overflow: hidden; border: 1px solid #dce0d4; border-radius: 16px; background: #fff; }
+.cro-home .cro-price-examples article { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--m-space-2); min-height: 59px; padding: var(--m-space-4) var(--m-space-4); border: 0; border-radius: 0; background: #fff; box-shadow: none; text-align: left; }
+.cro-home .cro-price-examples article + article { border-top: 1px solid #e0e3d9; }
+.cro-home .cro-price-examples article::before { display: none; }
+.cro-home .cro-price-examples article:nth-child(2) { background: #eef2e8; border-color: #e0e3d9; }
+.cro-home .cro-price-examples span, .cro-home .cro-price-examples small { font-size: 16px; font-weight: 600; margin: 0; }
+.cro-home .cro-price-examples strong { font-size: 21px; color: #1b5130; font-weight: 750; letter-spacing: -.025em; }
+.cro-home #candle-packages > .cro-price-caption { text-align: left; font-size: 12px; line-height: 1.45; margin-top: var(--m-space-4); }
+.cro-home #availability-checker { padding: var(--m-space-6) var(--m-space-5) var(--m-space-5); border: 0; border-radius: 16px; background: #f0f2eb; margin-block: 0 var(--m-space-6); }
+.cro-home .cro-availability-body { padding: 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.cro-home #availability-form input { min-height: 48px; background: #fff; border: 1px solid #dce1d8; border-radius: 10px; font-size: 16px; }
+.cro-home #availability-form label { font-size: 12px; font-weight: 650; color: #25332a; }
+.cro-home #availability-form .availability-form-grid { gap: var(--m-space-4); }
+.cro-home #availability-form .availability-submit { margin-top: var(--m-space-4); }
+.cro-home .cro-estimator .calculator-start { font-size: 12.5px; line-height: 1.5; color: #2f5d3c; text-align: center; justify-content: center; width: 100%; padding-block: var(--m-space-3); }
+.cro-home .availability-price { background: #fff; border: 1px solid #dde3d6; border-radius: 16px; padding: var(--m-space-4); }
+.cro-home .availability-price-hire strong { font-size: 32px; color: #194d35; }
+.cro-home #testimonials { width: calc(100% + 2 * var(--cro-gutter)); margin-inline: calc(-1 * var(--cro-gutter)); padding: var(--m-space-6) var(--cro-gutter) var(--m-space-6); background: #fff; }
+.cro-home #main-content .testimonials-header h2 { font: 700 10px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; letter-spacing: .07em; text-transform: uppercase; color: #355a3d; }
+.cro-home .testimonial-card { padding: 0; background: #fff; border: 0; box-shadow: none; }
+.cro-home .cro-quote-mark { width: 20px; height: 20px; margin-bottom: var(--m-space-2); }
+.cro-home .testimonial-quote { font-size: 15px; line-height: 1.62; margin-bottom: var(--m-space-2); color: #283128; }
+.cro-home .testimonials-header > .cro-review-rating { font-size: 13px; }
+.cro-home .testimonials-support { font-size: 12px; }
+.cro-home .cro-gallery-preview { gap: var(--m-space-2); }
+.cro-home .cro-gallery-preview a:first-child { grid-column: 1 / -1; }
+.cro-home .cro-gallery-preview img { aspect-ratio: auto; height: clamp(145px, 45.1vw, 240px); }
+.cro-home .cro-gallery-preview a:first-child img { aspect-ratio: auto; height: clamp(190px, 58vw, 320px); object-position: center 52%; }
+.cro-home .cro-gallery-preview a::after { display: none; }
+.cro-home .cro-outline-link { min-height: 48px; border: 1px solid #daddd1; background: #fff; color: #285e3e; font-size: 14px; font-weight: 600; }
+.cro-home .cro-size-layout { display: flex; flex-direction: column; gap: 0; align-items: stretch; }
+.cro-home .cro-size-visual picture { display: block; margin-bottom: var(--m-space-4); }
+.cro-home .cro-size-visual img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 56%; border-radius: 12px; }
+.cro-home .cro-size-labels { gap: var(--m-space-2); margin: 0; }
+.cro-home .cro-size-labels > div { padding: var(--m-space-4) var(--m-space-1) var(--m-space-3); background: #f0f1e9; border-radius: 12px; }
+.cro-home .cro-size-labels strong { font-size: 13px; white-space: normal; }
+.cro-home .cro-size-labels span:not(.mobile-v3-candle) { font-size: 12px; }
+.cro-home #how-it-works { background: #edf2e8; width: calc(100% + 2 * var(--cro-gutter)); margin-inline: calc(-1 * var(--cro-gutter)); padding: var(--m-space-6) var(--cro-gutter) var(--m-space-7); }
+.cro-home .cro-steps { margin-block: var(--m-space-5) 0; }
+.cro-home .cro-steps li { grid-template-columns: 30px minmax(0, 1fr); gap: var(--m-space-1) var(--m-space-3); padding-bottom: var(--m-space-4); }
+.cro-home .cro-steps li::before { width: 30px; height: 30px; background: #d6e4d0; color: #316040; font-size: 14px; font-weight: 600; }
+.cro-home .cro-steps li::after { display: none; }
+.cro-home .cro-steps h3 svg { display: block; width: 20px; height: 20px; flex: 0 0 20px; color: #526d56; }
+.cro-home .cro-steps h3 { font-size: 14px; margin: 0; padding-top: var(--m-space-1); }
+.cro-home #how-it-works .cro-steps p { font-size: 13px; line-height: 1.45; }
+.cro-home .cro-benefits .benefit { background: #f0f3eb; padding: var(--m-space-4); box-shadow: none; }
+.cro-home .cro-benefits svg { width: 26px; height: 26px; padding: 0; background: transparent; border: 0; border-radius: 0; margin-bottom: var(--m-space-4); }
+.cro-home .faq-item { background: #fff; border: 1px solid #dfe2d8; border-radius: 13px; }
+.cro-home .faq-question { min-height: 53px; padding: var(--m-space-3) var(--m-space-4); gap: var(--m-space-3); }
+.cro-home .faq-question strong { font-size: 13.5px; font-weight: 600; line-height: 1.35; }
+.cro-home .cro-faq-icon { transform: none; border: 0; width: 14px; height: 14px; flex-basis: 14px; margin: 0; position: relative; color: #316744; }
+.cro-home .cro-faq-icon::before, .cro-home .cro-faq-icon::after { content: ''; position: absolute; width: 12px; height: 1.5px; background: currentColor; top: 6px; left: 1px; }
+.cro-home .cro-faq-icon::after { transform: rotate(90deg); }
+.cro-home .faq-item.open .cro-faq-icon { transform: none; margin: 0; }
+.cro-home .faq-item.open .cro-faq-icon::after { display: none; }
+.cro-home .cro-ready { width: calc(100% + 2 * var(--cro-gutter)); margin: 0 calc(-1 * var(--cro-gutter)); padding: var(--m-space-7) var(--cro-gutter) var(--m-space-7); border: 0; border-radius: 0; box-shadow: none; background: #224532; text-align: left; }
+.cro-home .cro-ready > div { max-width: none; }
+.cro-home .cro-ready::before, .cro-home .cro-ready::after, .cro-home .cro-ready svg { display: none; }
+.cro-home .cro-ready .mobile-v3-kicker { color: #c7d8c4; margin-bottom: var(--m-space-4); }
+.cro-home #main-content .cro-ready h2 { text-align: left; color: #fffaf0; margin-bottom: var(--m-space-4); }
+.cro-home .cro-ready .mobile-v3-cta-copy { text-align: left; color: #d4dfce; font-size: 14px; margin: 0 0 var(--m-space-5); }
+.cro-home .cro-ready .booking-button { background: #fff; color: #285e3e; width: 100%; }
+.cro-home .cro-ready p:not(.mobile-v3-cta-copy) { text-align: left; }
+.cro-home #contact { gap: 0; }
+.cro-home #contact input, .cro-home #contact textarea { background: #fff; min-height: 50px; }
+.cro-home .site-footer-inner { display: block; padding-top: var(--m-space-7); }
+.cro-home .cro-footer-brand img { width: 36px; height: 36px; }
+.cro-home .site-footer-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--m-space-6); }
+.cro-home :is(a,button,input,select,textarea):focus-visible { outline: 2px solid #315f40; outline-offset: 4px; }
+@media (max-width: 359px) {
+  .cro-home { --cro-gutter: 18px; --cro-type-display: 32px; --cro-type-heading: 27px; }
+  .cro-home .hero-text { padding-inline: var(--m-space-4); }
+  .cro-home #availability-checker { padding: var(--m-space-4); }
+}
+
+/* Important legacy button colour is isolated in its own cascade layer. */
+@layer mobile-v3 { .cro-home .cro-ready .booking-button { color: #285e3e !important; } }
+
+@media (min-width: 360px) {
+  .cro-home .hero-text { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+  .cro-home .hero-text > :is(.hero-eyebrow,h1,.hero-intro,.hero-buttons) { grid-column: 1 / -1; }
+  .cro-home .hero-text > .hero-price { grid-row: 5; grid-column: 2; width: auto; margin-top: var(--m-space-4); align-self: center; }
+  .cro-home .hero-text > .cro-trust-link { grid-row: 5; grid-column: 1; margin-top: var(--m-space-4); align-self: center; gap: var(--m-space-1); font-size: 11px; }
+  .cro-home .cro-trust-link .cro-stars { font-size: 13px; letter-spacing: 0; }
+}
+
+/* Reference component details; this file is loaded only through the 767px media gate. */
+.cro-home #main-content #availability-checker h2 { font-size: 28px; }
+.cro-home #main-content #availability-checker .cro-section-heading > p { font-size: 13px; line-height: 1.45; }
+.cro-home .cro-size-preference { font-size: 12px; line-height: 1.5; }
+.cro-home .cro-steps h3, .cro-home .cro-benefits h3 { font-family: inherit; }
+.cro-home .testimonial-meta strong, .cro-home .testimonial-meta span { font-size: 12px; }
+.cro-home #contact .cro-section-heading > p { font-size: 14px; line-height: 1.55; }
+.cro-home .site-footer-links a { min-height: 44px; display: flex; align-items: center; font-size: 13px; }
+.cro-home .cro-outline-link { margin-top: var(--m-space-5); }
+.cro-home .cro-pricing-details > summary { font-size: 13px; }
+.cro-home .hero-text > .cro-trust-link { font-size: 11px; }
+
+.cro-home .booking-button, .cro-home .hero .btn.primary, .cro-home .cro-outline-link { font-family: inherit; }
+
+/* Reference-matched rhythm, using Grid/Flexbox rather than spacer elements. */
+.cro-home .cro-section-heading { display: flex; flex-direction: column; align-items: flex-start; }
+.cro-home .hero-text { row-gap: 0; }
+.cro-home .hero .hero-eyebrow { margin-bottom: var(--m-space-2); }
+.cro-home .hero-text > .hero-intro { margin-top: var(--m-space-3); }
+.cro-home .hero-buttons { margin-top: var(--m-space-5); }
+.cro-home .cro-price-examples article { min-height: 56px; }
+.cro-home #main-content .testimonials-header { margin-bottom: var(--m-space-3); }
+.cro-home #testimonials .testimonials-header h2 { font: 700 10px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; letter-spacing: .07em; }
+.cro-home #testimonials .testimonials-header > .cro-review-rating { font-size: 12px; }
+.cro-home #testimonials .cro-quote-mark { display: none; }
+.cro-home .testimonial-meta { display: flex; flex-direction: row; flex-wrap: wrap; gap: var(--m-space-1); }
+.cro-home .testimonials-footer { margin-top: var(--m-space-2); }
+.cro-home .testimonials-support { display: none; }
+.cro-home .testimonials-link { min-height: 44px; margin-top: 0; padding: var(--m-space-2); border: 0; background: transparent; text-decoration: underline; }
+.cro-home .cro-size-layout .cro-size-preference { margin-top: var(--m-space-3); }
+.cro-home .mobile-more { border: 0; padding-block: var(--m-space-3); }
+.cro-home .mobile-more > summary { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: var(--m-space-3) var(--m-space-4); border: 1px solid #daddd1; border-radius: 24px; background: #fff; color: #235336; font-size: 14px; font-weight: 600; cursor: pointer; list-style: none; }
+.cro-home .mobile-more > summary::-webkit-details-marker { display: none; }
+.cro-home .mobile-more > summary::after { content: '+'; margin-left: var(--m-space-2); }
+.cro-home .mobile-more[open] > summary::after { content: '−'; }
+.cro-home .mobile-more[open] > summary { margin-bottom: var(--m-space-4); }
+.cro-home .mobile-more .cro-gallery-preview a:first-child { grid-column: auto; }
+.cro-home .mobile-more .cro-gallery-preview a:first-child img { height: clamp(145px,45vw,240px); }
+.cro-home #contact .cro-section-heading { margin-bottom: var(--m-space-4); }
+.cro-home .cro-ready .booking-button { min-height: 48px; }
+.cro-home #availability-form { display: grid; gap: var(--m-space-4); padding: 0; margin: 0; }
+.cro-home #availability-form .availability-form-grid { padding: 0; margin: 0; }
+.cro-home #availability-step-1-panel { padding: 0; margin: 0; }
+.cro-home #availability-form .form-group { margin: 0; padding: 0; }
+.cro-home #availability-form .availability-submit { margin-top: 0; }
+.cro-home #availability-feedback:empty { display: none; }
+.cro-home .cro-estimator { margin-top: var(--m-space-3); }
+.cro-home .cro-estimator :is(#candle-calculator,.package-calculator,.calculator-shell,.calculator-intro-panel) { margin: 0; padding: 0; }
+.cro-home .cro-estimator #calculator-start { margin: 0; padding: var(--m-space-2) 0; min-height: 44px; }
+.cro-home #main-content { overflow: visible; }
+.cro-home .logoName { position: relative; display: flex; align-items: center; min-height: 64px; }
+.cro-home .menu-toggle { position: absolute; top: 50%; right: var(--cro-gutter); margin: 0; width: 32px; height: 32px; transform: translateY(-50%) scale(.8); transform-origin: center; }
+
+/* Compact mobile hero and overlapping original date-check form. */
+.cro-home .hero { position: relative; overflow: visible; }
+.cro-home .hero-content { position: relative; display: flex; align-items: flex-end; min-height: 360px; }
+.cro-home .hero-image { position: absolute; inset: 0; height: 100%; }
+.cro-home .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.cro-home .hero-image::after { display: block; content: ''; position: absolute; inset: 0; background: linear-gradient(180deg,transparent 10%,rgba(16,22,14,.25) 35%,rgba(16,22,14,.78) 100%); }
+.cro-home .hero-text { display: block; position: relative; z-index: 1; width: 100%; padding: 88px 24px 88px; }
+.cro-home .hero .hero-eyebrow { color: #f5f4ec; font-size: 9px; line-height: 1.5; letter-spacing: .1em; }
+.cro-home .hero h1 { color: #fffdf5; font-size: clamp(32px,8.3vw,44px); line-height: 1.07; margin: 0; }
+.cro-home .hero-text > .hero-intro { color: #fffdf5; font-size: 14px; line-height: 1.5; margin-top: 12px; }
+.cro-home .hero-buttons { display: none; }
+.cro-home #main-content > #availability-checker { position: relative; z-index: 2; margin-top: -48px; margin-bottom: 0; padding: 20px 16px 12px; border: 1px solid #e5e6dc; border-radius: 16px; background: #faf9f5; }
+.cro-home #main-content > #availability-checker > .cro-section-heading { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 16px; }
+.cro-home #main-content > #availability-checker > .cro-section-heading > :is(.mobile-v3-kicker,p) { display: none; }
+.cro-home #main-content > #availability-checker h2 { font-size: clamp(24px,6vw,30px); }
+.cro-home #main-content > #availability-checker .availability-entry-note { display: block; color: #687168; font-size: 10px; }
+.cro-home #availability-form .availability-form-grid { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 12px; }
+.cro-home #availability-form .form-group { min-width: 0; }
+.cro-home #availability-form input { width: 100%; min-width: 0; padding: 10px; min-height: 44px; }
+.cro-home #availability-form .availability-submit { min-height: 44px; }
+.cro-home #main-content > #availability-checker .availability-helper-copy,
+.cro-home #main-content > #availability-checker .calculator-event-note { display: none; }
+.cro-home #main-content > #availability-checker .cro-estimator { margin-top: 4px; }
+.cro-home .mobile-hero-trust { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 20px; }
+.cro-home .mobile-hero-trust .cro-trust-link { margin: 0; font-size: 10px; gap: 6px; }
+.cro-home .mobile-hero-trust .hero-price { margin: 0; padding-left: 12px; border-left: 1px solid #cbd2c6; color: #606b60; font-size: 11px; white-space: nowrap; }
+.cro-home #candle-packages { display: grid; grid-template-columns: minmax(0,1fr) auto; column-gap: 12px; padding-block: 24px; }
+.cro-home #candle-packages > .cro-section-heading { grid-column: 1 / -1; margin-bottom: 16px; }
+.cro-home #candle-packages h2 { font-size: clamp(25px,6.7vw,32px); }
+.cro-home #candle-packages .cro-price-examples { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; border: 0; background: transparent; }
+.cro-home #candle-packages .cro-price-examples article { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 12px 4px; min-height: 80px; border: 1px solid #e4e4db; border-radius: 8px; background: transparent; text-align: center; }
+.cro-home #candle-packages .pricing-quantity { display: flex; justify-content: center; gap: 3px; }
+.cro-home #candle-packages .pricing-quantity :is(span,small) { font-size: 11px; line-height: 16px; }
+.cro-home #candle-packages .cro-price-examples strong { font-size: 23px; line-height: 28px; }
+.cro-home #candle-packages > .cro-price-caption { font-size: 10px; margin: 16px 0 0; }
+.cro-home #candle-packages > .cro-pricing-details { margin-top: 16px; font-size: 10px; }
+.cro-home #candle-packages > .cro-pricing-details summary { font-size: 10px; padding: 0; min-height: 0; }
+.cro-home #candle-packages > .cro-pricing-details[open] { grid-column: 1 / -1; }
+@media(max-width:359px) {
+  .cro-home #main-content > #availability-checker .availability-entry-note { display: none; }
+  .cro-home #candle-packages > .cro-pricing-details { grid-column: 1 / -1; margin-top: 8px; }
+}
+
+.cro-home .hero .hero-content { min-height: 0; padding: 0; }
+.cro-home .hero .hero-text { padding: 80px 24px 88px; }
+.cro-home #main-content > #availability-checker #availability-quantity { min-height: 44px; }
+.cro-home #availability-form .availability-form-grid .form-group { display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; }
+.cro-home .hero { height: auto; min-height: 0; }
+.cro-home .hero .hero-content { height: auto; }
+.cro-home .hero .hero-text { height: auto; min-height: 0; flex: none; }
+.cro-home #availability-form .availability-form-grid input { box-sizing: border-box; height: 48px; min-height: 48px; margin: 0; }
+@media(max-width:359px) {
+  .cro-home #availability-form .availability-form-grid input { font-size: 16px; padding-inline: 6px; }
+  .cro-home .mobile-hero-trust .cro-trust-link { font-size: 9px; gap: 4px; }
+  .cro-home .mobile-hero-trust .cro-stars { font-size: 16px; }
+}
+
+.cro-home .journey-booking-cta { width: 100%; min-height: 48px; justify-content: center; margin-top: 20px; }
+.cro-home #testimonials .testimonials-footer { margin-top: 12px; }
+.cro-home #testimonials .journey-booking-cta { margin-top: 0; }
