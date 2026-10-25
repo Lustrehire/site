@@ -11,13 +11,21 @@
 .cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-copy h4 { margin: 0; color: #1d442a; font: 700 clamp(21px,2.4vw,28px)/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; letter-spacing: -.02em; }
 .cro-home #availability-result :is(.availability-result-card-success,.availability-result-card-limited,.availability-result-card-unavailable,.availability-result-card-notice) .availability-success-copy p { margin: 8px 0 0; color: #607661; font: 400 16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
 .cro-home #availability-result .availability-price-compact { display: block; margin: 0; padding: 20px; border: 1px solid #e0e3df; border-radius: 16px; background: #fff; box-shadow: none; }
-.cro-home #availability-result .available-price-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 24px; }
-.cro-home #availability-result .availability-price-compact :is(.availability-price-hire,.available-deposit) { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 0; padding: 0; border: 0; background: transparent; }
+.cro-home #availability-result .available-price-top { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: start; gap: 12px; padding-bottom: 24px; }
+.cro-home #availability-result .availability-price-compact :is(.availability-price-hire,.available-unit-price,.available-deposit) { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; margin: 0; padding: 0; border: 0; background: transparent; }
+.cro-home #availability-result .availability-price-compact .available-unit-price { align-items: center; text-align: center; border-inline: 1px solid #e1e7df; padding-inline: 8px; }
 .cro-home #availability-result .availability-price-compact .available-deposit { align-items: flex-end; text-align: right; }
 .cro-home #availability-result .available-price-top span { font-size: 13px; text-transform: uppercase; letter-spacing: .02em; font-weight: 400; color: #6a786d; }
 .cro-home #availability-result .available-price-top strong { font: 700 30px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color: #225c3c; }
 .cro-home #availability-result .available-price-top .available-deposit strong { font-size: 27px; }
-.cro-home #availability-result .available-deposit small { font-size: 15px; color: #606660; }
+.cro-home #availability-result :is(.available-deposit,.available-unit-price) small { font-size: 15px; color: #606660; }
+@media (max-width: 480px) {
+  .cro-home #availability-result .available-price-top { gap: 8px; }
+  .cro-home #availability-result .available-price-top span { font-size: 10px; min-height: 28px; }
+  .cro-home #availability-result .available-price-top strong,
+  .cro-home #availability-result .available-price-top .available-deposit strong { font-size: clamp(16px,5vw,24px); overflow-wrap: anywhere; }
+  .cro-home #availability-result :is(.available-deposit,.available-unit-price) small { font-size: 11px; }
+}
 .cro-home #availability-result .available-payment-details { border-top: 1px solid #e1e7df; padding-top: 16px; }
 .cro-home #availability-result .available-payment-details summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 44px; color: #346542; font-size: 15px; line-height: 1.4; font-weight: 500; list-style: none; cursor: pointer; }
 .cro-home #availability-result .available-payment-details summary::-webkit-details-marker { display: none; }

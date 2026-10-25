@@ -20,8 +20,24 @@ test('successful availability matches the compact layout across viewport widths'
     expect(geometry.fits).toBe(true);
     await result.locator('summary').click();
     await expect(result.locator('.available-payment-body')).toBeVisible();
+    await expect(result.locator('.available-unit-price strong')).toHaveText('$10.00');
+    await expect(result.locator('.available-payment-body')).toContainText('Candle hire (15 candles) $150');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await expect(page.locator('#availability-ready-button')).toHaveAccessibleName('Secure My Date — $75');
+    await expect(page.locator('#availability-ready-button')).toHaveAccessibleName('Secure My Date by Paying a Deposit — $75');
+  }
+});
+
+test('displayed average and full hire totals update when the checked quantity changes', async ({ page }) => {
+  for (const [quantity, hire, average, deposit, total] of [[15, '$150', '$10.00', '$75', '$300'], [45, '$449', '$9.98', '$224.50', '$898'], [90, '$853', '$9.48', '$426.50', '$1,706']]) {
+    await checkDate(page, quantity);
+    const result = page.locator('#availability-result');
+    await expect(result.locator('.availability-price-hire strong')).toHaveText(hire);
+    await expect(result.locator('.available-unit-price strong')).toHaveText(average);
+    await result.locator('summary').click();
+    await expect(result.locator('.available-payment-body dl > div').first()).toHaveText(`Candle hire (${quantity} candles) ${hire}`);
+    await expect(result.locator('.available-payment-body .availability-price-total')).toHaveText(`Total to pay before event ${total}`);
+    await expect(result.locator('.available-payment-body p')).toContainText('Your deposit is deducted from your total candle hire cost.');
+    await expect(page.locator('#availability-ready-button')).toHaveAccessibleName(`Secure My Date by Paying a Deposit — ${deposit}`);
   }
 });
 
@@ -41,7 +57,7 @@ test('limited and unavailable modal actions fit narrow screens and retain compac
       if (limited) {
         await expect(dialog.locator('.available-deposit')).toContainText('$1,266.50');
         await dialog.locator('.available-payment-details summary').click();
-        await expect(dialog.locator('.available-payment-body')).toContainText('Total paid before event $5,066');
+        await expect(dialog.locator('.available-payment-body')).toContainText('Total to pay before event $5,066');
       } else {
         await expect(dialog.locator('.availability-price')).toHaveCount(0);
       }

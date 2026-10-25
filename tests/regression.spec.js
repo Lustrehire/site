@@ -267,7 +267,7 @@ for (const [quantity, hire, deposit] of [[15, '$150', '$75'], [50, '$494', '$247
     await expect(price.locator('.available-deposit')).toContainText(deposit);
     await expect(page.locator('#availability-full-name')).toHaveValue('');
     await expect(page.locator('#availability-email')).toHaveValue('');
-    await expect(page.locator('#availability-success-actions button').first()).toHaveAccessibleName(`Secure My Date — ${deposit}`);
+    await expect(page.locator('#availability-success-actions button').first()).toHaveAccessibleName(`Secure My Date by Paying a Deposit — ${deposit}`);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   });
 }
@@ -283,10 +283,10 @@ test('partial availability prices resolved stock before and after adjustment', a
   await expect(price).toContainText('Candle hire $449');
   await expect(page.locator('#availability-ready-button')).toBeVisible();
   await expect(page.locator('#availability-continue-button')).toBeVisible();
-  await expect(page.locator('#availability-ready-button')).toHaveAccessibleName('Secure My Date — $224.50');
+  await expect(page.locator('#availability-ready-button')).toHaveAccessibleName('Secure My Date by Paying a Deposit — $224.50');
   await price.locator('summary').click();
   await expect(price).toContainText('Refundable bond $449');
-  await expect(price).toContainText('Total paid before event $898');
+  await expect(price).toContainText('Total to pay before event $898');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
@@ -332,13 +332,13 @@ test('available view shows hire and deposit, and reveals bond/payment details ac
   await price.locator('summary').focus();
   await page.keyboard.press('Enter');
   await expect(price.locator('.available-payment-body')).toBeVisible();
-  for (const row of ['Remaining hire balance $75', 'Refundable bond $150', 'Total paid before event $300']) {
+  for (const row of ['Candle hire (15 candles) $150', 'Refundable bond $150', 'Total to pay before event $300']) {
     await expect(price.locator('dl > div').filter({ hasText: row })).toBeVisible();
   }
-  await expect(price).toContainText('The bond is refunded after a satisfactory return');
+  await expect(price).toContainText('Your bond is refunded after a satisfactory return');
   await expect(price).toContainText('due 7 days before pickup');
   await expect(page.locator('#availability-full-name')).toHaveValue('');
-  await expect(page.locator('#availability-ready-button')).toHaveAccessibleName('Secure My Date — $75');
+  await expect(page.locator('#availability-ready-button')).toHaveAccessibleName('Secure My Date by Paying a Deposit — $75');
   await expect(page.locator('#availability-continue-button')).toHaveAccessibleName('Save My Quote by Email');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

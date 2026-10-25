@@ -1152,13 +1152,14 @@
           if (compact) return `<div class="availability-price availability-price-compact" aria-label="Price for ${quantity} candles">
             <div class="available-price-top">
               <div class="availability-price-hire"><span>Candle hire</span> <strong>${currency(hireFee)}</strong></div>
+              <div class="available-unit-price"><span>Cost per candle</span><strong>${new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(hireFee / quantity)}</strong><small>per candle</small></div>
               <div class="available-deposit" aria-label="Booking deposit"><span>Secure with</span><strong>${currency(depositAmount)}</strong><small>50% deposit</small></div>
             </div>
             <details class="available-payment-details">
               <summary>Payment &amp; refundable bond details<span class="available-chevron" aria-hidden="true"></span></summary>
               <div class="available-payment-body">
-                <dl><div><dt>Remaining hire balance</dt> <dd>${currency(remainingHireAmount)}</dd></div><div><dt>Refundable bond</dt> <dd>${currency(bondAmount)}</dd></div><div class="availability-price-total"><dt>Total paid before event</dt> <dd>${currency(totalPaid)}</dd></div></dl>
-                <p>The bond is refunded after a satisfactory return, subject to the hire terms. The remaining hire balance and bond are due 7 days before pickup.</p>
+                <dl><div><dt>Candle hire (${quantity} candles)</dt> <dd>${currency(hireFee)}</dd></div><div><dt>Refundable bond</dt> <dd>${currency(bondAmount)}</dd></div><div class="availability-price-total"><dt>Total to pay before event</dt> <dd>${currency(totalPaid)}</dd></div></dl>
+                <p>Your deposit is deducted from your total candle hire cost. The remaining hire balance and refundable bond are due 7 days before pickup. Your bond is refunded after a satisfactory return, subject to the hire terms.</p>
               </div>
             </details>
           </div>`;
@@ -1195,7 +1196,7 @@
           `;
           setAvailabilityResultState(true);
           setAvailabilityConfirmedState(true);
-          availabilityReadyButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg><span>Secure My Date — ${window.LustreHirePayment.currency(window.LustreHirePayment.calculate(calculateHireFee(requestedQuantity)).depositAmount)}</span><span aria-hidden="true">→</span>`;
+          availabilityReadyButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg><span>Secure My Date by Paying a Deposit — ${window.LustreHirePayment.currency(window.LustreHirePayment.calculate(calculateHireFee(requestedQuantity)).depositAmount)}</span><span aria-hidden="true">→</span>`;
           availabilityContinueButton.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Save My Quote by Email</span>';
           showAvailabilityStep(1);
         };
