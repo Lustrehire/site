@@ -3,13 +3,14 @@
 <head>
   <meta name="referrer" content="no-referrer">
   <meta charset="UTF-8" />
+  <meta name="lustre-private-page" content="true">
   <script src="./lustre-tracking.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Booking confirmation page for completed Lustre Hire payments." />
   <meta name="robots" content="noindex,nofollow" />
   <link rel="canonical" href="https://www.lustrehire.com/payment-success.html" />
   <meta name="theme-color" content="#204F0A" />
-  <title>Booking Deposit Received | Lustre Hire</title>
+  <title>Booking Confirmation | Lustre Hire</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link
     href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;500;600;700&family=Syne:wght@800&family=Cutive&display=swap"
@@ -68,9 +69,9 @@
         <span class="confirmation-icon" aria-hidden="true">
           <i class="bi bi-check2-circle"></i>
         </span>
-        <p class="confirmation-kicker">Booking confirmed</p>
-        <h1>Your date is secured</h1>
-        <p class="return-status" id="payment-success-status" aria-live="polite">Saving your confirmed booking...</p>
+        <p class="confirmation-kicker">Booking confirmation</p>
+        <h1 id="payment-success-heading">Confirming your booking</h1>
+        <p class="return-status" id="payment-success-status" aria-live="polite">Checking your booking confirmation...</p>
       </div>
 
       <div class="confirmation-layout">
@@ -122,7 +123,6 @@
       const mobileNavLinks = mobileNav ? Array.from(mobileNav.querySelectorAll("a")) : [];
 
 
-
       const bookingStorageKey = "lustreHirePendingBooking";
       const bookingSavedKey = "lustreHireConfirmedBookingSaved";
       const quoteStorageKey = "lustreHirePendingQuote";
@@ -158,9 +158,27 @@
         try {
           return responseText ? JSON.parse(responseText) : null;
         } catch (error) {
-          console.error("Malformed JSON response:", error, responseText);
+          // Never log raw backend responses or payment identifiers.
           return null;
         }
+      };
+      const reportPurchase = result => {
+        // Analytics failure must never interrupt a confirmed booking.
+        try { window.trackLustrePurchase?.(result, stripeSessionId); } catch { /* Optional analytics. */ }
+      };
+      const lookupPurchase = async sessionId => {
+        if (!window.isLustreStripeSessionId?.(sessionId)) return;
+        try {
+          const response = await fetchWithTimeout(appsScriptUrl, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({ action: "getVerifiedPurchaseReceipt", stripeSessionId: sessionId }),
+          });
+          if (response.ok) {
+            const result = await readJsonResponse(response);
+            try { window.trackLustrePurchase?.(result, sessionId); } catch { /* Optional analytics. */ }
+          }
+        } catch { /* Read-only analytics recovery never changes confirmation. */ }
       };
       const revealResolvedState = () => {
         if (nextStepsElement) {
@@ -204,23 +222,20 @@
         `;
       };
 
-      console.log("[QUOTE DEBUG] payment-success stripeSessionId:", stripeSessionId);
-      console.log("[QUOTE DEBUG] payment-success savedBookingRaw:", savedBookingRaw);
-
       if (savedBookingRaw) {
         try {
           const savedBooking = JSON.parse(savedBookingRaw);
-          console.log("[QUOTE DEBUG] payment-success savedBooking:", savedBooking);
           if (!stripeSessionId || !savedBooking.stripeSessionId || savedBooking.stripeSessionId === stripeSessionId) {
             const isQuote = savedBooking.mode === "quote";
-            console.log("[QUOTE DEBUG] payment-success using saved booking mode:", savedBooking.mode);
             if (statusElement) {
-              statusElement.textContent = "Your 50% booking deposit has been received and your booking is confirmed.";
+              statusElement.textContent = "Your previously saved booking confirmation is shown below.";
               statusElement.classList.remove("is-error");
               statusElement.classList.remove("status-loading");
             }
+            document.getElementById("payment-success-heading").textContent = "Your saved booking confirmation";
             renderSummary(savedBooking, isQuote);
             revealResolvedState();
+            await lookupPurchase(stripeSessionId || savedBooking.stripeSessionId);
             return;
           }
         } catch (error) {
@@ -229,12 +244,12 @@
       }
 
       const pendingBookingRaw = sessionStorage.getItem(bookingStorageKey);
-      console.log("[QUOTE DEBUG] payment-success pendingBookingRaw:", pendingBookingRaw);
 
       if (!pendingBookingRaw) {
+        void lookupPurchase(stripeSessionId);
         if (messageElement) {
           messageElement.textContent =
-            "Your booking deposit payment was successful, but we could not find your booking details in this browser session.";
+            "We could not verify your booking deposit payment here, and we could not find your booking details in this browser session.";
         }
         if (statusElement) {
           statusElement.textContent =
@@ -252,11 +267,10 @@
 
       try {
         pendingBooking = JSON.parse(pendingBookingRaw);
-        console.log("[QUOTE DEBUG] payment-success booking data:", pendingBooking);
       } catch (error) {
         if (messageElement) {
           messageElement.textContent =
-            "Your booking deposit payment was successful, but we could not read your saved booking details.";
+            "We could not verify your booking deposit payment here, and we could not read your saved booking details.";
         }
         if (statusElement) {
           statusElement.textContent =
@@ -281,8 +295,6 @@
         quoteToken: bookingMode === "quote" ? pendingBooking.quoteToken || "" : undefined,
         stripeSessionId: bookingMode === "quote" ? stripeSessionId : undefined,
       };
-      console.log("[QUOTE DEBUG] payment-success mode:", bookingMode);
-      console.log("[QUOTE DEBUG] payment-success payload:", successPayload);
 
       try {
         const response = await fetchWithTimeout(appsScriptUrl, {
@@ -295,15 +307,15 @@
 
         const result = await readJsonResponse(response);
 
-        console.log("[QUOTE DEBUG] payment-success response:", result);
-
         if (!response.ok || !result) {
           throw new Error("booking_save_request_failed");
         }
 
-        if (!result?.success) {
+        if (result?.success !== true || result.paymentVerified !== true) {
           throw new Error("booking_save_request_failed");
         }
+
+        reportPurchase(result);
 
         // Clear old storage first so stale bookings are not reused
         sessionStorage.removeItem(bookingSavedKey);
@@ -315,8 +327,6 @@
           bookingId: result.bookingId || ""
         }));
 
-        // A successful booking save does not independently verify Stripe payment.
-        // Purchase and booking_confirmed remain pending a verified backend contract.
 
         if (statusElement) {
           statusElement.textContent = "Your 50% booking deposit has been received and your booking is confirmed.";
@@ -324,16 +334,17 @@
           statusElement.classList.remove("status-loading");
         }
 
+        document.getElementById("payment-success-heading").textContent = "Your date is secured";
         if (summaryElement) {
           renderSummary(confirmedBooking, bookingMode === "quote");
         }
         revealResolvedState();
       } catch (error) {
-        console.error("Confirmed booking save error:", error);
+        console.error("Confirmed booking save error: confirmation unavailable");
 
         if (messageElement) {
           messageElement.textContent =
-            "Your booking deposit payment was successful, but we could not finish saving your booking yet.";
+            "We could not verify your booking deposit payment here, and we could not finish saving your booking yet.";
         }
 
         if (statusElement) {

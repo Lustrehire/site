@@ -243,6 +243,41 @@
       return true;
     } catch { return false; }
   }
+  // Accept only the backend's verified, fixed deposit contract. Never spread
+  // arbitrary receipt fields into analytics (item names can contain personal data).
+  const stripeSession = value => typeof value === 'string' && /^cs_(?:live|test)_[A-Za-z0-9]{1,240}$/.test(value);
+  window.isLustreStripeSessionId = stripeSession;
+  window.validateLustrePurchaseReceipt = result => {
+    const receipt = result?.purchaseReceipt;
+    if (result?.success !== true || result.paymentVerified !== true || !receipt ||
+        !stripeSession(receipt.transaction_id) || typeof receipt.value !== 'number' ||
+        !Number.isFinite(receipt.value) || receipt.value <= 0 || receipt.currency !== 'AUD' ||
+        !Array.isArray(receipt.items) || receipt.items.length !== 1) return null;
+    const item = receipt.items[0];
+    if (!item || item.item_id !== 'lustre_hire_deposit' ||
+        item.item_name !== 'Candle hire booking deposit' || item.quantity !== 1 ||
+        typeof item.price !== 'number' || !Number.isFinite(item.price) || item.price !== receipt.value) return null;
+    const params = { transaction_id: receipt.transaction_id, value: receipt.value, currency: 'AUD',
+      items: [{ item_id: item.item_id, item_name: item.item_name, price: item.price, quantity: 1 }] };
+    if (['direct', 'quote'].includes(receipt.booking_mode)) params.booking_mode = receipt.booking_mode;
+    return params;
+  };
+  window.trackLustrePurchase = (result, expectedSessionId) => {
+    try {
+      if (pagePath !== '/payment-success.html' || cleanNavigationRequested) return false;
+      const params = window.validateLustrePurchaseReceipt(result);
+      if (!params || (expectedSessionId && params.transaction_id !== expectedSessionId)) return false;
+      const key = 'purchase:' + params.transaction_id;
+      // Persistent across revisits, with tab storage and memory fallbacks. This
+      // records queueing, not delivery; GA also receives the transaction ID.
+      if (read(key)) return false;
+      try { if (localStorage.getItem('lustreTracking:' + key)) return false; } catch { /* Optional storage. */ }
+      write(key, true);
+      try { localStorage.setItem('lustreTracking:' + key, 'true'); } catch { /* Optional storage. */ }
+      window.gtag('event', 'purchase', { ...pageParams(), ...params, send_to: measurementId });
+      return true;
+    } catch { return false; }
+  };
   window.trackLustreEvent = track;
   window.buildLustreBookingTrackingParams = (source = {}, extra = {}) => {
     const hireFee = number(source.hireFee);

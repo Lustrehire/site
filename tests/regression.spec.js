@@ -209,8 +209,8 @@ for (const [hire, deposit, remaining, final] of [[150,75,75,225],[600,300,300,90
 
 for (const mode of ['direct', 'quote']) {
   test(`${mode} deposit confirmation and reopening`, async ({ page, backend }) => {
-    backend.replies.saveConfirmedBooking = { success: true, bookingId: booking.bookingId };
-    backend.replies.markQuoteAsConfirmed = { success: true, bookingId: booking.bookingId };
+    backend.replies.saveConfirmedBooking = { success: true, paymentVerified: true, bookingId: booking.bookingId };
+    backend.replies.markQuoteAsConfirmed = { success: true, paymentVerified: true, bookingId: booking.bookingId };
     await page.goto('/');
     await page.evaluate(data => sessionStorage.setItem('lustreHirePendingBooking', JSON.stringify(data)), { ...booking, mode });
     await page.goto('/payment-success.html?session_id=test-session');

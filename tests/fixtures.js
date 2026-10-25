@@ -21,6 +21,7 @@ const test = base.extend({
     const backend = {
       calls: [], unexpected: [], errors: [], expectedErrors: [],
       replies: {
+        getVerifiedPurchaseReceipt: { success: false },
         checkAvailability: available,
         getQuoteByToken: { success: true, status: 'valid', quoteRevalidated: false, booking },
         saveQuoteBooking: { success: true, bookingId: booking.bookingId, quoteToken: 'test-token', quoteStatus: 'sent' },

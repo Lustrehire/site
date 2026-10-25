@@ -48,7 +48,7 @@ for (const mode of ['quote', 'direct']) {
       await expect(source).toBeVisible();
       await expect(source).toHaveValue(selected);
       const confirmAction = mode === 'quote' ? 'markQuoteAsConfirmed' : 'saveConfirmedBooking';
-      backend.replies[confirmAction] = { success: true, bookingId: booking.bookingId };
+      backend.replies[confirmAction] = { success: true, paymentVerified: true, bookingId: booking.bookingId };
       await page.goto('/payment-success.html?session_id=test-session');
       await expect(page.locator('#payment-success-status')).toContainText('50% booking deposit has been received');
       expect(backend.calls.find(call => call.action === confirmAction).bookingData.customerSource).toBe(selected);

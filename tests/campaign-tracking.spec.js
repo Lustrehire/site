@@ -90,7 +90,8 @@ test('campaign attribution survives direct and private quote booking steps', asy
   await expect(page.locator('script[src*="gtm.js"], script[src*="fbevents.js"]')).toHaveCount(0);
   expect(page.url()).toContain('quoteToken=test-token');
   expect(await page.evaluate(() => JSON.stringify(window.dataLayer))).not.toContain('test-token');
-  backend.replies.saveConfirmedBooking = { success: true, bookingId: booking.bookingId };
+  backend.replies.getVerifiedPurchaseReceipt = { success: false };
+  backend.replies.saveConfirmedBooking = { success: true, paymentVerified: true, bookingId: booking.bookingId };
   await page.evaluate(data => sessionStorage.setItem('lustreHirePendingBooking', JSON.stringify({ ...data, mode: 'direct' })), booking);
   await page.goto('/payment-success.html?session_id=cs_test_private');
   await expect(page.locator('#payment-success-status')).toContainText('deposit has been received');
