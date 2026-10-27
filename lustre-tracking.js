@@ -3,20 +3,25 @@
   window.lustreTrackingLoaded = true;
   const measurementId = 'G-1RPLQ8LZ48';
   const privatePaths = ['/book.html', '/quote.html', '/payment-success.html', '/payment-cancelled.html'];
+  // Cloudflare Pages redirects these reviewed documents to extensionless URLs.
+  // Keep exact private aliases and canonical analytics paths; never opt in an
+  // arbitrary private marker, prefix or fallback document.
+  const privateDocumentPath = privatePaths.find(path =>
+    location.pathname === path || location.pathname === path.slice(0, -5));
   // Eligibility is authored in the HTML, never inferred from a URL prefix or query.
   // An exact static path also prevents a fallback/rewrite from opting in unknown URLs.
   const declaredPath = document.querySelector('meta[name="lustre-public-page"]')?.content;
   const validPagePath = path => typeof path === 'string' && path.length <= 200 &&
     (path === '/' || ['/gallery', '/faq'].includes(path) || /^\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9_-]+\.html$/.test(path));
-  const privatePage = privatePaths.includes(location.pathname) ||
+  const privatePage = Boolean(privateDocumentPath) ||
     document.querySelector('meta[name="lustre-private-page"]') !== null;
   // Only these two reviewed static documents share their existing clean SEO/GA paths.
   const publicDocumentAliases = { '/gallery.html': '/gallery', '/faq.html': '/faq' };
   const cleanDocumentPath = publicDocumentAliases[declaredPath];
   const publicPage = !privatePage && validPagePath(declaredPath) &&
     (declaredPath === location.pathname || cleanDocumentPath === location.pathname || (declaredPath === '/index.html' && location.pathname === '/'));
-  if (!publicPage && !privatePaths.includes(location.pathname)) return;
-  const pagePath = publicPage && cleanDocumentPath ? cleanDocumentPath : location.pathname;
+  if (!publicPage && !privateDocumentPath) return;
+  const pagePath = privateDocumentPath || (publicPage && cleanDocumentPath ? cleanDocumentPath : location.pathname);
   const originalParams = new URLSearchParams(location.search);
   const sources = new Set(['facebook', 'instagram', 'google', 'bing', 'microsoft', 'meta', 'fb', 'ig', 'linkedin', 'pinterest', 'tiktok', 'youtube']);
   const media = new Set(['cpc', 'ppc', 'paid_social', 'paid-social', 'paid_search', 'paid-search', 'social', 'organic', 'referral', 'email', 'display', 'affiliate', 'video']);

@@ -15,7 +15,8 @@ http.createServer((req, res) => {
     res.writeHead(308, { Location: '/' + cleanRoute[1] + query }).end();
     return;
   }
-  const routeFile = cleanRoute ? `/${cleanRoute[1]}.html` : pathname;
+  const privateAlias = pathname.match(/^\/(book|quote|payment-success|payment-cancelled)$/);
+  const routeFile = privateAlias ? `/${privateAlias[1]}.html` : cleanRoute ? `/${cleanRoute[1]}.html` : pathname;
   const file = path.resolve(root, '.' + decodeURIComponent(routeFile === '/' ? '/index.html' : routeFile));
   if (!file.startsWith(root + path.sep) || !['GET', 'HEAD'].includes(req.method)) {
     res.writeHead(403).end();
