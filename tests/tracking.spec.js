@@ -134,3 +134,73 @@ test('invalid availability and failed quote save do not produce success events',
   await expect(page.locator('#availability-booking-feedback')).toContainText('couldn’t complete');
   expect(await events(page, 'quote_generated')).toHaveLength(0);
 });
+
+for (const callback of [true, false]) {
+  test(`checkout waits for ${callback ? 'provider callback' : 'bounded blocked-provider fallback'}`, async ({ page }) => {
+    await page.goto('/book.html');
+    const elapsed = await page.evaluate(async callback => {
+      let ack;
+      const original = window.gtag;
+      window.gtag = (...args) => {
+        original(...args);
+        if (args[1] === 'begin_checkout') ack = args[2].event_callback;
+      };
+      let resolved = false;
+      const start = performance.now();
+      const ready = window.trackLustreCheckoutReady('https://checkout.stripe.com/c/pay/mock', { booking_mode: 'direct', quantity: 15 });
+      ready.then(() => { resolved = true; });
+      await Promise.resolve();
+      if (resolved || typeof ack !== 'function') throw new Error('Checkout did not wait for provider');
+      if (callback) { ack(); ack(); }
+      await ready;
+      return performance.now() - start;
+    }, callback);
+    expect(elapsed).toBeLessThan(3500);
+    if (!callback) expect(elapsed).toBeGreaterThanOrEqual(1900);
+    expect(await events(page, 'begin_checkout')).toHaveLength(1);
+    expect(await events(page, 'checkout_started')).toHaveLength(1);
+  });
+}
+
+test('funnel events exclude unverified money and refundable bond', async ({ page }) => {
+  await page.goto('/book.html');
+  await page.evaluate(() => window.trackLustreEvent('booking_details_completed', {
+    booking_mode: 'direct', quantity: 15, hire_fee: 150, bond_amount: 150, total_due: 75, value: 75,
+  }));
+  const [event] = await events(page, 'booking_details_completed');
+  expect(event.quantity).toBe(15);
+  for (const field of ['hire_fee', 'bond_amount', 'total_due', 'value']) expect(event).not.toHaveProperty(field);
+});
+
+for (const mode of ['direct', 'quote']) {
+  for (const provider of ['callback', 'blocked', 'throws', 'helper missing']) {
+    test(`${mode}: actual checkout redirects with GA ${provider}`, async ({ page, backend }) => {
+      if (mode === 'quote') await page.goto('/book.html?quoteToken=test-token');
+      else {
+        await checkDate(page);
+        await page.locator('#availability-ready-button').click();
+      }
+      await reviewBooking(page);
+      await page.locator('#book-terms-checkbox').check();
+      await page.evaluate(provider => {
+        if (provider === 'helper missing') { delete window.trackLustreCheckoutReady; return; }
+        const original = window.gtag;
+        window.gtag = (...args) => {
+          if (provider === 'throws') throw new Error('Mock blocked provider');
+          original(...args);
+          if (provider === 'callback' && args[1] === 'begin_checkout') window.releaseCheckoutAnalytics = args[2].event_callback;
+        };
+      }, provider);
+      await page.locator('#book-payment-button').click();
+      if (provider === 'callback') {
+        await expect.poll(() => page.evaluate(() => typeof window.releaseCheckoutAnalytics)).toBe('function');
+        expect(new URL(page.url()).pathname).toBe('/book.html');
+        await page.evaluate(() => { window.releaseCheckoutAnalytics(); window.releaseCheckoutAnalytics(); });
+      }
+      await expect(page).toHaveURL(checkoutUrl, { timeout: 7000 });
+      const calls = backend.calls.filter(c => c.action === (mode === 'quote' ? 'createQuoteCheckoutSession' : 'createCheckoutSession'));
+      expect(calls).toHaveLength(1);
+      expect(calls[0].bookingData).toMatchObject({ fullName: booking.fullName, email: booking.email, phone: '0400000000', quantity: 50 });
+    });
+  }
+}

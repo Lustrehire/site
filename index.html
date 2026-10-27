@@ -899,7 +899,7 @@
         try {
           return responseText ? JSON.parse(responseText) : null;
         } catch (error) {
-          console.error("Malformed JSON response:", error, responseText);
+          console.error("Malformed JSON response: invalid backend JSON");
           return null;
         }
       };
@@ -973,7 +973,6 @@
         const quoteStorageKey = "lustreHirePendingQuote";
         let latestAvailabilityResult = null;
         let availabilityJourneyMode = "";
-        console.log("[QUOTE DEBUG] index availabilityEndpoint:", availabilityEndpoint);
 
         const renderBookingFlowProgress = (stepNumber) => {
           if (bookingFlowProgressCount) {
@@ -1610,7 +1609,7 @@
               renderAvailabilityUnavailableState(result);
             }
           } catch (error) {
-            console.error("Availability check error:", error);
+            console.error("Availability check error:");
             availabilityFeedback.textContent = "";
             availabilityFeedback.classList.remove("status-loading");
             renderAvailabilitySystemErrorState();
@@ -1829,7 +1828,6 @@
 
             const { booking } = payload;
             sessionStorage.setItem(bookingStorageKey, JSON.stringify(booking));
-            console.log("[QUOTE DEBUG] saveQuoteBooking bookingData:", booking);
 
             if (step2SubmitButton instanceof HTMLButtonElement) {
               setButtonLoadingState(step2SubmitButton, true, "Sending Quote...");
@@ -1841,7 +1839,6 @@
                 action: "saveQuoteBooking",
                 bookingData: booking,
               };
-              console.log("[QUOTE DEBUG] saveQuoteBooking payload:", quoteRequestPayload);
 
               const response = await fetchWithTimeout(availabilityEndpoint, {
                 method: "POST",
@@ -1853,7 +1850,6 @@
 
               const result = await readJsonResponse(response);
 
-              console.log("[QUOTE DEBUG] saveQuoteBooking response:", result);
 
               if (!response.ok || !result) {
                 throw new Error("quote_request_failed");
@@ -1878,7 +1874,7 @@
               availabilityBookingFeedback.classList.remove("is-error");
               showAvailabilityStep(4);
             } catch (error) {
-              console.error("[QUOTE DEBUG] saveQuoteBooking error:", error);
+              console.error("[QUOTE DEBUG] saveQuoteBooking error:");
               availabilityBookingFeedback.textContent = "We couldn’t complete that step right now. Your booking has not been placed yet. Please try again.";
               availabilityBookingFeedback.classList.add("is-error");
               availabilityBookingFeedback.classList.remove("status-loading");
@@ -1958,7 +1954,7 @@
             }
 
             if (result.success && result.checkoutUrl) {
-              window.trackLustreCheckoutReady?.(result.checkoutUrl, checkoutParams);
+              await window.trackLustreCheckoutReady?.(result.checkoutUrl, checkoutParams);
               window.location.href = result.checkoutUrl;
               return;
             }
@@ -1966,7 +1962,7 @@
             throw new Error("checkout_session_failed");
           } catch (error) {
             window.trackLustreEvent?.("checkout_error", { booking_mode: checkoutParams.booking_mode, error_code: "checkout_preparation_failed" });
-            console.error("Checkout session preparation error:", error);
+            console.error("Checkout session preparation error:");
             if (availabilityReviewFeedback) {
               availabilityReviewFeedback.textContent = "We couldn’t start secure payment right now. Your booking has not been submitted. Please try again.";
               availabilityReviewFeedback.classList.add("is-error");
@@ -1990,7 +1986,6 @@
 
           const { booking } = payload;
           sessionStorage.setItem(bookingStorageKey, JSON.stringify(booking));
-          console.log("[QUOTE DEBUG] saveQuoteBooking bookingData:", booking);
 
           if (availabilityQuoteSubmit instanceof HTMLButtonElement) {
             setButtonLoadingState(availabilityQuoteSubmit, true, "Sending Quote...");
@@ -2004,7 +1999,6 @@
               action: "saveQuoteBooking",
               bookingData: booking,
             };
-            console.log("[QUOTE DEBUG] saveQuoteBooking payload:", quoteRequestPayload);
 
             const response = await fetchWithTimeout(availabilityEndpoint, {
               method: "POST",
@@ -2016,7 +2010,6 @@
 
             const result = await readJsonResponse(response);
 
-            console.log("[QUOTE DEBUG] saveQuoteBooking response:", result);
 
             if (!response.ok || !result) {
               throw new Error("quote_request_failed");
@@ -2035,7 +2028,6 @@
 
             sessionStorage.setItem(bookingStorageKey, JSON.stringify(quoteBooking));
             sessionStorage.setItem(quoteStorageKey, JSON.stringify(quoteBooking));
-            console.log("[QUOTE DEBUG] saveQuoteBooking stored booking:", quoteBooking);
 
             if (availabilityReviewFeedback) {
               availabilityReviewFeedback.textContent = "";
@@ -2044,7 +2036,7 @@
             }
             showAvailabilityStep(4);
           } catch (error) {
-            console.error("[QUOTE DEBUG] saveQuoteBooking error:", error);
+            console.error("[QUOTE DEBUG] saveQuoteBooking error:");
             if (availabilityReviewFeedback) {
               availabilityReviewFeedback.textContent = "We couldn’t complete that step right now. Your booking has not been placed yet. Please try again.";
               availabilityReviewFeedback.classList.add("is-error");

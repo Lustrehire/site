@@ -219,7 +219,7 @@
   function clean(source = {}) {
     const params = pageParams();
     if (['pricing', 'pickup', 'returns', 'bond', 'burn_time', 'safety', 'availability', 'other'].includes(source.faq_topic)) params.faq_topic = source.faq_topic;
-    for (const key of ['quantity', 'hire_fee', 'bond_amount', 'total_due', 'value']) {
+    for (const key of ['quantity']) {
       if (source[key] !== undefined && Number.isFinite(Number(source[key])) && Number(source[key]) >= 0) params[key] = Number(source[key]);
     }
     if (['direct', 'quote'].includes(source.booking_mode)) params.booking_mode = source.booking_mode;
@@ -232,13 +232,13 @@
     // Private browser-only identity. Never put identifiers/dates in provider data.
     return [read('journey') || 0, source.booking_mode, source._journey_key || source.event_date, source.quantity].join('|');
   }
-  function track(eventName, source = {}) {
+  function track(eventName, source = {}, controls = {}) {
     try {
       if (cleanNavigationRequested || !events.has(eventName)) return false;
       if (eventName === 'availability_check') write('journey', (read('journey') || 0) + 1);
       if (['booking_started', 'booking_details_completed'].includes(eventName) && !once(eventName + ':' + journey(source))) return false;
       const params = clean(source);
-      window.gtag('event', eventName, { ...params, send_to: measurementId });
+      window.gtag('event', eventName, { ...params, ...controls, send_to: measurementId });
       if (eventName !== 'faq_search') deliver(['meta', 'trackCustom', eventName, params]);
       return true;
     } catch { return false; }
@@ -278,7 +278,7 @@
       return true;
     } catch { return false; }
   };
-  window.trackLustreEvent = track;
+  window.trackLustreEvent = (eventName, source) => track(eventName, source);
   window.buildLustreBookingTrackingParams = (source = {}, extra = {}) => {
     const hireFee = number(source.hireFee);
     return { _journey_key: source.quoteToken || '', event_date: source.eventDate || source.event_date || '', quantity: number(source.quantity || source.requestedQuantity), hire_fee: hireFee,
@@ -302,9 +302,20 @@
       // Preparation is not a charge: deliberately omit monetary value until
       // the backend supplies the actual amount charged in a verified response.
       const safe = { booking_mode: params.booking_mode, quantity: params.quantity };
-      track('begin_checkout', safe);
+      // Wait for Google's processing callback before leaving this document.
+      // The fallback preserves checkout when gtag is blocked or never loads;
+      // neither a callback nor timeout proves GA collection/reporting.
+      let finish;
+      let timer;
+      const ready = new Promise(resolve => {
+        let finished = false;
+        finish = () => { if (finished) return; finished = true; clearTimeout(timer); resolve(); };
+        timer = setTimeout(finish, 2000);
+      });
+      if (!track('begin_checkout', safe, { event_callback: finish, event_timeout: 2000 })) finish();
       track('checkout_started', safe); // Legacy funnel name; not a conversion.
       deliver(['meta', 'track', 'InitiateCheckout', { ...clean(safe), currency: 'AUD' }]);
+      return ready;
     } catch { track('checkout_error', { error_code: 'checkout_preparation_failed' }); }
   };
   window.trackLustreCancellation = () => {

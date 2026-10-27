@@ -331,7 +331,7 @@
         try {
           return responseText ? JSON.parse(responseText) : null;
         } catch (error) {
-          console.error("Malformed JSON response:", error, responseText);
+          console.error("Malformed JSON response: invalid backend JSON");
           return null;
         }
       };
@@ -575,7 +575,6 @@
       }
 
       if (bookingMode === "quote") {
-        console.log("[QUOTE DEBUG] book page quoteToken:", quoteToken);
         try {
           const response = await fetchWithTimeout(appsScriptUrl, {
             method: "POST",
@@ -590,7 +589,6 @@
 
           const result = await readJsonResponse(response);
 
-          console.log("[QUOTE DEBUG] getQuoteByToken response:", result);
 
           const quoteBooking = result?.booking || result?.quote || result?.data || null;
           if (!response.ok || !result) {
@@ -705,7 +703,7 @@
             pageStatus.classList.remove("status-loading");
           }
         } catch (error) {
-          console.error("[QUOTE DEBUG] book page load error:", error);
+          console.error("[QUOTE DEBUG] book page load error:");
           setErrorState(
             "We couldn’t complete that step right now.",
             "Your booking has not been placed yet. Please try again or contact us if you need help."
@@ -842,10 +840,6 @@
                 bookingData,
               };
 
-          if (bookingMode === "quote") {
-            console.log("[QUOTE DEBUG] createQuoteCheckoutSession payload:", payload);
-          }
-
           const response = await fetchWithTimeout(appsScriptUrl, {
             method: "POST",
             headers: {
@@ -855,10 +849,6 @@
           }, 12000);
 
           const result = await readJsonResponse(response);
-
-          if (bookingMode === "quote") {
-            console.log("[QUOTE DEBUG] createQuoteCheckoutSession response:", result);
-          }
 
           if (!response.ok || !result) {
             throw new Error("checkout_preparation_failed");
@@ -878,14 +868,13 @@
           sessionStorage.setItem(bookingStorageKey, JSON.stringify(storedBooking));
           if (bookingMode === "quote") {
             sessionStorage.setItem(quoteStorageKey, JSON.stringify(storedBooking));
-            console.log("[QUOTE DEBUG] sessionStorage booking data:", storedBooking);
           }
 
-          window.trackLustreCheckoutReady?.(result.checkoutUrl, checkoutParams);
+          await window.trackLustreCheckoutReady?.(result.checkoutUrl, checkoutParams);
           window.location.href = result.checkoutUrl;
         } catch (error) {
           window.trackLustreEvent?.("checkout_error", { booking_mode: checkoutParams.booking_mode, error_code: "checkout_preparation_failed" });
-          console.error("Checkout session preparation error:", error);
+          console.error("Checkout session preparation error:");
           if (reviewFeedback) {
             reviewFeedback.textContent = "We couldn’t start secure payment right now. Your booking has not been submitted. Please try again.";
             reviewFeedback.classList.add("is-error");

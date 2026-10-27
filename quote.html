@@ -155,7 +155,7 @@
         try {
           return responseText ? JSON.parse(responseText) : null;
         } catch (error) {
-          console.error("Malformed JSON response:", error, responseText);
+          console.error("Malformed JSON response: invalid backend JSON");
           return null;
         }
       };
@@ -542,7 +542,6 @@
         }, 12000);
 
         const result = await readJsonResponse(response);
-        console.log("[QUOTE DEBUG] quote review response:", result);
 
         const rawQuote = result?.booking || result?.quote || result?.data || null;
         if (!response.ok || !result) {
@@ -595,7 +594,7 @@
         resolvedQuantity = quoteData.quantity;
         await runLiveAvailabilityCheck();
       } catch (error) {
-        console.error("Quote review load error:", error);
+        console.error("Quote review load error:");
         showErrorShell("Your booking has not been placed yet. Please try again in a moment.");
       }
     });

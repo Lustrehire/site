@@ -94,9 +94,9 @@ for (const file of privatePages) {
 test('blog to homepage to booking keeps safe navigation context and campaign attribution', async ({ page }) => {
   await page.goto('/blog/blog.html?utm_source=facebook&utm_medium=paid_social&utm_campaign=blog_journey');
   await page.locator('a[href="burn-time-calculator.html"]').first().click();
-  expect((await views(page))[0]).toMatchObject({ page_path: '/blog/burn-time-calculator.html', previous_page_path: '/blog/blog.html' });
+  await expect.poll(async () => (await views(page))[0]).toMatchObject({ page_path: '/blog/burn-time-calculator.html', previous_page_path: '/blog/blog.html' });
   await page.locator('.blog-post-cta a[href="../index.html?scrollTo=availability-checker"]').click();
-  expect((await views(page))[0]).toMatchObject({ previous_page_path: '/blog/burn-time-calculator.html', campaign_name: 'blog_journey' });
+  await expect.poll(async () => (await views(page))[0]).toMatchObject({ previous_page_path: '/blog/burn-time-calculator.html', campaign_name: 'blog_journey' });
   await page.locator('#availability-date').fill(booking.eventDate);
   await page.locator('#availability-quantity').fill('50');
   await page.locator('#availability-form').getByRole('button', { name: /check/i }).click();

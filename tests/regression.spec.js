@@ -172,7 +172,7 @@ for (const mode of ['quote', 'direct']) {
 
 test('checkout failure preserves details and allows retry @critical', async ({ page, backend }) => {
   backend.replies.createQuoteCheckoutSession = { success: false, message: 'Checkout temporarily unavailable' };
-  backend.expectedErrors.push(/^Checkout session preparation error: Error: checkout_preparation_failed$/);
+  backend.expectedErrors.push(/^Checkout session preparation error:$/);
   await page.goto('/book.html?quoteToken=test-token');
   await reviewBooking(page);
   await page.locator('#book-terms-checkbox').check();
