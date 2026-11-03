@@ -187,3 +187,49 @@ test('compact quote shows average hire price and opens later payments with the k
   await expect(later.locator('.quote-later-body')).toBeHidden();
   await expect(page.getByRole('link', { name: 'Book now' })).toBeVisible();
 });
+
+test('quote saved and emailed after 13 seconds still opens the personalised quote', async ({ page, backend }) => {
+  await checkDate(page,45);
+  await page.route('https://script.google.com/**', async route => {
+    const payload=route.request().postDataJSON();
+    if(payload.action!=='saveQuoteBooking') return route.fallback();
+    backend.calls.push(payload);
+    await new Promise(resolve=>setTimeout(resolve,13000));
+    return route.fulfill({json:{success:true,bookingId:booking.bookingId,quoteToken:booking.quoteToken}});
+  });
+  await page.locator('#availability-full-name').fill(booking.fullName);
+  await page.locator('#availability-email').fill(booking.email);
+  await page.locator('#availability-step-2-submit').click();
+  await expect(page.locator('#availability-step-2-submit')).toBeDisabled();
+  await expect(page.locator('#availability-step-4-panel')).toBeVisible({timeout:20000});
+  await expect(page.locator('#availability-step-4-panel')).toContainText('A copy has been emailed to you.');
+  expect(backend.calls.filter(call=>call.action==='saveQuoteBooking')).toHaveLength(1);
+});
+
+for(const failure of ['storage','tracking']) test(`successful quote remains visible when optional ${failure} throws`, async({page,backend})=>{
+  await checkDate(page,45);
+  await page.evaluate(failure=>{
+    if(failure==='tracking') window.trackLustreQuoteGenerated=()=>{throw new Error('Optional analytics failed');};
+    else {
+      const original=Storage.prototype.setItem;
+      Storage.prototype.setItem=function(key,value){
+        if(['lustreHirePendingBooking','lustreHirePendingQuote'].includes(key))throw new DOMException('Storage blocked','SecurityError');
+        return original.call(this,key,value);
+      };
+    }
+  },failure);
+  await submitContact(page);
+  await expect(page.locator('#availability-step-4-panel')).toContainText('A copy has been emailed to you.');
+  await expect(page.locator('#availability-book-quote')).toHaveAttribute('href',/book.html\?quoteToken=test-token/);
+  expect(backend.calls.filter(call=>call.action==='saveQuoteBooking')).toHaveLength(1);
+});
+
+test('saved quote with ambiguous email delivery explains review instead of encouraging another quote',async({page,backend})=>{
+  backend.replies.saveQuoteBooking={success:false,message:'Your quote is saved, but email delivery needs checking. Please contact Lustre Hire; do not submit a new quote.'};
+  await checkDate(page,45);
+  await page.locator('#availability-full-name').fill(booking.fullName);
+  await page.locator('#availability-email').fill(booking.email);
+  await page.locator('#availability-step-2-submit').click();
+  await expect(page.locator('#availability-booking-feedback')).toContainText('rather than submitting a new quote');
+  await expect(page.locator('#availability-step-4-panel')).toBeHidden();
+});

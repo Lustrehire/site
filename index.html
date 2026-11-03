@@ -1041,6 +1041,12 @@
         const persistQuoteRequests = () => {
           try { sessionStorage.setItem(quoteCacheKey, JSON.stringify(quoteRequests)); } catch { /* In-memory deduplication still works. */ }
         };
+        const cacheCreatedQuote = (booking) => {
+          try {
+            sessionStorage.setItem(bookingStorageKey, JSON.stringify(booking));
+            sessionStorage.setItem(quoteStorageKey, JSON.stringify(booking));
+          } catch { /* The token link works even when browser storage is blocked. */ }
+        };
         const displayCreatedQuote = (booking) => {
           const amounts = window.LustreHirePayment.calculate(booking.hireFee);
           const currency = window.LustreHirePayment.currency;
@@ -1060,9 +1066,10 @@
           url.searchParams.set("quoteToken", booking.quoteToken);
           bookLink.href = url.href;
           bookLink.onclick = () => {
-            sessionStorage.setItem(bookingStorageKey, JSON.stringify(booking));
-            sessionStorage.setItem(quoteStorageKey, JSON.stringify(booking));
-            window.trackLustreEvent?.("booking_started", window.buildLustreBookingTrackingParams?.(booking, { booking_mode: "quote" }) || {});
+            cacheCreatedQuote(booking);
+            try {
+              window.trackLustreEvent?.("booking_started", window.buildLustreBookingTrackingParams?.(booking, { booking_mode: "quote" }) || {});
+            } catch { /* Optional analytics must not block the booking link. */ }
           };
           showAvailabilityStep(4);
           document.getElementById("availability-quote-heading").focus({ preventScroll: true });
@@ -1927,10 +1934,12 @@
                 method: "POST",
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify({ action: "saveQuoteBooking", bookingData: booking, requestId: request.id }),
-              }, 12000);
+              }, 60000);
               const result = await readJsonResponse(response);
               if (!response.ok || result?.success !== true || !result.quoteToken || !result.bookingId) {
-                throw new Error("quote_request_failed");
+                const failure = new Error("quote_request_failed");
+                failure.emailNeedsReview = result?.message?.startsWith("Your quote is saved, but email delivery needs checking.") === true;
+                throw failure;
               }
               const quoteBooking = {
                 ...booking, bookingId: result.bookingId, quoteToken: result.quoteToken,
@@ -1938,16 +1947,18 @@
               };
               request.booking = quoteBooking;
               persistQuoteRequests();
-              sessionStorage.setItem(bookingStorageKey, JSON.stringify(quoteBooking));
-              sessionStorage.setItem(quoteStorageKey, JSON.stringify(quoteBooking));
-              window.trackLustreQuoteGenerated?.(quoteBooking);
+              cacheCreatedQuote(quoteBooking);
+              try { window.trackLustreQuoteGenerated?.(quoteBooking); }
+              catch { /* Quote creation succeeded; analytics cannot change that. */ }
               availabilityBookingFeedback.textContent = "";
               availabilityBookingFeedback.classList.remove("status-loading", "is-error");
               // Do not reveal a result for a different date edited during the request.
               if (!availabilityStep2Panel.hidden && latestAvailabilityResult?.available && availabilityDateField.value === booking.eventDate &&
                   Number(availabilityQuantityField.value) === booking.quantity) displayCreatedQuote(quoteBooking);
             } catch (error) {
-              availabilityBookingFeedback.textContent = "We couldn’t confirm your quote was saved and emailed. Your details are still here. Please try again; no booking or payment has been made.";
+              availabilityBookingFeedback.textContent = error.emailNeedsReview
+                ? "Your quote is saved, but email delivery needs checking. Please contact lustrehire@gmail.com rather than submitting a new quote. No payment has been made."
+                : "We couldn’t confirm the response. Your quote may already be saved and emailed. Your details are still here. Please try again with the same details; no payment has been made.";
               availabilityBookingFeedback.classList.add("is-error");
               availabilityBookingFeedback.classList.remove("status-loading");
             } finally {
