@@ -1665,7 +1665,8 @@
           if (availabilitySubmitButton instanceof HTMLButtonElement) {
             setButtonLoadingState(availabilitySubmitButton, true, "Checking...");
           }
-          setStatusLoadingState(availabilityFeedback, "Checking availability...", true);
+          availabilityFeedback.textContent = "";
+          availabilityFeedback.classList.remove("status-loading", "is-error");
 
           try {
             const response = await fetchWithTimeout(availabilityEndpoint, {
@@ -1928,7 +1929,8 @@
             }
             quoteSubmissionPending = true;
             setButtonLoadingState(step2SubmitButton, true, "Preparing your quote...");
-            setStatusLoadingState(availabilityBookingFeedback, "Preparing and emailing your quote...", true);
+            availabilityBookingFeedback.textContent = "";
+            availabilityBookingFeedback.classList.remove("status-loading", "is-error");
             try {
               const response = await fetchWithTimeout(availabilityEndpoint, {
                 method: "POST",
