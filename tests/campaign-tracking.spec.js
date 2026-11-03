@@ -1,4 +1,4 @@
-const { test, expect, booking, reviewBooking } = require('./fixtures');
+const { test, expect, booking, reviewBooking, captureQuote } = require('./fixtures');
 const googleClick = 'EAIaIQobChMI1234567890AbCdEfGhIjKlMn';
 const facebookClick = 'IwAR1234567890AbCdEfGhIjKlMnOpQrStUv';
 async function events(page, name) {
@@ -77,9 +77,10 @@ test('campaign attribution survives direct and private quote booking steps', asy
   await page.locator('#availability-date').fill(booking.eventDate);
   await page.locator('#availability-quantity').fill('50');
   await page.locator('#availability-form').getByRole('button', { name: /check/i }).click();
-  await expect(page.locator('#availability-ready-button')).toBeVisible();
+  await expect(page.locator('#availability-step-2-panel')).toBeVisible();
   expect((await events(page, 'availability_check'))[0]).toMatchObject({ campaign_source: 'facebook', campaign_name: 'spring_weddings' });
-  await page.locator('#availability-ready-button').click();
+  await captureQuote(page);
+  await page.getByRole('link', { name: 'Book now' }).click();
   await expect(page.locator('#book-form-panel')).toBeVisible();
   await reviewBooking(page);
   expect((await events(page, 'booking_details_completed'))[0]).toMatchObject({ campaign_source: 'facebook', campaign_name: 'spring_weddings' });

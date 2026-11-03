@@ -4,13 +4,13 @@ test('availability result replaces entry form and Edit Details restores its valu
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     await checkDate(page, 45);
-    await expect(page.locator('#availability-result')).toBeVisible();
-    await expect(page.locator('#availability-result .availability-price-hire')).toContainText('$449');
+    await expect(page.locator('#availability-step-2-panel')).toBeVisible();
+    await expect(page.locator('#availability-result .availability-price-hire')).toHaveCount(0);
     await expect(page.locator('#availability-form')).toBeHidden();
     await expect(page.locator('#mobile-price-preview')).toBeHidden();
-    await expect(page.locator('#availability-ready-button')).toBeVisible();
+    await expect(page.locator('#availability-step-2-panel')).toBeVisible();
     const date = await page.locator('#availability-date').inputValue();
-    await page.locator('#availability-edit-button').click();
+    await page.locator('#availability-back-to-step-1').click();
     await expect(page.locator('#availability-result')).toBeHidden();
     await expect(page.locator('#availability-form')).toBeVisible();
     await expect(page.locator('#availability-date')).toHaveValue(date);

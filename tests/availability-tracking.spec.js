@@ -29,7 +29,7 @@ for (const [status, isAvailable, partialAvailable, expected] of [
     const sent = await page.evaluate(() => JSON.stringify([window.dataLayer, window.fbq.queue]));
     for (const secret of ['private@example.test', 'private-token', 'cs_test_private', 'Backend message']) expect(sent).not.toContain(secret);
     expect(await page.evaluate(() => window.fbq.queue.filter(e => e[0] === 'trackCustom' && e[1] === 'availability_result').length)).toBe(1);
-    if (isAvailable) await expect(page.locator('#availability-ready-button')).toBeVisible();
+    if (isAvailable) await expect(page.locator('#availability-step-2-panel')).toBeVisible();
     else await expect(page.locator('#availability-ready-button')).toBeHidden();
   });
 }

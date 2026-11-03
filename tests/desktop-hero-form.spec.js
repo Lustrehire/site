@@ -34,7 +34,7 @@ test('result modal restores the hero form, including after resizing to mobile', 
   await page.setViewportSize({ width: 1440, height: 1000 });
   await checkDate(page, 45);
   await expect(page.locator('#availability-dialog #availability-form')).toHaveCount(1);
-  await page.locator('#availability-edit-button').click();
+  await page.locator('#availability-back-to-step-1').click();
   await expect(page.locator('.hero #availability-form')).toBeVisible();
   await expect(page.locator('#availability-quantity')).toHaveValue('45');
   await page.locator('#availability-form button[type="submit"]').click();

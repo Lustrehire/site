@@ -18,7 +18,7 @@ test.describe('seven full days between today and the event', () => {
         await expect(page.locator('#availability-ready-button')).toBeHidden();
         await expect(page.locator('#availability-continue-button')).toBeHidden();
       } else {
-        await expect(page.locator('#availability-ready-button')).toBeVisible();
+        await expect(page.locator('#availability-step-2-panel')).toBeVisible();
         expect(backend.calls[0]).toEqual({ action: 'checkAvailability', eventDate: `2026-09-${day}`, quantity: 15 });
       }
     });
@@ -55,7 +55,7 @@ test.describe('seven full days between today and the event', () => {
     await page.locator('#availability-date').fill('2026-09-28');
     await page.locator('#availability-quantity').fill('15');
     await page.locator('#availability-form button[type="submit"]').click();
-    await expect(page.locator('#availability-ready-button')).toBeVisible();
+    await expect(page.locator('#availability-step-2-panel')).toBeVisible();
     await expect(page.locator('#availability-date')).toHaveAttribute('min', '2026-09-28');
   });
 
@@ -91,7 +91,7 @@ for (const [today, earliest, blockedDate] of [
       await expect(page.locator('#availability-feedback')).toContainText("We require at least 7 days' notice");
       await page.locator('#availability-date').fill(earliest);
       await page.locator('#availability-form button[type="submit"]').click();
-      await expect(page.locator('#availability-ready-button')).toBeVisible();
+      await expect(page.locator('#availability-step-2-panel')).toBeVisible();
       expect(backend.calls[0]).toEqual({ action: 'checkAvailability', eventDate: earliest, quantity: 15 });
     });
   });

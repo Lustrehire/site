@@ -1,4 +1,4 @@
-const { test, expect, booking, available, checkoutUrl, checkDate, fillBooking, reviewBooking } = require('./fixtures');
+const { test, expect, booking, available, checkoutUrl, checkDate, fillBooking, reviewBooking, resumeDirectBooking, captureQuote } = require('./fixtures');
 
 test('homepage smoke @critical', async ({ page }) => {
   await page.goto('/');
@@ -13,8 +13,8 @@ test('homepage smoke @critical', async ({ page }) => {
 test('available date allows continuing @critical', async ({ page, backend }) => {
   await checkDate(page);
   await expect(page.locator('#availability-result')).toContainText('Your date is available');
-  await expect(page.locator('#availability-ready-button')).toBeVisible();
-  await expect(page.locator('#availability-continue-button')).toBeVisible();
+  await expect(page.locator('#availability-step-2-panel')).toBeVisible();
+  await expect(page.locator('#availability-step-2-submit')).toBeVisible();
   expect(backend.calls[0]).toEqual({ action: 'checkAvailability', eventDate: booking.eventDate, quantity: 50 });
 });
 
@@ -46,12 +46,11 @@ test('partial availability offers the available quantity', async ({ page, backen
 
 test('email quote collects customer and event details', async ({ page, backend }) => {
   await checkDate(page);
-  await page.locator('#availability-continue-button').click();
   await page.locator('#availability-full-name').fill(booking.fullName);
   await page.locator('#availability-email').fill(booking.email);
   await page.locator('#availability-step-2-submit').click();
   await expect(page.locator('#availability-step-4-panel')).toBeVisible();
-  await expect(page.locator('#availability-step-4-panel')).toContainText('Quote emailed');
+  await expect(page.locator('#availability-step-4-panel')).toContainText('A copy has been emailed to you.');
   expect(backend.calls.filter(call => call.action === 'saveQuoteBooking')).toHaveLength(1);
   expect(backend.calls.find(call => call.action === 'saveQuoteBooking').bookingData).toMatchObject({
     fullName: booking.fullName, email: booking.email, eventDate: booking.eventDate,
@@ -151,7 +150,7 @@ for (const mode of ['quote', 'direct']) {
       await page.getByRole('link', { name: 'Pay Deposit & Secure My Date' }).click();
     } else {
       await checkDate(page);
-      await page.locator('#availability-ready-button').click();
+      await resumeDirectBooking(page);
     }
     await reviewBooking(page);
     await expect(page.locator('#book-payment-button')).toBeDisabled();
@@ -259,36 +258,15 @@ test('partial quote recalculates deposit after quantity adjustment', async ({ pa
 });
 
 for (const [quantity, hire, deposit] of [[15, '$150', '$75'], [50, '$494', '$247']]) {
-  test(`availability immediately prices ${quantity} candles without personal details`, async ({ page }) => {
+  test(`availability prices ${quantity} candles only after contact submission`, async ({ page }) => {
     await checkDate(page, quantity);
-    const price = page.locator('.availability-price');
-    await expect(price).toBeVisible();
-    await expect(price).toContainText(`Candle hire ${hire}`);
-    await expect(price.locator('.available-deposit')).toContainText(deposit);
-    await expect(page.locator('#availability-full-name')).toHaveValue('');
-    await expect(page.locator('#availability-email')).toHaveValue('');
-    await expect(page.locator('#availability-success-actions button').first()).toHaveAccessibleName(`Secure My Date by Paying a Deposit — ${deposit}`);
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await expect(page.locator('.availability-price')).toHaveCount(0);
+    await captureQuote(page);
+    const quote = page.locator('#availability-created-quote');
+    await expect(quote).toContainText(`Candle hire ${hire}`);
+    await expect(quote).toContainText(`Book with a deposit ${deposit}`);
   });
 }
-
-test('partial availability prices resolved stock before and after adjustment', async ({ page, backend }) => {
-  backend.replies.checkAvailability = { ...available, available: false, partialAvailable: true, maxAvailable: 45 };
-  await checkDate(page, 80);
-  const price = page.locator('.availability-price');
-  await expect(price).toHaveAttribute('aria-label', 'Price for 45 candles');
-  await expect(price).toContainText('Candle hire $449');
-  await expect(price.locator('.available-deposit')).toContainText('$224.50');
-  await page.locator('[data-availability-action="continue-limited"]').click();
-  await expect(price).toContainText('Candle hire $449');
-  await expect(page.locator('#availability-ready-button')).toBeVisible();
-  await expect(page.locator('#availability-continue-button')).toBeVisible();
-  await expect(page.locator('#availability-ready-button')).toHaveAccessibleName('Secure My Date by Paying a Deposit — $224.50');
-  await price.locator('summary').click();
-  await expect(price).toContainText('Refundable bond $449');
-  await expect(price).toContainText('Total to pay before event $898');
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-});
 
 test('payment typography uses existing UI fonts and gives today priority', async ({ page }) => {
   await page.goto('/book.html?quoteToken=test-token');
@@ -322,23 +300,12 @@ test('font imports remain limited to existing site families', async ({ page }) =
   }
 });
 
-test('available view shows hire and deposit, and reveals bond/payment details accessibly', async ({ page }) => {
+test('available view captures contact before showing payment details', async ({ page }) => {
   await checkDate(page, 15);
-  const price = page.locator('.availability-price');
-  await expect(price.locator('.availability-price-hire')).toContainText('Candle hire $150');
-  await expect(price.locator('.available-deposit')).toContainText('$75');
-  await expect(price.locator('.available-deposit')).toContainText('50% deposit');
-  await expect(price.locator('.available-payment-body')).toBeHidden();
-  await price.locator('summary').focus();
-  await page.keyboard.press('Enter');
-  await expect(price.locator('.available-payment-body')).toBeVisible();
-  for (const row of ['Candle hire (15 candles) $150', 'Refundable bond $150', 'Total to pay before event $300']) {
-    await expect(price.locator('dl > div').filter({ hasText: row })).toBeVisible();
-  }
-  await expect(price).toContainText('Your bond is refunded after a satisfactory return');
-  await expect(price).toContainText('due 7 days before pickup');
-  await expect(page.locator('#availability-full-name')).toHaveValue('');
-  await expect(page.locator('#availability-ready-button')).toHaveAccessibleName('Secure My Date by Paying a Deposit — $75');
-  await expect(page.locator('#availability-continue-button')).toHaveAccessibleName('Save My Quote by Email');
+  await expect(page.locator('#availability-step-2-panel')).toBeVisible();
+  await expect(page.locator('.availability-price')).toHaveCount(0);
+  await captureQuote(page);
+  await expect(page.locator('#availability-created-quote')).toContainText('Refundable bond $150');
+  await expect(page.getByRole('link', { name: 'Book now' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

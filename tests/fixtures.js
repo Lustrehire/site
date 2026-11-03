@@ -22,7 +22,7 @@ const test = base.extend({
       calls: [], unexpected: [], errors: [], expectedErrors: [],
       replies: {
         getVerifiedPurchaseReceipt: { success: false },
-        checkAvailability: available,
+        checkAvailability: payload => ({ ...available, eventDate: payload.eventDate, requestedQuantity: payload.quantity }),
         getQuoteByToken: { success: true, status: 'valid', quoteRevalidated: false, booking },
         saveQuoteBooking: { success: true, bookingId: booking.bookingId, quoteToken: 'test-token', quoteStatus: 'sent' },
         createQuoteCheckoutSession: { success: true, checkoutUrl },
@@ -96,4 +96,21 @@ async function reviewBooking(page) {
   await expect(page.locator('#book-review-panel')).toBeVisible();
 }
 
-module.exports = { test, expect, booking, available, checkoutUrl, checkDate, fillBooking, reviewBooking };
+async function captureQuote(page) {
+  await page.locator('#availability-full-name').fill(booking.fullName);
+  await page.locator('#availability-email').fill(booking.email);
+  await page.locator('#availability-step-2-submit').click();
+  await expect(page.locator('#availability-step-4-panel')).toBeVisible();
+}
+
+// Retained legacy direct sessions still need checkout/cancellation coverage.
+async function resumeDirectBooking(page) {
+  await page.evaluate(data => {
+    const context = { ...data, mode: 'direct', hireFee: 494, refundableBond: 494 };
+    sessionStorage.setItem('lustreHirePendingBooking', JSON.stringify(context));
+    window.trackLustreEvent?.('booking_started', window.buildLustreBookingTrackingParams(context, { booking_mode: 'direct' }));
+  }, booking);
+  await page.goto('/book.html');
+}
+
+module.exports = { test, expect, booking, available, checkoutUrl, checkDate, fillBooking, reviewBooking, captureQuote, resumeDirectBooking };

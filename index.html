@@ -120,8 +120,10 @@
   <link rel="stylesheet" href="/availability-dialog.css">
   <link rel="stylesheet" href="/desktop-hero-form.css" media="(min-width: 1024px)">
   <script src="/availability-dialog.js" defer></script>
+  <script src="/estimator-dialog.js" defer></script>
   <link rel="stylesheet" href="/shared-header.css">
   <script src="/public-nav.js" defer></script>
+  <link rel="stylesheet" href="/pricing-section.css">
   <link rel="stylesheet" href="/mobile-navigation.css" media="(max-width: 1100px)">
 <script src="/gallery.js" defer></script>
 </head>
@@ -176,16 +178,28 @@
 
 <main id="main-content">
 <section id="candle-packages" class="cro-section"><span id="pricing" class="anchor-alias" aria-hidden="true"></span>
- <div class="cro-section-heading"><span class="cro-section-kicker"><svg class="cro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h3"/></svg><span class="mobile-v3-desktop">Considered pricing</span><span class="mobile-v3-only">Simple, transparent pricing</span></span><h2><span class="mobile-v3-desktop">Simple, transparent pricing</span><span class="mobile-v3-only">Know the cost before you book.</span></h2><p><span class="mobile-v3-desktop">Flexible quantities. Clear, progressive pricing.</span><span class="mobile-v3-only">Choose your quantity. You’ll pay less for additional candles as your order grows.</span></p></div>
- <div class="cro-price-examples" aria-label="Example candle hire prices">
- <article><div class="pricing-quantity"><span>30</span><small>candles</small></div><strong>$300</strong><p class="desktop-pricing-only pricing-tier-caption">$10 per candle</p><img class="desktop-pricing-only pricing-example-photo" src="/img/gallery-preview/glass-wedding-candles-floral-decor.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></article>
- <article><div class="pricing-quantity"><span>45</span><small>candles</small></div><strong>$449</strong><p class="desktop-pricing-only pricing-tier-caption">From candle 45: $9 each</p><span class="desktop-pricing-only pricing-saving">Save 10% on<br>candles 45–89</span><img class="desktop-pricing-only pricing-example-photo" src="/img/gallery-preview/clustered-candles-wedding-tablescape.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></article>
- <article><div class="pricing-quantity"><span>90</span><small>candles</small></div><strong>$853</strong><p class="desktop-pricing-only pricing-tier-caption">From candle 90: $8 each</p><span class="desktop-pricing-only pricing-saving">Save 20% on<br>candles 90 onwards</span><img class="desktop-pricing-only pricing-example-photo" src="/img/gallery-preview/wedding-reception-table-candle-row.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></article></div>
- <p class="cro-price-caption">Hire fees shown. Refundable bond additional.<span class="desktop-pricing-only pricing-photo-note">Photos show styling inspiration, not exact candle quantities.</span></p>
- <details class="cro-pricing-details"><summary>How pricing works <span aria-hidden="true">→</span></summary> <p class="cro-tier-note">First 44 candles: $10 each · Candles 45–89: $9 each · Candle 90 onward: $8 each.<br>These are progressive tiers: the lower rate applies only to the extra candles in that tier.</p>
- <div class="cro-payment-explainer"><div><h3>Today</h3><p>Pay a <strong>50% booking deposit</strong> to secure your date.</p></div><div><h3>Before pickup</h3><p>Pay the remaining hire balance + a <strong>refundable bond equal to your hire fee</strong>, due 7 days before pickup. We’ll email a secure Stripe payment link.</p></div></div>
- <p class="cro-bond-note">For 30 candles: $150 today + $450 later = $600 paid before your event. $300 is hire; the $300 bond is returned after return and inspection, subject to the hire terms.</p>
-<a class="text-link" href="#candle-sizes">See candle sizes &amp; what’s included →</a></details>
+ <div class="cro-section-heading"><span class="cro-section-kicker">Pricing</span><h2>Simple, progressive pricing</h2><p>The more candles you hire, the lower the rate per candle.</p></div>
+ <div class="pricing-rates" aria-label="Progressive candle hire rates">
+ <article><h3>First 44 candles</h3><p><strong>$10</strong> <span>each</span></p></article>
+ <article><h3>Candles 45–89</h3><p><strong>$9</strong> <span>each</span></p></article>
+ <article><h3>90+ candles</h3><p><strong>$8</strong> <span>each</span></p></article>
+ </div>
+ <div class="pricing-process"><h3>How it works</h3><ol>
+ <li><span class="pricing-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="22" rx="3"/><path d="M10 3v8m12-8v8M5 15h22"/></svg></span><div><h4>Today</h4><p>Pay a <strong>50% deposit</strong> to secure your date.</p></div></li>
+ <li><span class="pricing-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19" rx="3"/><path d="M3 14h26M8 21h5"/></svg></span><div><h4>7 days before pickup</h4><p>Pay the remaining 50% + refundable bond.</p></div></li>
+ <li><span class="pricing-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="11" y="12" width="10" height="17" rx="2"/><rect x="2" y="19" width="9" height="10" rx="2"/><rect x="21" y="19" width="9" height="10" rx="2"/><path d="M16 12V9m0-7c5 5 0 8 0 5-3 1-3-2 0-5ZM6 19v-4m20 4v-4"/></svg></span><div><h4>After your event</h4><p>Return your candles. We’ll refund your bond within 24 hours of inspection.</p></div></li>
+ </ol></div>
+ <div class="pricing-quantity-examples" aria-label="Example hire prices">
+ <h3>Example hire prices</h3>
+ <div class="pricing-example-cards">
+ <article><h4>30 candles</h4><p><strong>$300</strong> hire</p></article>
+ <article><h4>45 candles</h4><p><strong>$449</strong> hire</p></article>
+ <article><h4>90 candles</h4><p><strong>$853</strong> hire</p></article>
+ </div>
+ </div>
+ <details class="pricing-bond-explainer"><summary>Why a refundable bond?</summary><p>The bond equals your hire fee and covers loss, damage or other costs under our <a href="/terms-and-conditions.html">hire terms</a>. Eligible refunds are made within 24 hours of inspection.</p></details>
+ <div class="pricing-actions"><a class="booking-button pricing-quote-button" href="#availability">Get a quote <span aria-hidden="true">→</span></a>
+ <a class="text-link pricing-sizes-link" href="#candle-sizes">See candle sizes &amp; what’s included <span aria-hidden="true">→</span></a></div>
  </section>
 <section id="wedding-estimator-panel" class="cro-section" hidden aria-labelledby="estimator-panel-title"><div class="cro-section-heading"><span class="mobile-v3-kicker">Wedding Candle Estimator</span><h2 id="estimator-panel-title">How many candles will you need?</h2><p>Answer a few quick questions about your tables and styling for a personalised estimate.</p></div><div id="desktop-estimator-content"></div><div class="estimator-highlights" aria-label="About your candle estimate"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg><strong>Quick &amp; easy</strong><p>A few simple<br>questions</p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M8 9V5m8 4V5M12 9V3M4 14c2 3 4-3 6 0s4-3 6 0 4 0 4 0M2 21h20"/></svg><strong>Personalised</strong><p>Based on your<br>tables and styling</p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><strong>No obligation</strong><p>Just an estimate<br>to help you plan</p></div></div></section>
   <section id="availability-checker" class="cro-section"><span id="availability" class="anchor-alias" aria-hidden="true"></span>
@@ -215,15 +229,13 @@
             <div class="form-group">
               <label for="availability-quantity">Candle quantity (min 15)</label>
               <input data-clarity-mask="true" id="availability-quantity" name="availability-quantity" type="number" min="15" inputmode="numeric" placeholder="e.g. 50" required />
-              <p class="availability-helper-copy">
-                Not sure how many candles you need?
-                <a href="#candle-calculator" class="text-link availability-helper-link">Use our candle estimate</a>
-              </p>
+
             </div>
           </div>
           <button type="submit" class="booking-button availability-submit">Check Availability</button>
           <p class="availability-feedback" id="availability-feedback" data-clarity-mask="true" role="status" aria-live="polite"></p>
         </form>
+        <div id="existing-record-access"><button type="button" class="calculator-nav-button" id="existing-record-open" aria-haspopup="dialog">Already have a quote or booking?</button></div>
         <div class="availability-result" id="availability-result" data-clarity-mask="true" hidden></div>
         <div class="availability-success-actions" id="availability-success-actions" hidden>
           <button type="button" class="booking-button availability-ready-button" id="availability-ready-button" hidden>Secure My Date</button>
@@ -234,20 +246,22 @@
       </div>
 
       <div class="availability-panel" id="availability-step-2-panel" hidden>
-        <h3 id="availability-step-2-title">Enter your details</h3>
+        <div id="availability-contact-context" data-clarity-mask="true"></div>
+        <h3 id="availability-step-2-title">Let’s get your quote</h3>
+        <p id="availability-contact-explanation">See your price now, get an emailed copy and book online.</p>
         <form id="availability-booking-form" novalidate>
           <div class="availability-form-grid availability-quote-lite-fields">
             <div class="form-group">
-              <label for="availability-full-name">Full Name</label>
-              <input data-clarity-mask="true" id="availability-full-name" name="availability-full-name" type="text" required />
+              <label for="availability-full-name">Name</label>
+              <input data-clarity-mask="true" id="availability-full-name" name="availability-full-name" autocomplete="name" placeholder="Your full name" type="text" required />
             </div>
             <div class="form-group">
               <label for="availability-email">Email Address</label>
-              <input data-clarity-mask="true" id="availability-email" name="availability-email" type="email" required />
+              <input data-clarity-mask="true" id="availability-email" name="availability-email" autocomplete="email" placeholder="you@example.com" type="email" required />
             </div>
           </div>
           <div class="form-group">
-            <label for="availability-customer-source">How did you first hear about Lustre Hire?</label>
+            <label class="quote-source-label" for="availability-customer-source">How did you hear about us? <span>(optional)</span></label>
             <select data-clarity-mask="true" id="availability-customer-source" name="customerSource">
               <option value="">Select an option</option>
               <option value="Facebook Marketplace">Facebook Marketplace</option>
@@ -301,8 +315,9 @@
             <textarea data-clarity-mask="true" id="availability-notes" name="availability-notes"></textarea>
           </div>
           <div class="availability-panel-actions">
-            <button type="button" class="calculator-nav-button availability-back-button" id="availability-back-to-step-1">Back</button>
-            <button type="submit" class="booking-button availability-submit" id="availability-step-2-submit">Continue</button>
+            <button type="submit" class="booking-button availability-submit" id="availability-step-2-submit">Continue to my quote</button>
+            <p class="quote-email-reassurance">Quote and booking emails, including reminders.<br>No unrelated marketing.</p>
+            <button type="button" class="calculator-nav-button availability-back-button" id="availability-back-to-step-1">← Back to availability</button>
           </div>
           <p class="availability-booking-feedback" id="availability-booking-feedback" data-clarity-mask="true" role="status" aria-live="polite"></p>
         </form>
@@ -333,13 +348,31 @@
 
       <div class="availability-panel" id="availability-step-4-panel" data-clarity-mask="true" hidden>
         <div class="availability-complete-card">
-          <span class="availability-complete-icon" aria-hidden="true">
-            <i class="bi bi-envelope-check"></i>
-          </span>
-          <h3>Quote emailed</h3>
-          <p>Your quote has been sent to your email so you can review it when you are ready.</p>
-          <p class="availability-complete-note">Your quote is valid for 7 days. If you do not see it shortly, have a quick look in your spam or promotions folder as well.</p>
-          <button type="button" class="booking-button availability-complete-button" id="availability-complete-button">Done</button>
+          <h3 tabindex="-1" id="availability-quote-heading">Your quote</h3>
+          <div id="availability-created-quote" data-clarity-mask="true">
+            <p class="quote-summary-context" id="quote-summary-context" data-quote-value></p>
+            <div class="quote-summary-prices">
+              <div><span>Candle hire</span> <strong id="quote-hire-total" data-quote-value></strong></div>
+              <div><span>Average per candle</span> <strong id="quote-unit-price" data-quote-value></strong><small>Hire only</small></div>
+            </div>
+            <div class="quote-deposit-card">
+              <span>Book with a deposit</span> <strong id="quote-deposit-total" data-quote-value></strong>
+              <p>That’s 50% of your hire cost.</p>
+              <a class="booking-button" id="availability-book-quote" href="book.html">Book now <span aria-hidden="true">→</span></a>
+            </div>
+            <details class="quote-later-details">
+              <summary><span><strong>What do I pay later?</strong><small>Remaining hire balance + refundable bond</small></span><span class="quote-chevron" aria-hidden="true"></span></summary>
+              <div class="quote-later-body">
+                <p>Due 7 days before pickup: <strong id="quote-final-total" data-quote-value></strong></p>
+                <dl><div><dt>Remaining hire balance</dt> <dd id="quote-remaining-total" data-quote-value></dd></div><div><dt>Refundable bond</dt> <dd id="quote-bond-total" data-quote-value></dd></div></dl>
+                <p>The bond covers loss, damage or other costs under our <a href="/terms-and-conditions.html" target="_blank" rel="noopener">hire terms</a>. Eligible refunds are made within 24 hours of inspection.</p>
+              </div>
+            </details>
+            <p class="quote-deposit-reassurance">Only your deposit is charged when you book.</p>
+          </div>
+          <p class="quote-email-confirmation" role="status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg>A copy has been emailed to you.</p>
+          <p class="availability-complete-note">Quote valid for 7 days, subject to availability.<br>Your paid deposit secures your date.</p>
+          <button type="button" class="text-link availability-complete-button" id="availability-complete-button">Done</button>
         </div>
       </div>
     </div>
@@ -598,9 +631,9 @@
             <div class="calculator-result-main">
               <span class="calculator-result-eyebrow">Recommended quantity</span>
               <strong class="calculator-result-range-display" id="calculator-result-range"></strong>
-              <p class="calculator-result-cost-line">Estimated hire from <strong id="calculator-result-price"></strong></p>
+              <p class="calculator-result-cost-line">Check your date to get your personalised quote.</p>
             </div>
-            <p class="calculator-result-disclaimer">This estimate is intended as a helpful starting point. Final recommendations may vary depending on your venue layout, styling preferences, and how full you want the candle setup to feel.</p>
+            <p class="calculator-result-disclaimer"><span class="estimator-result-full-note">This estimate is intended as a helpful starting point. Final recommendations may vary depending on your venue layout, styling preferences, and how full you want the candle setup to feel.</span><span class="estimator-result-short-note">Use this as a starting point. Your venue layout and styling may change the quantity you need.</span></p>
             <div class="calculator-cta-row">
               <button type="button" class="booking-button" id="calculator-check-date">Check Availability</button>
             </div>
@@ -614,6 +647,12 @@
   </section>
 
 <section id="benefits" class="cro-section"><span id="diy-practical" class="anchor-alias" aria-hidden="true"></span><div class="cro-section-heading"><span class="cro-section-kicker"><svg class="cro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4C9 2 3 7 5 14s14 7 15-10ZM4 21 16 9"/></svg>Less prep. More celebration.</span><h2>You do the styling. We’ll handle the messy bits.</h2><p>Doing your own wedding or event styling doesn’t mean making everything yourself. We’ve taken care of the candle prep so you have less to organise.</p></div><div class="cro-benefits"><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c1 6 8 8 8 14a8 8 0 0 1-16 0c0-4 3-7 5-9 0 4 2 5 3 5 2-3 0-6 0-10Z"/><path d="M12 14c4 4 4 7 0 8-4-1-4-4 0-8Z"/></svg><h3>Ready to light</h3><p>No filling, pouring or assembling. Your candles are already prepared.</p></article><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-4 9 4v10l-9 4-9-4V7Zm0 0 9 4 9-4M12 11v10M7.5 5l9 4"/></svg><h3>Packed and ready</h3><p>Securely packed in protective boxes, ready for collection and easy to repack.</p></article><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3 2 6 6 2-6 2-2 6-2-6-6-2 6-2ZM19 1l1 3 3 1-3 1-1 3-1-3-3-1 3-1ZM19 16l1 3 3 1-3 1-1 3-1-3-3-1 3-1Z"/></svg><h3>Style them your way</h3><p>Create the look you want without spending hours preparing candles yourself.</p></article><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 3C8 2 3 7 5 14s13 8 15-11ZM5 21 16 9M10 15l-1-5"/></svg><h3>No cleaning afterwards</h3><p>Blow them out, pack them up and return them. We’ll take care of the cleaning.</p></article></div><a href="#availability" class="cro-outline-link journey-booking-cta" data-availability-focus>Check Your Date <span aria-hidden="true">→</span></a></section>
+<section id="estimator-cta" class="cro-section cro-ready" aria-labelledby="estimator-cta-title"><div>
+  <span class="mobile-v3-kicker">Planning your candlelight?</span>
+  <h2 id="estimator-cta-title">Not sure how many candles you need?</h2>
+  <p class="mobile-v3-cta-copy">Find a starting point for your tables and styling with our Wedding Candle Estimator.</p>
+  <button type="button" class="booking-button" data-open-estimator>Estimate my candle quantity <span aria-hidden="true">→</span></button>
+</div></section>
 <section id="gallery-preview" class="cro-section"><div class="cro-section-heading"><span class="cro-section-kicker"><svg class="cro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 5-5 4 4 4-6 5 7"/></svg><span class="mobile-v3-desktop">The inspiration</span><span class="mobile-v3-only">Wedding inspiration</span></span><h2><span class="mobile-v3-desktop">See the candles styled for celebrations</span><span class="mobile-v3-only">A little glow goes a long way.</span></h2><p><span class="mobile-v3-desktop">Get inspired by our glass candle vessels, warm reception details and different styling ideas.</span><span class="mobile-v3-only">See the candles styled at receptions and ceremonies.</span></p></div><div class="cro-gallery-preview"><!-- HOME_GALLERY_IMAGES_START -->
 <a href="/img/gallery-managed/full/Pin%2016.jpg.jpg" data-gallery-image aria-label="Open image: Pin 16"><img src="/img/gallery-managed/previews/Pin%2016.jpg.jpg" srcset="/img/gallery-managed/previews/Pin%2016.jpg.jpg 480w, /img/gallery-managed/full/Pin%2016.jpg.jpg 896w" sizes="(max-width: 767px) 90vw, (min-width: 1101px) 768px, 45vw" alt="Pin 16" width="896" height="1280" loading="lazy" decoding="async"></a>
 <a href="/img/gallery-managed/full/IMG_7593.jpeg.jpg" data-gallery-image aria-label="Open image: IMG 7593"><img src="/img/gallery-managed/previews/IMG_7593.jpeg.jpg" srcset="/img/gallery-managed/previews/IMG_7593.jpeg.jpg 480w, /img/gallery-managed/full/IMG_7593.jpeg.jpg 1600w" sizes="(max-width: 767px) 90vw, (min-width: 1101px) 768px, 45vw" alt="IMG 7593" width="1600" height="1200" loading="lazy" decoding="async"></a>
@@ -683,7 +722,7 @@
 <section id="faq" class="cro-section"><div class="cro-section-heading"><span class="mobile-v3-only mobile-v3-kicker">Common questions</span><h2><span class="mobile-v3-desktop">Frequently asked questions</span><span class="mobile-v3-only">Good to know.</span></h2><p>Find quick answers below, or view all FAQs for more detail.</p></div><div class="faq-list" id="faq-list"><!-- FAQ_ITEMS_START -->
 <div class="faq-item" data-faq-category="pricing booking" data-faq-search="how many candles do i need for my wedding candle estimate calculator quantity tables styling full recommendation">
     <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-0" id="faq-question-0"><strong>How many candles do I need for my wedding?</strong><span class="cro-faq-icon" aria-hidden="true"></span></button>
-    <div class="answer" id="faq-answer-0" role="region" aria-labelledby="faq-question-0"><p>It depends on your table count, layout, and how full you want the styling to feel. You can use our candle estimate calculator for a general guide, or get in touch for a more tailored recommendation.</p></div>
+    <div class="answer" id="faq-answer-0" role="region" aria-labelledby="faq-question-0"><p>It depends on your table count, layout, and how full you want the styling to feel. You can use our candle estimate calculator for a general guide, or get in touch for a more tailored recommendation.</p><button type="button" class="booking-button faq-estimator-button" data-open-estimator>Try the Wedding Candle Estimator <span aria-hidden="true">→</span></button></div>
   </div>
 <div class="faq-item" data-faq-category="pickup booking" data-faq-search="do you offer delivery pickup bull creek standard option">
     <button class="faq-question" type="button" aria-expanded="false" aria-controls="faq-answer-1" id="faq-question-1"><strong>Do you offer delivery?</strong><span class="cro-faq-icon" aria-hidden="true"></span></button>
@@ -711,11 +750,11 @@
       <form id="contact-modal-form" action="https://formspree.io/f/moverenq" method="POST">
         <div class="form-group">
           <label for="contact-modal-name">Name</label>
-          <input data-clarity-mask="true" id="contact-modal-name" name="full-name" placeholder="Your name" autocomplete="name" type="text" required />
+          <input data-clarity-mask="true" id="contact-modal-name" name="full-name" placeholder="Your name" autocomplete="name" placeholder="Your full name" type="text" required />
         </div>
         <div class="form-group">
           <label for="contact-modal-email">Email</label>
-          <input data-clarity-mask="true" id="contact-modal-email" name="email" placeholder="your@email.com" autocomplete="email" type="email" required />
+          <input data-clarity-mask="true" id="contact-modal-email" name="email" placeholder="your@email.com" autocomplete="email" placeholder="you@example.com" type="email" required />
         </div>
         <div class="form-group">
           <label for="contact-modal-message">Message</label>
@@ -723,7 +762,28 @@
         </div>
         <button type="submit" class="booking-button contact-modal-submit">Send Message</button>
       </form></div></section>
+<dialog id="existing-record-dialog" aria-labelledby="existing-record-title">
+  <div class="record-dialog-bar"><span>Welcome back</span><button type="button" id="existing-record-close" aria-label="Close retrieval">×</button></div>
+  <div class="record-dialog-body">
+    <section id="existing-record-email-panel">
+      <h2 id="existing-record-title">Find your quote or booking</h2>
+      <p>Enter your quote or booking reference and the email address you used with Lustre Hire. You’ll find your reference in your quote or confirmation email.</p>
+      <form id="existing-record-email-form" data-lookup-endpoint="https://script.google.com/macros/s/AKfycbxajjPE4vCpTJZSIHRXWy_IZk5Sw3Rkpe4eKthR_0dw6eSoCKjMNqZjKiLZcjTwDy5ZgA/exec">
+        <label for="existing-record-reference">Quote or booking reference</label>
+        <input data-clarity-mask="true" id="existing-record-reference" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="64" placeholder="LH-…" aria-describedby="existing-record-reference-help" required>
+        <p id="existing-record-reference-help" data-clarity-mask="true" class="record-reference-help">Copy the full reference, including the letters at the end.</p>
+        <label for="existing-record-email">Email address</label>
+        <input data-clarity-mask="true" id="existing-record-email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <button type="submit" class="booking-button" id="existing-record-next">Next <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+    <section id="existing-record-result" data-clarity-mask="true" hidden aria-label="Retrieved record"></section>
+    <p id="existing-record-email-feedback" data-clarity-mask="true" role="status" aria-live="polite"></p>
+    <p class="record-lookup-limit">Only the record matching both details will be shown. Looking it up won’t send an email or take a payment.</p>
+  </div>
+</dialog>
 </main>
+  <script src="/existing-record-access.js" defer></script>
   <script src="/cro-interactions.js" defer></script>
   <script src="/faq.js" defer></script>
   <script src="./shared-date.js"></script>
@@ -852,7 +912,6 @@
       const calculatorTablesSummary = document.getElementById("calculator-tables-summary");
       const calculatorResultTables = document.getElementById("calculator-result-tables");
       const calculatorResultRange = document.getElementById("calculator-result-range");
-      const calculatorResultPrice = document.getElementById("calculator-result-price");
       const calculatorSummaryChips = document.getElementById("calculator-summary-chips");
       const calculatorSteps = calculatorForm ? Array.from(calculatorForm.querySelectorAll(".calculator-step")) : [];
       let calculatorStepIndex = 0;
@@ -973,6 +1032,41 @@
         const quoteStorageKey = "lustreHirePendingQuote";
         let latestAvailabilityResult = null;
         let availabilityJourneyMode = "";
+        let quoteSubmissionPending = false;
+        const quoteCacheKey = "lustreHireQuoteRequests";
+        const readQuoteRequests = () => {
+          try { return JSON.parse(sessionStorage.getItem(quoteCacheKey)) || {}; } catch { return {}; }
+        };
+        const quoteRequests = readQuoteRequests();
+        const persistQuoteRequests = () => {
+          try { sessionStorage.setItem(quoteCacheKey, JSON.stringify(quoteRequests)); } catch { /* In-memory deduplication still works. */ }
+        };
+        const displayCreatedQuote = (booking) => {
+          const amounts = window.LustreHirePayment.calculate(booking.hireFee);
+          const currency = window.LustreHirePayment.currency;
+          const values = {
+            "quote-summary-context": `${booking.quantity} candles · ${formatAvailabilityDisplayDate(booking.eventDate)}`,
+            "quote-hire-total": currency(booking.hireFee),
+            "quote-unit-price": new Intl.NumberFormat("en-AU", { style: "currency", currency: "AUD", minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(booking.hireFee / booking.quantity),
+            "quote-deposit-total": currency(amounts.depositAmount),
+            "quote-final-total": currency(amounts.finalPaymentAmount),
+            "quote-remaining-total": currency(amounts.remainingHireAmount),
+            "quote-bond-total": currency(amounts.bondAmount),
+          };
+          for (const [id, text] of Object.entries(values)) document.getElementById(id).textContent = text;
+          document.querySelector(".quote-later-details").open = false;
+          const bookLink = document.getElementById("availability-book-quote");
+          const url = new URL("book.html", window.location.href);
+          url.searchParams.set("quoteToken", booking.quoteToken);
+          bookLink.href = url.href;
+          bookLink.onclick = () => {
+            sessionStorage.setItem(bookingStorageKey, JSON.stringify(booking));
+            sessionStorage.setItem(quoteStorageKey, JSON.stringify(booking));
+            window.trackLustreEvent?.("booking_started", window.buildLustreBookingTrackingParams?.(booking, { booking_mode: "quote" }) || {});
+          };
+          showAvailabilityStep(4);
+          document.getElementById("availability-quote-heading").focus({ preventScroll: true });
+        };
 
         const renderBookingFlowProgress = (stepNumber) => {
           if (bookingFlowProgressCount) {
@@ -999,14 +1093,14 @@
 
           if (availabilityStep2Title) {
             availabilityStep2Title.textContent = mode === "quote"
-              ? "Enter your details for your quote"
+              ? "Let’s get your quote"
               : mode === "booking"
                 ? "Enter your booking details"
                 : "Enter your details";
           }
 
           if (availabilityStep2Submit) {
-            availabilityStep2Submit.textContent = mode === "quote" ? "Email My Quote" : "Review Booking";
+            availabilityStep2Submit.textContent = mode === "quote" ? "Continue to my quote" : "Review Booking";
           }
 
           if (availabilityStep3Title) {
@@ -1091,6 +1185,7 @@
           // The result replaces the entry form in this panel. Keep its nodes and
           // values for Edit Details; hidden also removes the fields from tab order.
           availabilityForm.hidden = hasResult;
+          document.getElementById("existing-record-access").hidden = hasResult;
           availabilityResult.hidden = !hasResult;
           availabilityCheckerSection.dispatchEvent(new CustomEvent("lustre:availability-view", { detail: { hasResult } }));
         };
@@ -1189,15 +1284,29 @@
                 <span class="availability-success-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span>
                 <div class="availability-success-copy"><h4>Your date is available!</h4><p>${eventDateDisplay} · ${quantityLabel}</p></div>
               </div>
-              ${renderAvailabilityPrice(requestedQuantity, true)}
+
               <div class="available-reservation-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6h5"/></svg><div><strong>Your date isn't reserved just yet</strong><p>Availability can change until your booking deposit is paid.</p></div></div>
             </div>
           `;
           setAvailabilityResultState(true);
-          setAvailabilityConfirmedState(true);
-          availabilityReadyButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg><span>Secure My Date by Paying a Deposit — ${window.LustreHirePayment.currency(window.LustreHirePayment.calculate(calculateHireFee(requestedQuantity)).depositAmount)}</span><span aria-hidden="true">→</span>`;
-          availabilityContinueButton.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Save My Quote by Email</span>';
-          showAvailabilityStep(1);
+          setAvailabilityConfirmedState(false);
+          setAvailabilityJourneyMode("quote");
+          const contactContext = document.getElementById("availability-contact-context");
+          contactContext.replaceChildren();
+          for (const [kind, text] of [["date", eventDateDisplay], ["quantity", quantityLabel]]) {
+            const item = document.createElement("span");
+            item.className = `quote-context-${kind}`;
+            const icon = document.createElement("span");
+            icon.setAttribute("aria-hidden", "true");
+            icon.innerHTML = kind === "date"
+              ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v5m8-5v5M4 11h16"/></svg>'
+              : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="10" width="10" height="12" rx="1"/><path d="M12 10V7m0-6c4 4 3 6 0 6s-4-2 0-6Z"/></svg>';
+            item.append(icon, document.createTextNode(text));
+            contactContext.append(item);
+          }
+          showAvailabilityStep(2);
+          window.trackLustreEvent?.("quote_contact_viewed", { quantity: requestedQuantity });
+
         };
 
         const renderAvailabilityLimitedState = (resultData, requestedQuantity, maxAvailable) => {
@@ -1215,7 +1324,7 @@
                   <h4>This date is almost booked out</h4><p>${eventDateDisplay} · Up to ${maxAvailable} candles</p>
                 </div>
               </div>
-              ${renderAvailabilityPrice(maxAvailable, true)}
+
               <p class="availability-success-note">We can’t do ${requestedQuantity} candles for this date, but we currently have up to ${maxAvailable} candles available.</p>
               <div class="availability-result-actions availability-result-actions-triple">
                 <button type="button" class="booking-button" data-availability-action="continue-limited">Continue with ${maxAvailable} candles</button>
@@ -1247,7 +1356,7 @@
               <p class="availability-success-note">We do not currently have enough candles available to accept another booking for this date.</p>
               <div class="availability-result-actions">
                 <button type="button" class="calculator-nav-button" data-availability-action="change-date">Try another date</button>
-                <button type="button" class="booking-button" data-availability-action="contact-us">Contact us</button>
+                <button type="button" class="calculator-nav-button" data-availability-action="contact-us">Contact us</button>
               </div>
             </div>
           `;
@@ -1395,6 +1504,7 @@
             availabilityReviewFeedback.classList.remove("is-error");
           }
           availabilityBookingSummary.innerHTML = "";
+          document.querySelectorAll("#availability-created-quote [data-quote-value]").forEach(node => { node.textContent = ""; });
           availabilityResult.hidden = true;
           availabilityResult.innerHTML = "";
           availabilityResult.classList.remove("is-error");
@@ -1508,7 +1618,6 @@
           availabilityResult.classList.remove("is-error");
           availabilityResult.hidden = true;
           availabilityResult.innerHTML = "";
-          availabilityBookingForm.reset();
           availabilityBookingFeedback.textContent = "";
           availabilityBookingFeedback.classList.remove("is-error");
           if (availabilityReviewFeedback) {
@@ -1695,35 +1804,6 @@
           }
         });
 
-        availabilityReadyButton?.addEventListener("click", () => {
-          if (!latestAvailabilityResult?.available) return;
-          const eventDate = getStringValue(latestAvailabilityResult.eventDate) || availabilityDateField?.value || "";
-          const quantity = getNumberFromValue(latestAvailabilityResult.requestedQuantity) || Number(availabilityQuantityField?.value || 0);
-          const hireFee = calculateHireFee(quantity);
-          const directBookingContext = {
-            mode: "direct",
-            customerSource: getBookingFormValues().customerSource,
-            eventDate,
-            quantity,
-            pickupDate: getStringValue(latestAvailabilityResult.pickupDate),
-            returnDate: getStringValue(latestAvailabilityResult.returnDate),
-            hireFee,
-            refundableBond: hireFee,
-          };
-
-          sessionStorage.setItem(bookingStorageKey, JSON.stringify(directBookingContext));
-          sessionStorage.removeItem(quoteStorageKey);
-
-          window.trackLustreEvent?.("booking_started", window.buildLustreBookingTrackingParams?.(directBookingContext, {
-            booking_mode: "direct",
-          }) || {});
-
-          if (availabilityReadyButton instanceof HTMLButtonElement) {
-            setButtonLoadingState(availabilityReadyButton, true, "Opening Booking...");
-          }
-
-          window.location.href = new URL("book.html", window.location.href).href;
-        });
 
         availabilityEditButton?.addEventListener("click", () => {
           setAvailabilityJourneyMode("");
@@ -1739,8 +1819,7 @@
         });
 
         availabilityBackToStep1?.addEventListener("click", () => {
-          setAvailabilityJourneyMode("");
-          showAvailabilityStep(1);
+          availabilityEditButton?.click();
         });
 
         availabilityBackToStep2?.addEventListener("click", () => {
@@ -1783,6 +1862,8 @@
         availabilityBookingForm.addEventListener("submit", async (event) => {
           event.preventDefault();
           const step2SubmitButton = availabilityStep2Submit;
+          if (quoteSubmissionPending) return;
+          if (!availabilityBookingForm.reportValidity()) return;
 
           if (!latestAvailabilityResult?.available) {
             availabilityBookingFeedback.textContent = "Check availability before entering booking details.";
@@ -1827,61 +1908,51 @@
             }
 
             const { booking } = payload;
-            sessionStorage.setItem(bookingStorageKey, JSON.stringify(booking));
-
-            if (step2SubmitButton instanceof HTMLButtonElement) {
-              setButtonLoadingState(step2SubmitButton, true, "Sending Quote...");
+            const identity = JSON.stringify([booking.eventDate, booking.quantity, booking.fullName, booking.email.toLowerCase()]);
+            let request = quoteRequests[identity];
+            if (!request || Date.now() - request.createdAt >= 7 * 24 * 60 * 60 * 1000 ||
+                (request.booking?.quoteExpiresAt && Date.parse(request.booking.quoteExpiresAt) <= Date.now())) {
+              request = quoteRequests[identity] = { id: crypto.randomUUID(), createdAt: Date.now() };
+              persistQuoteRequests();
             }
-            setStatusLoadingState(availabilityBookingFeedback, "Sending your quote...", true);
-
+            if (request.booking) {
+              displayCreatedQuote(request.booking);
+              return;
+            }
+            quoteSubmissionPending = true;
+            setButtonLoadingState(step2SubmitButton, true, "Preparing your quote...");
+            setStatusLoadingState(availabilityBookingFeedback, "Preparing and emailing your quote...", true);
             try {
-              const quoteRequestPayload = {
-                action: "saveQuoteBooking",
-                bookingData: booking,
-              };
-
               const response = await fetchWithTimeout(availabilityEndpoint, {
                 method: "POST",
-                headers: {
-                  "Content-Type": "text/plain;charset=utf-8",
-                },
-                body: JSON.stringify(quoteRequestPayload),
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "saveQuoteBooking", bookingData: booking, requestId: request.id }),
               }, 12000);
-
               const result = await readJsonResponse(response);
-
-
-              if (!response.ok || !result) {
+              if (!response.ok || result?.success !== true || !result.quoteToken || !result.bookingId) {
                 throw new Error("quote_request_failed");
               }
-
-              if (!result?.success) {
-                throw new Error("quote_request_failed");
-              }
-
               const quoteBooking = {
-                ...booking,
-                bookingId: result.bookingId || "",
-                quoteToken: result.quoteToken || "",
-                quoteStatus: result.quoteStatus || "sent",
+                ...booking, bookingId: result.bookingId, quoteToken: result.quoteToken,
+                quoteStatus: result.quoteStatus || "sent", quoteExpiresAt: result.quoteExpiresAt || "",
               };
-
-              window.trackLustreQuoteGenerated?.(quoteBooking);
+              request.booking = quoteBooking;
+              persistQuoteRequests();
               sessionStorage.setItem(bookingStorageKey, JSON.stringify(quoteBooking));
               sessionStorage.setItem(quoteStorageKey, JSON.stringify(quoteBooking));
+              window.trackLustreQuoteGenerated?.(quoteBooking);
               availabilityBookingFeedback.textContent = "";
-              availabilityBookingFeedback.classList.remove("status-loading");
-              availabilityBookingFeedback.classList.remove("is-error");
-              showAvailabilityStep(4);
+              availabilityBookingFeedback.classList.remove("status-loading", "is-error");
+              // Do not reveal a result for a different date edited during the request.
+              if (!availabilityStep2Panel.hidden && latestAvailabilityResult?.available && availabilityDateField.value === booking.eventDate &&
+                  Number(availabilityQuantityField.value) === booking.quantity) displayCreatedQuote(quoteBooking);
             } catch (error) {
-              console.error("[QUOTE DEBUG] saveQuoteBooking error:");
-              availabilityBookingFeedback.textContent = "We couldn’t complete that step right now. Your booking has not been placed yet. Please try again.";
+              availabilityBookingFeedback.textContent = "We couldn’t confirm your quote was saved and emailed. Your details are still here. Please try again; no booking or payment has been made.";
               availabilityBookingFeedback.classList.add("is-error");
               availabilityBookingFeedback.classList.remove("status-loading");
             } finally {
-              if (step2SubmitButton instanceof HTMLButtonElement) {
-                setButtonLoadingState(step2SubmitButton, false);
-              }
+              quoteSubmissionPending = false;
+              setButtonLoadingState(step2SubmitButton, false);
             }
 
             return;
@@ -2445,7 +2516,7 @@
           }
 
           calculatorResultRange.textContent = `Around ${result.lowEnd} to ${result.highEnd} candles`;
-          calculatorResultPrice.textContent = `From ${formatCurrency(result.estimatedStartingPrice)}`;
+          // Quantity recommendation stays visible; pricing follows contact submission.
           if (calculatorSummaryChips) {
             const summaryItems = result.setupSummary.length ? result.setupSummary : ["Estimate based on your selections"];
             calculatorSummaryChips.innerHTML = summaryItems

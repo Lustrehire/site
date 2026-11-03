@@ -1,4 +1,4 @@
-const { test, expect, booking, checkoutUrl, checkDate, reviewBooking } = require('./fixtures');
+const { test, expect, booking, checkoutUrl, checkDate, reviewBooking, resumeDirectBooking } = require('./fixtures');
 
 async function events(page, name) {
   return page.evaluate(name => (window.dataLayer || []).filter(e => e[0] === 'event' && e[1] === name).map(e => e[2]), name);
@@ -24,11 +24,10 @@ for (const path of ['index.html', 'book.html', 'quote.html', 'payment-success.ht
 
 test('availability is not a quote; saved quote is not a purchase', async ({ page }) => {
   await checkDate(page);
-  await expect(page.locator('#availability-ready-button')).toBeVisible();
+  await expect(page.locator('#availability-step-2-panel')).toBeVisible();
   expect(await events(page, 'availability_check')).toHaveLength(1);
   expect(await events(page, 'availability_result')).toMatchObject([{ availability_status: 'available' }]);
   expect(await events(page, 'quote_generated')).toHaveLength(0);
-  await page.locator('#availability-continue-button').click();
   await page.locator('#availability-full-name').fill(booking.fullName);
   await page.locator('#availability-email').fill(booking.email);
   await page.locator('#availability-step-2-submit').click();
@@ -43,7 +42,7 @@ for (const mode of ['direct', 'quote']) {
   test(`${mode}: journey, review, failed checkout, retry and cancellation`, async ({ page, backend }) => {
     if (mode === 'direct') {
       await checkDate(page);
-      await page.locator('#availability-ready-button').click();
+      await resumeDirectBooking(page);
     } else {
       await page.goto('/quote.html?quoteToken=test-token');
       await page.getByRole('link', { name: 'Pay Deposit & Secure My Date' }).click();
@@ -127,11 +126,10 @@ test('invalid availability and failed quote save do not produce success events',
   backend.replies.saveQuoteBooking = { success: false };
   backend.expectedErrors.push(/^\[QUOTE DEBUG\] saveQuoteBooking error:/);
   await checkDate(page);
-  await page.locator('#availability-continue-button').click();
   await page.locator('#availability-full-name').fill(booking.fullName);
   await page.locator('#availability-email').fill(booking.email);
   await page.locator('#availability-step-2-submit').click();
-  await expect(page.locator('#availability-booking-feedback')).toContainText('couldn’t complete');
+  await expect(page.locator('#availability-booking-feedback')).toContainText('couldn’t confirm');
   expect(await events(page, 'quote_generated')).toHaveLength(0);
 });
 
@@ -178,7 +176,7 @@ for (const mode of ['direct', 'quote']) {
       if (mode === 'quote') await page.goto('/book.html?quoteToken=test-token');
       else {
         await checkDate(page);
-        await page.locator('#availability-ready-button').click();
+        await resumeDirectBooking(page);
       }
       await reviewBooking(page);
       await page.locator('#book-terms-checkbox').check();

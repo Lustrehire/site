@@ -1,12 +1,11 @@
-const { test, expect, booking, checkoutUrl, checkDate, reviewBooking } = require('./fixtures');
+const { test, expect, booking, checkoutUrl, checkDate, reviewBooking, captureQuote } = require('./fixtures');
 
 for (const customerSource of ['Facebook Marketplace', '']) {
   test(`email quote saves optional source: ${customerSource || 'unanswered'}`, async ({ page, backend }) => {
     await checkDate(page);
-    await page.locator('#availability-continue-button').click();
-    await page.locator('#availability-full-name').fill(booking.fullName);
+      await page.locator('#availability-full-name').fill(booking.fullName);
     await page.locator('#availability-email').fill(booking.email);
-    await page.getByLabel('How did you first hear about Lustre Hire?').selectOption(customerSource);
+    await page.getByLabel(/How did you (?:first hear about Lustre Hire|hear about us)\?/).selectOption(customerSource);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.locator('#availability-step-2-submit').click();
     await expect(page.locator('#availability-step-4-panel')).toBeVisible();
@@ -28,12 +27,13 @@ for (const mode of ['quote', 'direct']) {
         await page.evaluate(data => sessionStorage.setItem('lustreHirePendingBooking', JSON.stringify(data)), data);
         await page.goto('/book.html');
       }
-      const source = page.getByLabel('How did you first hear about Lustre Hire?');
+      const source = page.getByLabel(/How did you (?:first hear about Lustre Hire|hear about us)\?/);
       await expect(source).toHaveValue(initialSource || '');
       await expect(source).not.toHaveAttribute('required');
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       // Legacy quotes may remain unanswered; existing answers can be changed.
       const selected = initialSource ? 'Instagram' : '';
+      if (!(await source.isVisible())) await page.locator('#book-source-details summary').click();
       await source.selectOption(selected);
       const action = mode === 'quote' ? 'createQuoteCheckoutSession' : 'createCheckoutSession';
       // A backend returning booking data without this new field must not erase it.
@@ -45,7 +45,8 @@ for (const mode of ['quote', 'direct']) {
       expect(backend.calls.find(call => call.action === action).bookingData.customerSource).toBe(selected);
       await page.goto('/payment-cancelled.html');
       await page.locator('#payment-cancelled-resume-link').click();
-      await expect(source).toBeVisible();
+      if (selected) await expect(page.locator('#book-source-details')).not.toHaveAttribute('open', '');
+      else await expect(source).toBeVisible();
       await expect(source).toHaveValue(selected);
       const confirmAction = mode === 'quote' ? 'markQuoteAsConfirmed' : 'saveConfirmedBooking';
       backend.replies[confirmAction] = { success: true, paymentVerified: true, bookingId: booking.bookingId };
@@ -56,19 +57,18 @@ for (const mode of ['quote', 'direct']) {
   }
 }
 
-test('direct booking collects Facebook Marketplace at checkout', async ({ page, backend }) => {
+test('immediate quote booking retains Facebook Marketplace at checkout', async ({ page, backend }) => {
   await checkDate(page);
-  await page.locator('#availability-continue-button').click();
-  await page.getByLabel('How did you first hear about Lustre Hire?').selectOption('Facebook Marketplace');
-  await page.locator('#availability-back-to-step-1').click();
-  await page.locator('#availability-ready-button').click();
-  await expect(page.getByLabel('How did you first hear about Lustre Hire?')).toHaveValue('Facebook Marketplace');
+  await page.getByLabel(/How did you (?:first hear about Lustre Hire|hear about us)\?/).selectOption('Facebook Marketplace');
+  await captureQuote(page);
+  await page.getByRole('link', { name: 'Book now' }).click();
+  await expect(page.getByLabel(/How did you (?:first hear about Lustre Hire|hear about us)\?/)).toHaveValue('Facebook Marketplace');
   await reviewBooking(page);
   await page.locator('#book-terms-checkbox').check();
   await page.locator('#book-payment-button').click();
   await expect(page).toHaveURL(checkoutUrl);
-  expect(backend.calls.find(call => call.action === 'createCheckoutSession').bookingData.customerSource).toBe('Facebook Marketplace');
+  expect(backend.calls.find(call => call.action === 'createQuoteCheckoutSession').bookingData.customerSource).toBe('Facebook Marketplace');
   await page.goto('/payment-cancelled.html');
   await page.locator('#payment-cancelled-resume-link').click();
-  await expect(page.getByLabel('How did you first hear about Lustre Hire?')).toHaveValue('Facebook Marketplace');
+  await expect(page.getByLabel(/How did you (?:first hear about Lustre Hire|hear about us)\?/)).toHaveValue('Facebook Marketplace');
 });

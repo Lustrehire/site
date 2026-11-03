@@ -1,0 +1,65 @@
+/* Visible, mobile-first pricing explanation using the homepage palette and type. */
+.cro-home #main-content #candle-packages { display: block; position: relative; }
+.cro-home #candle-packages .pricing-rates { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+.cro-home #candle-packages .pricing-rates article { padding: 14px 5px; border-radius: 16px; background: #f0f1e9; text-align: center; }
+.cro-home #candle-packages .pricing-rates h3 { font-family: inherit; font-size: 12px; font-weight: 600; color: #184d30; margin: 0 0 8px; line-height: 1.4; }
+.cro-home #candle-packages .pricing-rates p { margin: 0; color: #1c291f; white-space: nowrap; text-align: center; }
+.cro-home #candle-packages .pricing-rates strong { font-family: Georgia, 'Times New Roman', serif; font-size: 32px; font-weight: 400; line-height: 1.1; }
+.cro-home #candle-packages .pricing-rates p span { font-size: 12px; }
+.cro-home #candle-packages .pricing-rates article:last-child { background: #224532; }
+.cro-home #candle-packages .pricing-rates article:last-child :is(h3,p) { color: #fff; }
+.cro-home #candle-packages .pricing-process { margin-top: 16px; padding: 16px; border-radius: 20px; background: #edf2e8; }
+.cro-home #candle-packages .pricing-process > h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 28px; font-weight: 400; margin: 0 0 16px; color: #1c291f; }
+.cro-home #candle-packages .pricing-process ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.cro-home #candle-packages .pricing-process li { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 12px; }
+.cro-home #candle-packages .pricing-step-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #e0e8d8; color: #184d30; }
+.cro-home #candle-packages .pricing-step-icon svg { width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.cro-home #candle-packages .pricing-process h4 { font-family: inherit; color: #1c291f; font-size: 16px; margin: 0 0 6px; }
+.cro-home #candle-packages .pricing-process p { font-size: 14px; line-height: 1.6; margin: 0; color: #1c291f; }
+.cro-home #candle-packages .pricing-process p strong { font-weight: 500; }
+.cro-home #candle-packages .pricing-sizes-link { display: flex; justify-content: center; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; color: #184d30; text-underline-offset: 5px; }
+@media (min-width: 768px) {
+ .cro-home #candle-packages .pricing-rates { gap: 12px; }
+ .cro-home #candle-packages .pricing-rates article { padding: 16px 8px; }
+ .cro-home #candle-packages .pricing-rates h3 { font-size: 15px; }
+ .cro-home #candle-packages .pricing-rates strong { font-size: 40px; }
+ .cro-home #candle-packages .pricing-process ol { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
+ .cro-home #candle-packages .pricing-process li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+ .cro-home #candle-packages .pricing-step-icon { width: 48px; height: 48px; }
+}
+@media (max-width: 359px) {
+ .cro-home #candle-packages .pricing-rates h3 { font-size: 11px; }
+ .cro-home #candle-packages .pricing-rates strong { font-size: 30px; }
+}
+
+@media (min-width: 1100px) {
+ .cro-home #candle-packages .cro-section-kicker { min-height: 18px; }
+}
+
+.cro-home #candle-packages .pricing-actions { display: grid; gap: 4px; }
+.cro-home #candle-packages .pricing-quote-button { width: 100%; min-height: 48px; background: #224532; font-family: inherit; font-size: 15px; box-sizing: border-box; }
+.cro-home #candle-packages .pricing-quote-button:hover { background: #184d30; }
+@media (min-width: 768px) {
+ .cro-home #candle-packages .pricing-actions { justify-items: center; gap: 8px; }
+ .cro-home #candle-packages .pricing-quote-button { width: auto; min-width: 200px; }
+}
+
+.cro-home #candle-packages .pricing-quantity-examples { margin-top: 20px; }
+.cro-home #candle-packages .pricing-quantity-examples > h3,
+.cro-home #candle-packages .pricing-bond-explainer summary { font-family: inherit; font-size: 15px; font-weight: 600; margin: 0 0 10px; color: #1c291f; }
+.cro-home #candle-packages .pricing-example-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+.cro-home #candle-packages .pricing-example-cards article { padding: 12px 4px; border: 1px solid #e4e4db; border-radius: 12px; text-align: center; }
+.cro-home #candle-packages .pricing-example-cards h4 { font-family: inherit; font-size: 12px; font-weight: 500; margin: 0 0 4px; }
+.cro-home #candle-packages .pricing-example-cards p { margin: 0; font-size: 11px; text-align: center; color: #606b60; }
+.cro-home #candle-packages .pricing-example-cards strong { color: #184d30; font-size: 23px; font-weight: 600; }
+.cro-home #candle-packages .pricing-bond-explainer { margin: 16px 0; }
+.cro-home #candle-packages .pricing-bond-explainer summary { margin-bottom: 6px; }
+.cro-home #candle-packages .pricing-bond-explainer p { margin: 0; font-size: 13px; line-height: 1.55; color: #606b60; }
+.cro-home #candle-packages .pricing-bond-explainer a { color: #184d30; text-underline-offset: 3px; }
+
+.cro-home #candle-packages .pricing-bond-explainer summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; margin: 0; cursor: pointer; list-style: none; }
+.cro-home #candle-packages .pricing-bond-explainer summary::-webkit-details-marker { display: none; }
+.cro-home #candle-packages .pricing-bond-explainer summary::after { content: '+'; font-size: 20px; font-weight: 400; color: #184d30; }
+.cro-home #candle-packages .pricing-bond-explainer[open] summary::after { content: '−'; }
+.cro-home #candle-packages .pricing-bond-explainer[open] p { margin-top: 4px; }
+.cro-home #candle-packages .pricing-bond-explainer summary:focus-visible { outline: 2px solid #184d30; outline-offset: 4px; border-radius: 4px; }

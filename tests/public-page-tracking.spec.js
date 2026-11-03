@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { test, expect, booking } = require('./fixtures');
+const { test, expect, booking, captureQuote } = require('./fixtures');
 const root = path.resolve(__dirname, '..');
 const privatePages = ['book.html', 'quote.html', 'payment-success.html', 'payment-cancelled.html'];
 const htmlFiles = ['', 'blog'].flatMap(dir => fs.readdirSync(path.join(root, dir))
@@ -101,7 +101,8 @@ test('blog to homepage to booking keeps safe navigation context and campaign att
   await page.locator('#availability-quantity').fill('50');
   await page.locator('#availability-form').getByRole('button', { name: /check/i }).click();
   expect(await page.evaluate(() => window.dataLayer.find(e => e[1] === 'availability_check')[2])).toMatchObject({ previous_page_path: '/blog/burn-time-calculator.html', campaign_name: 'blog_journey' });
-  await page.locator('#availability-ready-button').click();
+  await captureQuote(page);
+  await page.getByRole('link', { name: 'Book now' }).click();
   await expect(page.locator('#book-form-panel')).toBeVisible();
   expect((await views(page))[0]).toMatchObject({ page_path: '/book.html', previous_page_path: '/index.html', campaign_name: 'blog_journey' });
   await expect(page.locator('script[src*="gtm.js"]')).toHaveCount(0);

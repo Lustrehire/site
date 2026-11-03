@@ -117,15 +117,16 @@
                 <div class="availability-form-grid">
                   <div class="form-group">
                     <label for="book-full-name">Full Name</label>
-                    <input id="book-full-name" name="book-full-name" type="text" placeholder="e.g. Jane Smith" required />
+                    <input id="book-full-name" name="book-full-name" autocomplete="name" type="text" placeholder="e.g. Jane Smith" required />
                   </div>
                   <div class="form-group">
                     <label for="book-email">Email Address</label>
-                    <input id="book-email" name="book-email" type="email" placeholder="e.g. jane@email.com" required />
+                    <input id="book-email" name="book-email" autocomplete="email" type="email" placeholder="e.g. jane@email.com" required />
                   </div>
                 </div>
+<details id="book-source-details"><summary>How did you hear about us? (optional)</summary>
                 <div class="form-group">
-                  <label for="book-customer-source">How did you first hear about Lustre Hire?</label>
+                  <label for="book-customer-source">How did you first hear about Lustre Hire? (optional)</label>
                   <select id="book-customer-source" name="customerSource">
                     <option value="">Select an option</option>
                     <option value="Facebook Marketplace">Facebook Marketplace</option>
@@ -136,14 +137,15 @@
                     <option value="Other">Other</option>
                   </select>
                 </div>
+</details>
                 <div class="availability-form-grid">
                   <div class="form-group">
                     <label for="book-address">Address</label>
-                    <input id="book-address" name="book-address" type="text" placeholder="Enter your address" required />
+                    <input id="book-address" name="book-address" autocomplete="street-address" type="text" placeholder="Enter your address" required />
                   </div>
                   <div class="form-group">
                     <label for="book-phone">Phone Number</label>
-                    <input id="book-phone" name="book-phone" type="tel" inputmode="tel" placeholder="e.g. 0412 345 678" required />
+                    <input id="book-phone" name="book-phone" autocomplete="tel" type="tel" inputmode="tel" placeholder="e.g. 0412 345 678" required />
                   </div>
                 </div>
                 <div class="availability-form-grid">
@@ -538,7 +540,10 @@
       const populateForm = () => {
         if (!baseBookingContext) return;
         if (fullNameField) fullNameField.value = baseBookingContext.fullName || "";
-        if (customerSourceField) customerSourceField.value = baseBookingContext.customerSource || "";
+        if (customerSourceField) {
+          customerSourceField.value = baseBookingContext.customerSource || "";
+          document.getElementById("book-source-details").open = !customerSourceField.value;
+        }
         if (emailField) emailField.value = baseBookingContext.email || "";
         if (addressField) addressField.value = baseBookingContext.address || baseBookingContext.customerAddress || "";
         if (phoneField) phoneField.value = baseBookingContext.phone || "";

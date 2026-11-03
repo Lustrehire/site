@@ -77,7 +77,7 @@ test('homepage photos open locally in a modal and only full gallery navigates', 
 
 test('estimator handoff retains date/customer details and invalidates stale availability', async ({ page }) => {
   await checkDate(page, 50);
-  await page.locator('#availability-edit-button').click();
+  await page.locator('#availability-back-to-step-1').click();
   await page.evaluate(() => {
     // Existing details may remain from a quote/back interaction.
     document.getElementById('availability-full-name').value = 'Test Customer';
@@ -85,16 +85,18 @@ test('estimator handoff retains date/customer details and invalidates stale avai
     document.getElementById('availability-customer-source').value = 'Instagram';
   });
   const source = await page.locator('#availability-customer-source').inputValue();
-  await page.locator('#calculator-start').click();
+  await page.locator('#estimator-cta [data-open-estimator]').click();
   await page.locator('input[name="calculator_knowledge"][value="final-guests"]').check();
   await page.locator('#calculator-final-guests').fill('100');
   await page.locator('#calculator-next').click();
   await page.locator('input[name="calculator_table_style_guess"]').first().check();
   await page.locator('#calculator-next').click();
-  await page.locator('input[name="calculator_fullness"]').first().check();
+  await page.locator('.calculator-visual-choice').first().click();
   await page.locator('#calculator-next').click();
   await page.locator('#calculator-next').click();
   await expect(page.locator('#calculator-result-panel')).toBeVisible();
+  await expect(page.locator('#calculator-result-panel')).not.toContainText(/\$[0-9]/);
+  await expect(page.locator('#calculator-result-range')).toContainText('candles');
   await page.locator('#calculator-check-date').click();
   await expect(page.locator('#availability-date')).toHaveValue(booking.eventDate);
   await expect(page.locator('#availability-full-name')).toHaveValue('Test Customer');
@@ -104,7 +106,7 @@ test('estimator handoff retains date/customer details and invalidates stale avai
   await expect(page.locator('#availability-result')).not.toBeVisible();
   await expect(page.locator('#availability-ready-button')).not.toBeVisible();
   await page.locator('#availability-form button[type="submit"]').click();
-  await expect(page.locator('#availability-result')).toBeVisible();
+  await expect(page.locator('#availability-step-2-panel')).toBeVisible();
 });
 
 for (const route of ['/gallery', '/faq']) {
@@ -211,14 +213,24 @@ test('inline contact keeps its masked submission and remains visible on Escape',
   await expect(page.locator('#contact-modal-status')).toHaveAttribute('data-clarity-mask', 'true');
 });
 
-test('compact pricing keeps full payment details accessible and estimator text readable', async ({ page }) => {
+test('pricing keeps payment details visible without expanding and estimator text readable', async ({ page }) => {
   await page.goto('/');
-  const pricing = page.locator('.cro-pricing-details');
-  await pricing.locator('summary').click();
-  await expect(pricing).toHaveAttribute('open', '');
-  await expect(pricing).toContainText('First 44 candles: $10 each');
-  await expect(pricing).toContainText('50% booking deposit');
-  await expect(pricing).toContainText('refundable bond equal to your hire fee');
+  const pricing = page.locator('#candle-packages');
+  await expect(pricing.locator('.pricing-process')).toBeVisible();
+  await expect(pricing.locator('.pricing-rates article')).toHaveCount(3);
+  await expect(pricing.locator('.pricing-rates article').first()).toContainText('First 44 candles');
+  await expect(pricing.getByRole('heading', { name: 'Today', exact: true })).toBeVisible();
+  await expect(pricing.locator('.pricing-example-cards article')).toHaveText(['30 candles$300 hire', '45 candles$449 hire', '90 candles$853 hire']);
+  const bond = pricing.locator('.pricing-bond-explainer');
+  await expect(bond.locator('p')).toBeHidden();
+  await bond.locator('summary').click();
+  await expect(bond.locator('p')).toBeVisible();
+  await expect(bond).toContainText('The bond equals your hire fee');
+  await bond.locator('summary').click();
+  await expect(bond.locator('p')).toBeHidden();
+  await expect(pricing).toContainText('Pay a 50% deposit to secure your date.');
+  await expect(pricing).toContainText('Pay the remaining 50% + refundable bond.');
+  await expect(pricing).toContainText('Return your candles. We’ll refund your bond within 24 hours of inspection.');
   expect(await page.locator('#calculator-start').evaluate(button => {
     const channels = value => value.match(/[\d.]+/g).slice(0, 3).map(Number).map(v => {
       v /= 255;

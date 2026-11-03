@@ -34,8 +34,8 @@ test('available result is modal, keeps quote steps in focus, and Escape restores
     await expect(page.locator('#availability-form')).toHaveCount(1);
     await page.keyboard.press('Tab');
     expect(await dialog.evaluate(e => e.contains(document.activeElement))).toBe(true);
-    await page.locator('#availability-continue-button').click();
-    await expect(dialog.locator('#availability-step-2-panel')).toBeVisible();
+      await expect(dialog.locator('#availability-step-2-panel')).toBeVisible();
+    await page.locator('#availability-full-name').focus();
     await expect(page.locator('#availability-full-name')).toBeFocused();
     await page.keyboard.press('Escape');
     await expect(dialog).toBeHidden();

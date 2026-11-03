@@ -9,7 +9,7 @@ test('mobile homepage adapts without duplicate forms or horizontal overflow', as
     for (const id of ['availability-form', 'availability-booking-form', 'contact-modal-form']) {
       await expect(page.locator(`#${id}`)).toHaveCount(1);
     }
-    const positions = await page.evaluate(() => ['availability-checker', 'benefits', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works'].map(id => document.getElementById(id).getBoundingClientRect().top));
+    const positions = await page.evaluate(() => ['availability-checker', 'benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works'].map(id => document.getElementById(id).getBoundingClientRect().top));
     expect(positions).toEqual([...positions].sort((a, b) => a - b));
     const image = await page.locator('.hero-image').boundingBox();
     const text = await page.locator('.hero-text').boundingBox();
@@ -17,7 +17,7 @@ test('mobile homepage adapts without duplicate forms or horizontal overflow', as
     expect(text.y + text.height).toBeLessThanOrEqual(image.y + image.height + 1);
     const form = await page.locator('#availability-checker').boundingBox();
     expect(form.y).toBeLessThan(image.y + image.height);
-    const button = page.locator('.cro-ready .booking-button');
+    const button = page.locator('.cro-ready:not(#estimator-cta) .booking-button');
     expect((await button.boundingBox()).height).toBeGreaterThanOrEqual(48);
     expect(await button.evaluate(e => getComputedStyle(e).color)).toBe('rgb(40, 94, 62)');
   }
@@ -29,7 +29,7 @@ test('breakpoint restores desktop section order and retains form state', async (
   await page.locator('#availability-quantity').fill('63');
   await page.setViewportSize({ width: 1024, height: 900 });
   await expect(page.locator('#availability-quantity')).toHaveValue('63');
-  await expect.poll(() => page.locator('#main-content > section').evaluateAll(nodes => nodes.filter(n => ['gallery-preview', 'how-it-works', 'benefits', 'testimonials', 'candle-sizes'].includes(n.id)).map(n => n.id))).toEqual(['benefits', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works']);
+  await expect.poll(() => page.locator('#main-content > section').evaluateAll(nodes => nodes.filter(n => ['gallery-preview', 'how-it-works', 'benefits', 'estimator-cta', 'testimonials', 'candle-sizes'].includes(n.id)).map(n => n.id))).toEqual(['benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works']);
   await expect(page.locator('h1 .mobile-v3-only')).toBeHidden();
   for (const width of [768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
@@ -81,7 +81,7 @@ test('tablet and desktop show full content, matching mobile copy and the entry f
     await expect(page.locator('#gallery-preview .cro-gallery-preview img')).toHaveCount(6);
     for (const card of await page.locator('.testimonial-card').all()) await expect(card).toBeVisible();
     expect(await page.locator('.testimonials-grid').evaluate(e => e.scrollWidth > e.clientWidth)).toBe(true);
-    await expect(page.locator('#candle-packages h2 .mobile-v3-only')).toBeVisible();
+    await expect(page.locator('#candle-packages h2')).toBeVisible();
     await expect(page.locator('h1 .mobile-v3-only')).toBeHidden();
     await page.locator('#availability-quantity').fill('45');
     await expect(page.locator('#availability-result')).toBeHidden();
@@ -93,7 +93,7 @@ test('homepage journey and booking anchors remain correct across breakpoints', a
   for (const width of [390, 768, 1024, 1440, 1920]) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('/');
-    const expected = ['candle-packages', 'benefits', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works', 'faq', 'booking-cta', 'contact'];
+    const expected = ['candle-packages', 'benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works', 'faq', 'booking-cta', 'contact'];
     expect(await page.locator('#main-content > section').evaluateAll(nodes => nodes.filter(n => !['availability-checker', 'wedding-estimator-panel'].includes(n.id)).map(n => n.id || (n.classList.contains('cro-ready') ? 'booking-cta' : '')))).toEqual(expected);
     await page.locator('.cro-ready a[href="#availability"]').click();
     await expect(page.locator('#availability-form')).toBeInViewport();

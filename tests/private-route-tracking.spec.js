@@ -1,4 +1,4 @@
-const { test, expect, booking, checkoutUrl, checkDate, reviewBooking } = require('./fixtures');
+const { test, expect, booking, checkoutUrl, checkDate, reviewBooking, resumeDirectBooking } = require('./fixtures');
 const aliases = ['book', 'quote', 'payment-success', 'payment-cancelled'];
 const events = (page, name) => page.evaluate(name => (window.dataLayer || []).filter(e => e[0] === 'event' && e[1] === name).map(e => e[2]), name);
 
@@ -28,7 +28,7 @@ for (const mode of ['direct', 'quote']) {
     await cloudflareRedirects(page);
     if (mode === 'direct') {
       await checkDate(page);
-      await page.locator('#availability-ready-button').click();
+      await resumeDirectBooking(page);
     } else {
       await page.goto('/quote.html?quoteToken=test-token');
       await page.getByRole('link', { name: 'Pay Deposit & Secure My Date' }).click();

@@ -1,6 +1,6 @@
 const { test, expect, checkDate } = require('./fixtures');
 
-const sensitiveContainers = ['availability-feedback', 'availability-result', 'availability-booking-summary', 'availability-booking-feedback', 'availability-review-feedback', 'availability-step-4-panel', 'contact-modal-status'];
+const sensitiveContainers = ['availability-contact-context', 'availability-created-quote', 'availability-feedback', 'availability-result', 'availability-booking-summary', 'availability-booking-feedback', 'availability-review-feedback', 'availability-step-4-panel', 'contact-modal-status'];
 
 test('public text is not blanket-masked and sensitive content is masked before GTM runs', async ({ page }) => {
   await page.route('https://www.googletagmanager.com/gtm.js*', route => route.fulfill({ contentType: 'application/javascript', body: `
@@ -20,7 +20,7 @@ test('public text is not blanket-masked and sensitive content is masked before G
 
 test('customer details remain inside a masked container after actual summary re-renders', async ({ page }) => {
   await checkDate(page);
-  await expect(page.locator('#availability-ready-button')).toBeVisible();
+  await expect(page.locator('#availability-step-2-panel')).toBeVisible();
   const details = {
     'availability-full-name': 'Private Customer', 'availability-email': 'private@example.test',
     'availability-phone': '0400000000', 'availability-address': '123 Private Street',

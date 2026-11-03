@@ -18,3 +18,258 @@ html.availability-dialog-open { overflow: hidden; }
 .cro-home #availability-dialog .availability-dialog-content:has(#availability-step-1-panel:not([hidden]) #availability-result[hidden])::before { content: 'Checking availability…'; display: block; padding: 24px; color: #526d56; font: 500 16px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
 .cro-home #availability-dialog #availability-checker:has(.availability-step-has-result) > .cro-section-heading,
 .cro-home #availability-dialog .cro-estimator { display: none; }
+
+/* Compact contact form, matching the approved cream-and-forest concept. */
+.cro-home #main-content #availability-dialog.availability-contact-design { background: #faf9f5; border: 0; }
+.cro-home #availability-dialog.availability-contact-design .availability-dialog-bar { padding: 16px 24px; background: #faf9f5; border-color: #daddd1; }
+.cro-home #availability-dialog.availability-contact-design #availability-dialog-title { font: 400 clamp(22px,5.5vw,28px)/1.2 Georgia,'Times New Roman',serif; color: #1c291f; }
+.cro-home #main-content #availability-dialog.availability-contact-design #availability-checker { padding: 24px; background: #faf9f5; }
+.cro-home #availability-dialog.availability-contact-design #booking-flow-progress { display: none; }
+.cro-home #availability-dialog.availability-contact-design #availability-contact-context { padding: 14px 16px; margin: 0 0 24px; border-radius: 10px; background: #edf0e8; color: #1c291f; font-size: 15px; font-weight: 400; }
+.cro-home #availability-dialog.availability-contact-design #availability-step-2-title { font: 400 clamp(25px,6.5vw,34px)/1.15 Georgia,'Times New Roman',serif; letter-spacing: -.025em; margin: 0 0 12px; color: #1c291f; }
+.cro-home #availability-dialog.availability-contact-design #availability-contact-explanation { margin: 0 0 24px; color: #606b60; font-size: 15px; line-height: 1.5; }
+.cro-home #availability-dialog.availability-contact-design #availability-booking-form { display: grid; gap: 16px; margin: 0; padding: 0; }
+.cro-home #availability-dialog.availability-contact-design .availability-quote-lite-fields { display: grid; grid-template-columns: minmax(0,1fr); gap: 16px; padding: 0; }
+.cro-home #availability-dialog.availability-contact-design .form-group { margin: 0; padding: 0; }
+.cro-home #availability-dialog.availability-contact-design .form-group label { display: block; margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+.cro-home #availability-dialog.availability-contact-design :is(#availability-full-name,#availability-email,#availability-customer-source) { box-sizing: border-box; width: 100%; min-width: 0; height: 48px; padding: 12px 14px; border: 1px solid #cbd1c9; border-radius: 10px; background-color: #fff; color: #1c291f; font: 400 16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; box-shadow: none; }
+.cro-home #availability-dialog.availability-contact-design .availability-panel-actions { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; margin: 4px 0 0; }
+.cro-home #availability-dialog.availability-contact-design #availability-step-2-submit { order: 1; width: 100%; min-height: 48px; padding: 12px 16px; border: 0; border-radius: 999px; background: #184d30; color: #fff; font: 600 16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; box-shadow: none; }
+.cro-home #availability-dialog.availability-contact-design .quote-email-reassurance { order: 2; margin: 0; color: #606b60; text-align: center; font-size: 12px; line-height: 1.5; }
+.cro-home #availability-dialog.availability-contact-design #availability-back-to-step-1 { order: 3; justify-content: flex-start; width: 100%; min-height: 44px; margin: 4px 0 0; padding: 16px 0 0; border: 0; border-top: 1px solid #daddd1; border-radius: 0; background: transparent; color: #315b3d; font: 400 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; box-shadow: none; text-align: left; }
+.cro-home #availability-dialog.availability-contact-design #availability-booking-feedback:empty { display: none; }
+@media(max-width:359px) {
+ .cro-home #main-content #availability-dialog.availability-contact-design #availability-checker { padding: 20px 16px; }
+ .cro-home #availability-dialog.availability-contact-design .availability-dialog-bar { padding: 12px 16px; }
+}
+
+/* Image-free availability celebration: sage, type and simple line icons. */
+.availability-celebration { display: none; }
+.cro-home #availability-dialog.availability-contact-design .availability-dialog-bar { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 24px 18px; border: 0; border-radius: 0 0 20px 20px; background: #edf0e8; text-align: center; }
+.cro-home #availability-dialog.availability-contact-design .availability-celebration { display: block; width: 48px; height: 48px; color: #184d30; }
+.cro-home #availability-dialog.availability-contact-design .availability-celebration svg { display: block; width: 100%; height: 100%; }
+.cro-home #availability-dialog.availability-contact-design #availability-dialog-title { max-width: 340px; font: 400 clamp(29px,7.8vw,38px)/1.08 Georgia,'Times New Roman',serif; letter-spacing: -.025em; color: #123b29; text-wrap: balance; }
+.cro-home #availability-dialog.availability-contact-design .availability-dialog-close { position: absolute; top: 8px; right: 8px; }
+.cro-home #availability-dialog.availability-contact-design #availability-contact-context { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; margin: 6px 0 0; padding: 0; border-radius: 0; background: transparent; color: #466052; font-size: 14px; }
+.cro-home #availability-dialog.availability-contact-design #availability-contact-context > span { display: inline-flex; align-items: center; gap: 7px; }
+.cro-home #availability-dialog.availability-contact-design .quote-context-quantity { padding-left: 12px; border-left: 1px solid #b8c4b6; }
+.cro-home #availability-dialog.availability-contact-design #availability-contact-context svg { display: block; width: 20px; height: 20px; }
+.cro-home #main-content #availability-dialog.availability-contact-design #availability-checker { padding: 20px 24px; }
+.cro-home #availability-dialog.availability-contact-design #availability-step-2-title { font-size: clamp(25px,6.5vw,32px); margin-bottom: 8px; }
+.cro-home #availability-dialog.availability-contact-design #availability-contact-explanation { margin-bottom: 20px; }
+.cro-home #availability-dialog.availability-contact-design #availability-back-to-step-1 { text-align: center; justify-content: center; border: 0; margin: 0; padding: 8px 0 0; }
+@media(max-width:359px) {
+ .cro-home #availability-dialog.availability-contact-design .availability-dialog-bar { padding-inline: 16px; }
+ .cro-home #main-content #availability-dialog.availability-contact-design #availability-checker { padding: 20px 16px; }
+ .cro-home #availability-dialog.availability-contact-design #availability-contact-context { font-size: 13px; gap: 8px; }
+ .cro-home #availability-dialog.availability-contact-design .quote-context-quantity { padding-left: 8px; }
+}
+.cro-home #availability-dialog.availability-contact-design #availability-step-2-submit::after { content: ''; display: inline-block; width: 18px; height: 12px; margin-left: 10px; background: currentColor; clip-path: polygon(0 43%,75% 43%,48% 8%,58% 0,100% 50%,58% 100%,48% 92%,75% 57%,0 57%); }
+.cro-home #availability-dialog.availability-contact-design #availability-step-2-submit:disabled::after { content: none; }
+
+/* Limited stock and fully booked alternatives share the same calm visual family. */
+.cro-home #main-content #availability-dialog.availability-alternative-design { background: #faf9f5; border: 0; }
+.cro-home #availability-dialog.availability-alternative-design .availability-dialog-bar { background: #faf9f5; border: 0; }
+.cro-home #main-content #availability-dialog.availability-alternative-design #availability-checker { background: #faf9f5; padding: 0 24px 24px; }
+.cro-home #availability-dialog.availability-alternative-design #availability-result { margin: 0; padding: 0; }
+.cro-home #availability-dialog.availability-alternative-design .availability-success-card { padding: 0; gap: 20px; background: transparent; border: 0; box-shadow: none; }
+.cro-home #availability-dialog.availability-alternative-design .availability-success-heading { flex-direction: column; align-items: center; gap: 12px; padding: 20px 16px; border-radius: 16px; background: #edf0e8; text-align: center; }
+.cro-home #availability-dialog.availability-alternative-design .availability-success-icon { width: 48px; height: 48px; border-radius: 50%; background: #e1e7da; color: #315b3d; }
+.cro-home #availability-dialog.availability-alternative-design .availability-success-copy h4 { font: 400 clamp(26px,7vw,34px)/1.15 Georgia,'Times New Roman',serif; letter-spacing: -.025em; color: #1c291f; text-align: center; margin: 0 0 10px; }
+.cro-home #availability-dialog.availability-alternative-design .availability-success-copy p { text-align: center; color: #526650; font-size: 14px; }
+.cro-home #availability-dialog.availability-alternative-design .availability-success-note { padding: 0 4px; background: transparent; font-size: 15px; line-height: 1.55; text-align: center; color: #606b60; }
+.cro-home #availability-dialog.availability-alternative-design .availability-result-actions { gap: 10px; }
+.cro-home #availability-dialog.availability-alternative-design [data-availability-action="change-date"] { background: transparent; }
+.cro-home #availability-dialog.availability-alternative-design .availability-result-card-unavailable [data-availability-action="change-date"] { background: #184d30; color: #fff; border-color: #184d30; }
+.cro-home #availability-dialog.availability-alternative-design .availability-result-card-unavailable [data-availability-action="contact-us"] { background: #fff; color: #315b3d; border-color: #cbd9c5; }
+@media(max-width:359px) {
+ .cro-home #main-content #availability-dialog.availability-alternative-design #availability-checker { padding-inline: 16px; }
+}
+.cro-home #availability-dialog.availability-alternative-design #availability-result [data-availability-action="contact-us"] { color: #315b3d; background: #fff; font-size: 15px; }
+.cro-home #availability-dialog.availability-alternative-design #availability-checker #availability-result [data-availability-action="contact-us"] { color: #315b3d; background: #fff; }
+
+/* Personalised quote: hire and average, one deposit, optional later details. */
+.cro-home #main-content #availability-dialog.availability-quote-design { background: #faf9f5; border: 0; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .availability-dialog-bar { background: #faf9f5; border: 0; padding: 12px 24px 0; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-dialog-title { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-dialog-title::before { content: ''; width: 24px; height: 24px; background: #184d30; border-radius: 50%; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-dialog-title::after { content: ''; position: absolute; left: 31px; width: 9px; height: 5px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg); }
+.cro-home #main-content #availability-dialog.availability-quote-design #availability-checker { padding: 20px 24px; background: #faf9f5; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .availability-complete-card { padding: 0; margin: 0; border: 0; background: transparent; box-shadow: none; text-align: left; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-quote-heading { text-align: left; margin: 0 0 8px; color: #1c291f; font: 400 clamp(30px,8vw,40px)/1.1 Georgia,'Times New Roman',serif; letter-spacing: -.025em; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-created-quote { margin: 0; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-summary-context { margin: 0 0 20px; font-size: 14px; color: #606b60; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-summary-prices { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; border-top: 1px solid #daddd1; padding: 16px 0; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-summary-prices > div + div { border-left: 1px solid #daddd1; padding-left: 16px; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-summary-prices span { display: block; font-size: 13px; color: #606b60; margin-bottom: 4px; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-summary-prices strong { display: block; font-size: clamp(24px,6vw,30px); line-height: 1.2; color: #1c291f; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-summary-prices small { font-size: 12px; color: #606b60; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-deposit-card { padding: 16px; background: #edf0e8; border-radius: 16px; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-deposit-card > span { font-size: 14px; color: #315b3d; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) :is(#quote-deposit-total,.record-deposit-total) { display: block; margin: 6px 0; font-size: clamp(28px,7.5vw,36px); line-height: 1.2; color: #123b29; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-deposit-card p { margin: 0 0 16px; font-size: 14px; color: #606b60; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) :is(#availability-book-quote,.record-book-quote) { background: #184d30; color: #fff; min-height: 48px; font: 600 16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; box-shadow: none; gap: 12px; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-details { margin-top: 16px; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-details summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 8px 0; list-style: none; cursor: pointer; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-details summary::-webkit-details-marker { display: none; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-details summary strong { display: block; font-size: 15px; font-weight: 600; color: #1c291f; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-details summary small { display: block; font-size: 12px; color: #606b60; margin-top: 4px; }
+.quote-chevron { flex: 0 0 8px; width: 8px; height: 8px; border: solid #315b3d; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); margin-right: 4px; }
+.quote-later-details[open] .quote-chevron { transform: rotate(225deg); }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-body { padding: 12px; margin-top: 8px; border-radius: 10px; background: #edf0e8; font-size: 13px; line-height: 1.55; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-body p { margin: 0 0 12px; font-size: 13px; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-body p:last-child { margin-bottom: 0; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-body dl { margin: 0 0 12px; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-body dl > div { display: flex; justify-content: space-between; gap: 12px; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-later-body dd { margin: 0; font-weight: 600; white-space: nowrap; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-deposit-reassurance { font-size: 12px; color: #606b60; margin: 12px 0 16px; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-email-confirmation { display: flex; align-items: center; gap: 10px; border-block: 1px solid #daddd1; padding: 14px 0; margin: 0; font-size: 13px; color: #606b60; }
+.quote-email-confirmation svg { width: 22px; height: 22px; flex-shrink: 0; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .availability-complete-note { font-size: 12px; line-height: 1.55; margin: 14px 0 4px; color: #606b60; text-align: center; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-complete-button { display: block; margin: 0 auto; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) summary:focus-visible { outline: 2px solid #184d30; outline-offset: 3px; border-radius: 4px; }
+@media(max-width:359px) {
+ .cro-home #main-content #availability-dialog.availability-quote-design #availability-checker { padding: 16px; }
+ .cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .availability-dialog-bar { padding-inline: 16px; }
+ .cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-dialog-title::after { left: 23px; }
+}
+
+/* Let the quote fill the modal gutter; legacy success cards centred their children. */
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .availability-complete-card { align-items: stretch; gap: 0; width: 100%; box-sizing: border-box; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-created-quote { width: 100%; min-width: 0; box-sizing: border-box; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .cro-availability-body { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .quote-email-confirmation { width: 100%; box-sizing: border-box; }
+@media(max-width:767px) {
+ .cro-home #main-content #availability-dialog.availability-quote-design #availability-checker { padding: 16px 20px 20px; }
+ .cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .availability-dialog-bar { padding-inline: 20px; }
+ .cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-dialog-title::after { left: 27px; }
+}
+@media(max-width:359px) {
+ .cro-home #main-content #availability-dialog.availability-quote-design #availability-checker { padding-inline: 16px; }
+ .cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .availability-dialog-bar { padding-inline: 16px; }
+ .cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) #availability-dialog-title::after { left: 23px; }
+}
+.cro-home :is(#availability-dialog.availability-quote-design,#existing-record-dialog) .availability-complete-card > p { max-width: none; }
+
+/* Returning-customer modal follows the same cream, sage and forest treatment. */
+#existing-record-dialog { position: fixed; inset: 0; width: min(600px,calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 32px); box-sizing: border-box; margin: auto; padding: 0; border: 0; border-radius: 20px; overflow: auto; background: #faf9f5; color: #1c291f; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+#existing-record-dialog::backdrop { background: rgb(16 27 19 / .55); backdrop-filter: blur(3px); }
+#existing-record-dialog .record-dialog-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: #edf0e8; color: #315b3d; font-size: 14px; }
+#existing-record-close { width: 44px; height: 44px; padding: 0; background: transparent; border: 0; color: #315b3d; font: 32px/1 sans-serif; cursor: pointer; }
+#existing-record-dialog .record-dialog-body { padding: 24px; }
+#existing-record-dialog h2 { margin: 0 0 12px; font: 400 clamp(26px,7vw,34px)/1.15 Georgia,'Times New Roman',serif; letter-spacing: -.025em; }
+#existing-record-dialog p { color: #606b60; font-size: 14px; line-height: 1.55; margin: 12px 0; }
+#existing-record-dialog #existing-record-email-form { display: grid; gap: 12px; margin-top: 20px; }
+#existing-record-dialog label { font-size: 14px; font-weight: 600; }
+#existing-record-dialog :is(#existing-record-email,#existing-record-reference) { width: 100%; box-sizing: border-box; min-height: 48px; border: 1px solid #cbd1c9; border-radius: 10px; padding: 12px; font: 16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; background: #fff; }
+#existing-record-dialog .booking-button { display: flex; justify-content: center; gap: 12px; width: 100%; min-height: 48px; box-sizing: border-box; background: #184d30; color: #fff; font: 600 16px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+#existing-record-dialog .record-lookup-limit { padding-top: 12px; border-top: 1px solid #daddd1; font-size: 12px; }
+#existing-record-dialog #existing-record-email-feedback:empty { display: none; }
+#existing-record-dialog .record-back { display: block; min-height: 44px; margin: 12px auto 0; border: 0; background: transparent; color: #315b3d; font: inherit; text-decoration: underline; cursor: pointer; }
+#existing-record-open { width: 100%; min-height: 48px; border: 1px solid #cbd1c9; border-radius: 999px; background: #fff; color: #315b3d; font: 500 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+@media(max-width:430px) { #existing-record-dialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px); border-radius: 16px; } #existing-record-dialog .record-dialog-body { padding: 20px; } }
+
+#existing-record-dialog .record-validity-note { font-size: 12px; text-align: center; margin-top: 16px; }
+#existing-record-dialog .record-state-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; margin-bottom: 16px; background: #edf0e8; color: #315b3d; font-size: 24px; }
+#existing-record-dialog .record-state-context { padding: 12px; border-radius: 10px; background: #edf0e8; }
+#existing-record-dialog .record-state-actions { display: grid; gap: 10px; margin-top: 20px; }
+#existing-record-dialog .record-state-actions .calculator-nav-button { min-height: 44px; text-align: center; }
+#existing-record-dialog .record-change-notice { background: #edf0e8; padding: 14px; margin-block: 16px; border-radius: 12px; font-size: 14px; color: #315b3d; }
+#existing-record-dialog .record-change-notice p { font-size: 13px; margin-bottom: 0; }
+#existing-record-dialog .record-price-acceptance { display: flex; align-items: center; gap: 10px; min-height: 44px; margin-bottom: 12px; font-size: 13px; }
+#existing-record-dialog .record-price-acceptance input { width: 18px; height: 18px; accent-color: #184d30; }
+#existing-record-dialog a[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+#existing-record-dialog .record-payment-facts { margin: 12px 0 0; font-size: 13px; }
+#existing-record-dialog .record-payment-facts > div { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; }
+#existing-record-dialog .record-payment-facts dd { margin: 0; font-weight: 600; }
+#book-source-details { margin: 16px 0; }
+#book-source-details summary { min-height: 44px; cursor: pointer; font-size: 14px; color: #315b3d; }
+#estimator-dialog { position: fixed; inset: 0; width: min(640px,calc(100% - 24px)); max-width: none; max-height: calc(100dvh - 24px); margin: auto; padding: 0; border: 0; border-radius: 20px; background: #faf9f5; color: #1c291f; overflow: auto; }
+#estimator-dialog::backdrop { background: rgb(16 27 19 / .55); backdrop-filter: blur(3px); }
+#estimator-dialog .estimator-dialog-bar { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: #edf0e8; color: #315b3d; font: 500 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+#estimator-dialog .estimator-dialog-bar button { width: 44px; height: 44px; border: 0; background: transparent; color: #315b3d; font-size: 30px; cursor: pointer; }
+.cro-home #estimator-dialog #candle-calculator { display: block; width: 100%; margin: 0; padding: 20px; box-sizing: border-box; }
+.cro-home #estimator-dialog .calculator-shell { margin: 0; padding: 0; border: 0; box-shadow: none; }
+.cro-home #estimator-dialog input[type="radio"] { accent-color: #184d30; }
+.cro-home .faq-estimator-button { margin-block: 12px; min-height: 48px; }
+
+/* Mobile estimator: same questions, less nested padding and compact navigation. */
+@media(max-width:767px) {
+ #estimator-dialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px); border-radius: 16px; }
+ #estimator-dialog .estimator-dialog-bar { padding: 8px 16px; }
+ .cro-home #estimator-dialog #candle-calculator { padding: 16px; }
+ .cro-home #estimator-dialog .calculator-flow-panel { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+ .cro-home #estimator-dialog .calculator-progress { margin-bottom: 12px; }
+ .cro-home #estimator-dialog .calculator-progress-row { margin-bottom: 6px; font-size: 12px; text-align: left; }
+ .cro-home #estimator-dialog .calculator-progress-row p { margin: 0; }
+ .cro-home #estimator-dialog .calculator-progress-bar { height: 5px; }
+ .cro-home #estimator-dialog #calculator-form { gap: 0; align-items: stretch; }
+ .cro-home #estimator-dialog .calculator-step { gap: 10px; }
+ .cro-home #estimator-dialog .calculator-step legend { margin-bottom: 12px; text-align: left; font: 400 22px/1.25 Georgia,'Times New Roman',serif; }
+ .cro-home #estimator-dialog :is(.calculator-choice-grid,.calculator-checkbox-grid,.calculator-field-grid) { gap: 8px; }
+ .cro-home #estimator-dialog :is(.calculator-choice,.calculator-checkbox-row) { min-height: 44px; box-sizing: border-box; padding: 10px 12px; gap: 8px; border-radius: 10px; font-size: 14px; line-height: 1.4; }
+ .cro-home #estimator-dialog .calculator-input-panel { margin-top: 10px; gap: 6px; }
+ .cro-home #estimator-dialog .calculator-input-panel label,
+ .cro-home #estimator-dialog .calculator-group-label { font-size: 14px; line-height: 1.4; }
+ .cro-home #estimator-dialog input[type="number"] { min-height: 44px; font-size: 16px; padding: 10px 12px; }
+ .cro-home #estimator-dialog .calculator-visual-choice { grid-template-columns: 18px 56px minmax(0,1fr); column-gap: 8px; row-gap: 3px; }
+ .cro-home #estimator-dialog .calculator-visual-choice img { width: 56px; height: 70px; border-radius: 6px; }
+ .cro-home #estimator-dialog .calculator-visual-title { font-size: 15px; line-height: 1.3; }
+ .cro-home #estimator-dialog .calculator-visual-copy { font-size: 12px; line-height: 1.4; }
+ .cro-home #estimator-dialog #calculator-error:empty { display: none; }
+ .cro-home #estimator-dialog #calculator-error { min-height: 0; margin: 10px 0 0; font-size: 13px; text-align: left; }
+ .cro-home #estimator-dialog #calculator-cancel { display: none; }
+ .cro-home #estimator-dialog .calculator-nav { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-top: 16px; }
+ .cro-home #estimator-dialog :is(#calculator-back,#calculator-next) { width: 100%; min-width: 0; min-height: 44px; margin: 0; padding: 10px 16px; font-size: 14px; box-sizing: border-box; }
+ .cro-home #estimator-dialog #calculator-back { grid-column: 1; }
+ .cro-home #estimator-dialog #calculator-next { grid-column: 2; }
+}
+
+/* Mobile styling choices: photo left, title and description right. */
+@media(max-width:767px) {
+ .cro-home #estimator-dialog label.calculator-visual-choice { position: relative; display: grid; grid-template-columns: 88px minmax(0,1fr); grid-template-rows: auto 1fr; column-gap: 12px; row-gap: 4px; align-items: start; padding: 10px; }
+ .cro-home #estimator-dialog label.calculator-visual-choice > input[type="radio"] { position: absolute; width: 1px; height: 1px; margin: 0; padding: 0; overflow: hidden; clip-path: inset(50%); }
+ .cro-home #estimator-dialog label.calculator-visual-choice > img { grid-column: 1; grid-row: 1 / 3; display: block; width: 88px; height: 100px; object-fit: cover; border-radius: 7px; }
+ .cro-home #estimator-dialog label.calculator-visual-choice > .calculator-visual-title { grid-column: 2; grid-row: 1; margin: 2px 0 0; font-size: 16px; line-height: 1.25; }
+ .cro-home #estimator-dialog label.calculator-visual-choice > .calculator-visual-copy { grid-column: 2; grid-row: 2; margin: 0; font-size: 13px; line-height: 1.45; }
+ .cro-home #estimator-dialog label.calculator-visual-choice:has(input:checked) { border-color: #184d30; background: #edf0e8; box-shadow: inset 0 0 0 1px #184d30; }
+ .cro-home #estimator-dialog label.calculator-visual-choice:has(input:focus-visible) { outline: 2px solid #184d30; outline-offset: 3px; }
+}
+@media(max-width:359px) {
+ .cro-home #estimator-dialog label.calculator-visual-choice { grid-template-columns: 76px minmax(0,1fr); column-gap: 10px; }
+ .cro-home #estimator-dialog label.calculator-visual-choice > img { width: 76px; height: 100px; }
+}
+
+/* Mobile estimate result: one recommendation, one next step, quieter context. */
+@media(max-width:767px) {
+ .cro-home #estimator-dialog .calculator-result-panel { gap: 8px; align-items: stretch; }
+ .cro-home #estimator-dialog .calculator-result-card { display: flex; flex-direction: column; align-items: stretch; gap: 16px; width: 100%; box-sizing: border-box; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; text-align: left; }
+ .cro-home #estimator-dialog .calculator-result-kicker { order: 1; margin: 0; padding: 0; font: 400 28px/1.15 Georgia,'Times New Roman',serif; color: #1c291f; letter-spacing: -.025em; text-transform: none; text-align: left; }
+ .cro-home #estimator-dialog .calculator-result-main { order: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin: 0; padding: 16px; border-radius: 14px; background: #edf0e8; text-align: left; }
+ .cro-home #estimator-dialog .calculator-result-eyebrow { margin: 0; font: 500 12px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color: #526650; letter-spacing: .04em; }
+ .cro-home #estimator-dialog .calculator-result-range-display { margin: 0; font: 400 clamp(29px,7.7vw,34px)/1.12 Georgia,'Times New Roman',serif; color: #123b29; letter-spacing: -.025em; text-align: left; }
+ .cro-home #estimator-dialog .calculator-result-cost-line { margin: 0; font-size: 14px; line-height: 1.5; color: #606b60; text-align: left; }
+ .cro-home #estimator-dialog .calculator-cta-row { order: 3; width: 100%; margin: 0; }
+ .cro-home #estimator-dialog #calculator-check-date { width: 100%; min-height: 48px; padding: 12px 16px; font-size: 15px; margin: 0; }
+ .cro-home #estimator-dialog .calculator-result-summary { order: 4; width: 100%; margin: 0; padding: 0 0 14px; border: 0; border-bottom: 1px solid #daddd1; }
+ .cro-home #estimator-dialog .calculator-summary-chips { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 6px 10px; }
+ .cro-home #estimator-dialog .calculator-summary-chip { padding: 0; border: 0; border-radius: 0; background: transparent; color: #606b60; font-size: 12px; font-weight: 400; line-height: 1.5; }
+ .cro-home #estimator-dialog .calculator-summary-chip + .calculator-summary-chip::before { content: '·'; margin-right: 10px; color: #8b9788; }
+ .cro-home #estimator-dialog .calculator-result-card .calculator-result-disclaimer { order: 5; margin: 0; font-size: 12px; line-height: 1.5; color: #606b60; text-align: left; }
+ .cro-home #estimator-dialog #calculator-reset { display: block; align-self: center; min-height: 44px; padding: 10px 12px; margin: 0; font-size: 13px; color: #315b3d; }
+}
+.estimator-result-short-note { display: none; }
+@media(max-width:767px) {
+ #estimator-dialog .estimator-result-full-note { display: none; }
+ #estimator-dialog .estimator-result-short-note { display: inline; }
+}
+@media(max-width:767px) {
+ .cro-home #estimator-dialog #calculator-result-panel { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+ .cro-home #estimator-dialog .calculator-result-main { box-sizing: border-box; }
+}
+
+/* Estimator entry now lives in a dedicated CTA, rather than below the date form. */
+.cro-home #availability-checker #calculator-intro-panel { display: none; }
+.cro-home #estimator-cta .mobile-v3-kicker { display: block; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.cro-home #availability-checker #candle-calculator { display: none; }
+#existing-record-dialog .record-reference-help { font-size: 12px; line-height: 1.5; margin: -8px 0 14px; color: #627362; }

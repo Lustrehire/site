@@ -100,7 +100,7 @@
   // referral is safe; a path/query-bearing referral needs a clean landing hop.
   // Do not discard its attribution or reject the referring site itself.
   const needsCleanReferrer = Boolean(document.referrer && document.referrer !== safeReferrer);
-  const events = new Set(['faq_search', 'availability_check', 'availability_result', 'quote_generated', 'booking_started', 'booking_details_completed', 'begin_checkout', 'checkout_started', 'checkout_error', 'payment_cancelled']);
+  const events = new Set(['faq_search', 'availability_check', 'availability_result', 'quote_contact_viewed', 'quote_generated', 'booking_started', 'booking_details_completed', 'begin_checkout', 'checkout_started', 'checkout_error', 'payment_cancelled']);
   const memory = {};
   const read = key => { try { return JSON.parse(sessionStorage.getItem('lustreTracking:' + key)) || memory[key]; } catch { return memory[key]; } };
   const write = (key, value) => { memory[key] = value; try { if (value === null) sessionStorage.removeItem('lustreTracking:' + key); else sessionStorage.setItem('lustreTracking:' + key, JSON.stringify(value)); } catch { /* Tracking must not block booking. */ } };

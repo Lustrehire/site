@@ -54,10 +54,12 @@
       priceHome.after(heroPrice);
       trustStrip.remove();
     }
-    if (desktopHero.matches) document.getElementById('desktop-estimator-content').appendChild(estimator);
-    else estimatorHome.after(estimator);
+    if (!document.getElementById('estimator-dialog')?.open) {
+      if (desktopHero.matches) document.getElementById('desktop-estimator-content').appendChild(estimator);
+      else estimatorHome.after(estimator);
+    }
   };
-  const ids = ['candle-packages', 'availability-checker', 'wedding-estimator-panel', 'benefits', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works', 'faq'];
+  const ids = ['candle-packages', 'availability-checker', 'wedding-estimator-panel', 'benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works', 'faq'];
   const disclosures = [];
   const disclose = (nodes, label, before) => {
     if (!nodes.length || !before?.parentNode) return;
@@ -103,4 +105,5 @@
   mobile.addEventListener('change', apply);
   desktopHero.addEventListener('change', placeAvailability);
   availability.addEventListener('lustre:availability-restored', placeAvailability);
+  estimator.addEventListener('lustre:estimator-restored', placeAvailability);
 })();

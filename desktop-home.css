@@ -202,3 +202,7 @@
 }
 
 .cro-home .cro-occasions li:nth-child(2) .occasion-photo { object-position: center 65%; }
+/* Match the estimator CTA to the centred occasion CTA on desktop. */
+.cro-home #main-content #estimator-cta > div { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 600px; margin-inline: auto; text-align: center; }
+.cro-home #main-content #estimator-cta :is(h2,.mobile-v3-kicker,.mobile-v3-cta-copy) { width: 100%; text-align: center; }
+.cro-home #main-content #estimator-cta .booking-button { align-self: center; width: auto; max-width: 100%; margin-inline: auto; }
