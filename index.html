@@ -795,9 +795,15 @@
 
 
 
-      const scrollToSection = (selector) => {
+      const scrollToSection = async (selector) => {
         const target = document.querySelector(selector);
         if (!(target instanceof HTMLElement)) return;
+
+        // Closing the mobile menu changes the header's height over a CSS
+        // transition. Measure the destination only after that layout settles.
+        if (mobileNav && !mobileNav.classList.contains("open")) {
+          await Promise.all((mobileNav.getAnimations?.() || []).map(animation => animation.finished.catch(() => {})));
+        }
 
         const headerHeight = document.querySelector(".header-container .logoName")?.getBoundingClientRect().height || 0;
         const top = Math.max(target.getBoundingClientRect().top + window.scrollY - headerHeight - 12, 0);

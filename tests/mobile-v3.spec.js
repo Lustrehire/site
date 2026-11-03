@@ -114,3 +114,21 @@ test('homepage gallery preview follows the managed gallery selection and order',
     await expect(page.locator('#gallery-preview > a[href="/gallery.html"]')).toBeVisible();
   }
 });
+
+test('mobile menu How It Works lands at the section top after the menu collapses', async ({ page }) => {
+  for (const width of [390,768]) {
+    await page.setViewportSize({width,height:900});
+    await page.goto('/');
+    await page.locator('.menu-toggle').click();
+    await expect(page.locator('.mobile-nav')).toHaveClass(/open/);
+    await page.locator('.mobile-nav a[href="#how-it-works"]').click();
+    await expect(page.locator('.menu-toggle')).toHaveAttribute('aria-expanded','false');
+    await expect.poll(()=>page.locator('.mobile-nav').evaluate(nav=>nav.getBoundingClientRect().height)).toBe(0);
+    await expect.poll(()=>page.evaluate(()=>{
+      const target=document.getElementById('how-it-works').getBoundingClientRect();
+      const bar=document.querySelector('.header-container .logoName').getBoundingClientRect();
+      return Math.abs(target.top-bar.height-12);
+    })).toBeLessThan(3);
+    await expect(page.locator('#how-it-works h2')).toBeInViewport();
+  }
+});
