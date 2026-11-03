@@ -64,8 +64,9 @@ html.availability-dialog-open { overflow: hidden; }
  .cro-home #availability-dialog.availability-contact-design #availability-contact-context { font-size: 13px; gap: 8px; }
  .cro-home #availability-dialog.availability-contact-design .quote-context-quantity { padding-left: 8px; }
 }
-.cro-home #availability-dialog.availability-contact-design #availability-step-2-submit::after { content: ''; display: inline-block; width: 18px; height: 12px; margin-left: 10px; background: currentColor; clip-path: polygon(0 43%,75% 43%,48% 8%,58% 0,100% 50%,58% 100%,48% 92%,75% 57%,0 57%); }
-.cro-home #availability-dialog.availability-contact-design #availability-step-2-submit:disabled::after { content: none; }
+.cro-home #availability-dialog.availability-contact-design #availability-step-2-submit:not(.button-loading)::after { content: ''; display: inline-block; width: 18px; height: 12px; margin-left: 10px; background: currentColor; clip-path: polygon(0 43%,75% 43%,48% 8%,58% 0,100% 50%,58% 100%,48% 92%,75% 57%,0 57%); }
+.cro-home #availability-dialog.availability-contact-design #availability-step-2-submit:disabled:not(.button-loading)::after { content: none; }
+.cro-home #availability-dialog.availability-contact-design #availability-step-2-submit.button-loading::after { display: inline-block; flex: 0 0 14px; }
 
 /* Limited stock and fully booked alternatives share the same calm visual family. */
 .cro-home #main-content #availability-dialog.availability-alternative-design { background: #faf9f5; border: 0; }

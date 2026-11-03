@@ -201,6 +201,16 @@ test('quote saved and emailed after 13 seconds still opens the personalised quot
   await page.locator('#availability-email').fill(booking.email);
   await page.locator('#availability-step-2-submit').click();
   await expect(page.locator('#availability-step-2-submit')).toBeDisabled();
+  const spinner = await page.locator('#availability-step-2-submit').evaluate(button => {
+    const style = getComputedStyle(button, '::after');
+    return {
+      visible: style.content !== 'none' && style.display !== 'none' && parseFloat(style.width) > 0 && parseFloat(style.height) > 0,
+      rotating: style.animationName !== 'none',
+      ring: parseFloat(style.borderTopWidth) > 0 && style.borderRightColor === 'rgba(0, 0, 0, 0)' && style.clipPath === 'none',
+    };
+  });
+  expect(spinner).toEqual({visible:true,rotating:true,ring:true});
+  await expect(page.locator('#availability-booking-feedback')).toBeEmpty();
   await expect(page.locator('#availability-step-4-panel')).toBeVisible({timeout:20000});
   await expect(page.locator('#availability-step-4-panel')).toContainText('A copy has been emailed to you.');
   expect(backend.calls.filter(call=>call.action==='saveQuoteBooking')).toHaveLength(1);
