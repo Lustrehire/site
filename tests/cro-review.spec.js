@@ -174,7 +174,7 @@ test('public content reflows at 320px with increased user text spacing', async (
 });
 
 test('old and new quote anchors scroll without reloading or losing form inputs', async ({ page }) => {
-  for (const hash of ['availability-checker', 'availability', 'candle-packages', 'pricing', 'how-it-works', 'faq', 'diy-practical', 'contact']) {
+  for (const hash of ['availability-checker', 'availability', 'candle-packages', 'pricing', 'how-it-works', 'faq', 'diy-practical']) {
     await page.goto('/gallery');
     await page.goto('/#' + hash);
     // Near the footer the browser clamps scrolling at the document end.
@@ -191,11 +191,11 @@ test('old and new quote anchors scroll without reloading or losing form inputs',
   await expect(page.locator('#availability-date')).toHaveValue(booking.eventDate);
 });
 
-test('inline contact keeps its masked submission and remains visible on Escape', async ({ page }) => {
+test('contact modal keeps its masked submission and returns focus on Escape', async ({ page }) => {
   const submitted = [];
   await page.route('https://formspree.io/f/moverenq', route => { submitted.push(route.request().postData()); return route.fulfill({ json: { ok: true } }); });
   await page.goto('/');
-  if (await page.locator('#contact .mobile-more > summary').isVisible()) await page.locator('#contact .mobile-more > summary').click();
+  await page.locator('#contact [data-open-contact]').click();
   await expect(page.locator('#contact-modal-form')).toBeVisible();
   expect(await page.locator('#contact-modal-form').evaluate(form => {
     const field = form.querySelector('input').getBoundingClientRect();
@@ -203,7 +203,9 @@ test('inline contact keeps its masked submission and remains visible on Escape',
   })).toBe(true);
   await page.locator('#contact-modal-name').focus();
   await page.keyboard.press('Escape');
-  await expect(page.locator('#contact-modal-form')).toBeVisible();
+  await expect(page.locator('#contact-dialog')).toBeHidden();
+  await expect(page.locator('#contact [data-open-contact]')).toBeFocused();
+  await page.locator('#contact [data-open-contact]').click();
   await page.locator('#contact-modal-name').fill('Test Customer');
   await page.locator('#contact-modal-email').fill('customer@example.test');
   await page.locator('#contact-modal-message').fill('Synthetic review message');
@@ -225,7 +227,8 @@ test('pricing keeps payment details visible without expanding and estimator text
   await expect(bond.locator('p')).toBeHidden();
   await bond.locator('summary').click();
   await expect(bond.locator('p')).toBeVisible();
-  await expect(bond).toContainText('The bond equals your hire fee');
+  await expect(page.locator('.pricing-bond-summary')).toContainText('equal to your hire fee');
+  await expect(bond).toContainText('covers loss, damage');
   await bond.locator('summary').click();
   await expect(bond.locator('p')).toBeHidden();
   await expect(pricing).toContainText('Pay a 50% deposit to secure your date.');

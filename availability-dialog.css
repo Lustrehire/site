@@ -274,3 +274,32 @@ html.availability-dialog-open { overflow: hidden; }
 .cro-home #estimator-cta .mobile-v3-kicker { display: block; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 .cro-home #availability-checker #candle-calculator { display: none; }
 #existing-record-dialog .record-reference-help { font-size: 12px; line-height: 1.5; margin: -8px 0 14px; color: #627362; }
+
+/* Local review: concise planning guidance and estimator recovery. */
+.cro-home #availability-form .availability-logistics { display: grid; gap: 2px; margin: 0 0 12px; padding: 0; color: #526453; font: 400 12px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; text-align: left; }
+.cro-home #availability-form .availability-logistics strong { font-weight: 600; color: #315b3d; }
+.cro-home #candle-packages :is(.pricing-tier-note,.pricing-bond-summary) { margin: 12px 0; color: #526453; font-size: 13px; line-height: 1.5; }
+#existing-record-dialog .record-reference-recovery { font-size: 13px; }
+#existing-record-dialog .record-reference-recovery a { color: #315b3d; text-underline-offset: 3px; }
+.calculator-edit-link { display: block; margin: 12px auto 0; padding: 10px 12px; min-height: 44px; border: 0; background: transparent; color: #315b3d; font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+@media(max-width:767px) {
+ .cro-home #estimator-dialog #calculator-edit { margin: 0; font-size: 14px; }
+}
+
+/* Contact uses the same cream, sage and forest modal styling. */
+#contact-dialog { width: min(560px,calc(100% - 24px)); max-height: calc(100dvh - 24px); box-sizing: border-box; padding: 0; border: 0; border-radius: 18px; overflow: auto; background: #faf9f5; color: #1c291f; }
+#contact-dialog::backdrop { background: rgb(16 27 19 / .55); backdrop-filter: blur(3px); }
+#contact-dialog .contact-dialog-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; background: #edf0e8; }
+#contact-dialog .contact-dialog-bar h2 { margin: 0; color: #315b3d; font: 500 19px/1.3 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+#contact-dialog .contact-dialog-bar button { flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: #315b3d; font: 32px/1 sans-serif; cursor: pointer; }
+#contact-dialog .contact-dialog-body { padding: 20px; }
+#contact-dialog #contact-modal { width: 100%; margin: 0; padding: 0; border: 0; background: transparent; }
+#contact-dialog form { display: grid; gap: 16px; width: 100%; margin: 0; }
+#contact-dialog form[hidden] { display: none; }
+#contact-dialog .form-group { display: grid; gap: 8px; margin: 0; }
+#contact-dialog label { color: #1c291f; font: 600 14px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+#contact-dialog :is(input,textarea) { box-sizing: border-box; width: 100%; min-height: 48px; padding: 12px; border: 1px solid #cbd1c9; border-radius: 10px; background: #fff; color: #1c291f; font: 16px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+#contact-dialog textarea { min-height: 120px; resize: vertical; }
+#contact-dialog .contact-modal-submit { width: 100%; min-height: 48px; margin: 0; border-radius: 999px; background: #184d30; }
+.cro-home #contact .contact-open-button { display: block; width: min(100%,340px); min-height: 48px; margin-top: 20px; background: #184d30; }
+.cro-home #main-content #contact { grid-template-columns: 1fr; }

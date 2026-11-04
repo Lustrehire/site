@@ -121,6 +121,7 @@
   <link rel="stylesheet" href="/desktop-hero-form.css" media="(min-width: 1024px)">
   <script src="/availability-dialog.js" defer></script>
   <script src="/estimator-dialog.js" defer></script>
+  <script src="/contact-dialog.js" defer></script>
   <link rel="stylesheet" href="/shared-header.css">
   <script src="/public-nav.js" defer></script>
   <link rel="stylesheet" href="/pricing-section.css">
@@ -143,7 +144,7 @@
         <a href="#how-it-works">How It Works</a>
         <a href="/faq.html">FAQs</a>
         <a href="/blog/blog.html">Blog</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" data-open-contact>Contact</a>
         <a href="#availability" class="nav-booking-link">Check Date &amp; Get Quote</a>
       </nav>
     </div>
@@ -152,9 +153,10 @@
         <a href="/gallery.html">Gallery</a>
         <a href="#pricing">Pricing</a>
         <a href="#how-it-works">How It Works</a>
+        <button type="button" class="nav-estimator-link" data-open-estimator>Estimate candle quantity</button>
         <a href="/faq.html">FAQs</a>
         <a href="/blog/blog.html">Blog</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" data-open-contact>Contact</a>
         <a href="#availability" class="nav-booking-link">Check Date &amp; Get Quote</a>
     </nav>
   </header>
@@ -166,7 +168,7 @@
       <div class="hero-text">
         <p class="hero-eyebrow">PERTH CANDLE HIRE · WEDDINGS &amp; EVENTS</p>
         <h1><span class="mobile-v3-desktop">Beautiful candles, minus all the prep.</span><span class="mobile-v3-only">Beautiful candles, minus all the prep.</span></h1>
-        <p class="hero-intro"><span class="mobile-v3-desktop">Hire candles that are filled and ready to light. You style them, then pack them up and leave the cleaning to us.</span><span class="mobile-v3-only">Ready-to-light candles for your event. You style them, we handle the cleaning.</span></p>
+        <p class="hero-intro"><span class="mobile-v3-desktop">Hire sand wax candles that are filled and ready to light. You style them, then pack them up and leave the cleaning to us.</span><span class="mobile-v3-only">Ready-to-light sand wax candles for your event. You style them, we handle the cleaning.</span></p>
         <div class="hero-features"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11h6v11H9zM12 11V8M12 2c3 3 3 5 0 6-3-1-3-3 0-6Z"/></svg><span>Ready<br>to light</span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 3C8 2 3 7 5 14s13 8 15-11ZM5 21 16 9M10 15l-1-5"/></svg><span>No cleaning<br>afterwards</span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21 3 12C-3 4 7-1 12 6c5-7 15-2 9 6Z"/></svg><span>Pickup<br>Bull Creek</span></div></div>
         <div class="hero-buttons"><a href="#availability" class="btn primary">Check Date &amp; Get Quote <span aria-hidden="true">→</span></a></div>
         <p class="hero-price"><span class="mobile-v3-desktop">From $150 hire · 15 candle minimum</span><span class="mobile-v3-only">Hire from $150</span></p>
@@ -184,7 +186,7 @@
  <article><h3>Candles 45–89</h3><p><strong>$9</strong> <span>each</span></p></article>
  <article><h3>90+ candles</h3><p><strong>$8</strong> <span>each</span></p></article>
  </div>
- <div class="pricing-process"><h3>How it works</h3><ol>
+ <div class="pricing-process"><h3>Payment timeline</h3><ol>
  <li><span class="pricing-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="22" rx="3"/><path d="M10 3v8m12-8v8M5 15h22"/></svg></span><div><h4>Today</h4><p>Pay a <strong>50% deposit</strong> to secure your date.</p></div></li>
  <li><span class="pricing-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19" rx="3"/><path d="M3 14h26M8 21h5"/></svg></span><div><h4>7 days before pickup</h4><p>Pay the remaining 50% + refundable bond.</p></div></li>
  <li><span class="pricing-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="11" y="12" width="10" height="17" rx="2"/><rect x="2" y="19" width="9" height="10" rx="2"/><rect x="21" y="19" width="9" height="10" rx="2"/><path d="M16 12V9m0-7c5 5 0 8 0 5-3 1-3-2 0-5ZM6 19v-4m20 4v-4"/></svg></span><div><h4>After your event</h4><p>Return your candles. We’ll refund your bond within 24 hours of inspection.</p></div></li>
@@ -197,13 +199,15 @@
  <article><h4>90 candles</h4><p><strong>$853</strong> hire</p></article>
  </div>
  </div>
- <details class="pricing-bond-explainer"><summary>Why a refundable bond?</summary><p>The bond equals your hire fee and covers loss, damage or other costs under our <a href="/terms-and-conditions.html">hire terms</a>. Eligible refunds are made within 24 hours of inspection.</p></details>
+ <p class="pricing-tier-note">For 45 candles: 44 at $10 + 1 at $9 = $449.</p>
+ <p class="pricing-bond-summary"><strong>Refundable bond:</strong> equal to your hire fee, paid before pickup.</p>
+ <details class="pricing-bond-explainer"><summary>Why a refundable bond?</summary><p>The bond covers loss, damage or other costs under our <a href="/terms-and-conditions.html">hire terms</a>. Eligible refunds are made within 24 hours of inspection.</p></details>
  <div class="pricing-actions"><a class="booking-button pricing-quote-button" href="#availability">Get a quote <span aria-hidden="true">→</span></a>
  <a class="text-link pricing-sizes-link" href="#candle-sizes">See candle sizes &amp; what’s included <span aria-hidden="true">→</span></a></div>
  </section>
 <section id="wedding-estimator-panel" class="cro-section" hidden aria-labelledby="estimator-panel-title"><div class="cro-section-heading"><span class="mobile-v3-kicker">Wedding Candle Estimator</span><h2 id="estimator-panel-title">How many candles will you need?</h2><p>Answer a few quick questions about your tables and styling for a personalised estimate.</p></div><div id="desktop-estimator-content"></div><div class="estimator-highlights" aria-label="About your candle estimate"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg><strong>Quick &amp; easy</strong><p>A few simple<br>questions</p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M8 9V5m8 4V5M12 9V3M4 14c2 3 4-3 6 0s4-3 6 0 4 0 4 0M2 21h20"/></svg><strong>Personalised</strong><p>Based on your<br>tables and styling</p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><strong>No obligation</strong><p>Just an estimate<br>to help you plan</p></div></div></section>
   <section id="availability-checker" class="cro-section"><span id="availability" class="anchor-alias" aria-hidden="true"></span>
-<header class="cro-section-heading"><span class="mobile-v3-only mobile-v3-kicker">Your candle quote</span>    <h2><span class="mobile-v3-desktop">Check availability and get a quote</span><span class="mobile-v3-only">Let’s check your date.</span></h2><span class="mobile-hero-only availability-entry-note">No contact details yet</span>
+<header class="cro-section-heading"><span class="mobile-v3-only mobile-v3-kicker">Your candle quote</span>    <h2><span class="mobile-v3-desktop">Check availability and get a quote</span><span class="mobile-v3-only">Let’s check your date.</span></h2>
     <p><span class="mobile-v3-desktop">Enter your event date and estimated quantity to see availability.</span><span class="mobile-v3-only">Start with two details. No contact information required yet.</span></p>
 </header>
 <div class="cro-availability-body">
@@ -221,6 +225,7 @@
       <div class="availability-panel" id="availability-step-1-panel">
         <h3>Check availability</h3>
         <form id="availability-form" novalidate>
+          <p class="availability-logistics"><strong>Pickup Bull Creek</strong><span>Collect the day before · Return the day after</span></p>
           <div class="availability-form-grid">
             <div class="form-group">
               <label for="availability-date">Event date</label>
@@ -622,9 +627,9 @@
           </form>
         </div>
 
-        <div class="calculator-panel calculator-result-panel calculator-hidden" id="calculator-result-panel">
+        <div class="calculator-panel calculator-result-panel calculator-hidden" id="calculator-result-panel" data-clarity-mask="true">
           <div class="calculator-result-card">
-            <p class="calculator-result-kicker">Your candle estimate</p>
+            <h2 class="calculator-result-kicker" id="calculator-result-title" tabindex="-1">Your candle estimate</h2>
             <div class="calculator-result-summary" id="calculator-result-summary">
               <div class="calculator-summary-chips" id="calculator-summary-chips"></div>
             </div>
@@ -638,6 +643,7 @@
               <button type="button" class="booking-button" id="calculator-check-date">Check Availability</button>
             </div>
           </div>
+          <button type="button" class="calculator-edit-link" id="calculator-edit">Edit answers</button>
           <button type="button" class="calculator-reset-link" id="calculator-reset"><i class="bi bi-arrow-clockwise" aria-hidden="true"></i> Start again</button>
         </div>
       </div>
@@ -646,7 +652,7 @@
 </div>
   </section>
 
-<section id="benefits" class="cro-section"><span id="diy-practical" class="anchor-alias" aria-hidden="true"></span><div class="cro-section-heading"><span class="cro-section-kicker"><svg class="cro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4C9 2 3 7 5 14s14 7 15-10ZM4 21 16 9"/></svg>Less prep. More celebration.</span><h2>You do the styling. We’ll handle the messy bits.</h2><p>Doing your own wedding or event styling doesn’t mean making everything yourself. We’ve taken care of the candle prep so you have less to organise.</p></div><div class="cro-benefits"><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c1 6 8 8 8 14a8 8 0 0 1-16 0c0-4 3-7 5-9 0 4 2 5 3 5 2-3 0-6 0-10Z"/><path d="M12 14c4 4 4 7 0 8-4-1-4-4 0-8Z"/></svg><h3>Ready to light</h3><p>No filling, pouring or assembling. Your candles are already prepared.</p></article><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-4 9 4v10l-9 4-9-4V7Zm0 0 9 4 9-4M12 11v10M7.5 5l9 4"/></svg><h3>Packed and ready</h3><p>Securely packed in protective boxes, ready for collection and easy to repack.</p></article><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3 2 6 6 2-6 2-2 6-2-6-6-2 6-2ZM19 1l1 3 3 1-3 1-1 3-1-3-3-1 3-1ZM19 16l1 3 3 1-3 1-1 3-1-3-3-1 3-1Z"/></svg><h3>Style them your way</h3><p>Create the look you want without spending hours preparing candles yourself.</p></article><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 3C8 2 3 7 5 14s13 8 15-11ZM5 21 16 9M10 15l-1-5"/></svg><h3>No cleaning afterwards</h3><p>Blow them out, pack them up and return them. We’ll take care of the cleaning.</p></article></div><a href="#availability" class="cro-outline-link journey-booking-cta" data-availability-focus>Check Your Date <span aria-hidden="true">→</span></a></section>
+<section id="benefits" class="cro-section"><span id="diy-practical" class="anchor-alias" aria-hidden="true"></span><div class="cro-section-heading"><span class="cro-section-kicker"><svg class="cro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4C9 2 3 7 5 14s14 7 15-10ZM4 21 16 9"/></svg>Less prep. More celebration.</span><h2>You do the styling. We’ll handle the messy bits.</h2><p>Doing your own wedding or event styling doesn’t mean making everything yourself. We’ve taken care of the candle prep so you have less to organise.</p></div><div class="cro-benefits"><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c1 6 8 8 8 14a8 8 0 0 1-16 0c0-4 3-7 5-9 0 4 2 5 3 5 2-3 0-6 0-10Z"/><path d="M12 14c4 4 4 7 0 8-4-1-4-4 0-8Z"/></svg><h3>Ready to light</h3><p>Your sand wax candles arrive filled and ready to light. No pouring or assembling.</p></article><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 7 9-4 9 4v10l-9 4-9-4V7Zm0 0 9 4 9-4M12 11v10M7.5 5l9 4"/></svg><h3>Packed and ready</h3><p>Securely packed in protective boxes, ready for collection and easy to repack.</p></article><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3 2 6 6 2-6 2-2 6-2-6-6-2 6-2ZM19 1l1 3 3 1-3 1-1 3-1-3-3-1 3-1ZM19 16l1 3 3 1-3 1-1 3-1-3-3-1 3-1Z"/></svg><h3>Style them your way</h3><p>Create the look you want without spending hours preparing candles yourself.</p></article><article class="benefit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 3C8 2 3 7 5 14s13 8 15-11ZM5 21 16 9M10 15l-1-5"/></svg><h3>No cleaning afterwards</h3><p>Blow them out, pack them up and return them. We’ll take care of the cleaning.</p></article></div><a href="#availability" class="cro-outline-link journey-booking-cta" data-availability-focus>Check Your Date <span aria-hidden="true">→</span></a></section>
 <section id="estimator-cta" class="cro-section cro-ready" aria-labelledby="estimator-cta-title"><div>
   <span class="mobile-v3-kicker">Planning your candlelight?</span>
   <h2 id="estimator-cta-title">Not sure how many candles you need?</h2>
@@ -661,7 +667,7 @@
 <a href="/img/gallery-managed/full/Image_fx%20-%202025-11-09T171045.458.jpg.jpg" data-gallery-image aria-label="Open image: Image fx   2025 11 09T171045.458"><img src="/img/gallery-managed/previews/Image_fx%20-%202025-11-09T171045.458.jpg.jpg" srcset="/img/gallery-managed/previews/Image_fx%20-%202025-11-09T171045.458.jpg.jpg 480w, /img/gallery-managed/full/Image_fx%20-%202025-11-09T171045.458.jpg.jpg 768w" sizes="(max-width: 767px) 90vw, (min-width: 1101px) 768px, 45vw" alt="Image fx   2025 11 09T171045.458" width="768" height="1408" loading="lazy" decoding="async"></a>
 <a href="/img/gallery-managed/full/Image_fx%20-%202025-11-09T170804.897.jpg.jpg" data-gallery-image aria-label="Open image: Image fx   2025 11 09T170804.897"><img src="/img/gallery-managed/previews/Image_fx%20-%202025-11-09T170804.897.jpg.jpg" srcset="/img/gallery-managed/previews/Image_fx%20-%202025-11-09T170804.897.jpg.jpg 480w, /img/gallery-managed/full/Image_fx%20-%202025-11-09T170804.897.jpg.jpg 768w" sizes="(max-width: 767px) 90vw, (min-width: 1101px) 768px, 45vw" alt="Image fx   2025 11 09T170804.897" width="768" height="1408" loading="lazy" decoding="async"></a>
 <!-- HOME_GALLERY_IMAGES_END --></div><a href="/gallery.html" class="cro-outline-link">View Full Gallery <span aria-hidden="true">→</span></a><aside class="cro-occasions" aria-labelledby="occasions-heading"><div><span class="occasion-desktop-only occasions-kicker">For life’s special moments</span><h3 id="occasions-heading">Beautifully styled for every occasion.</h3><p>From wedding receptions to intimate gatherings, style your candles your way. We’ve taken care of the filling and will handle the cleaning.</p></div><ul aria-label="Occasions"><li><img class="occasion-desktop-only occasion-photo" src="/img/gallery-preview/clustered-candles-wedding-tablescape.jpg" alt="" width="480" height="320" loading="lazy" decoding="async"><span class="occasion-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="23" r="9"/><circle cx="26" cy="23" r="9"/><path d="m12 9 2-5 2 5m8 0 2-5 2 5"/></svg></span><div class="occasion-copy"><span class="occasion-title">Weddings</span><p class="occasion-desktop-only occasion-description">Set the tables for your wedding day.</p></div></li><li><img class="occasion-desktop-only occasion-photo" src="/img/bridal-shower.jpg" alt="" width="768" height="1408" loading="lazy" decoding="async"><span class="occasion-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v7a5 5 0 0 1-10 0V7Zm16 0h10v7a5 5 0 0 1-10 0V7ZM12 19v13m16-13v13M7 33h10m6 0h10M8 11h8m8 0h8"/></svg></span><div class="occasion-copy"><span class="occasion-title">Bridal showers &amp; engagements</span><p class="occasion-desktop-only occasion-description">Bring a little candlelight to your celebration.</p></div></li><li><img class="occasion-desktop-only occasion-photo" src="/img/Birthday.png" alt="" width="1080" height="1350" loading="lazy" decoding="async"><span class="occasion-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22h28v12H6zM10 22v-6h20v6M6 26c3 4 5-4 8 0s5-4 8 0 5-4 8 0 4 0 4 0M14 16v-5m12 5v-5M20 16V9M14 5v2m6-4v2m6 0v2"/></svg></span><div class="occasion-copy"><span class="occasion-title">Birthdays &amp; celebrations</span><p class="occasion-desktop-only occasion-description">Make room for candles at your next celebration.</p></div></li><li><img class="occasion-desktop-only occasion-photo" src="/img/gallery-preview/candlelit-wedding-table-mixed-glass-vessels.jpg" alt="" width="480" height="320" loading="lazy" decoding="async"><span class="occasion-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="11" y="18" width="14" height="17" rx="2"/><path d="M18 18v-4m0-10c-6 7-5 10 0 10s6-3 0-10ZM27 28c1-6 4-9 10-10-1 6-4 10-10 10Zm0 0-3 7"/></svg></span><div class="occasion-copy"><span class="occasion-title">Memorials &amp; gatherings</span><p class="occasion-desktop-only occasion-description">A gentle glow to honour and remember.</p></div></li></ul></aside></section>
-<section id="candle-sizes" class="cro-section"><div class="cro-size-layout"><div class="cro-section-heading"><span class="mobile-v3-only mobile-v3-kicker">What’s included</span><h2><span class="mobile-v3-desktop">Candle sizes included</span><span class="mobile-v3-only">Three heights. One beautiful look.</span></h2><p>A balanced mix of all 3 sizes comes with your booking, creating a layered candlelit look.</p><p class="cro-size-preference">If you have a preference, leave a note when booking and we can confirm what is available.</p></div><div class="cro-size-visual"><picture><img src="/img/wedding-reception-candles-clear-glass-vessels.jpg" alt="Mixed-height glass wedding candles styled on a reception table" width="1080" height="1440" loading="lazy" decoding="async"></picture><div class="cro-size-labels"><div><strong>10×10 cm</strong><span>Low layer</span></div><div><strong>10×15 cm</strong><span>Middle height</span></div><div><strong>10×30 cm</strong><span>Tall &amp; impact</span></div></div></div></div></section>
+<section id="candle-sizes" class="cro-section"><div class="cro-size-layout"><div class="cro-section-heading"><span class="mobile-v3-only mobile-v3-kicker">What’s included</span><h2><span class="mobile-v3-desktop">Candle sizes included</span><span class="mobile-v3-only">Three heights. One beautiful look.</span></h2><p>Ready-to-light sand wax candles in glass vessels. A balanced mix of all 3 sizes comes with your booking for a layered candlelit look.</p><p class="cro-size-preference">If you have a preference, leave a note when booking and we can confirm what is available.</p></div><div class="cro-size-visual"><picture><img src="/img/wedding-reception-candles-clear-glass-vessels.jpg" alt="Mixed-height glass wedding candles styled on a reception table" width="1080" height="1440" loading="lazy" decoding="async"></picture><div class="cro-size-labels"><div><strong>10×10 cm</strong><span>Low layer</span></div><div><strong>10×15 cm</strong><span>Middle height</span></div><div><strong>10×30 cm</strong><span>Tall &amp; impact</span></div></div></div></div></section>
   <section id="testimonials" class="cro-section">
     <div class="testimonials-header">
       <h2><span class="mobile-v3-desktop">What our customers say</span><span class="mobile-v3-only">Genuine Google reviews</span></h2>
@@ -746,15 +752,15 @@
   </div>
 <!-- FAQ_ITEMS_END --></div><a class="cro-outline-link" href="/faq.html">View All FAQs <span aria-hidden="true">→</span></a></section>
 <section class="cro-ready"><div><span class="mobile-v3-only mobile-v3-kicker">Ready for your occasion?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="17" rx="2"/><path d="M7 2v6M17 2v6M3 11h18M7 15h1M12 15h1M17 15h1M7 19h1M12 19h1"/></svg><h2><span class="mobile-v3-desktop">Ready to create<br>your candlelit look?</span><span class="mobile-v3-only">Let’s make your event glow.</span></h2><p class="mobile-v3-only mobile-v3-cta-copy">Choose a quantity that suits your setup and budget.</p><a href="#availability" class="booking-button">Check Date &amp; Get Quote <span aria-hidden="true">→</span></a><p>15 candle minimum · Pickup Bull Creek</p></div></section>
-<section id="contact" class="cro-section cro-contact"><div class="cro-section-heading"><span class="cro-section-kicker"><svg class="cro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg><span class="mobile-v3-desktop">Here to help</span><span class="mobile-v3-only">Questions?</span></span><h2 id="contact-modal-title"><span class="mobile-v3-desktop">Get in touch</span><span class="mobile-v3-only">We’re happy to help.</span></h2><p>Have a question? Send us a message and we’ll get back to you.</p><a href="mailto:lustrehire@gmail.com">lustrehire@gmail.com</a></div><div class="cro-contact-inline" id="contact-modal">      <div class="contact-modal-status" id="contact-modal-status" data-clarity-mask="true" hidden aria-live="polite"></div>
+<section id="contact" class="cro-section cro-contact"><div class="cro-section-heading"><span class="cro-section-kicker"><svg class="cro-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg><span class="mobile-v3-desktop">Here to help</span><span class="mobile-v3-only">Questions?</span></span><h2 id="contact-modal-title"><span class="mobile-v3-desktop">Get in touch</span><span class="mobile-v3-only">We’re happy to help.</span></h2><p>Have a question? Send us a message and we’ll get back to you.</p><a href="mailto:lustrehire@gmail.com">lustrehire@gmail.com</a><button type="button" class="booking-button contact-open-button" data-open-contact aria-haspopup="dialog">Send us a message</button></div><div class="cro-contact-inline" id="contact-modal">      <div class="contact-modal-status" id="contact-modal-status" data-clarity-mask="true" hidden aria-live="polite"></div>
       <form id="contact-modal-form" action="https://formspree.io/f/moverenq" method="POST">
         <div class="form-group">
           <label for="contact-modal-name">Name</label>
-          <input data-clarity-mask="true" id="contact-modal-name" name="full-name" placeholder="Your name" autocomplete="name" placeholder="Your full name" type="text" required />
+          <input data-clarity-mask="true" id="contact-modal-name" name="full-name" autocomplete="name" placeholder="Your full name" type="text" required />
         </div>
         <div class="form-group">
           <label for="contact-modal-email">Email</label>
-          <input data-clarity-mask="true" id="contact-modal-email" name="email" placeholder="your@email.com" autocomplete="email" placeholder="you@example.com" type="email" required />
+          <input data-clarity-mask="true" id="contact-modal-email" name="email" autocomplete="email" placeholder="you@example.com" type="email" required />
         </div>
         <div class="form-group">
           <label for="contact-modal-message">Message</label>
@@ -776,6 +782,7 @@
         <input data-clarity-mask="true" id="existing-record-email" type="email" autocomplete="email" placeholder="you@example.com" required>
         <button type="submit" class="booking-button" id="existing-record-next">Next <span aria-hidden="true">→</span></button>
       </form>
+    <p class="record-reference-recovery">Can’t find your reference? <a href="mailto:lustrehire@gmail.com">Contact us</a>.</p>
     </section>
     <section id="existing-record-result" data-clarity-mask="true" hidden aria-label="Retrieved record"></section>
     <p id="existing-record-email-feedback" data-clarity-mask="true" role="status" aria-live="polite"></p>
@@ -820,7 +827,7 @@
 
       const scrollToParamTarget = new URLSearchParams(window.location.search).get("scrollTo");
       const initialHash = window.location.hash;
-      if (initialHash && document.querySelector(initialHash)) {
+      if (initialHash && initialHash !== "#contact" && document.querySelector(initialHash)) {
         requestAnimationFrame(() => { scrollToSection(initialHash); clearSectionHash(); });
       }
       if (scrollToParamTarget) {
@@ -837,7 +844,7 @@
         }
       }
 
-      document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach((link) => {
+      document.querySelectorAll('a[href^="#"]:not([href="#"]):not([data-open-contact])').forEach((link) => {
         link.addEventListener("click", (event) => {
           const href = link.getAttribute("href");
           if (!href) return;
@@ -988,8 +995,8 @@
         contactModalStatus.innerHTML = "";
         contactModalStatus.classList.remove("is-error");
         contactModalStatus.classList.remove("is-success");
-        contactModalStatus.hidden = false;
-        setStatusLoadingState(contactModalStatus, "Sending your message...", true);
+        // The submit button is the single visual loading indicator.
+        contactModalStatus.hidden = true;
 
         try {
           const response = await fetch(contactModalForm.action, {
@@ -1016,10 +1023,14 @@
               </div>
             </div>
           `;
+          contactModalStatus.hidden = false;
+          contactModalStatus.setAttribute("tabindex", "-1");
+          contactModalStatus.focus({ preventScroll: true });
           contactModalStatus.classList.add("is-success");
           contactModalStatus.classList.remove("status-loading");
           contactModalForm.hidden = true;
         } catch (error) {
+          contactModalStatus.hidden = false;
           contactModalStatus.textContent = "Something went wrong while sending your message. Please try again.";
           contactModalStatus.classList.add("is-error");
           contactModalStatus.classList.remove("is-success");
@@ -2486,7 +2497,7 @@
           };
         };
 
-        const renderCalculatorStep = () => {
+        const renderCalculatorStep = (focusQuestion = false) => {
           const data = getCalculatorData();
           const activeSteps = getActiveCalculatorSteps(data);
           if (calculatorStepIndex >= activeSteps.length) {
@@ -2505,6 +2516,11 @@
           calculatorProgressFill.style.width = `${((calculatorStepIndex + 1) / activeSteps.length) * 100}%`;
           calculatorBack.classList.toggle("calculator-hidden", calculatorStepIndex === 0);
           calculatorNext.textContent = calculatorStepIndex === activeSteps.length - 1 ? "See My Estimate" : "Next";
+          if (focusQuestion) {
+            const legend = calculatorSteps.find(step => Number(step.dataset.step) === currentStep)?.querySelector("legend");
+            legend?.setAttribute("tabindex", "-1");
+            legend?.focus({ preventScroll: true });
+          }
         };
 
         const scrollCalculatorToTop = () => {
@@ -2535,6 +2551,7 @@
           }
 
           calculatorResultRange.textContent = `Around ${result.lowEnd} to ${result.highEnd} candles`;
+          calculatorCheckDate.textContent = `Use ${result.estimateCount} candles & check date`;
           // Quantity recommendation stays visible; pricing follows contact submission.
           if (calculatorSummaryChips) {
             const summaryItems = result.setupSummary.length ? result.setupSummary : ["Estimate based on your selections"];
@@ -2546,6 +2563,7 @@
           calculatorIntroPanel.classList.add("calculator-hidden");
           calculatorFlowPanel.classList.add("calculator-hidden");
           calculatorResultPanel.classList.remove("calculator-hidden");
+          document.getElementById("calculator-result-title").focus({ preventScroll: true });
         };
 
         calculatorStart.addEventListener("click", () => {
@@ -2556,7 +2574,7 @@
             calculatorIntroPanel.classList.add("calculator-hidden");
             calculatorResultPanel.classList.add("calculator-hidden");
             calculatorFlowPanel.classList.remove("calculator-hidden");
-            renderCalculatorStep();
+            renderCalculatorStep(true);
             scrollCalculatorToTop();
           }, 180);
         });
@@ -2575,7 +2593,7 @@
         calculatorBack.addEventListener("click", () => {
           if (calculatorStepIndex > 0) {
             calculatorStepIndex -= 1;
-            renderCalculatorStep();
+            renderCalculatorStep(true);
             scrollCalculatorToTop();
           }
         });
@@ -2593,7 +2611,8 @@
 
           if (calculatorStepIndex === activeSteps.length - 1) {
             setButtonLoadingState(calculatorNext, true, "Calculating...");
-            setStatusLoadingState(calculatorError, "Calculating your estimate...", true);
+            calculatorError.textContent = "";
+            calculatorError.classList.remove("status-loading");
             window.setTimeout(() => {
               setButtonLoadingState(calculatorNext, false);
               calculatorError.textContent = "";
@@ -2605,7 +2624,16 @@
           }
 
           calculatorStepIndex += 1;
-          renderCalculatorStep();
+          renderCalculatorStep(true);
+          scrollCalculatorToTop();
+        });
+
+        document.getElementById("calculator-edit")?.addEventListener("click", () => {
+          calculatorStepIndex = 0;
+          calculatorResultPanel.classList.add("calculator-hidden");
+          calculatorIntroPanel.classList.add("calculator-hidden");
+          calculatorFlowPanel.classList.remove("calculator-hidden");
+          renderCalculatorStep(true);
           scrollCalculatorToTop();
         });
 
@@ -2650,7 +2678,7 @@
         <a href="#pricing">Pricing</a>
         <a href="#how-it-works">How It Works</a>
         <a href="/blog/blog.html">Blog</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact" data-open-contact>Contact</a>
         <a href="mailto:lustrehire@gmail.com">lustrehire@gmail.com</a>
         <a href="/terms-and-conditions.html">Terms &amp; Conditions</a>
         <a href="/how-to-return.html">How to Return</a>

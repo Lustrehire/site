@@ -1,0 +1,46 @@
+const {test,expect}=require('./fixtures');
+test('footer and message button share one modal, preserve drafts and return focus',async({page})=>{
+  await page.goto('/');
+  const footer=page.locator('.site-footer [data-open-contact]');
+  await footer.click();
+  await expect(page.locator('#contact-dialog')).toBeVisible();
+  await expect(page.locator('#contact-modal-name')).toBeFocused();
+  await page.locator('#contact-modal-message').fill('Unsent draft');
+  await page.keyboard.press('Escape');
+  await expect(footer).toBeFocused();
+  await page.locator('#contact [data-open-contact]').click();
+  await expect(page.locator('#contact-dialog')).toBeVisible();
+  await expect(page.locator('#contact-modal-message')).toHaveValue('Unsent draft');
+  await expect(page.locator('#contact-modal-form')).toHaveCount(1);
+  await expect(page.locator('#contact .mobile-more')).toHaveCount(0);
+  await page.getByRole('button',{name:'Close contact form',exact:true}).click();
+  await expect(page.locator('#contact [data-open-contact]')).toBeFocused();
+});
+test('contact failure keeps details for retry and success permits a fresh message',async({page,backend})=>{
+  backend.expectedErrors.push(/Failed to load resource:.*503/);
+  let calls=0;
+  await page.route('https://formspree.io/f/moverenq',route=>{calls++;return route.fulfill({status:calls===1?503:200,json:{ok:calls>1}});});
+  await page.goto('/');
+  await page.locator('#contact [data-open-contact]').click();
+  await page.locator('#contact-modal-name').fill('Test Customer');
+  await page.locator('#contact-modal-email').fill('customer@example.test');
+  await page.locator('#contact-modal-message').fill('Synthetic contact message');
+  await page.locator('.contact-modal-submit').click();
+  await expect(page.locator('#contact-modal-status')).toContainText('Please try again');
+  await expect(page.locator('#contact-modal-message')).toHaveValue('Synthetic contact message');
+  await page.locator('.contact-modal-submit').click();
+  await expect(page.locator('#contact-modal-status')).toContainText('Message sent');
+  await expect(page.locator('#contact-modal-status')).toHaveAttribute('data-clarity-mask','true');
+  await page.keyboard.press('Escape');
+  await page.locator('#contact [data-open-contact]').click();
+  await expect(page.locator('#contact-modal-form')).toBeVisible();
+  await expect(page.locator('#contact-modal-message')).toHaveValue('');
+  await expect(page.locator('#contact-modal-status')).toBeHidden();
+  expect(calls).toBe(2);
+});
+test('contact link from another page opens the homepage modal',async({page})=>{
+  await page.goto('/faq.html');
+  await page.locator('.site-footer').getByRole('link',{name:'Contact',exact:true}).click();
+  await expect(page.locator('#contact-dialog')).toBeVisible();
+  await expect(page.locator('#contact-modal-name')).toBeFocused();
+});

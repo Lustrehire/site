@@ -62,7 +62,7 @@ test('compact mobile disclosures retain gallery content and the original contact
   await expect(page.locator('details #benefits')).toHaveCount(0);
   await expect(page.locator('#gallery-preview [data-gallery-image] img')).toHaveCount(6);
   await expect(page.locator('#contact-modal-form')).toBeHidden();
-  await page.locator('#contact .mobile-more > summary').click();
+  await page.locator('#contact [data-open-contact]').click();
   await expect(page.locator('#contact-modal-form')).toBeVisible();
   await expect(page.locator('#contact-modal-form')).toHaveCount(1);
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -76,7 +76,8 @@ test('tablet and desktop show full content, matching mobile copy and the entry f
     await page.goto('/');
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     await expect(page.locator('#main-content .mobile-more')).toHaveCount(0);
-    await expect(page.locator('#contact-modal-form')).toBeVisible();
+    await expect(page.locator('#contact-modal-form')).toBeHidden();
+    await expect(page.locator('#contact [data-open-contact]')).toBeVisible();
     await expect(page.locator('#benefits')).toBeVisible();
     await expect(page.locator('#gallery-preview .cro-gallery-preview img')).toHaveCount(6);
     for (const card of await page.locator('.testimonial-card').all()) await expect(card).toBeVisible();

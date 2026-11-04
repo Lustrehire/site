@@ -45,7 +45,7 @@
       else main.insertBefore(availability, estimatorPanel);
     }
     entryTitle.textContent = mobile.matches ? 'Check your date' : originalEntryTitle;
-    quantityLabel.textContent = mobile.matches ? 'Candle quantity' : originalQuantityLabel;
+    quantityLabel.textContent = mobile.matches ? 'Candles (min 15)' : originalQuantityLabel;
     if (mobile.matches) {
       trustStrip.append(heroReviews, heroPrice);
       if (!document.getElementById('availability-dialog')?.open) availability.after(trustStrip);
@@ -92,8 +92,6 @@
         extraPhotos.forEach(photo => extraGrid.appendChild(photo));
         disclose([extraGrid], 'More candle styling', extraGrid);
       }
-      const contact = document.getElementById('contact-modal');
-      disclose([contact], 'Send us a message', contact);
     } else {
       document.querySelectorAll('.cro-gallery-preview:empty').forEach(grid => {
         if (grid !== gallery) grid.remove();

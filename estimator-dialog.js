@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     dialog.close();
     if (placeholder) { placeholder.replaceWith(estimator); placeholder = null; }
     estimator.dispatchEvent(new Event('lustre:estimator-restored'));
-    if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+    const returnTarget = trigger?.closest(".mobile-nav") ? document.querySelector(".menu-toggle") : trigger;
+    if (returnTarget?.isConnected) returnTarget.focus({ preventScroll: true });
   };
   const open = source => {
     if (dialog.open) return;
@@ -24,9 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     body.append(estimator);
     dialog.showModal();
     document.getElementById('calculator-start').click();
-    const input = estimator.querySelector('input[name="calculator_knowledge"]');
-    // Existing start handler shows the first step asynchronously.
-    setTimeout(() => { if (dialog.open) input?.focus({ preventScroll: true }); }, 200);
+
   };
   document.querySelectorAll('[data-open-estimator]').forEach(button => button.addEventListener('click', () => open(button)));
   dialog.querySelector('button').addEventListener('click', close);
@@ -37,5 +36,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('calculator-cancel')?.addEventListener('click', close);
   document.getElementById('calculator-check-date')?.addEventListener('click', close, true);
-  if (location.hash === '#candle-calculator') open(document.querySelector('[data-open-estimator]'));
+  if (location.hash === '#candle-calculator') open(document.querySelector('#estimator-cta [data-open-estimator]'));
 });
