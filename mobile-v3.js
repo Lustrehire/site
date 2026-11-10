@@ -59,7 +59,7 @@
       else estimatorHome.after(estimator);
     }
   };
-  const ids = ['candle-packages', 'availability-checker', 'wedding-estimator-panel', 'benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works', 'faq'];
+  const ids = ['sand-wax-difference', 'candle-packages', 'availability-checker', 'wedding-estimator-panel', 'benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works', 'faq'];
   const disclosures = [];
   const disclose = (nodes, label, before) => {
     if (!nodes.length || !before?.parentNode) return;

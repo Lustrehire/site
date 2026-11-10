@@ -215,12 +215,15 @@ test('contact modal keeps its masked submission and returns focus on Escape', as
   await expect(page.locator('#contact-modal-status')).toHaveAttribute('data-clarity-mask', 'true');
 });
 
-test('pricing keeps payment details visible without expanding and estimator text readable', async ({ page }) => {
+test('pricing keeps public prices visible and payment details collapsed until requested', async ({ page }) => {
   await page.goto('/');
   const pricing = page.locator('#candle-packages');
   await expect(pricing.locator('.pricing-process')).toBeVisible();
   await expect(pricing.locator('.pricing-rates article')).toHaveCount(3);
   await expect(pricing.locator('.pricing-rates article').first()).toContainText('First 44 candles');
+  await expect(pricing.getByRole('heading', { name: 'Today', exact: true })).toBeHidden();
+  await pricing.locator('.pricing-process summary').focus();
+  await page.keyboard.press('Enter');
   await expect(pricing.getByRole('heading', { name: 'Today', exact: true })).toBeVisible();
   await expect(pricing.locator('.pricing-example-cards article')).toHaveText(['30 candles$300 hire', '45 candles$449 hire', '90 candles$853 hire']);
   const bond = pricing.locator('.pricing-bond-explainer');

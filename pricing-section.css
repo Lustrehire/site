@@ -9,7 +9,13 @@
 .cro-home #candle-packages .pricing-rates article:last-child { background: #224532; }
 .cro-home #candle-packages .pricing-rates article:last-child :is(h3,p) { color: #fff; }
 .cro-home #candle-packages .pricing-process { margin-top: 16px; padding: 16px; border-radius: 20px; background: #edf2e8; }
-.cro-home #candle-packages .pricing-process > h3 { font-family: Georgia, 'Times New Roman', serif; font-size: 28px; font-weight: 400; margin: 0 0 16px; color: #1c291f; }
+.cro-home #candle-packages .pricing-process > summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; list-style: none; cursor: pointer; }
+.cro-home #candle-packages .pricing-process > summary::-webkit-details-marker { display: none; }
+.cro-home #candle-packages .pricing-process > summary h3 { margin: 0; font: 600 17px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; color: #1c291f; }
+.cro-home #candle-packages .pricing-process > summary::after { content: '+'; flex: 0 0 auto; font-size: 24px; font-weight: 400; color: #184d30; }
+.cro-home #candle-packages .pricing-process[open] > summary::after { content: '−'; }
+.cro-home #candle-packages .pricing-process[open] > summary { margin-bottom: 16px; }
+.cro-home #candle-packages .pricing-process > summary:focus-visible { outline: 2px solid #184d30; outline-offset: 4px; border-radius: 4px; }
 .cro-home #candle-packages .pricing-process ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
 .cro-home #candle-packages .pricing-process li { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 12px; }
 .cro-home #candle-packages .pricing-step-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #e0e8d8; color: #184d30; }

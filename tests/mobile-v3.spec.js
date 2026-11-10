@@ -94,7 +94,7 @@ test('homepage journey and booking anchors remain correct across breakpoints', a
   for (const width of [390, 768, 1024, 1440, 1920]) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('/');
-    const expected = ['candle-packages', 'benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works', 'faq', 'booking-cta', 'contact'];
+    const expected = ['sand-wax-difference', 'candle-packages', 'benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works', 'faq', 'booking-cta', 'contact'];
     expect(await page.locator('#main-content > section').evaluateAll(nodes => nodes.filter(n => !['availability-checker', 'wedding-estimator-panel'].includes(n.id)).map(n => n.id || (n.classList.contains('cro-ready') ? 'booking-cta' : '')))).toEqual(expected);
     await page.locator('.cro-ready a[href="#availability"]').click();
     await expect(page.locator('#availability-form')).toBeInViewport();

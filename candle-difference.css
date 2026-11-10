@@ -1,0 +1,80 @@
+/* Product explanation: live text stays readable at every viewport size. */
+.cro-home #sand-wax-difference .cro-section-heading { margin-bottom: 20px; }
+.sand-wax-layout { display: grid; gap: 20px; }
+.sand-wax-comparison { margin: 0; min-width: 0; }
+.sand-wax-comparison img { display: block; width: 100%; height: auto; border-radius: 16px; }
+.sand-wax-comparison figcaption { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 10px; text-align: center; color: #526451; font-size: 13px; }
+.sand-wax-reasons, .hire-benefits { list-style: none; padding: 0; margin: 0; }
+.sand-wax-reasons li { display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid #dfe3d8; }
+.sand-wax-reasons li:first-child { padding-top: 0; }
+.sand-wax-reasons li:last-child { border-bottom: 0; padding-bottom: 0; }
+.sand-wax-reasons li > span, .hire-benefits li > span { color: #315d3c; flex: 0 0 22px; font-size: 20px; }
+.cro-home #sand-wax-difference h3 { margin: 0 0 5px; font-family: inherit; font-size: 17px; font-weight: 600; line-height: 1.35; color: #21412b; }
+.sand-wax-reasons p { margin: 0; color: #626b60; font-size: 14px; line-height: 1.55; }
+.cro-home #main-content > #benefits.hire-section { background: #eef1e7; border: 0; border-radius: 20px; padding: 28px 24px; }
+.cro-home #benefits .cro-section-heading { margin-bottom: 18px; }
+.cro-home #benefits .hire-benefits { display: grid; gap: 14px; }
+.cro-home #benefits .hire-benefits .benefit { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 10px; padding: 0; margin: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; text-align: left; font-size: 15px; line-height: 1.45; color: #253c2c; }
+#benefits .hire-summary { margin: 22px 0 18px; color: #526451; font-size: 14px; line-height: 1.55; }
+.cro-home #benefits .journey-booking-cta { background: #184e35; border-color: #184e35; color: #fff; padding: 13px 22px; border-radius: 999px; text-decoration: none; display: inline-flex; justify-content: center; gap: 16px; }
+.cro-home #benefits .journey-booking-cta:hover { background: #123c29; }
+@media (min-width: 768px) {
+ .sand-wax-layout { grid-template-columns: 1.15fr 1fr; align-items: center; gap: 40px; }
+ .cro-home #main-content > #benefits.hire-section { padding: 36px; }
+ .cro-home #benefits .hire-benefits { grid-template-columns: 1fr 1fr; gap: 18px 28px; }
+ .cro-home #benefits .cro-section-heading { max-width: 650px; }
+}
+@media (max-width: 767px) {
+ .cro-home #main-content > #benefits.hire-section { padding: 24px 20px; }
+ .cro-home #benefits .journey-booking-cta { width: 100%; box-sizing: border-box; }
+}
+
+/* Shared section rhythm keeps coloured panels from touching their neighbours. */
+@media (max-width: 767px) {
+ .cro-home #main-content { display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
+ .cro-home #main-content > section { min-width: 0; }
+ .cro-home #main-content > .cro-ready { margin-block: 0; }
+}
+.cro-home #sand-wax-difference .candle-benefit-icon,
+.cro-home #benefits .hire-benefits .candle-benefit-icon { display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; padding: 0; margin: 0; border: 0; border-radius: 50%; background: #e8eddf; color: #315d3c; }
+.cro-home #benefits .hire-benefits .candle-benefit-icon { background: #e1e8d7; }
+.cro-home #sand-wax-difference .candle-benefit-icon svg,
+.cro-home #benefits .hire-benefits .candle-benefit-icon svg { display: block; width: 23px; height: 23px; padding: 0; margin: 0; border: 0; border-radius: 0; background: transparent; }
+.cro-home #sand-wax-difference .sand-wax-reasons li { gap: 14px; align-items: flex-start; }
+.cro-home #benefits .hire-benefits { gap: 16px; }
+.cro-home #benefits .hire-benefits .benefit { gap: 12px; }
+
+@media (min-width: 1100px) {
+ .cro-home #main-content > #sand-wax-difference { grid-column: 1 / -1; grid-row: 1; }
+ .cro-home #main-content > #candle-packages,
+ .cro-home #main-content > #availability-checker,
+ .cro-home #main-content > #wedding-estimator-panel { grid-row: 2; }
+}
+
+.hire-desktop-photo { display: none; }
+/* Desktop editorial layout; mobile retains the approved stacked design. */
+@media (min-width: 1024px) {
+ .cro-home #main-content > #sand-wax-difference { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 56px; row-gap: 24px; padding-block: 40px; align-items: center; }
+ .cro-home #sand-wax-difference > .cro-section-heading { grid-column: 2; grid-row: 1; align-self: end; margin: 0; max-width: 440px; gap: 12px; }
+ .cro-home #sand-wax-difference h2 { font-size: clamp(36px, 3.4vw, 48px); line-height: 1.08; font-weight: 400; }
+ .cro-home #sand-wax-difference .sand-wax-layout { display: contents; }
+ .cro-home #sand-wax-difference .sand-wax-comparison { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+ .cro-home #sand-wax-difference .sand-wax-comparison img { aspect-ratio: 1.12; object-fit: cover; border-radius: 24px; }
+ .cro-home #sand-wax-difference .sand-wax-comparison figcaption { padding-top: 14px; font-size: 14px; }
+ .cro-home #sand-wax-difference .sand-wax-reasons { grid-column: 2; grid-row: 2; align-self: start; }
+ .cro-home #sand-wax-difference .sand-wax-reasons li { padding-block: 20px; gap: 16px; }
+ .cro-home #sand-wax-difference .sand-wax-reasons li:first-child { padding-top: 0; }
+ .cro-home #sand-wax-difference h3 { font-size: 19px; }
+ .cro-home #sand-wax-difference .sand-wax-reasons p { font-size: 15px; max-width: 360px; }
+ .cro-home #sand-wax-difference .candle-benefit-icon { width: 48px; height: 48px; flex-basis: 48px; }
+ .cro-home #main-content > #benefits.hire-section { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 44px; padding: 40px; align-items: center; }
+ .hire-desktop-copy { min-width: 0; }
+ .cro-home #benefits .cro-section-heading { gap: 14px; margin-bottom: 24px; }
+ .cro-home #benefits h2 { font-weight: 400; font-size: clamp(32px, 3vw, 42px); }
+ .cro-home #benefits .hire-benefits { grid-template-columns: 1fr; gap: 14px; }
+ .cro-home #benefits .hire-summary { max-width: 440px; margin: 24px 0 0; }
+ .cro-home #benefits .journey-booking-cta { margin-top: 24px; }
+ .cro-home #benefits .hire-desktop-photo { display: block; position: relative; align-self: stretch; min-height: 440px; margin: 0; border-radius: 18px; overflow: hidden; }
+ .hire-desktop-photo img { display: block; position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+ .hire-desktop-photo figcaption { position: absolute; inset: auto 0 0; padding: 48px 24px 24px; background: linear-gradient(transparent, rgba(17, 39, 25, .8)); color: #fffaf0; font: 400 24px/1.2 Georgia, serif; }
+}
