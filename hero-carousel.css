@@ -1,0 +1,162 @@
+/* The hero carries campaigns; no additional sale section above the fold. */
+.cro-home .hero.has-hero-carousel .hero-content { position:relative; }
+.cro-home .hero.has-hero-carousel .hero-text { position:relative; z-index:1; }
+.cro-home .hero.has-hero-carousel .hero-image::after { background:linear-gradient(90deg,rgba(11,24,16,.76),rgba(11,24,16,.22)); }
+.cro-home .hero #sale-banner { width:100%; max-width:none; margin:18px 0 0; padding:0; background:none; border:0; grid-template-columns:1fr auto; gap:14px; overflow:visible; color:#fffaf0; }
+.cro-home .hero #sale-banner::after,.cro-home .hero #sale-banner .sale-banner-copy { display:none; }
+.cro-home .hero:not([data-hero-slide="sale"]) #sale-banner { display:none; }
+.cro-home .hero #sale-banner .sale-banner-clock { display:block; }
+.cro-home .hero #sale-banner .sale-countdown-label { margin-bottom:7px; font-size:9px; color:#fffdf5; }
+.cro-home .hero #sale-banner .sale-countdown { gap:14px; }
+.cro-home .hero #sale-banner .sale-countdown b { font-size:21px; }
+.cro-home .hero #sale-banner .sale-banner-details { align-self:center; min-height:44px; padding:10px 16px; border:1px solid #fffdf5; border-radius:999px; background:#fffdf5; color:#173c2b; font:600 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
+.cro-home .hero[data-hero-slide="sale"] .hero-features { display:none; }
+.cro-home .hero[data-hero-slide="sale"] .hero-eyebrow { color:#fffdf5; letter-spacing:.15em; text-transform:uppercase; }
+.hero-carousel-controls { position:absolute; z-index:2; bottom:18px; left:48px; display:flex; gap:16px; align-items:center; color:#fffaf0; }
+.hero-slide-choices { display:flex; gap:0; }
+.hero-slide-choice { display:grid; place-items:center; width:36px; height:44px; padding:0; border:0; background:none; cursor:pointer; }
+.hero-slide-choice span { width:7px; height:7px; border-radius:999px; background:rgb(255 250 240 / .5); }
+.hero-slide-choice[aria-current="true"] span { width:24px; background:#fffdf5; }
+.hero-carousel-pause { min-height:44px; padding:8px; border:0; background:none; color:#fffaf0; font:400 11px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; cursor:pointer; text-underline-offset:4px; }
+.hero-carousel-controls button:focus-visible { outline:2px solid #fffdf5; outline-offset:0; border-radius:6px; }
+.hero-carousel-announcement { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media(min-width:768px) and (max-width:1023px) {
+ .cro-home .hero.has-hero-carousel .hero-text { min-height:440px; box-sizing:border-box; padding-bottom:80px; }
+}
+@media(min-width:1024px) {
+ .cro-home .hero.has-hero-carousel .hero-text { min-height:470px; display:flex; flex-direction:column; justify-content:center; }
+}
+@media(max-width:767px) {
+ .cro-home .hero.has-hero-carousel .hero-content { min-height:410px; }
+ .cro-home .hero.has-hero-carousel .hero-text { display:flex; flex-direction:column; justify-content:flex-end; box-sizing:border-box; min-height:410px; padding:36px 24px 106px; }
+ .cro-home .hero.has-hero-carousel .hero-image::after { background:linear-gradient(180deg,rgba(11,24,16,.08),rgba(11,24,16,.62) 38%,rgba(11,24,16,.88)); }
+ .cro-home .hero.has-hero-carousel h1 { font-size:36px; line-height:1.07; }
+ .cro-home .hero.has-hero-carousel .hero-intro { font-size:14px; line-height:1.5; max-width:340px; }
+ .cro-home .hero #sale-banner { grid-template-columns:1fr auto; align-items:center; margin-top:16px; }
+ .cro-home .hero #sale-banner .sale-countdown { gap:10px; }
+ .cro-home .hero #sale-banner .sale-countdown b { font-size:19px; }
+ .cro-home .hero #sale-banner .sale-banner-details { padding:10px 14px; font-size:12px; }
+ .hero-carousel-controls { bottom:54px; left:24px; right:24px; justify-content:space-between; }
+}
+/* Render decoded backgrounds in place: never clear the image between slides. */
+.cro-home .hero.has-hero-carousel .hero-image > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.cro-home .hero.has-hero-carousel #sale-banner { display:flex; flex-direction:column; align-items:flex-start; gap:2px; }
+.cro-home .hero.has-hero-carousel:not([data-hero-slide="sale"]) #sale-banner,
+.cro-home .hero.has-hero-carousel #sale-banner[hidden] { display:none; }
+.cro-home .hero #sale-banner .sale-banner-details { align-self:flex-start; min-height:36px; padding:6px 0; border:0; border-radius:0; background:transparent; color:#fffdf5; text-decoration:underline; text-underline-offset:4px; }
+@media(min-width:768px) and (max-width:1023px) {
+ .cro-home .hero.has-hero-carousel .hero-content { display:block; min-height:560px; }
+ .cro-home .hero.has-hero-carousel .hero-text { width:100%; max-width:560px; min-height:560px; padding:48px 36px 90px; text-align:left; color:#fffaf0; }
+ .cro-home .hero.has-hero-carousel h1 { color:#fffaf0; }
+ .cro-home .hero.has-hero-carousel .hero-intro { color:#fffaf0; }
+ .cro-home .hero.has-hero-carousel .hero-price { text-align:left; color:#fffaf0; }
+ .cro-home .hero.has-hero-carousel .hero-buttons { max-width:340px; }
+ .hero-carousel-controls { left:36px; }
+}
+@media(max-width:767px) {
+ .cro-home #main-content > #availability-checker.mobile-availability-entry { display:none; }
+ .cro-home .hero.has-hero-carousel .hero-text { padding:32px 24px 72px; min-height:440px; }
+ .cro-home .hero.has-hero-carousel .hero-content { min-height:440px; }
+ .cro-home .hero.has-hero-carousel .hero-buttons { display:block; margin:18px 0 0; }
+ .cro-home .hero.has-hero-carousel .hero-buttons .btn { display:flex; align-items:center; justify-content:center; gap:16px; min-height:48px; padding:12px 18px; box-sizing:border-box; width:100%; border-radius:999px; background:var(--cro-green); color:#fffdf5; font-size:14px; font-weight:600; }
+ .hero-carousel-controls { bottom:14px; }
+ .cro-home #availability-dialog.availability-entry-design .availability-dialog-content::before { display:none; }
+ .cro-home #availability-dialog.availability-entry-design #availability-checker { display:block; padding:20px; }
+ .cro-home #availability-dialog.availability-entry-design #availability-checker > .cro-section-heading { display:flex; flex-direction:column; align-items:flex-start; gap:8px; margin:0 0 18px; }
+ .cro-home #availability-dialog.availability-entry-design #availability-checker > .cro-section-heading > p { display:none; }
+ .cro-home #availability-dialog.availability-entry-design #availability-form { display:grid; gap:16px; }
+ .cro-home #availability-dialog.availability-entry-design .availability-form-grid { display:grid; grid-template-columns:1fr; gap:16px; }
+ .cro-home #availability-dialog.availability-entry-design .availability-submit { width:100%; margin:0; }
+}
+@media(max-width:767px) {
+ .cro-home #main-content #availability-dialog.availability-entry-design .availability-dialog-content::before { display:none; content:none; }
+ .cro-home #availability-dialog.availability-entry-design .cro-section-heading > .mobile-v3-kicker { display:none; }
+}
+@media(max-width:767px) {
+ .cro-home #main-content #availability-dialog.availability-entry-design .availability-dialog-content:has(#availability-step-1-panel:not([hidden]) #availability-result[hidden])::before { display:none; content:none; }
+}
+/* Legacy primary buttons use an important colour inside the legacy layer. */
+@layer legacy {
+ @media(max-width:767px) {
+  .cro-home .hero.has-hero-carousel .hero-buttons .btn.primary { color:#fffdf5 !important; }
+ }
+}
+
+/* Match the existing booking-button component and shared public type tokens. */
+.cro-home .hero.has-hero-carousel h1 { font-family:var(--cro-serif); font-weight:400; }
+.cro-home .hero.has-hero-carousel .hero-carousel-pause,
+.cro-home .hero #sale-banner .sale-countdown :is(b,small),
+.cro-home .hero #sale-banner .sale-banner-details { font-family:inherit; }
+.cro-home .hero.has-hero-carousel .hero-buttons .hero-quote-button { background:var(--cro-green); color:#fffdf5; font-family:inherit; font-weight:600; box-shadow:0 5px 14px rgb(16 27 19 / .12); }
+.cro-home .hero.has-hero-carousel .hero-buttons .hero-quote-button:hover { background:#245720; }
+.cro-home .hero[data-hero-slide="sale"] .hero-image::after { background:linear-gradient(180deg,rgba(11,24,16,.05),rgba(11,24,16,.42) 42%,rgba(11,24,16,.88)); }
+.cro-home .hero[data-hero-slide="benefits"] .hero-image::after { background:linear-gradient(180deg,rgba(11,24,16,.05),rgba(11,24,16,.5) 36%,rgba(11,24,16,.88)); }
+.cro-home .hero[data-hero-slide="benefits"] .hero-image img { object-position:50% 44%; }
+@media(min-width:768px) {
+ .cro-home .hero[data-hero-slide="sale"] .hero-image::after,
+ .cro-home .hero[data-hero-slide="benefits"] .hero-image::after { background:linear-gradient(90deg,rgba(11,24,16,.84),rgba(11,24,16,.32) 70%,rgba(11,24,16,.15)); }
+}
+.cro-home .hero #sale-banner .sale-banner-details { width:auto; text-align:left; min-height:44px; justify-content:flex-start; }
+@media(max-width:767px) {
+ .cro-home .hero.has-hero-carousel .hero-content,
+ .cro-home .hero.has-hero-carousel .hero-text { min-height:448px; }
+ .cro-home .hero.has-hero-carousel .hero-text,
+ .cro-home .hero.has-hero-carousel .hero-buttons .hero-quote-button { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+ .cro-home .hero.has-hero-carousel :is(.hero-intro,.hero-eyebrow,.hero-buttons) { font-family:inherit; }
+}
+/* A clear product/benefit/price hierarchy, using the existing display scale. */
+.cro-home .hero.has-hero-carousel h1 > span { white-space:pre-line; }
+@media(max-width:767px) {
+ .cro-home .hero.has-hero-carousel .hero-text { justify-content:flex-start; padding-top:36px; }
+ .cro-home .hero.has-hero-carousel h1 { font-size:var(--cro-type-display); line-height:1.09; }
+ .cro-home .hero.has-hero-carousel .hero-eyebrow { margin:0 0 12px; }
+ .cro-home .hero.has-hero-carousel .hero-intro { margin:12px 0 0; max-width:34ch; }
+ .cro-home .hero.has-hero-carousel .hero-buttons { margin-top:auto; padding-top:20px; width:100%; }
+ .cro-home .hero #sale-banner { margin-top:16px; }
+}
+.sale-pricing-details { display:block; min-height:44px; margin:4px 0 0; padding:8px 0; border:0; background:transparent; color:#315d3c; font:inherit; font-size:13px; text-decoration:underline; text-underline-offset:4px; cursor:pointer; }
+/* Mobile hierarchy: slightly larger copy and trust beneath the primary action. */
+@media(max-width:767px) {
+ .cro-home .hero.has-hero-carousel h1 { font-size:clamp(32px,9.2vw,38px); line-height:1.08; }
+ .cro-home .hero.has-hero-carousel .hero-intro { font-size:15px; line-height:1.5; max-width:32ch; }
+ .cro-home .hero.has-hero-carousel .hero-text { min-height:448px; padding-bottom:66px; }
+ .cro-home .hero.has-hero-carousel .hero-buttons { padding-top:22px; }
+ .cro-home .hero.has-hero-carousel .hero-text > .hero-price { display:none; }
+ .cro-home .hero.has-hero-carousel .hero-text > .cro-trust-link { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:6px; width:100%; margin:12px 0 0; min-height:24px; color:#fffdf5; font-size:11px; line-height:1.4; }
+ .cro-home .hero.has-hero-carousel .cro-trust-link .cro-stars { color:#fffdf5; font-size:16px; }
+ .hero-carousel-controls { bottom:10px; }
+}
+@media(max-width:767px) {
+ .cro-home .hero.has-hero-carousel .hero-intro { font-size:var(--cro-type-body); max-width:30ch; }
+}
+@media(max-width:767px) {
+ .cro-home .hero.has-hero-carousel .hero-intro { text-wrap:pretty; }
+}
+@media(max-width:767px) {
+ .cro-home .hero.has-hero-carousel .hero-text { padding-top:28px; padding-bottom:58px; }
+ .cro-home .hero #sale-banner { margin-top:12px; }
+}
+/* Mobile trust sits with the CTA, after the descriptive copy or sale countdown. */
+@media(max-width:767px) {
+ .cro-home .hero.has-hero-carousel .hero-text > .cro-trust-link { margin: auto 0 0; padding-top:14px; }
+ .cro-home .hero.has-hero-carousel .hero-buttons { margin-top:12px; padding-top:0; }
+ .cro-home .hero.has-hero-carousel .hero-eyebrow { font-size:12px; line-height:1.45; letter-spacing:.08em; font-weight:600; }
+}
+/* One left edge for hero headings, supporting copy and review trust at every size. */
+.cro-home .hero.has-hero-carousel .hero-text > .cro-trust-link { justify-content:flex-start; text-align:left; margin-inline:0; max-width:100%; }
+/* Strengthen the product and hire messages over imagery; retain the sale label. */
+.cro-home .hero.has-hero-carousel:is([data-hero-slide="main"],[data-hero-slide="benefits"]) .hero-eyebrow { font-size:15px; line-height:1.45; font-weight:700; letter-spacing:.065em; color:#fffdf5; text-shadow:0 1px 5px rgb(11 24 16 / .65); }
+@media(max-width:767px) {
+ .cro-home .hero.has-hero-carousel:is([data-hero-slide="main"],[data-hero-slide="benefits"]) .hero-intro { font-size:17px; line-height:1.5; max-width:30ch; }
+}
+/* Tablet uses the same readable overlay treatment as the phone hero. */
+.cro-home .hero.has-hero-carousel .hero-text > .cro-trust-link,
+.cro-home .hero.has-hero-carousel .cro-trust-link .cro-stars { color: #fffdf5; }
+@media (min-width:768px) and (max-width:1023px) {
+ .cro-home .hero.has-hero-carousel .hero-content { min-height: 520px; }
+ .cro-home .hero.has-hero-carousel .hero-text { display:flex; flex-direction:column; justify-content:center; min-height:520px; padding:36px 36px 72px; }
+ .cro-home .hero.has-hero-carousel .hero-text > .hero-intro { display:block; max-width:34ch; font-size:17px; margin-top:16px; }
+ .cro-home .hero.has-hero-carousel .hero-text > .cro-trust-link { order:1; margin-top:20px; font-size:13px; }
+ .cro-home .hero.has-hero-carousel .hero-buttons { order:2; margin-top:14px; }
+ .cro-home .hero.has-hero-carousel .hero-price { order:3; margin-top:14px; }
+}

@@ -303,3 +303,5 @@ html.availability-dialog-open { overflow: hidden; }
 #contact-dialog .contact-modal-submit { width: 100%; min-height: 48px; margin: 0; border-radius: 999px; background: #184d30; }
 .cro-home #contact .contact-open-button { display: block; width: min(100%,340px); min-height: 48px; margin-top: 20px; background: #184d30; }
 .cro-home #main-content #contact { grid-template-columns: 1fr; }
+
+.cro-home #availability-dialog .availability-date-interest { margin: 2px 0 0; padding: 0; color: #315b3d; font: 500 13px/1.45 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; text-align: center; }

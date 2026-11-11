@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/shared-header.css">
   <script src="/public-nav.js" defer></script>
   <link rel="stylesheet" href="/mobile-navigation.css" media="(max-width: 1100px)">
+  <script src="/promotion-pricing.js" defer></script>
 </head>
 <body>
   <div class="header-container site-header">
@@ -191,6 +192,7 @@
         const refundableBond = getNumberFromValue(rawQuote.refundableBond ?? rawQuote.bondAmount ?? rawQuote.hireFee) || hireFee;
 
         return {
+          pricingSnapshot: rawQuote.pricingSnapshot || "",
           ...rawQuote,
           bookingId: getStringValue(rawQuote.bookingId),
           eventDate: getStringValue(rawQuote.eventDate),
@@ -418,9 +420,9 @@
           quoteData = {
             ...quoteData,
             quantity: maxAvailable,
-            hireFee: calculateHireFee(maxAvailable),
-            refundableBond: calculateHireFee(maxAvailable),
-            bondAmount: calculateHireFee(maxAvailable),
+            hireFee: window.LustrePricing.forQuote(maxAvailable, quoteData),
+            refundableBond: window.LustrePricing.forQuote(maxAvailable, quoteData),
+            bondAmount: window.LustrePricing.forQuote(maxAvailable, quoteData),
           };
           renderValidState();
         });

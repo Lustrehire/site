@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   matchMedia('(max-width: 1100px)').addEventListener('change', () => setOpen(false));
   toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
-  nav?.querySelectorAll('a, [data-open-estimator], [data-open-contact]').forEach(link => link.addEventListener('click', () => setOpen(false)));
+  nav?.querySelectorAll('a, [data-open-estimator], [data-open-contact], [data-open-existing-record]').forEach(link => link.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
       setOpen(false);

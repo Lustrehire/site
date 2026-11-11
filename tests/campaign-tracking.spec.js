@@ -74,6 +74,7 @@ test('known PII in UTM fields and malformed click IDs are rejected', async ({ pa
 
 test('campaign attribution survives direct and private quote booking steps', async ({ page, backend }) => {
   await page.goto(`/?utm_source=facebook&utm_medium=paid_social&utm_campaign=spring_weddings&fbclid=${facebookClick}`);
+  if (page.viewportSize().width < 768) await page.locator('.hero-quote-button').click();
   await page.locator('#availability-date').fill(booking.eventDate);
   await page.locator('#availability-quantity').fill('50');
   await page.locator('#availability-form').getByRole('button', { name: /check/i }).click();

@@ -42,10 +42,10 @@ test('result modal restores the hero form, including after resizing to mobile', 
   await page.setViewportSize({ width: 390, height: 900 });
   await expect(page.locator('#availability-dialog #availability-form')).toHaveCount(1);
   await page.keyboard.press('Escape');
-  await expect(page.locator('#main-content > #availability-checker #availability-form')).toBeVisible();
+  await expect(page.locator('#main-content > #availability-checker #availability-form')).toBeHidden();
   await expect(page.locator('#availability-checker #candle-calculator')).toHaveCount(1);
   await expect(page.locator('#wedding-estimator-panel')).toBeHidden();
-  await expect(page.locator('.hero .hero-buttons')).toBeHidden();
+  await expect(page.locator('.hero .hero-buttons')).toBeVisible();
   await expect(page.locator('#availability-quantity')).toHaveValue('45');
   await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(page.locator('.hero #availability-form')).toBeVisible();

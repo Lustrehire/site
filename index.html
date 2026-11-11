@@ -126,8 +126,13 @@
   <script src="/public-nav.js" defer></script>
   <link rel="stylesheet" href="/pricing-section.css">
   <link rel="stylesheet" href="/candle-difference.css">
+  <link rel="stylesheet" href="/promotion-pricing.css">
+  <script src="/promotion-pricing.js" defer></script>
+  <link rel="stylesheet" href="/hero-carousel.css">
+  <script src="/hero-carousel.js" defer></script>
   <link rel="stylesheet" href="/mobile-navigation.css" media="(max-width: 1100px)">
 <script src="/gallery.js" defer></script>
+<script src="/gallery-preview-rotation.js" defer></script>
 </head>
 
 <!-- partial:index.partial.html -->
@@ -147,6 +152,7 @@
         <a href="/blog/blog.html">Blog</a>
         <a href="#contact" data-open-contact>Contact</a>
         <a href="#availability" class="nav-booking-link">Check Date &amp; Get Quote</a>
+        <button type="button" class="nav-estimator-link nav-existing-record-link" data-open-existing-record aria-haspopup="dialog">Find my quote or booking</button>
       </nav>
     </div>
     <nav class="main-nav mobile-nav" id="mobile-nav" aria-label="Mobile" inert aria-hidden="true">
@@ -159,6 +165,7 @@
         <a href="/blog/blog.html">Blog</a>
         <a href="#contact" data-open-contact>Contact</a>
         <a href="#availability" class="nav-booking-link">Check Date &amp; Get Quote</a>
+        <button type="button" class="nav-estimator-link nav-existing-record-link" data-open-existing-record aria-haspopup="dialog">Find my quote or booking</button>
     </nav>
   </header>
 </div>
@@ -167,11 +174,13 @@
     <div class="hero-content">
       <div class="hero-image"><img src="/img/spring-hero.jpg" alt="Glowing wedding candles in clear glass vessels among soft florals" width="1408" height="768" loading="eager" fetchpriority="high" decoding="async"></div>
       <div class="hero-text">
-        <p class="hero-eyebrow">PERTH CANDLE HIRE · WEDDINGS &amp; EVENTS</p>
-        <h1><span class="mobile-v3-desktop">Beautiful candles, minus all the prep.</span><span class="mobile-v3-only">Beautiful candles, minus all the prep.</span></h1>
-        <p class="hero-intro"><span class="mobile-v3-desktop">Hire sand wax candles that are filled and ready to light. You style them, then pack them up and leave the cleaning to us.</span><span class="mobile-v3-only">Ready-to-light sand wax candles for your event. You style them, we handle the cleaning.</span></p>
+        <p class="hero-eyebrow">SAND WAX CANDLE HIRE · PERTH</p>
+        <h1><span class="mobile-v3-desktop">Sand wax candles.
+Ready to light.</span><span class="mobile-v3-only">Sand wax candles.
+Ready to light.</span></h1>
+        <p class="hero-intro"><span class="mobile-v3-desktop">Pre-filled sand wax candles and matching glass vessels. Enjoy 8+ hours of candlelight, without the wax cleaning.</span><span class="mobile-v3-only">Pre-filled sand wax candles and matching glass. 8+ hours of glow, without the wax cleaning.</span></p>
         <div class="hero-features"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11h6v11H9zM12 11V8M12 2c3 3 3 5 0 6-3-1-3-3 0-6Z"/></svg><span>Ready<br>to light</span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 3C8 2 3 7 5 14s13 8 15-11ZM5 21 16 9M10 15l-1-5"/></svg><span>No cleaning<br>afterwards</span></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21 3 12C-3 4 7-1 12 6c5-7 15-2 9 6Z"/></svg><span>Pickup<br>Bull Creek</span></div></div>
-        <div class="hero-buttons"><a href="#availability" class="btn primary">Check Date &amp; Get Quote <span aria-hidden="true">→</span></a></div>
+        <div class="hero-buttons"><a href="#availability" class="btn primary booking-button hero-quote-button">Get my free quote <span aria-hidden="true">→</span></a></div>
         <p class="hero-price"><span class="mobile-v3-desktop">From $150 hire · 15 candle minimum</span><span class="mobile-v3-only">Hire from $150</span></p>
         <a class="cro-trust-link" href="#testimonials"><span class="cro-stars" aria-hidden="true">★★★★★</span> 5-star Google reviews</a>
       </div>
@@ -202,7 +211,7 @@
  <li><span class="pricing-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="22" rx="3"/><path d="M10 3v8m12-8v8M5 15h22"/></svg></span><div><h4>Today</h4><p>Pay a <strong>50% deposit</strong> to secure your date.</p></div></li>
  <li><span class="pricing-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="19" rx="3"/><path d="M3 14h26M8 21h5"/></svg></span><div><h4>7 days before pickup</h4><p>Pay the remaining 50% + refundable bond.</p></div></li>
  <li><span class="pricing-step-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="11" y="12" width="10" height="17" rx="2"/><rect x="2" y="19" width="9" height="10" rx="2"/><rect x="21" y="19" width="9" height="10" rx="2"/><path d="M16 12V9m0-7c5 5 0 8 0 5-3 1-3-2 0-5ZM6 19v-4m20 4v-4"/></svg></span><div><h4>After your event</h4><p>Return your candles. We’ll refund your bond within 24 hours of inspection.</p></div></li>
- </ol></details>
+ </ol>
  <div class="pricing-quantity-examples" aria-label="Example hire prices">
  <h3>Example hire prices</h3>
  <div class="pricing-example-cards">
@@ -214,8 +223,9 @@
  <p class="pricing-tier-note">For 45 candles: 44 at $10 + 1 at $9 = $449.</p>
  <p class="pricing-bond-summary"><strong>Refundable bond:</strong> equal to your hire fee, paid before pickup.</p>
  <details class="pricing-bond-explainer"><summary>Why a refundable bond?</summary><p>The bond covers loss, damage or other costs under our <a href="/terms-and-conditions.html">hire terms</a>. Eligible refunds are made within 24 hours of inspection.</p></details>
- <div class="pricing-actions"><a class="booking-button pricing-quote-button" href="#availability">Get a quote <span aria-hidden="true">→</span></a>
- <a class="text-link pricing-sizes-link" href="#candle-sizes">See candle sizes &amp; what’s included <span aria-hidden="true">→</span></a></div>
+ <a class="text-link pricing-sizes-link" href="#candle-sizes">See candle sizes &amp; what’s included <span aria-hidden="true">→</span></a>
+ </details>
+ <div class="pricing-actions"><a class="booking-button pricing-quote-button" href="#availability">Get a quote <span aria-hidden="true">→</span></a></div>
  </section>
 <section id="wedding-estimator-panel" class="cro-section" hidden aria-labelledby="estimator-panel-title"><div class="cro-section-heading"><span class="mobile-v3-kicker">Wedding Candle Estimator</span><h2 id="estimator-panel-title">How many candles will you need?</h2><p>Answer a few quick questions about your tables and styling for a personalised estimate.</p></div><div id="desktop-estimator-content"></div><div class="estimator-highlights" aria-label="About your candle estimate"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg><strong>Quick &amp; easy</strong><p>A few simple<br>questions</p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M8 9V5m8 4V5M12 9V3M4 14c2 3 4-3 6 0s4-3 6 0 4 0 4 0M2 21h20"/></svg><strong>Personalised</strong><p>Based on your<br>tables and styling</p></div><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><strong>No obligation</strong><p>Just an estimate<br>to help you plan</p></div></div></section>
   <section id="availability-checker" class="cro-section"><span id="availability" class="anchor-alias" aria-hidden="true"></span>
@@ -829,8 +839,12 @@
 
 
       const scrollToSection = async (selector) => {
+        if ((selector === "#availability" || selector === "#availability-checker") && window.matchMedia("(max-width:767px)").matches && window.LustreOpenAvailability?.()) return;
         const target = document.querySelector(selector);
         if (!(target instanceof HTMLElement)) return;
+
+        // Public pricing can change the section heights while it loads.
+        if (selector !== "#availability") await window.LustrePricing?.ready().catch(() => {});
 
         // Closing the mobile menu changes the header's height over a CSS
         // transition. Measure the destination only after that layout settles.
@@ -853,15 +867,21 @@
         window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
       };
 
+      // Native fragment scrolling can run at load, after DOMContentLoaded.
+      // Position incoming section links after that so the sticky header offset wins.
+      const positionIncomingSection = callback => {
+        if (document.readyState === "complete") requestAnimationFrame(callback);
+        else window.addEventListener("load", () => requestAnimationFrame(callback), { once: true });
+      };
       const scrollToParamTarget = new URLSearchParams(window.location.search).get("scrollTo");
       const initialHash = window.location.hash;
       if (initialHash && initialHash !== "#contact" && document.querySelector(initialHash)) {
-        requestAnimationFrame(() => { scrollToSection(initialHash); clearSectionHash(); });
+        positionIncomingSection(() => { scrollToSection(initialHash); clearSectionHash(); });
       }
       if (scrollToParamTarget) {
         const targetSelector = `#${scrollToParamTarget}`;
         if (document.querySelector(targetSelector)) {
-          requestAnimationFrame(() => {
+          positionIncomingSection(() => {
             scrollToSection(targetSelector);
             const params = new URLSearchParams(window.location.search);
             params.delete("scrollTo");
@@ -874,6 +894,7 @@
 
       document.querySelectorAll('a[href^="#"]:not([href="#"]):not([data-open-contact])').forEach((link) => {
         link.addEventListener("click", (event) => {
+          if (event.defaultPrevented) return;
           const href = link.getAttribute("href");
           if (!href) return;
 
@@ -1243,19 +1264,7 @@
         };
 
         // Uses the same stepped pricing model as the main calculator.
-        const calculateHireFee = (quantity) => {
-          const safeCount = Math.max(15, Math.round(quantity));
-
-          if (safeCount <= 44) {
-            return safeCount * 10;
-          }
-
-          if (safeCount <= 89) {
-            return (44 * 10) + ((safeCount - 44) * 9);
-          }
-
-          return (44 * 10) + (45 * 9) + ((safeCount - 89) * 8);
-        };
+        const calculateHireFee = quantity => window.LustrePricing.calculate(quantity);
 
         // Some Apps Script responses can come back as single-item arrays.
         // These helpers keep the booking payload simple and predictable.
@@ -1489,8 +1498,6 @@
           const pickupTimeValue = availabilityPickupTimeWindow?.value || "Not selected yet";
           const dropoffTimeValue = availabilityDropoffTimeWindow?.value || "Not selected yet";
           const notesValue = document.getElementById("availability-notes")?.value.trim() || "No notes added";
-          const hireFee = calculateHireFee(quantityValue);
-
           if (availabilityJourneyMode === "quote") {
             availabilityBookingSummary.innerHTML = `
               <section class="availability-review-card">
@@ -1511,6 +1518,7 @@
             return;
           }
 
+          const hireFee = calculateHireFee(quantityValue);
           availabilityBookingSummary.innerHTML = `
             <div class="availability-review-layout">
               <div class="availability-review-top">
@@ -1637,6 +1645,7 @@
           return {
             booking: {
               mode,
+              pricingSnapshot: JSON.stringify(window.LustrePricing.rule()),
               eventDate,
               quantity,
               pickupDate: getStringValue(latestAvailabilityResult.pickupDate),
@@ -1952,6 +1961,14 @@
           }
 
           if (availabilityJourneyMode === "quote") {
+            quoteSubmissionPending = true;
+            setButtonLoadingState(step2SubmitButton, true, "Preparing your quote...");
+            try { await window.LustrePricing.refresh(); }
+            catch (error) {
+              availabilityBookingFeedback.textContent = error.message;
+              availabilityBookingFeedback.classList.add("is-error");
+              return;
+            } finally { quoteSubmissionPending = false; setButtonLoadingState(step2SubmitButton, false); }
             const payload = getValidatedBookingPayload("quote");
 
             if (payload.error) {
@@ -1972,6 +1989,9 @@
               displayCreatedQuote(request.booking);
               return;
             }
+            // Keep the original intent across an uncertain response. The server's
+            // deduplication digest must not change just because a sale ended.
+            if (!request.pendingBooking) { request.pendingBooking = booking; persistQuoteRequests(); }
             quoteSubmissionPending = true;
             setButtonLoadingState(step2SubmitButton, true, "Preparing your quote...");
             availabilityBookingFeedback.textContent = "";
@@ -1980,16 +2000,32 @@
               const response = await fetchWithTimeout(availabilityEndpoint, {
                 method: "POST",
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({ action: "saveQuoteBooking", bookingData: booking, requestId: request.id }),
+                body: JSON.stringify({ action: "saveQuoteBooking", bookingData: request.pendingBooking, requestId: request.id }),
               }, 60000);
               const result = await readJsonResponse(response);
               if (!response.ok || result?.success !== true || !result.quoteToken || !result.bookingId) {
+                if (/pricing changed|price does not match/i.test(result?.message || "")) {
+                  delete request.pendingBooking; persistQuoteRequests();
+                }
                 const failure = new Error("quote_request_failed");
                 failure.emailNeedsReview = result?.message?.startsWith("Your quote is saved, but email delivery needs checking.") === true;
                 throw failure;
               }
+              // A retry can recover a quote created before the sale changed.
+              // Use the saved server amount rather than today's browser price.
+              let savedBooking = request.pendingBooking || booking;
+              if (result.reused === true) {
+                const recoveredResponse = await fetchWithTimeout(availabilityEndpoint, {
+                  method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                  body: JSON.stringify({ action: "getQuoteByToken", quoteToken: result.quoteToken }),
+                });
+                const recovered = await readJsonResponse(recoveredResponse);
+                if (!recoveredResponse.ok || recovered?.success !== true || !recovered.booking ||
+                    recovered.booking.bookingId !== result.bookingId) throw new Error("saved_quote_recovery_failed");
+                savedBooking = { ...booking, ...recovered.booking };
+              }
               const quoteBooking = {
-                ...booking, bookingId: result.bookingId, quoteToken: result.quoteToken,
+                ...savedBooking, bookingId: result.bookingId, quoteToken: result.quoteToken,
                 quoteStatus: result.quoteStatus || "sent", quoteExpiresAt: result.quoteExpiresAt || "",
               };
               request.booking = quoteBooking;
@@ -2565,6 +2601,7 @@
             availabilityQuantityField.focus({ preventScroll: true });
           }
 
+          if (window.LustreOpenAvailability?.()) return;
           availabilityCheckerSection.scrollIntoView({ behavior: "smooth", block: "start" });
         };
 

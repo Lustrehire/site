@@ -2,7 +2,8 @@ const { test, expect, booking } = require('./fixtures');
 async function show(page, data) {
   await page.addInitScript(data => { window.lustrePreviewFindRecord = async () => data; }, data);
   await page.goto('/');
-  await page.locator('#existing-record-open').click();
+  if (page.viewportSize().width <= 1100) await page.getByRole('button', { name: 'Toggle navigation' }).click();
+  await page.getByRole('button', { name: 'Find my quote or booking', exact: true }).click();
   await page.locator('#existing-record-reference').fill(booking.bookingId);
   await page.locator('#existing-record-email').fill(booking.email);
   await page.locator('#existing-record-next').click();
@@ -47,7 +48,8 @@ test('older quote automatically uses the existing revalidation route without an 
   await page.addInitScript(data => { window.lustrePreviewFindRecord = async () => ({ status: 'expired', booking: data }); }, booking);
   backend.replies.getQuoteByToken = { success: true, status: 'valid', quoteRevalidated: true, booking };
   await page.goto('/');
-  await page.locator('#existing-record-open').click();
+  if (page.viewportSize().width <= 1100) await page.getByRole('button', { name: 'Toggle navigation' }).click();
+  await page.getByRole('button', { name: 'Find my quote or booking', exact: true }).click();
   await page.locator('#existing-record-reference').fill(booking.bookingId);
   await page.locator('#existing-record-email').fill(booking.email);
   await page.locator('#existing-record-next').click();
@@ -68,14 +70,16 @@ test('lookup loading is clear and closing prevents stale results on reopening', 
     window.lustrePreviewFindRecord = () => new Promise(resolve => { window.finishPreviewLookup = () => resolve({ status: 'quote', booking: data }); });
   }, booking);
   await page.goto('/');
-  await page.locator('#existing-record-open').click();
+  if (page.viewportSize().width <= 1100) await page.getByRole('button', { name: 'Toggle navigation' }).click();
+  await page.getByRole('button', { name: 'Find my quote or booking', exact: true }).click();
   await page.locator('#existing-record-reference').fill(booking.bookingId);
   await page.locator('#existing-record-email').fill(booking.email);
   await page.locator('#existing-record-next').click();
   await expect(page.locator('#existing-record-next')).toHaveText('Checking…');
   await expect(page.locator('#existing-record-email-form')).toHaveAttribute('aria-busy', 'true');
   await page.keyboard.press('Escape');
-  await page.locator('#existing-record-open').click();
+  if (page.viewportSize().width <= 1100) await page.getByRole('button', { name: 'Toggle navigation' }).click();
+  await page.getByRole('button', { name: 'Find my quote or booking', exact: true }).click();
   await page.evaluate(() => window.finishPreviewLookup());
   await expect(page.locator('#existing-record-email-panel')).toBeVisible();
   await expect(page.locator('#existing-record-result')).toBeHidden();

@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/shared-header.css">
   <script src="/public-nav.js" defer></script>
   <link rel="stylesheet" href="/mobile-navigation.css" media="(max-width: 1100px)">
+  <script src="/promotion-pricing.js" defer></script>
 </head>
 <body>
   <div class="header-container site-header">
@@ -640,6 +641,7 @@
             pickupTimeWindow: getStringValue(quoteBooking.pickupTimeWindow),
             dropoffTimeWindow: getStringValue(quoteBooking.dropoffTimeWindow),
             notes: getStringValue(quoteBooking.notes),
+            pricingSnapshot: quoteBooking.pricingSnapshot || "",
             quantity: getNumberFromValue(quoteBooking.quantity),
             hireFee: getNumberFromValue(quoteBooking.hireFee) || calculateHireFee(getNumberFromValue(quoteBooking.quantity)),
             refundableBond: getNumberFromValue(quoteBooking.refundableBond ?? quoteBooking.bondAmount ?? quoteBooking.hireFee) || calculateHireFee(getNumberFromValue(quoteBooking.quantity)),
@@ -657,7 +659,7 @@
           }
 
           if (Number.isFinite(adjustedQuantityParam) && adjustedQuantityParam >= 15 && adjustedQuantityParam < baseBookingContext.quantity) {
-            const adjustedHireFee = calculateHireFee(adjustedQuantityParam);
+            const adjustedHireFee = window.LustrePricing.forQuote(adjustedQuantityParam, baseBookingContext);
             baseBookingContext = {
               ...baseBookingContext,
               quantity: adjustedQuantityParam,

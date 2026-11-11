@@ -1,6 +1,7 @@
 const { test, expect, booking } = require('./fixtures');
 async function open(page) {
   await page.goto('/');
+  if (page.viewportSize().width < 768) await page.locator('.hero-quote-button').click();
   await page.getByRole('button', { name: 'Already have a quote or booking?' }).click();
   await expect(page.locator('#existing-record-dialog')).toBeVisible();
   await expect(page.locator('#existing-record-reference')).toBeFocused();
@@ -152,4 +153,33 @@ test('connected confirmed booking shows unknown balance honestly and never offer
   await expect(page.locator('#existing-record-result')).toContainText('Your booking is confirmed');
   await expect(page.locator('#existing-record-result')).toContainText('Not available');
   await expect(page.locator('#existing-record-result .record-book-quote')).toHaveCount(0);
+});
+
+test('main menu opens existing lookup directly and returns focus on close', async ({ page }) => {
+  await page.goto('/');
+  const mobileMenu = page.viewportSize().width <= 1100;
+  if (mobileMenu) await page.getByRole('button', { name: 'Toggle navigation' }).click();
+  const trigger = page.locator(mobileMenu ? '.mobile-nav [data-open-existing-record]' : '.desktop-nav [data-open-existing-record]');
+  await trigger.click();
+  await expect(page.locator('#existing-record-dialog')).toBeVisible();
+  await expect(page.locator('#existing-record-reference')).toBeFocused();
+  await expect(page.locator('#availability-dialog')).toBeHidden();
+  if (mobileMenu) await expect(page.locator('.menu-toggle')).toHaveAttribute('aria-expanded', 'false');
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#existing-record-dialog')).toBeHidden();
+  await expect(mobileMenu ? page.locator('.menu-toggle') : trigger).toBeFocused();
+});
+
+test('new quote recovery from the main menu exposes the date form on every device', async ({ page, backend }) => {
+  backend.replies.lookupExistingRecord = { success: true, status: 'missing' };
+  await page.goto('/');
+  if (page.viewportSize().width <= 1100) await page.getByRole('button', { name: 'Toggle navigation' }).click();
+  await page.getByRole('button', { name: 'Find my quote or booking', exact: true }).click();
+  await page.locator('#existing-record-reference').fill(booking.bookingId);
+  await page.locator('#existing-record-email').fill(booking.email);
+  await page.locator('#existing-record-next').click();
+  await page.getByRole('button', { name: 'Get a new quote', exact: true }).click();
+  await expect(page.locator('#existing-record-dialog')).toBeHidden();
+  await expect(page.locator('#availability-form')).toBeVisible();
+  await expect(page.locator('#availability-date')).toBeFocused();
 });

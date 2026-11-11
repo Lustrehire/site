@@ -14,6 +14,7 @@ test('both understated section CTAs reach the original form without submitting i
       if (width >= 768) await expect(page.locator('#availability-date')).toBeFocused();
       await expect(page.locator('#availability-form')).toHaveCount(1);
       await expect(page.locator('#availability-result')).toBeHidden();
+      if (width < 768) await page.keyboard.press('Escape');
     }
     expect(backend.calls).toHaveLength(0);
   }

@@ -4,8 +4,12 @@ test('homepage smoke @critical', async ({ page }) => {
   await page.goto('/');
   await expect(page).toHaveTitle(/Lustre Hire/);
   if (page.viewportSize().width >= 1024) await expect(page.locator('.hero #availability-form')).toBeVisible();
-  else if (page.viewportSize().width >= 768) await expect(page.locator('.hero').getByRole('link', { name: 'Check Date & Get Quote', exact: true })).toBeVisible();
-  else await expect(page.locator('#main-content > #availability-checker #availability-form')).toBeVisible();
+  else if (page.viewportSize().width >= 768) await expect(page.locator('.hero-quote-button')).toBeVisible();
+  else {
+    await expect(page.locator('#main-content > #availability-checker #availability-form')).toBeHidden();
+    await page.locator('.hero-quote-button').click();
+    await expect(page.locator('#availability-dialog #availability-form')).toBeVisible();
+  }
   await expect(page.locator('#availability-checker')).toBeVisible();
   await expect(page.locator('#availability-form').getByRole('button', { name: /check/i })).toBeVisible();
 });

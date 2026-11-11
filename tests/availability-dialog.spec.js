@@ -4,6 +4,7 @@ test('quantity retains focus throughout consecutive typing and after returning f
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
+    if (width < 768) await page.locator('.hero-quote-button').click();
     const quantity = page.locator('#availability-quantity');
     await quantity.click();
     for (const digit of '150') {
@@ -13,6 +14,7 @@ test('quantity retains focus throughout consecutive typing and after returning f
     await expect(quantity).toHaveValue('150');
     await checkDate(page, 45);
     await page.locator('#availability-dialog').getByRole('button', { name: 'Close availability' }).click();
+    if (width < 768) await page.locator('.hero-quote-button').click();
     await quantity.fill('');
     for (const digit of '250') {
       await page.keyboard.type(digit);
@@ -39,9 +41,14 @@ test('available result is modal, keeps quote steps in focus, and Escape restores
     await expect(page.locator('#availability-full-name')).toBeFocused();
     await page.keyboard.press('Escape');
     await expect(dialog).toBeHidden();
-    await expect(page.locator('#availability-form')).toBeVisible();
+    if (width < 768) {
+      await expect(page.locator('#availability-form')).toBeHidden();
+      await expect(page.locator('.hero-quote-button')).toBeFocused();
+    } else {
+      await expect(page.locator('#availability-form')).toBeVisible();
+      await expect(page.locator('#availability-date')).toBeFocused();
+    }
     await expect(page.locator('#availability-quantity')).toHaveValue('45');
-    await expect(page.locator('#availability-date')).toBeFocused();
     expect(await page.evaluate(() => document.documentElement.classList.contains('availability-dialog-open'))).toBe(false);
   }
 });
@@ -53,7 +60,8 @@ test('unavailable result is modal and another date returns to the existing form'
   await expect(dialog).toBeVisible();
   await expect(dialog).toContainText('fully booked');
   await dialog.locator('[data-availability-action="change-date"]').click();
-  await expect(dialog).toBeHidden();
+  if (page.viewportSize().width < 768) await expect(dialog).toBeVisible();
+  else await expect(dialog).toBeHidden();
   await expect(page.locator('#availability-result')).toBeHidden();
   await expect(page.locator('#availability-form')).toBeVisible();
   await expect(page.locator('#availability-date')).toBeFocused();
@@ -71,5 +79,5 @@ test('limited availability retains its adjustment action inside the modal', asyn
   await expect(dialog.locator('#availability-checker')).toHaveCount(1);
   await dialog.getByRole('button', { name: 'Close availability' }).click();
   await expect(dialog).toBeHidden();
-  await expect(page.locator('#availability-form')).toBeVisible();
+  await expect(page.locator('#availability-form')).toBeHidden();
 });

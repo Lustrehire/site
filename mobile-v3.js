@@ -30,6 +30,7 @@
   const quantityLabel = availability.querySelector('label[for="availability-quantity"]');
   const originalQuantityLabel = quantityLabel.textContent;
   const placeAvailability = () => {
+    availability.classList.toggle("mobile-availability-entry",mobile.matches);
     heroSlot.hidden = !desktopHero.matches;
     estimatorPanel.hidden = !desktopHero.matches;
     const startLabel = desktopHero.matches ? 'Estimate my candle quantity →' : mobile.matches ? 'Not sure how many you need? Try our wedding candle estimator →' : mobileEstimatorLabel;
@@ -47,8 +48,11 @@
     entryTitle.textContent = mobile.matches ? 'Check your date' : originalEntryTitle;
     quantityLabel.textContent = mobile.matches ? 'Candles (min 15)' : originalQuantityLabel;
     if (mobile.matches) {
-      trustStrip.append(heroReviews, heroPrice);
-      if (!document.getElementById('availability-dialog')?.open) availability.after(trustStrip);
+      // Keep trust alongside the hero action; the starting-price line is hidden
+      // on mobile, while desktop retains its original placement.
+      document.querySelector('.hero-buttons').before(heroReviews);
+      priceHome.after(heroPrice);
+      trustStrip.remove();
     } else {
       reviewsHome.after(heroReviews);
       priceHome.after(heroPrice);

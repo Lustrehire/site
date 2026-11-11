@@ -54,6 +54,9 @@ const test = base.extend({
       if (url.hostname === 'script.google.com' && request.method() === 'POST') {
         let payload;
         try { payload = request.postDataJSON(); } catch { payload = {}; }
+        if (payload.action === 'getPublicPricing') {
+          return route.fulfill({json: (typeof backend.replies.getPublicPricing === 'function' ? backend.replies.getPublicPricing() : backend.replies.getPublicPricing) || {success:true,serverTime:new Date().toISOString(),minimumQuantity:15,pricing:{kind:'standard',version:1},saleActive:false}});
+        }
         backend.calls.push(payload);
         const reply = backend.replies[payload.action];
         if (!reply) backend.unexpected.push(`Unknown backend action: ${payload.action}`);
@@ -77,6 +80,7 @@ const test = base.extend({
 
 async function checkDate(page, quantity = 50) {
   await page.goto('/index.html');
+  if (await page.locator('.hero-buttons a').isVisible() && (await page.viewportSize()).width < 768) await page.locator('.hero-buttons a').click();
   await page.locator('#availability-date').fill(booking.eventDate);
   await page.locator('#availability-quantity').fill(String(quantity));
   await page.locator('#availability-form').getByRole('button', { name: /check/i }).click();

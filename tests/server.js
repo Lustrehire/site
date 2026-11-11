@@ -25,6 +25,9 @@ http.createServer((req, res) => {
   fs.readFile(file, (error, data) => {
     if (error) return res.writeHead(404).end();
     const headers = { 'Content-Type': types[path.extname(file)] || 'application/octet-stream' };
+    if (preview && pathname === '/scripts/preview-mocks.js') {
+      data = Buffer.concat([data, Buffer.from('\nwindow.lustrePreviewGallery = ' + fs.readFileSync(path.join(root, 'content/gallery.json'), 'utf8') + ';')]);
+    }
     if (preview && path.extname(file) === '.html') {
       // Allow existing visual assets, but block all tracking scripts, API calls,
       // remote frames and native form submissions independently of the mocks.

@@ -4,19 +4,19 @@ test('mobile homepage adapts without duplicate forms or horizontal overflow', as
   for (const width of [320, 360, 375, 390, 430, 767]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Beautiful candles, minus all the prep\./);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Sand wax candles\.\s*Ready to light\./);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     for (const id of ['availability-form', 'availability-booking-form', 'contact-modal-form']) {
       await expect(page.locator(`#${id}`)).toHaveCount(1);
     }
-    const positions = await page.evaluate(() => ['availability-checker', 'benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works'].map(id => document.getElementById(id).getBoundingClientRect().top));
+    const positions = await page.evaluate(() => ['benefits', 'estimator-cta', 'gallery-preview', 'candle-sizes', 'testimonials', 'how-it-works'].map(id => document.getElementById(id).getBoundingClientRect().top));
     expect(positions).toEqual([...positions].sort((a, b) => a - b));
     const image = await page.locator('.hero-image').boundingBox();
     const text = await page.locator('.hero-text').boundingBox();
     expect(text.y).toBeGreaterThanOrEqual(image.y);
     expect(text.y + text.height).toBeLessThanOrEqual(image.y + image.height + 1);
-    const form = await page.locator('#availability-checker').boundingBox();
-    expect(form.y).toBeLessThan(image.y + image.height);
+    await expect(page.locator('#availability-form')).toBeHidden();
+    await expect(page.locator('.hero-quote-button')).toBeVisible();
     const button = page.locator('.cro-ready:not(#estimator-cta) .booking-button');
     expect((await button.boundingBox()).height).toBeGreaterThanOrEqual(48);
     expect(await button.evaluate(e => getComputedStyle(e).color)).toBe('rgb(40, 94, 62)');
@@ -26,6 +26,7 @@ test('mobile homepage adapts without duplicate forms or horizontal overflow', as
 test('breakpoint restores desktop section order and retains form state', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto('/');
+  await page.locator('.hero-quote-button').click();
   await page.locator('#availability-quantity').fill('63');
   await page.setViewportSize({ width: 1024, height: 900 });
   await expect(page.locator('#availability-quantity')).toHaveValue('63');
@@ -44,6 +45,7 @@ test('date and quantity entry do not show pricing or request availability before
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
+    if (width < 768) await page.locator('.hero-quote-button').click();
     await page.locator('#availability-date').fill('2030-06-15');
     await page.locator('#availability-quantity').pressSequentially('45');
     await expect(page.locator('#availability-result')).toBeHidden();
@@ -98,6 +100,7 @@ test('homepage journey and booking anchors remain correct across breakpoints', a
     expect(await page.locator('#main-content > section').evaluateAll(nodes => nodes.filter(n => !['availability-checker', 'wedding-estimator-panel'].includes(n.id)).map(n => n.id || (n.classList.contains('cro-ready') ? 'booking-cta' : '')))).toEqual(expected);
     await page.locator('.cro-ready a[href="#availability"]').click();
     await expect(page.locator('#availability-form')).toBeInViewport();
+    if (width < 768) await page.keyboard.press('Escape');
     for (const target of ['pricing', 'how-it-works']) {
       await page.locator(`.site-footer a[href="#${target}"]`).click();
       await expect(page.locator(`#${target}`)).toBeInViewport();

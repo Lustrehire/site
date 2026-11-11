@@ -16,8 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const idleLabel = next.innerHTML;
   const clearLoading = () => { pending = false; next.disabled = false; next.innerHTML = idleLabel; form.removeAttribute('aria-busy'); };
   const reset = () => { selectedRecordId = null; lookupVersion++; clearLoading(); panel.hidden = false; result.hidden = true; result.replaceChildren(); feedback.textContent = ''; dialog.setAttribute('aria-labelledby', 'existing-record-title'); };
-  opener.addEventListener('click', () => { reset(); dialog.showModal(); reference.focus(); });
-  const close = () => { lookupVersion++; clearLoading(); dialog.close(); opener.focus(); };
+  let returnTarget = opener;
+  const open = trigger => {
+    const fromMenu = trigger.closest('.mobile-nav');
+    returnTarget = fromMenu ? document.querySelector('.menu-toggle') : trigger;
+    if (fromMenu && returnTarget?.getAttribute('aria-expanded') === 'true') returnTarget.click();
+    reset();
+    if (!dialog.open) dialog.showModal();
+    reference.focus();
+  };
+  [opener, ...document.querySelectorAll('[data-open-existing-record]')].forEach(trigger => {
+    trigger.addEventListener('click', () => open(trigger));
+  });
+  const close = () => { lookupVersion++; clearLoading(); dialog.close(); returnTarget?.focus({ preventScroll: true }); };
   document.getElementById('existing-record-close').addEventListener('click', close);
   dialog.addEventListener('cancel', event => { event.preventDefault(); close(); });
   dialog.addEventListener('click', event => {
@@ -46,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const quantity = document.getElementById('availability-quantity');
     date.value = booking?.eventDate || ''; quantity.value = booking?.quantity || '';
     date.dispatchEvent(new Event('input', { bubbles: true }));
+    if (window.LustreOpenAvailability?.(returnTarget)) return;
     date.scrollIntoView({ block: 'center', behavior: 'smooth' }); date.focus({ preventScroll: true });
   };
   const showEdge = (title, copy, booking, primaryLabel, primaryAction) => {

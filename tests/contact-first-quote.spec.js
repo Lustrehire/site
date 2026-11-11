@@ -68,10 +68,12 @@ test('double submission and revisiting the same quote do not send it again', asy
   });
   await expect(page.locator('#availability-step-4-panel')).toBeVisible();
   await page.locator('#availability-complete-button').click();
+  if (page.viewportSize().width < 768) await page.locator('.hero-buttons a').click();
   await page.locator('#availability-form').getByRole('button', { name: /check/i }).click();
   await submitContact(page);
   expect(backend.calls.filter(c => c.action === 'saveQuoteBooking')).toHaveLength(1);
   await page.reload();
+  if (page.viewportSize().width < 768) await page.locator('.hero-buttons a').click();
   await page.locator('#availability-date').fill(booking.eventDate);
   await page.locator('#availability-quantity').fill('50');
   await page.locator('#availability-form').getByRole('button', { name: /check/i }).click();
@@ -158,10 +160,12 @@ test('closing contact capture during save keeps the entry visible and reuses the
   await page.locator('#availability-step-2-submit').click();
   await expect.poll(() => !!pendingRoute).toBe(true);
   await page.keyboard.press('Escape');
-  await expect(page.locator('#availability-form')).toBeVisible();
+  if (page.viewportSize().width < 768) await expect(page.locator('.hero-buttons a')).toBeVisible();
+  else await expect(page.locator('#availability-form')).toBeVisible();
   await pendingRoute.fulfill({ json: { success: true, bookingId: booking.bookingId, quoteToken: 'test-token' } });
   await expect(page.locator('#availability-step-2-submit')).toBeEnabled();
   await expect(page.locator('#availability-step-4-panel')).toBeHidden();
+  if (page.viewportSize().width < 768) await page.locator('.hero-buttons a').click();
   await page.locator('#availability-form').getByRole('button', { name: /check/i }).click();
   await page.locator('#availability-step-2-submit').click();
   await expect(page.locator('#availability-step-4-panel')).toBeVisible();

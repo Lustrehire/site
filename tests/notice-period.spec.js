@@ -6,6 +6,7 @@ test.describe('seven full days between today and the event', () => {
   for (const day of [20, 21, 26, 27, 28, 29]) {
     test(`20 September: event on ${day} September is ${day < 28 ? 'blocked' : 'allowed'}`, async ({ page, backend }) => {
       await page.goto('/');
+      if (page.viewportSize().width < 768) await page.locator('.hero-quote-button').click();
       const date = page.locator('#availability-date');
       await expect(date).toHaveAttribute('min', '2026-09-28');
       await date.fill(`2026-09-${day}`);
@@ -26,6 +27,7 @@ test.describe('seven full days between today and the event', () => {
 
   test('manual removal of picker limits cannot bypass submission validation', async ({ page, backend }) => {
     await page.goto('/');
+      if (page.viewportSize().width < 768) await page.locator('.hero-quote-button').click();
     await page.locator('#availability-date').evaluate(input => {
       input.removeAttribute('min');
       input.value = '2026-09-27';
@@ -40,6 +42,7 @@ test.describe('seven full days between today and the event', () => {
   test('backend notice response blocks booking and displays its message', async ({ page, backend }) => {
     backend.replies.checkAvailability = { ...available, status: 'notice_period', available: false, minimumNoticeDays: 8, earliestAllowedEventDate: '2026-09-30', message: 'Please select 30 September or later.' };
     await page.goto('/');
+      if (page.viewportSize().width < 768) await page.locator('.hero-quote-button').click();
     await page.locator('#availability-date').fill('2026-09-28');
     await page.locator('#availability-quantity').fill('15');
     await page.locator('#availability-form button[type="submit"]').click();
@@ -52,6 +55,7 @@ test.describe('seven full days between today and the event', () => {
   test('an earlier backend limit cannot relax the eight-day minimum', async ({ page, backend }) => {
     backend.replies.checkAvailability = { ...available, minimumNoticeDays: 3, earliestAllowedEventDate: '2026-09-23' };
     await page.goto('/');
+      if (page.viewportSize().width < 768) await page.locator('.hero-quote-button').click();
     await page.locator('#availability-date').fill('2026-09-28');
     await page.locator('#availability-quantity').fill('15');
     await page.locator('#availability-form button[type="submit"]').click();
@@ -61,6 +65,7 @@ test.describe('seven full days between today and the event', () => {
 
   test('an open page refreshes its minimum when the local date changes', async ({ page, backend }) => {
     await page.goto('/');
+      if (page.viewportSize().width < 768) await page.locator('.hero-quote-button').click();
     await page.locator('#availability-date').fill('2026-09-28');
     await page.clock.install({ time: new Date('2026-09-21T04:00:00Z') });
     await page.evaluate(() => window.dispatchEvent(new Event('pageshow')));
@@ -83,6 +88,7 @@ for (const [today, earliest, blockedDate] of [
     test.use({ browserNow: today });
     test('picker and submission enforce the current local date plus eight days', async ({ page, backend }) => {
       await page.goto('/');
+      if (page.viewportSize().width < 768) await page.locator('.hero-quote-button').click();
       await expect(page.locator('#availability-date')).toHaveAttribute('min', earliest);
       await page.locator('#availability-date').fill(blockedDate);
       await page.locator('#availability-quantity').fill('15');
@@ -106,6 +112,7 @@ for (const [timezoneId, browserNow, expected] of [
     test.use({ timezoneId, browserNow });
     test('date differs from UTC where appropriate and stays eight calendar days ahead', async ({ page }) => {
       await page.goto('/');
+      if (page.viewportSize().width < 768) await page.locator('.hero-quote-button').click();
       await expect(page.locator('#availability-date')).toHaveAttribute('min', expected);
     });
   });

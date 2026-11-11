@@ -39,7 +39,8 @@ test('limited and unavailable modal actions fit narrow screens and retain compac
       await expect(dialog.locator('.availability-price')).toHaveCount(0);
       if (!limited) await expect(dialog.locator('[data-availability-action="contact-us"]')).toHaveCSS('color', 'rgb(49, 91, 61)');
       await dialog.locator('[data-availability-action="change-date"]').click();
-      await expect(dialog).toBeHidden();
+      if (width < 768) await expect(dialog).toBeVisible();
+      else await expect(dialog).toBeHidden();
       await expect(page.locator('#availability-date')).toBeFocused();
     }
   }

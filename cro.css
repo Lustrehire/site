@@ -443,3 +443,7 @@ body:has(> .header-container) { overflow-x: clip; }
 .cro-home .occasion-desktop-only { display: none; }
 .cro-home .cro-occasions .occasion-icon, .cro-home .cro-occasions .occasion-copy { display: contents; }
 .faq-estimator-button { margin-block: 12px; min-height: 48px; }
+
+.cro-home #gallery-preview .gallery-rotation-control { display: inline-flex; align-items: center; min-height: 44px; margin: 4px 0 0; padding: 6px 0; border: 0; background: transparent; color: #315b3d; font: 500 13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.cro-home #gallery-preview .gallery-rotation-control[hidden] { display: none; }
+.cro-home #gallery-preview .gallery-rotation-control:focus-visible { outline: 2px solid #315b3d; outline-offset: 3px; border-radius: 4px; }
